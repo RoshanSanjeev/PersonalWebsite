@@ -14,6 +14,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Roshan Sanjeev - Product Manager & Software Engineer",
   description: "Personal portfolio of Roshan Sanjeev, focusing on Product Management and Software Engineering experiences.",
+  icons: {
+    icon: '/GT3RS.png',
+  },
 };
 
 export default function RootLayout({ children }) {
