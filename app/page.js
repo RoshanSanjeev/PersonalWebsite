@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import InteractiveGrid from "../components/InteractiveGrid";
+import DraggableGT3RS from "../components/DraggableGT3RS";
 import Image from "next/image";
 
 export default function Home() {
@@ -299,10 +300,26 @@ export default function Home() {
             </div>
           </div>
 
-          <h1 className="text-5xl font-bold text-white mb-6 tracking-tight">Roshan Sanjeev</h1>
-          <p className="max-w-3xl text-center text-lg text-gray-300 mb-12 leading-relaxed">
-            Welcome to my personal portfolio! As a Product Manager and Software Engineer, I thrive at the intersection of technology and user needs. Explore the different "hats" I wear by clicking on the categories below to dive into my experiences in software development, AI/ML research, product leadership, and more.
-          </p>
+          {/* Text container with gradient border - same style as content container */}
+          <div className="relative group rounded-3xl mb-12">
+            <span
+              className="absolute inset-0 rounded-3xl transition-opacity duration-300 opacity-100 animate-gradient"
+              style={{
+                background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                padding: '5px',
+                WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                WebkitMaskComposite: 'xor',
+                maskComposite: 'exclude',
+                pointerEvents: 'none',
+              }}
+            />
+            <div className="bg-white/10 backdrop-blur-sm rounded-3xl px-8 py-6 border border-white/20 relative z-10">
+              <h1 className="text-5xl font-bold text-white mb-6 tracking-tight text-center">Roshan Sanjeev</h1>
+              <p className="max-w-3xl text-center text-lg text-gray-300 leading-relaxed">
+                Nice to virtually meet you! As a Product Manager and Software Engineer, I thrive at the intersection of technology and user needs. Explore the different types of hats I wear by clicking on the categories below to dive into my experiences in software development, AI/ML research, product leadership, and more.
+              </p>
+            </div>
+          </div>
 
         {/* Navigation for Hats */}
         <nav className="flex flex-wrap justify-center gap-4 mb-10">
@@ -373,8 +390,13 @@ export default function Home() {
               pointerEvents: 'none',
             }}
           />
-          <div className="w-full h-full bg-white/10 backdrop-blur-sm shadow-2xl rounded-2xl p-8 border border-white/20 relative z-10">
+          <div className="w-full h-full bg-white/10 backdrop-blur-sm shadow-2xl rounded-2xl p-8 border border-white/20 relative z-10 overflow-visible">
             {renderContent()}
+
+            {/* Draggable GT3RS with rainbow trail - positioned below content */}
+            <div className="relative w-full">
+              <DraggableGT3RS />
+            </div>
           </div>
         </div>
         </div>
