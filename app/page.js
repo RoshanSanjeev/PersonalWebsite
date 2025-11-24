@@ -15,7 +15,13 @@ export default function Home() {
             <div className="flex flex-col lg:flex-row gap-8 mb-8">
               {/* Image with gradient border */}
               <div className="lg:w-1/3 relative group">
-                <div className="relative rounded-2xl overflow-hidden">
+                <div
+                  className="relative rounded-2xl overflow-hidden animate-gradient"
+                  style={{
+                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    padding: '3px',
+                  }}
+                >
                   <div className="relative rounded-2xl overflow-hidden bg-black">
                     <Image
                       src="/dine board soft launch-5.png"
@@ -74,7 +80,13 @@ export default function Home() {
             <div className="flex flex-col lg:flex-row gap-8 mb-8">
               {/* Image with gradient border */}
               <div className="lg:w-1/3 relative group">
-                <div className="relative rounded-2xl overflow-hidden">
+                <div
+                  className="relative rounded-2xl overflow-hidden animate-gradient"
+                  style={{
+                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    padding: '3px',
+                  }}
+                >
                   <div className="relative rounded-2xl overflow-hidden bg-black">
                     <Image
                       src="/Research.png"
@@ -109,7 +121,13 @@ export default function Home() {
             <div className="flex flex-col lg:flex-row gap-8 mb-8">
               {/* Image with gradient border */}
               <div className="lg:w-1/3 relative group">
-                <div className="relative rounded-2xl overflow-hidden">
+                <div
+                  className="relative rounded-2xl overflow-hidden animate-gradient"
+                  style={{
+                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    padding: '3px',
+                  }}
+                >
                   <div className="relative rounded-2xl overflow-hidden bg-black">
                     <Image
                       src="/Hackathon.png"
@@ -261,19 +279,14 @@ export default function Home() {
         <div className="relative z-10 flex flex-col items-center px-4">
           {/* Hero Section with Profile Picture */}
           <div className="mb-8 relative group">
-            <div className="relative w-64 h-64 rounded-full">
-              <span
-                className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient"
-                style={{
-                  background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
-                  padding: '4px', // Border thickness
-                  WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                  WebkitMaskComposite: 'xor',
-                  maskComposite: 'exclude',
-                  pointerEvents: 'none',
-                }}
-              />
-              <div className="w-full h-full rounded-full overflow-hidden bg-black relative z-10">
+            <div
+              className="relative w-64 h-64 rounded-full animate-gradient"
+              style={{
+                background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                padding: '4px',
+              }}
+            >
+              <div className="w-full h-full rounded-full overflow-hidden bg-black">
                 <Image
                   src="/pfp.png"
                   alt="Roshan Sanjeev"
@@ -294,29 +307,48 @@ export default function Home() {
         {/* Navigation for Hats */}
         <nav className="flex flex-wrap justify-center gap-4 mb-10">
           {hats.map((hat) => (
-            <button
-              key={hat}
-              onClick={() => setActiveHat(hat)}
-              className={`px-6 py-3 rounded-full text-base font-medium transition-all duration-300 backdrop-blur-sm relative group ${
-                activeHat === hat
-                  ? "bg-white/10 text-white shadow-lg"
-                  : "bg-white/10 text-gray-300"
-              }`}
-            >
-              {/* Gradient border using pseudo-element */}
-              <span
-                className={`absolute inset-0 rounded-full transition-opacity duration-300 animate-gradient ${
-                  activeHat === hat ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+            <div key={hat} className="relative group rounded-full">
+              {/* Animated gradient for SELECTED state - brighter colors */}
+              {activeHat === hat && (
+                <span
+                  className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient"
+                  style={{
+                    background: 'linear-gradient(135deg, rgb(100, 160, 255) 0%, rgb(200, 170, 255) 25%, rgb(255, 130, 180) 50%, rgb(255, 150, 110) 75%, rgb(255, 200, 120) 100%)',
+                    padding: '4px',
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    maskComposite: 'exclude',
+                    pointerEvents: 'none',
+                  }}
+                />
+              )}
+
+              {/* Hover gradient effect for NON-SELECTED state */}
+              {activeHat !== hat && (
+                <span
+                  className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-0 group-hover:opacity-100 animate-gradient"
+                  style={{
+                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    padding: '4px',
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    maskComposite: 'exclude',
+                    pointerEvents: 'none',
+                  }}
+                />
+              )}
+
+              <button
+                onClick={() => setActiveHat(hat)}
+                className={`px-6 py-3 rounded-full text-base font-medium transition-all duration-300 backdrop-blur-sm relative ${
+                  activeHat === hat
+                    ? "bg-white/10 text-white shadow-lg"
+                    : "bg-white/10 text-gray-300"
                 }`}
-                style={{
-                  background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
-                  padding: '3px',
-                  WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                  WebkitMaskComposite: 'xor',
-                  maskComposite: 'exclude',
-                  pointerEvents: 'none',
-                }}
-              />
+              >
+                <span className="relative z-10">{hat}</span>
+              </button>
+
               {/* Default border for inactive non-hovered state */}
               {activeHat !== hat && (
                 <span
@@ -324,18 +356,17 @@ export default function Home() {
                   style={{ pointerEvents: 'none' }}
                 />
               )}
-              <span className="relative z-10">{hat}</span>
-            </button>
+            </div>
           ))}
         </nav>
 
         {/* Content Display Area */}
         <div className="w-full max-w-5xl relative group rounded-2xl">
           <span
-            className="absolute inset-0 rounded-2xl transition-opacity duration-300 opacity-0 group-hover:opacity-100 animate-gradient"
+            className="absolute inset-0 rounded-2xl transition-opacity duration-300 opacity-100 animate-gradient"
             style={{
               background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
-              padding: '3px',
+              padding: '5px',
               WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
               WebkitMaskComposite: 'xor',
               maskComposite: 'exclude',

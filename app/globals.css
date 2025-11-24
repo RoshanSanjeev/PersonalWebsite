@@ -34,7 +34,7 @@
 
 .animate-gradient {
   background-size: 200% 200% !important; /* Make gradient larger than element */
-  animation: gradient-animation 10s ease infinite; /* Apply animation */
+  animation: gradient-animation 5s ease infinite; /* Apply animation */
 }
 
 .semi-circle-mask {

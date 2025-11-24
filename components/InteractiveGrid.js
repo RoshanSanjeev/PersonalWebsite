@@ -153,8 +153,9 @@ function Grid() {
     <lineSegments ref={meshRef} geometry={geometry}>
       <lineBasicMaterial
         vertexColors={true}
-        opacity={0.5}
+        opacity={1.0}
         transparent
+        linewidth={10}
       />
     </lineSegments>
   );

@@ -16,6 +16,8 @@ export const metadata = {
   description: "Personal portfolio of Roshan Sanjeev, focusing on Product Management and Software Engineering experiences.",
   icons: {
     icon: '/GT3RS.png',
+    shortcut: '/GT3RS.png',
+    apple: '/GT3RS.png',
   },
 };
 
