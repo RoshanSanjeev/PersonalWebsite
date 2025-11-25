@@ -42,8 +42,17 @@ export const colorThemes = [
   },
 ];
 
+export const backgroundColors = [
+  { name: 'Black', color: '#000000' },
+  { name: 'Dark Gray', color: '#1a1a1a' },
+  { name: 'Charcoal', color: '#0f0f0f' },
+  { name: 'Deep Blue', color: '#0a0e1a' },
+  { name: 'Dark Purple', color: '#0f0a1a' },
+];
+
 export function ThemeProvider({ children }) {
   const [currentTheme, setCurrentTheme] = useState(5); // Fire theme (index 5)
+  const [currentBackground, setCurrentBackground] = useState(0); // Black (index 0)
 
   const getGradient = (colors) => {
     return `linear-gradient(135deg, ${colors[0]} 0%, ${colors[1]} 25%, ${colors[2]} 50%, ${colors[3]} 75%, ${colors[4]} 100%)`;
@@ -55,6 +64,9 @@ export function ThemeProvider({ children }) {
     theme: colorThemes[currentTheme],
     gradient: getGradient(colorThemes[currentTheme].colors),
     trailGradient: getGradient(colorThemes[currentTheme].trailColors),
+    currentBackground,
+    setCurrentBackground,
+    backgroundColor: backgroundColors[currentBackground].color,
   };
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

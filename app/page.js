@@ -58,9 +58,9 @@ export default function Home() {
                 <h3 className="text-xl font-semibold text-white mb-1">Software Engineer Intern | UC, Merced</h3>
                 <p className="text-gray-400 mb-3">Aug 2025 - Present</p>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                  <li>Emphathized with UCM stakeholders in Agile sprints to build DineBoard, an enterprise system serving ~2,500 students daily.</li>
-                  <li>Engineered secure REST APIs with stateless OAuth 2.0 authentication integration, driving 80% increase in productivity for staff.</li>
-                  <li>Architected Flask/Redis backend with Nginx & Gunicorn & React frontend for long-term reliability & performance.</li>
+                  <li>Built DineBoard enterprise system serving 2,500+ students daily using Agile methodology</li>
+                  <li>Engineered secure REST APIs with OAuth 2.0, driving 80% productivity increase for staff</li>
+                  <li>Architected Flask/Redis backend with Nginx & React frontend for scalable performance</li>
                 </ul>
               </div>
             </div>
@@ -93,9 +93,9 @@ export default function Home() {
                 <h3 className="text-xl font-semibold text-white mb-1">Software Engineer Intern | PosTrue</h3>
                 <p className="text-gray-400 mb-3">Mar 2024 - Jun 2024</p>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                  <li>Developed Django website to display wearable sensor data, delivering posture analytics with ergonomic feedback for customers.</li>
-                  <li>Designed UI/UX with HTML, CSS, JavaScript, & Bootstrap, following brand standards & responsive design.</li>
-                  <li>Created a PostgreSQL analytics dashboard to visualise real-time sensor data and deliver actionable posture insights.</li>
+                  <li>Developed Django website with real-time wearable sensor analytics and ergonomic feedback</li>
+                  <li>Designed responsive UI/UX with Bootstrap, HTML/CSS/JavaScript following brand standards</li>
+                  <li>Built PostgreSQL dashboard visualizing real-time posture data with actionable insights</li>
                 </ul>
               </div>
             </div>
@@ -128,9 +128,9 @@ export default function Home() {
               <div className="lg:w-2/3">
                 <h3 className="text-xl font-semibold text-white mb-1">Fullstack AI Developer | SASEHacks (PoseVision)</h3>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                  <li>Won 1st place for developing PoseVision in a team of 3, an injury prevention tool utilising deep learning & pose estimation from user-uploaded videos for injury prevention in the squat.</li>
-                  <li>Developed Python script with MediaPipe & OpenCV to detect squat asymmetries & enhance UI/UX with visual feedback.</li>
-                  <li>Containerised Docker pipeline deployed on AWS EC2, with Flask integration using git (version control) to display results.</li>
+                  <li>Won 1st place building AI injury prevention tool using deep learning pose estimation</li>
+                  <li>Developed Python script with MediaPipe & OpenCV detecting squat asymmetries with visual feedback</li>
+                  <li>Deployed Dockerized Flask pipeline on AWS EC2 with git version control</li>
                 </ul>
               </div>
             </div>
@@ -162,8 +162,8 @@ export default function Home() {
               <div className="lg:w-2/3">
                 <h3 className="text-xl font-semibold text-white mb-1">Fullstack AI Developer | HackMercedX (Credit Compass)</h3>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                  <li>Won Alumni Prize for developing Credit Compass in a team of 3, an AI-powered platform that delivers long-term, personalised credit card recommendations by leveraging real-time internet data.</li>
-                  <li>Built a REST pipeline with the Letta AI API, JavaScript & HTML/CSS to display the personalised credit timeline in Flask.</li>
+                  <li>Won Alumni Prize building AI platform delivering personalized credit card recommendations using real-time data</li>
+                  <li>Built REST pipeline with Letta AI API and Flask frontend using JavaScript & HTML/CSS</li>
                 </ul>
               </div>
             </div>
@@ -202,9 +202,9 @@ export default function Home() {
                 <h3 className="text-xl font-semibold text-white mb-1">Machine Learning Research Intern | Mi3 Lab</h3>
                 <p className="text-gray-400 mb-3">Jun 2025 - Present</p>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                  <li>Co-authored paper, published & presented at CVPR 2025 & ICCV 2025 conferences for our VLLM, which generates accurate real-time navigation instructions for users with visual impairments in complex urban environments.</li>
-                  <li>Outperformed GPT-4o baseline by 43.84% via finetuning VideoLLaMa3-7B on preprocessed dataset, prompt engineering, frame sampling, & strategic post-processing across ROUGE-L, Timing F1/AUC, & Action F1 metrics.</li>
-                  <li>Developed data visualisations using Pandas/Matplotlib & Python for JSON post-processing for the paper & presentation.</li>
+                  <li>Co-authored VLLM paper published at CVPR 2025 & ICCV 2025 generating real-time navigation for visually impaired users</li>
+                  <li>Outperformed GPT-4o by 43.84% finetuning VideoLLaMa3-7B across ROUGE-L, Timing F1/AUC, & Action F1 metrics</li>
+                  <li>Built data visualizations using Pandas/Matplotlib for JSON post-processing and conference presentations</li>
                 </ul>
               </div>
             </div>
@@ -244,9 +244,9 @@ export default function Home() {
                   <h3 className="text-xl font-semibold text-white mb-1">Product Development Intern | Plant Culture Systems</h3>
                   <p className="text-gray-400 mb-3">Jul 2024 - Oct 2024</p>
                   <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                    <li>Designed & developed the AI landing page for OurGarden, using Flutterflow, integrating UI/UX feedback to enhance targeted user engagement for 500+ users.</li>
-                    <li>Led image analysis feature as A.I. subteam lead, improving engagement metrics by ~50% in Agile sprints with customers & users.</li>
-                    <li>Utilised ChatGPT API for chatbot queries, Firebase database for user management & Figma for frontend planning.</li>
+                    <li>Designed AI landing page for OurGarden using Flutterflow, enhancing engagement for 500+ users</li>
+                    <li>Led AI image analysis feature improving engagement metrics by 50% through Agile sprints</li>
+                    <li>Integrated ChatGPT API chatbot, Firebase user management, and Figma frontend planning</li>
                   </ul>
                 </div>
               </div>
@@ -284,9 +284,9 @@ export default function Home() {
                 <div className="lg:w-2/3">
                   <h4 className="text-lg font-semibold text-white mb-1">Fullstack AI Developer | SASEHacks (PoseVision)</h4>
                   <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                    <li>Won 1st place for developing PoseVision in a team of 3, an injury prevention tool utilising deep learning & pose estimation from user-uploaded videos for injury prevention in the squat.</li>
-                    <li>Developed Python script with MediaPipe & OpenCV to detect squat asymmetries & enhance UI/UX with visual feedback.</li>
-                    <li>Containerised Docker pipeline deployed on AWS EC2, with Flask integration using git (version control) to display results.</li>
+                    <li>Won 1st place building AI injury prevention tool using deep learning pose estimation</li>
+                    <li>Developed Python script with MediaPipe & OpenCV detecting squat asymmetries with visual feedback</li>
+                    <li>Deployed Dockerized Flask pipeline on AWS EC2 with git version control</li>
                   </ul>
                 </div>
               </div>
@@ -318,8 +318,8 @@ export default function Home() {
                 <div className="lg:w-2/3">
                   <h4 className="text-lg font-semibold text-white mb-1">Fullstack AI Developer | HackMercedX (Credit Compass)</h4>
                   <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                    <li>Won Alumni Prize for developing Credit Compass in a team of 3, an AI-powered platform that delivers long-term, personalised credit card recommendations by leveraging real-time internet data.</li>
-                    <li>Built a REST pipeline with the Letta AI API, JavaScript & HTML/CSS to display the personalised credit timeline in Flask.</li>
+                    <li>Won Alumni Prize building AI platform delivering personalized credit card recommendations using real-time data</li>
+                    <li>Built REST pipeline with Letta AI API and Flask frontend using JavaScript & HTML/CSS</li>
                   </ul>
                 </div>
               </div>
@@ -359,7 +359,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold text-white mb-1">AI Campus Ambassador | Perplexity</h3>
                 <p className="text-gray-400 mb-3">June 2025 - Present</p>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                  <li>Developed & executed a responsible AI adoption marketing strategy on campus through tailored presentations to clubs & classes engaging 300+ in-person students to date & working toward 500 sign-ups to secure Perplexity hackathon sponsorship.</li>
+                  <li>Executed responsible AI marketing strategy engaging 300+ students, working toward 500 sign-ups for hackathon sponsorship</li>
                 </ul>
               </div>
             </div>
@@ -391,7 +391,7 @@ export default function Home() {
               <div className="lg:w-2/3">
                 <h3 className="text-xl font-semibold text-white mb-1">Hackathon Organiser | HackMercedX</h3>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                  <li>Worked in Backend & Outreach teams, managing hackathon website while pursuing company sponsorships & participant outreach.</li>
+                  <li>Managed hackathon website backend while securing company sponsorships and coordinating participant outreach</li>
                 </ul>
               </div>
             </div>
@@ -424,9 +424,9 @@ export default function Home() {
                 <h3 className="text-xl font-semibold text-white mb-1">Executive Board/Recruitment | Theta Tau</h3>
                 <p className="text-gray-400 mb-3">Mar 2024 - Present</p>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                  <li>As recruitment chair, led a committee of 9, with a $2,000 budget & organised class presentations to 1,000+ students.</li>
-                  <li>Increased chapter growth by 70% through 5 daily events with 50+ daily attendees & created a detailed manual for future chairs.</li>
-                  <li>As Executive Board, oversaw chapter operations & presented to regional executives preparing to run for President next semester.</li>
+                  <li>Led recruitment committee of 9 with $2,000 budget, organizing presentations to 1,000+ students</li>
+                  <li>Increased chapter growth by 70% through daily events with 50+ attendees, created succession manual</li>
+                  <li>Oversaw chapter operations as Executive Board member, preparing for President role next semester</li>
                 </ul>
               </div>
             </div>
@@ -513,9 +513,9 @@ export default function Home() {
     <main className="bg-black">
       <div className="min-h-screen bg-black text-foreground flex flex-col items-center justify-center py-10 relative">
         {/* Interactive Grid Background */}
-        <div className="absolute inset-0 z-0 h-[70vh] semi-circle-mask">
+        {/* <div className="absolute inset-0 z-0 h-[70vh] semi-circle-mask">
           <InteractiveGrid />
-        </div>
+        </div> */}
 
         {/* Color Theme Selector - Top Left */}
         <ColorThemeSelector />
@@ -596,11 +596,16 @@ export default function Home() {
                 pointerEvents: 'none',
               }}
             />
-            <div className="bg-white/10 backdrop-blur-sm rounded-3xl px-8 py-6 border border-white/20 relative z-10">
+            <div className="bg-white/10 backdrop-blur-sm rounded-3xl px-8 py-6 pb-6 border border-white/20 relative z-10 overflow-visible">
               <h1 className="text-5xl font-bold text-white mb-6 tracking-tight text-center">Roshan Sanjeev</h1>
-              <p className="max-w-3xl text-center text-lg text-gray-300 leading-relaxed">
+              <p className="max-w-3xl text-center text-lg text-gray-300 leading-relaxed mb-4">
                 Nice to virtually meet you! As a Product Manager and Software Engineer, I thrive at the intersection of technology and user needs. Explore the different types of hats I wear by clicking on the categories below to dive into my experiences in software development, AI/ML research, product leadership, and more.
               </p>
+
+              {/* GT3RS at bottom of hero container */}
+              <div className="relative w-full mt-2">
+                <DraggableGT3RS />
+              </div>
             </div>
           </div>
 
@@ -628,7 +633,7 @@ export default function Home() {
                 className={`px-6 py-3 rounded-full text-base font-medium transition-all duration-300 backdrop-blur-sm relative bg-white/10 border border-white/20 ${
                   activeHat === hat
                     ? "text-white shadow-lg"
-                    : "text-gray-300"
+                    : "text-gray-300 hover:text-white hover:bg-white/15 hover:scale-105 hover:shadow-md"
                 }`}
               >
                 <span className="relative z-10">{hat}</span>
