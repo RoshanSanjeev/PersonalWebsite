@@ -43,15 +43,17 @@ export const colorThemes = [
 ];
 
 export const backgroundColors = [
-  { name: 'Black', color: '#000000' },
-  { name: 'Dark Gray', color: '#1a1a1a' },
-  { name: 'Charcoal', color: '#0f0f0f' },
-  { name: 'Deep Blue', color: '#0a0e1a' },
-  { name: 'Dark Purple', color: '#0f0a1a' },
+  { name: 'Black', color: '#000000', textColor: '#ffffff', secondaryTextColor: '#d1d5db' },
+  { name: 'White', color: '#ffffff', textColor: '#000000', secondaryTextColor: '#4b5563' },
+  { name: 'Pastel Gray', color: '#d3d3d3', textColor: '#1f2937', secondaryTextColor: '#374151' },
+  { name: 'Beige', color: '#f5f5dc', textColor: '#1f2937', secondaryTextColor: '#374151' },
+  { name: 'Navy', color: '#0a1628', textColor: '#ffffff', secondaryTextColor: '#d1d5db' },
+  { name: 'Charcoal', color: '#1a1a1a', textColor: '#ffffff', secondaryTextColor: '#d1d5db' },
+  { name: 'Soft Blue', color: '#e6f3ff', textColor: '#1f2937', secondaryTextColor: '#374151' },
 ];
 
 export function ThemeProvider({ children }) {
-  const [currentTheme, setCurrentTheme] = useState(5); // Fire theme (index 5)
+  const [currentTheme, setCurrentTheme] = useState(0); // Chroma theme (index 0)
   const [currentBackground, setCurrentBackground] = useState(0); // Black (index 0)
 
   const getGradient = (colors) => {
@@ -67,6 +69,8 @@ export function ThemeProvider({ children }) {
     currentBackground,
     setCurrentBackground,
     backgroundColor: backgroundColors[currentBackground].color,
+    textColor: backgroundColors[currentBackground].textColor,
+    secondaryTextColor: backgroundColors[currentBackground].secondaryTextColor,
   };
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

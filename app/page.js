@@ -8,7 +8,7 @@ import { useTheme } from "../contexts/ThemeContext";
 import Image from "next/image";
 
 export default function Home() {
-  const { gradient } = useTheme();
+  const { gradient, backgroundColor, textColor, secondaryTextColor } = useTheme();
   const [activeHat, setActiveHat] = useState("Software Engineering"); // Default active hat
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -28,7 +28,7 @@ export default function Home() {
       case "Software Engineering":
         return (
           <section className="p-2">
-            <h2 className="text-3xl font-bold mb-6 text-white border-b border-white/20 pb-2">Software Engineering</h2>
+            <h2 className="text-3xl font-bold mb-6 text-[var(--text-primary)] border-b border-white/20 pb-2">Software Engineering</h2>
 
             {/* UC Merced - DineBoard */}
             <div className="flex flex-col lg:flex-row gap-8 mb-8">
@@ -55,9 +55,9 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-white mb-1">Software Engineer Intern | UC, Merced</h3>
-                <p className="text-gray-400 mb-3">Aug 2025 - Present</p>
-                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Software Engineer Intern | UC, Merced</h3>
+                <p className="text-[var(--text-secondary)] mb-3">Aug 2025 - Present</p>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Built DineBoard enterprise system serving 2,500+ students daily using Agile methodology</li>
                   <li>Engineered secure REST APIs with OAuth 2.0, driving 80% productivity increase for staff</li>
                   <li>Architected Flask/Redis backend with Nginx & React frontend for scalable performance</li>
@@ -90,9 +90,9 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-white mb-1">Software Engineer Intern | PosTrue</h3>
-                <p className="text-gray-400 mb-3">Mar 2024 - Jun 2024</p>
-                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Software Engineer Intern | PosTrue</h3>
+                <p className="text-[var(--text-secondary)] mb-3">Mar 2024 - Jun 2024</p>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Developed Django website with real-time wearable sensor analytics and ergonomic feedback</li>
                   <li>Designed responsive UI/UX with Bootstrap, HTML/CSS/JavaScript following brand standards</li>
                   <li>Built PostgreSQL dashboard visualizing real-time posture data with actionable insights</li>
@@ -126,8 +126,8 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-white mb-1">Fullstack AI Developer | SASEHacks (PoseVision)</h3>
-                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Fullstack AI Developer | SASEHacks (PoseVision)</h3>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Won 1st place building AI injury prevention tool using deep learning pose estimation</li>
                   <li>Developed Python script with MediaPipe & OpenCV detecting squat asymmetries with visual feedback</li>
                   <li>Deployed Dockerized Flask pipeline on AWS EC2 with git version control</li>
@@ -160,8 +160,8 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-white mb-1">Fullstack AI Developer | HackMercedX (Credit Compass)</h3>
-                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Fullstack AI Developer | HackMercedX (Credit Compass)</h3>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Won Alumni Prize building AI platform delivering personalized credit card recommendations using real-time data</li>
                   <li>Built REST pipeline with Letta AI API and Flask frontend using JavaScript & HTML/CSS</li>
                 </ul>
@@ -172,7 +172,7 @@ export default function Home() {
       case "AI/ML Research":
         return (
           <section className="p-2">
-            <h2 className="text-3xl font-bold mb-6 text-white border-b border-white/20 pb-2">AI/ML Research</h2>
+            <h2 className="text-3xl font-bold mb-6 text-[var(--text-primary)] border-b border-white/20 pb-2">AI/ML Research</h2>
 
             {/* Mi3 Lab Research */}
             <div className="flex flex-col lg:flex-row gap-8 mb-8">
@@ -199,9 +199,9 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-white mb-1">Machine Learning Research Intern | Mi3 Lab</h3>
-                <p className="text-gray-400 mb-3">Jun 2025 - Present</p>
-                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Machine Learning Research Intern | Mi3 Lab</h3>
+                <p className="text-[var(--text-secondary)] mb-3">Jun 2025 - Present</p>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Co-authored VLLM paper published at CVPR 2025 & ICCV 2025 generating real-time navigation for visually impaired users</li>
                   <li>Outperformed GPT-4o by 43.84% finetuning VideoLLaMa3-7B across ROUGE-L, Timing F1/AUC, & Action F1 metrics</li>
                   <li>Built data visualizations using Pandas/Matplotlib for JSON post-processing and conference presentations</li>
@@ -213,7 +213,7 @@ export default function Home() {
       case "Product Development":
         return (
           <section className="p-2">
-            <h2 className="text-3xl font-bold mb-6 text-white border-b border-white/20 pb-2">Product Development</h2>
+            <h2 className="text-3xl font-bold mb-6 text-[var(--text-primary)] border-b border-white/20 pb-2">Product Development</h2>
 
             {/* Plant Culture Systems */}
             <div className="flex flex-col lg:flex-row gap-8 mb-8">
@@ -241,9 +241,9 @@ export default function Home() {
               {/* Content */}
               <div className="lg:w-2/3">
                 <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-white mb-1">Product Development Intern | Plant Culture Systems</h3>
-                  <p className="text-gray-400 mb-3">Jul 2024 - Oct 2024</p>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                  <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Product Development Intern | Plant Culture Systems</h3>
+                  <p className="text-[var(--text-secondary)] mb-3">Jul 2024 - Oct 2024</p>
+                  <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                     <li>Designed AI landing page for OurGarden using Flutterflow, enhancing engagement for 500+ users</li>
                     <li>Led AI image analysis feature improving engagement metrics by 50% through Agile sprints</li>
                     <li>Integrated ChatGPT API chatbot, Firebase user management, and Figma frontend planning</li>
@@ -254,7 +254,7 @@ export default function Home() {
 
             {/* Hackathons Subsection */}
             <div className="mb-8">
-              <h3 className="text-2xl font-semibold text-white mb-6 border-b border-white/20 pb-2">Hackathons</h3>
+              <h3 className="text-2xl font-semibold text-[var(--text-primary)] mb-6 border-b border-white/20 pb-2">Hackathons</h3>
 
               {/* PoseVision - Video on left, text on right */}
               <div className="flex flex-col lg:flex-row gap-8 mb-8">
@@ -282,8 +282,8 @@ export default function Home() {
 
                 {/* PoseVision Text */}
                 <div className="lg:w-2/3">
-                  <h4 className="text-lg font-semibold text-white mb-1">Fullstack AI Developer | SASEHacks (PoseVision)</h4>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                  <h4 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Fullstack AI Developer | SASEHacks (PoseVision)</h4>
+                  <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                     <li>Won 1st place building AI injury prevention tool using deep learning pose estimation</li>
                     <li>Developed Python script with MediaPipe & OpenCV detecting squat asymmetries with visual feedback</li>
                     <li>Deployed Dockerized Flask pipeline on AWS EC2 with git version control</li>
@@ -316,8 +316,8 @@ export default function Home() {
 
                 {/* Credit Compass Text */}
                 <div className="lg:w-2/3">
-                  <h4 className="text-lg font-semibold text-white mb-1">Fullstack AI Developer | HackMercedX (Credit Compass)</h4>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                  <h4 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Fullstack AI Developer | HackMercedX (Credit Compass)</h4>
+                  <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                     <li>Won Alumni Prize building AI platform delivering personalized credit card recommendations using real-time data</li>
                     <li>Built REST pipeline with Letta AI API and Flask frontend using JavaScript & HTML/CSS</li>
                   </ul>
@@ -329,7 +329,7 @@ export default function Home() {
       case "Leadership & Community":
         return (
           <section className="p-2">
-            <h2 className="text-3xl font-bold mb-6 text-white border-b border-white/20 pb-2">Leadership & Community</h2>
+            <h2 className="text-3xl font-bold mb-6 text-[var(--text-primary)] border-b border-white/20 pb-2">Leadership & Community</h2>
 
             {/* Perplexity AI Campus Ambassador */}
             <div className="flex flex-col lg:flex-row gap-8 mb-8">
@@ -356,9 +356,9 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-white mb-1">AI Campus Ambassador | Perplexity</h3>
-                <p className="text-gray-400 mb-3">June 2025 - Present</p>
-                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">AI Campus Ambassador | Perplexity</h3>
+                <p className="text-[var(--text-secondary)] mb-3">June 2025 - Present</p>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Executed responsible AI marketing strategy engaging 300+ students, working toward 500 sign-ups for hackathon sponsorship</li>
                 </ul>
               </div>
@@ -389,8 +389,8 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-white mb-1">Hackathon Organiser | HackMercedX</h3>
-                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Hackathon Organiser | HackMercedX</h3>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Managed hackathon website backend while securing company sponsorships and coordinating participant outreach</li>
                 </ul>
               </div>
@@ -421,9 +421,9 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-white mb-1">Executive Board/Recruitment | Theta Tau</h3>
-                <p className="text-gray-400 mb-3">Mar 2024 - Present</p>
-                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Executive Board/Recruitment | Theta Tau</h3>
+                <p className="text-[var(--text-secondary)] mb-3">Mar 2024 - Present</p>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Led recruitment committee of 9 with $2,000 budget, organizing presentations to 1,000+ students</li>
                   <li>Increased chapter growth by 70% through daily events with 50+ attendees, created succession manual</li>
                   <li>Oversaw chapter operations as Executive Board member, preparing for President role next semester</li>
@@ -435,33 +435,33 @@ export default function Home() {
       case "Technical Skills":
         return (
           <section className="p-2">
-            <h2 className="text-3xl font-bold mb-8 text-white">Technical Skills</h2>
+            <h2 className="text-3xl font-bold mb-8 text-[var(--text-primary)]">Technical Skills</h2>
             <div className="mb-6">
-              <h3 className="text-xl font-semibold text-white mb-2">Languages</h3>
-              <p className="text-gray-300">Python, C/C++, JavaScript, R, SQL, Java, HTML/CSS, MIPS Assembly, LaTeX</p>
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Languages</h3>
+              <p className="text-[var(--text-secondary)]">Python, C/C++, JavaScript, R, SQL, Java, HTML/CSS, MIPS Assembly, LaTeX</p>
             </div>
             <div className="mb-6">
-              <h3 className="text-xl font-semibold text-white mb-2">Frameworks</h3>
-              <p className="text-gray-300">Flask, Django, React, Pandas, Matplotlib, MediaPipe, OpenCV, Bootstrap, FlutterFlow</p>
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Frameworks</h3>
+              <p className="text-[var(--text-secondary)]">Flask, Django, React, Pandas, Matplotlib, MediaPipe, OpenCV, Bootstrap, FlutterFlow</p>
             </div>
             <div className="mb-6">
-              <h3 className="text-xl font-semibold text-white mb-2">Tools & Platforms</h3>
-              <p className="text-gray-300">Azure, AWS EC2, Git, Docker, PostgreSQL, Redis, Linux, Microsoft Suite, Claude Code, Firebase, Figma</p>
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Tools & Platforms</h3>
+              <p className="text-[var(--text-secondary)]">Azure, AWS EC2, Git, Docker, PostgreSQL, Redis, Linux, Microsoft Suite, Claude Code, Firebase, Figma</p>
             </div>
             <div className="mb-6">
-              <h3 className="text-xl font-semibold text-white mb-2">AI/ML</h3>
-              <p className="text-gray-300">Computer Vision, HuggingFace, PyTorch, TensorFlow, CrewAI Agents, MediaPipe, Vapi, Nous, Masumi</p>
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">AI/ML</h3>
+              <p className="text-[var(--text-secondary)]">Computer Vision, HuggingFace, PyTorch, TensorFlow, CrewAI Agents, MediaPipe, Vapi, Nous, Masumi</p>
             </div>
             <div className="mb-6">
-              <h3 className="text-xl font-semibold text-white mb-2">Methodologies</h3>
-              <p className="text-gray-300">OOP, Agile, Scrum, Responsive Design, UI/UX, CI/CD, DevOps</p>
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Methodologies</h3>
+              <p className="text-[var(--text-secondary)]">OOP, Agile, Scrum, Responsive Design, UI/UX, CI/CD, DevOps</p>
             </div>
           </section>
         );
       case "Resume":
         return (
           <section className="p-2">
-            <h2 className="text-3xl font-bold mb-8 text-white">Resume</h2>
+            <h2 className="text-3xl font-bold mb-8 text-[var(--text-primary)]">Resume</h2>
             <div className="w-full">
               {/* PDF Embed without border */}
               <iframe
@@ -487,7 +487,7 @@ export default function Home() {
                       pointerEvents: 'none',
                     }}
                   />
-                  <span className="bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20 relative z-10 inline-block text-white font-medium hover:bg-white/20 transition-all duration-300">
+                  <span className="bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20 relative z-10 inline-block text-[var(--text-primary)] font-medium hover:bg-white/20 transition-all duration-300">
                     Download Resume
                   </span>
                 </a>
@@ -510,8 +510,8 @@ export default function Home() {
   ];
 
   return (
-    <main className="bg-black">
-      <div className="min-h-screen bg-black text-foreground flex flex-col items-center justify-center py-10 relative">
+    <main style={{ backgroundColor, color: textColor }}>
+      <div className="min-h-screen text-foreground flex flex-col items-center justify-center py-10 relative" style={{ backgroundColor, '--text-primary': textColor, '--text-secondary': secondaryTextColor }}>
         {/* Interactive Grid Background */}
         {/* <div className="absolute inset-0 z-0 h-[70vh] semi-circle-mask">
           <InteractiveGrid />
@@ -536,21 +536,21 @@ export default function Home() {
             />
             <div className="bg-white/10 backdrop-blur-sm rounded-full px-4 py-3 border border-white/20 relative z-10 flex items-center gap-4">
               {/* GitHub */}
-              <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+              <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                 </svg>
               </a>
 
               {/* Discord */}
-              <a href="https://discord.com/users/youruserid" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+              <a href="https://discord.com/users/youruserid" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
                 </svg>
               </a>
 
               {/* LinkedIn */}
-              <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+              <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
@@ -597,9 +597,9 @@ export default function Home() {
               }}
             />
             <div className="bg-white/10 backdrop-blur-sm rounded-3xl px-8 py-6 pb-6 border border-white/20 relative z-10 overflow-visible">
-              <h1 className="text-5xl font-bold text-white mb-6 tracking-tight text-center">Roshan Sanjeev</h1>
-              <p className="max-w-3xl text-center text-lg text-gray-300 leading-relaxed mb-4">
-                Nice to virtually meet you! As a Product Manager and Software Engineer, I thrive at the intersection of technology and user needs. Explore the different types of hats I wear by clicking on the categories below to dive into my experiences in software development, AI/ML research, product leadership, and more.
+              <h1 className="text-5xl font-bold text-[var(--text-primary)] mb-6 tracking-tight text-center">Roshan Sanjeev</h1>
+              <p className="max-w-3xl text-center text-lg text-[var(--text-secondary)] leading-relaxed mb-4">
+                Nice to virtually meet you! As a Product Manager and Software Engineer, I thrive at the intersection of technology and user needs. Explore the different types of hats I wear by clicking on the categories below in software development, AI/ML research, product, leadership, and more.
               </p>
 
               {/* GT3RS at bottom of hero container */}
@@ -632,8 +632,8 @@ export default function Home() {
                 onClick={() => handleHatChange(hat)}
                 className={`px-6 py-3 rounded-full text-base font-medium transition-all duration-300 backdrop-blur-sm relative bg-white/10 border border-white/20 ${
                   activeHat === hat
-                    ? "text-white shadow-lg"
-                    : "text-gray-300 hover:text-white hover:bg-white/15 hover:scale-105 hover:shadow-md"
+                    ? "text-[var(--text-primary)] shadow-lg"
+                    : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/15 hover:scale-105 hover:shadow-md"
                 }`}
               >
                 <span className="relative z-10">{hat}</span>
