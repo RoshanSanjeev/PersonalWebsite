@@ -1,8 +1,10 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import { useTheme } from "../contexts/ThemeContext";
 
 export default function DraggableGT3RS() {
+  const { theme } = useTheme();
   const [position, setPosition] = useState({ x: -40 }); // Start further left, partially off-screen
   const [isDragging, setIsDragging] = useState(false);
   const [trail, setTrail] = useState([]);
@@ -118,11 +120,11 @@ export default function DraggableGT3RS() {
               width: size,
               height: size,
               background: `linear-gradient(135deg,
-                rgb(100, 160, 255) 0%,
-                rgb(200, 170, 255) 25%,
-                rgb(255, 130, 180) 50%,
-                rgb(255, 150, 110) 75%,
-                rgb(255, 200, 120) 100%)`,
+                ${theme.trailColors[0]} 0%,
+                ${theme.trailColors[1]} 25%,
+                ${theme.trailColors[2]} 50%,
+                ${theme.trailColors[3]} 75%,
+                ${theme.trailColors[4]} 100%)`,
               opacity: opacity,
               filter: "blur(4px)",
               zIndex: 999,

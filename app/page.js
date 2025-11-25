@@ -3,9 +3,12 @@
 import { useState } from "react";
 import InteractiveGrid from "../components/InteractiveGrid";
 import DraggableGT3RS from "../components/DraggableGT3RS";
+import ColorThemeSelector from "../components/ColorThemeSelector";
+import { useTheme } from "../contexts/ThemeContext";
 import Image from "next/image";
 
 export default function Home() {
+  const { gradient } = useTheme();
   const [activeHat, setActiveHat] = useState("Software Engineering"); // Default active hat
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -34,7 +37,7 @@ export default function Home() {
                 <div
                   className="relative rounded-2xl overflow-hidden animate-gradient"
                   style={{
-                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    background: gradient,
                     padding: '3px',
                   }}
                 >
@@ -69,7 +72,7 @@ export default function Home() {
                 <div
                   className="relative rounded-2xl overflow-hidden animate-gradient"
                   style={{
-                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    background: gradient,
                     padding: '3px',
                   }}
                 >
@@ -104,7 +107,7 @@ export default function Home() {
                 <div
                   className="relative rounded-2xl overflow-hidden animate-gradient"
                   style={{
-                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    background: gradient,
                     padding: '3px',
                   }}
                 >
@@ -139,7 +142,7 @@ export default function Home() {
                 <div
                   className="relative rounded-2xl overflow-hidden animate-gradient"
                   style={{
-                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    background: gradient,
                     padding: '3px',
                   }}
                 >
@@ -178,7 +181,7 @@ export default function Home() {
                 <div
                   className="relative rounded-2xl overflow-hidden animate-gradient"
                   style={{
-                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    background: gradient,
                     padding: '3px',
                   }}
                 >
@@ -219,7 +222,7 @@ export default function Home() {
                 <div
                   className="relative rounded-2xl overflow-hidden animate-gradient"
                   style={{
-                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    background: gradient,
                     padding: '3px',
                   }}
                 >
@@ -260,7 +263,7 @@ export default function Home() {
                   <div
                     className="relative rounded-2xl overflow-hidden animate-gradient"
                     style={{
-                      background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                      background: gradient,
                       padding: '3px',
                     }}
                   >
@@ -295,7 +298,7 @@ export default function Home() {
                   <div
                     className="relative rounded-2xl overflow-hidden animate-gradient"
                     style={{
-                      background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                      background: gradient,
                       padding: '3px',
                     }}
                   >
@@ -335,7 +338,7 @@ export default function Home() {
                 <div
                   className="relative rounded-2xl overflow-hidden animate-gradient"
                   style={{
-                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    background: gradient,
                     padding: '3px',
                   }}
                 >
@@ -368,7 +371,7 @@ export default function Home() {
                 <div
                   className="relative rounded-2xl overflow-hidden animate-gradient"
                   style={{
-                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    background: gradient,
                     padding: '3px',
                   }}
                 >
@@ -400,7 +403,7 @@ export default function Home() {
                 <div
                   className="relative rounded-2xl overflow-hidden animate-gradient"
                   style={{
-                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    background: gradient,
                     padding: '3px',
                   }}
                 >
@@ -476,7 +479,7 @@ export default function Home() {
                   <span
                     className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient"
                     style={{
-                      background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                      background: gradient,
                       padding: '3px',
                       WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                       WebkitMaskComposite: 'xor',
@@ -514,13 +517,16 @@ export default function Home() {
           <InteractiveGrid />
         </div>
 
+        {/* Color Theme Selector - Top Left */}
+        <ColorThemeSelector />
+
         {/* Social Media Links - Top Right */}
         <div className="absolute top-8 right-8 z-20">
           <div className="relative group rounded-full">
             <span
               className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient"
               style={{
-                background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                background: gradient,
                 padding: '3px',
                 WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                 WebkitMaskComposite: 'xor',
@@ -560,7 +566,7 @@ export default function Home() {
             <div
               className="relative w-64 h-64 rounded-full animate-gradient"
               style={{
-                background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                background: gradient,
                 padding: '4px',
               }}
             >
@@ -582,7 +588,7 @@ export default function Home() {
             <span
               className="absolute inset-0 rounded-3xl transition-opacity duration-300 opacity-100 animate-gradient"
               style={{
-                background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                background: gradient,
                 padding: '5px',
                 WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                 WebkitMaskComposite: 'xor',
@@ -607,7 +613,7 @@ export default function Home() {
                 <span
                   className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient"
                   style={{
-                    background: 'linear-gradient(135deg, rgb(100, 160, 255) 0%, rgb(200, 170, 255) 25%, rgb(255, 130, 180) 50%, rgb(255, 150, 110) 75%, rgb(255, 200, 120) 100%)',
+                    background: gradient,
                     padding: '3px',
                     WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                     WebkitMaskComposite: 'xor',
@@ -636,7 +642,7 @@ export default function Home() {
           <span
             className="absolute inset-0 rounded-2xl transition-opacity duration-300 opacity-100 animate-gradient"
             style={{
-              background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+              background: gradient,
               padding: '5px',
               WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
               WebkitMaskComposite: 'xor',

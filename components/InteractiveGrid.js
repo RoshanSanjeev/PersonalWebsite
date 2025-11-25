@@ -1,9 +1,10 @@
 "use client";
 import React, { useRef, useMemo, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useTheme } from "../contexts/ThemeContext";
 import * as THREE from "three";
 
-function Grid() {
+function Grid({ themeColors }) {
   const meshRef = useRef();
   const mousePos = useRef(new THREE.Vector2(0, 0));
   const targetMousePos = useRef(new THREE.Vector2(0, 0));
@@ -33,32 +34,30 @@ function Grid() {
     const positions = [];
     const colors = [];
 
-    // Helper function to get gradient color
+    // Helper function to get gradient color from theme
     const getGradientColor = (x, y) => {
       const normalizedX = (x + size/2) / size;
-      let r, g, b;
+      const numColors = themeColors.length;
+      const segmentSize = 1 / (numColors - 1);
 
-      if (normalizedX < 0.25) {
-        const t = normalizedX / 0.25;
-        r = 0.25 + t * 0.35;
-        g = 0.45 + t * 0.05;
-        b = 0.75 - t * 0.10;
-      } else if (normalizedX < 0.5) {
-        const t = (normalizedX - 0.25) / 0.25;
-        r = 0.60 + t * 0.15;
-        g = 0.50 - t * 0.15;
-        b = 0.65 - t * 0.15;
-      } else if (normalizedX < 0.75) {
-        const t = (normalizedX - 0.5) / 0.25;
-        r = 0.75 + t * 0.10;
-        g = 0.35 + t * 0.10;
-        b = 0.50 - t * 0.15;
-      } else {
-        const t = (normalizedX - 0.75) / 0.25;
-        r = 0.85 + t * 0.05;
-        g = 0.45 + t * 0.15;
-        b = 0.35 - t * 0.15;
-      }
+      // Find which two colors to interpolate between
+      const colorIndex = Math.floor(normalizedX / segmentSize);
+      const nextColorIndex = Math.min(colorIndex + 1, numColors - 1);
+      const t = (normalizedX - colorIndex * segmentSize) / segmentSize;
+
+      // Parse RGB from theme colors
+      const parseRGB = (colorStr) => {
+        const match = colorStr.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+        return match ? [match[1] / 255, match[2] / 255, match[3] / 255] : [1, 1, 1];
+      };
+
+      const color1 = parseRGB(themeColors[colorIndex]);
+      const color2 = parseRGB(themeColors[nextColorIndex]);
+
+      // Interpolate
+      const r = color1[0] + (color2[0] - color1[0]) * t;
+      const g = color1[1] + (color2[1] - color1[1]) * t;
+      const b = color1[2] + (color2[2] - color1[2]) * t;
 
       return [r, g, b];
     };
@@ -101,7 +100,7 @@ function Grid() {
     geo.userData.originalPositions = new Float32Array(positions);
 
     return geo;
-  }, []);
+  }, [themeColors]);
 
   // Track mouse position
   useFrame((state) => {
@@ -162,6 +161,8 @@ function Grid() {
 }
 
 export default function InteractiveGrid() {
+  const { theme } = useTheme();
+
   return (
     <Canvas
       camera={{ position: [0, 0, 5], fov: 50 }}
@@ -169,7 +170,7 @@ export default function InteractiveGrid() {
     >
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={0.3} />
-      <Grid />
+      <Grid themeColors={theme.colors} />
     </Canvas>
   );
 }
