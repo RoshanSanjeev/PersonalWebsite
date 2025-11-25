@@ -155,7 +155,7 @@ function Grid() {
         vertexColors={true}
         opacity={1.0}
         transparent
-        linewidth={10}
+        linewidth={15}
       />
     </lineSegments>
   );

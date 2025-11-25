@@ -8,6 +8,7 @@ export default function DraggableGT3RS() {
   const [trail, setTrail] = useState([]);
   const [facingLeft, setFacingLeft] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
+  const [isHoveringCar, setIsHoveringCar] = useState(false);
   const carRef = useRef(null);
   const lastX = useRef(0);
   const carWidth = 100; // Smaller car size
@@ -113,7 +114,7 @@ export default function DraggableGT3RS() {
             className="pointer-events-none absolute rounded-full animate-gradient"
             style={{
               left: point.x - size / 2,
-              bottom: -30 + size / 2, // Fixed at bottom
+              bottom: -25 + size / 2, // Fixed at bottom, slightly higher
               width: size,
               height: size,
               background: `linear-gradient(135deg,
@@ -133,8 +134,7 @@ export default function DraggableGT3RS() {
       {/* GT3RS Car - Smaller and constrained to screen width */}
       <div
         ref={carRef}
-        onMouseDown={handleMouseDown}
-        className="absolute cursor-grab active:cursor-grabbing group"
+        className="absolute pointer-events-none"
         style={{
           left: position.x,
           bottom: -50,
@@ -152,8 +152,8 @@ export default function DraggableGT3RS() {
             style={{
               left: "-4px",
               right: "-4px",
-              top: "15px",
-              bottom: "15px",
+              top: "52px",
+              bottom: "16px",
               borderRadius: "12px",
               boxShadow: "0 0 15px 3px rgba(100, 160, 255, 0.5), 0 0 15px 3px rgba(255, 130, 180, 0.3)",
               animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
@@ -161,21 +161,34 @@ export default function DraggableGT3RS() {
           />
         )}
 
-        <Image
-          src="/GT3RS.png"
-          alt="GT3RS"
-          width={carWidth}
-          height={carWidth}
-          className="select-none hover:scale-105 transition-transform duration-200"
-          draggable={false}
-        />
+        {/* Clickable car image area */}
+        <div
+          className="cursor-grab active:cursor-grabbing pointer-events-auto"
+          onMouseDown={handleMouseDown}
+          onMouseEnter={() => setIsHoveringCar(true)}
+          onMouseLeave={() => setIsHoveringCar(false)}
+          style={{
+            paddingTop: "42px",
+            paddingBottom: "7px",
+          }}
+        >
+          <Image
+            src="/GT3RS.png"
+            alt="GT3RS"
+            width={carWidth}
+            height={carWidth}
+            className="select-none hover:scale-105 transition-transform duration-200"
+            draggable={false}
+          />
+        </div>
 
         {/* Drag me text hint - counter-flip to keep text readable */}
-        {!isDragging && (
+        {!isDragging && isHoveringCar && (
           <div
-            className="absolute -top-8 left-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+            className="absolute left-1/2 transition-opacity duration-300 pointer-events-none"
             style={{
               transform: facingLeft ? "translateX(-50%) scaleX(-1)" : "translateX(-50%)",
+              top: "30px",
             }}
           >
             <span className="text-xs text-white bg-black/70 px-3 py-1 rounded-full whitespace-nowrap backdrop-blur-sm border border-white/20">

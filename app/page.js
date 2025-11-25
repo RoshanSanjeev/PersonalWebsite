@@ -7,12 +7,27 @@ import Image from "next/image";
 
 export default function Home() {
   const [activeHat, setActiveHat] = useState("Software Engineering"); // Default active hat
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Handle smooth transitions between sections
+  const handleHatChange = (hat) => {
+    if (hat !== activeHat) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setActiveHat(hat);
+        setIsTransitioning(false);
+      }, 150); // Half of the fade duration for crossfade effect
+    }
+  };
 
   const renderContent = () => {
     switch (activeHat) {
       case "Software Engineering":
         return (
           <section className="p-2">
+            <h2 className="text-3xl font-bold mb-6 text-white border-b border-white/20 pb-2">Software Engineering</h2>
+
+            {/* UC Merced - DineBoard */}
             <div className="flex flex-col lg:flex-row gap-8 mb-8">
               {/* Image with gradient border */}
               <div className="lg:w-1/3 relative group">
@@ -37,40 +52,116 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h2 className="text-3xl font-bold mb-8 text-white">Software Engineering</h2>
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-white mb-1">Software Engineer Intern | UC, Merced</h3>
-                  <p className="text-gray-400 mb-3">Aug 2025 - Present</p>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                    <li>Emphathized with UCM stakeholders in Agile sprints to build DineBoard, an enterprise system serving ~2,500 students daily.</li>
-                    <li>Engineered secure REST APIs with stateless OAuth 2.0 authentication integration, driving 80% increase in productivity for staff.</li>
-                    <li>Architected Flask/Redis backend with Nginx & Gunicorn & React frontend for long-term reliability & performance.</li>
-                  </ul>
+                <h3 className="text-xl font-semibold text-white mb-1">Software Engineer Intern | UC, Merced</h3>
+                <p className="text-gray-400 mb-3">Aug 2025 - Present</p>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                  <li>Emphathized with UCM stakeholders in Agile sprints to build DineBoard, an enterprise system serving ~2,500 students daily.</li>
+                  <li>Engineered secure REST APIs with stateless OAuth 2.0 authentication integration, driving 80% increase in productivity for staff.</li>
+                  <li>Architected Flask/Redis backend with Nginx & Gunicorn & React frontend for long-term reliability & performance.</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* PosTrue */}
+            <div className="flex flex-col lg:flex-row gap-8 mb-8">
+              {/* Image with gradient border */}
+              <div className="lg:w-1/3 relative group">
+                <div
+                  className="relative rounded-2xl overflow-hidden animate-gradient"
+                  style={{
+                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    padding: '3px',
+                  }}
+                >
+                  <div className="relative rounded-2xl overflow-hidden bg-black">
+                    <Image
+                      src="/dine board soft launch-5.png"
+                      alt="PosTrue Software Engineering"
+                      width={400}
+                      height={300}
+                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
                 </div>
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-white mb-1">Software Engineer Intern | PosTrue</h3>
-                  <p className="text-gray-400 mb-3">Mar 2024 - Jun 2024</p>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                    <li>Developed Django website to display wearable sensor data, delivering posture analytics with ergonomic feedback for customers.</li>
-                    <li>Designed UI/UX with HTML, CSS, JavaScript, & Bootstrap, following brand standards & responsive design.</li>
-                    <li>Created a PostgreSQL analytics dashboard to visualise real-time sensor data and deliver actionable posture insights.</li>
-                  </ul>
+              </div>
+
+              {/* Content */}
+              <div className="lg:w-2/3">
+                <h3 className="text-xl font-semibold text-white mb-1">Software Engineer Intern | PosTrue</h3>
+                <p className="text-gray-400 mb-3">Mar 2024 - Jun 2024</p>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                  <li>Developed Django website to display wearable sensor data, delivering posture analytics with ergonomic feedback for customers.</li>
+                  <li>Designed UI/UX with HTML, CSS, JavaScript, & Bootstrap, following brand standards & responsive design.</li>
+                  <li>Created a PostgreSQL analytics dashboard to visualise real-time sensor data and deliver actionable posture insights.</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* PoseVision */}
+            <div className="flex flex-col lg:flex-row gap-8 mb-8">
+              {/* Video with gradient border */}
+              <div className="lg:w-1/3 relative group">
+                <div
+                  className="relative rounded-2xl overflow-hidden animate-gradient"
+                  style={{
+                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    padding: '3px',
+                  }}
+                >
+                  <div className="relative rounded-2xl overflow-hidden bg-black">
+                    <video
+                      controls
+                      className="w-full h-auto"
+                      preload="metadata"
+                    >
+                      <source src="/PoseVisionDemo.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
                 </div>
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-white mb-1">Fullstack AI Developer | SASEHacks (PoseVision)</h3>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                    <li>Won 1st place for developing PoseVision in a team of 3, an injury prevention tool utilising deep learning & pose estimation from user-uploaded videos for injury prevention in the squat.</li>
-                    <li>Developed Python script with MediaPipe & OpenCV to detect squat asymmetries & enhance UI/UX with visual feedback.</li>
-                    <li>Containerised Docker pipeline deployed on AWS EC2, with Flask integration using git (version control) to display results.</li>
-                  </ul>
+              </div>
+
+              {/* Content */}
+              <div className="lg:w-2/3">
+                <h3 className="text-xl font-semibold text-white mb-1">Fullstack AI Developer | SASEHacks (PoseVision)</h3>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                  <li>Won 1st place for developing PoseVision in a team of 3, an injury prevention tool utilising deep learning & pose estimation from user-uploaded videos for injury prevention in the squat.</li>
+                  <li>Developed Python script with MediaPipe & OpenCV to detect squat asymmetries & enhance UI/UX with visual feedback.</li>
+                  <li>Containerised Docker pipeline deployed on AWS EC2, with Flask integration using git (version control) to display results.</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Credit Compass */}
+            <div className="flex flex-col lg:flex-row gap-8 mb-8">
+              {/* Image with gradient border */}
+              <div className="lg:w-1/3 relative group">
+                <div
+                  className="relative rounded-2xl overflow-hidden animate-gradient"
+                  style={{
+                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    padding: '3px',
+                  }}
+                >
+                  <div className="relative rounded-2xl overflow-hidden bg-black">
+                    <Image
+                      src="/Hackathon.png"
+                      alt="Credit Compass Hackathon"
+                      width={400}
+                      height={300}
+                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
                 </div>
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-white mb-1">Fullstack AI Developer | HackMercedX (Credit Compass)</h3>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                    <li>Won Alumni Prize for developing Credit Compass in a team of 3, an AI-powered platform that delivers long-term, personalised credit card recommendations by leveraging real-time internet data.</li>
-                    <li>Built a REST pipeline with the Letta AI API, JavaScript & HTML/CSS to display the personalised credit timeline in Flask.</li>
-                  </ul>
-                </div>
+              </div>
+
+              {/* Content */}
+              <div className="lg:w-2/3">
+                <h3 className="text-xl font-semibold text-white mb-1">Fullstack AI Developer | HackMercedX (Credit Compass)</h3>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                  <li>Won Alumni Prize for developing Credit Compass in a team of 3, an AI-powered platform that delivers long-term, personalised credit card recommendations by leveraging real-time internet data.</li>
+                  <li>Built a REST pipeline with the Letta AI API, JavaScript & HTML/CSS to display the personalised credit timeline in Flask.</li>
+                </ul>
               </div>
             </div>
           </section>
@@ -78,6 +169,9 @@ export default function Home() {
       case "AI/ML Research":
         return (
           <section className="p-2">
+            <h2 className="text-3xl font-bold mb-6 text-white border-b border-white/20 pb-2">AI/ML Research</h2>
+
+            {/* Mi3 Lab Research */}
             <div className="flex flex-col lg:flex-row gap-8 mb-8">
               {/* Image with gradient border */}
               <div className="lg:w-1/3 relative group">
@@ -102,16 +196,13 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h2 className="text-3xl font-bold mb-8 text-white">AI/ML Research</h2>
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-white mb-1">Machine Learning Research Intern | Mi3 Lab</h3>
-                  <p className="text-gray-400 mb-3">Jun 2025 - Present</p>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                    <li>Co-authored paper, published & presented at CVPR 2025 & ICCV 2025 conferences for our VLLM, which generates accurate real-time navigation instructions for users with visual impairments in complex urban environments.</li>
-                    <li>Outperformed GPT-4o baseline by 43.84% via finetuning VideoLLaMa3-7B on preprocessed dataset, prompt engineering, frame sampling, & strategic post-processing across ROUGE-L, Timing F1/AUC, & Action F1 metrics.</li>
-                    <li>Developed data visualisations using Pandas/Matplotlib & Python for JSON post-processing for the paper & presentation.</li>
-                  </ul>
-                </div>
+                <h3 className="text-xl font-semibold text-white mb-1">Machine Learning Research Intern | Mi3 Lab</h3>
+                <p className="text-gray-400 mb-3">Jun 2025 - Present</p>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                  <li>Co-authored paper, published & presented at CVPR 2025 & ICCV 2025 conferences for our VLLM, which generates accurate real-time navigation instructions for users with visual impairments in complex urban environments.</li>
+                  <li>Outperformed GPT-4o baseline by 43.84% via finetuning VideoLLaMa3-7B on preprocessed dataset, prompt engineering, frame sampling, & strategic post-processing across ROUGE-L, Timing F1/AUC, & Action F1 metrics.</li>
+                  <li>Developed data visualisations using Pandas/Matplotlib & Python for JSON post-processing for the paper & presentation.</li>
+                </ul>
               </div>
             </div>
           </section>
@@ -119,6 +210,9 @@ export default function Home() {
       case "Product Development":
         return (
           <section className="p-2">
+            <h2 className="text-3xl font-bold mb-6 text-white border-b border-white/20 pb-2">Product Development</h2>
+
+            {/* Plant Culture Systems */}
             <div className="flex flex-col lg:flex-row gap-8 mb-8">
               {/* Image with gradient border */}
               <div className="lg:w-1/3 relative group">
@@ -143,7 +237,6 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h2 className="text-3xl font-bold mb-8 text-white">Product Development</h2>
                 <div className="mb-8">
                   <h3 className="text-xl font-semibold text-white mb-1">Product Development Intern | Plant Culture Systems</h3>
                   <p className="text-gray-400 mb-3">Jul 2024 - Oct 2024</p>
@@ -155,31 +248,90 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
+            {/* Hackathons Subsection */}
+            <div className="mb-8">
+              <h3 className="text-2xl font-semibold text-white mb-6 border-b border-white/20 pb-2">Hackathons</h3>
+
+              {/* PoseVision - Video on left, text on right */}
+              <div className="flex flex-col lg:flex-row gap-8 mb-8">
+                {/* Video with gradient border */}
+                <div className="lg:w-1/3 relative group">
+                  <div
+                    className="relative rounded-2xl overflow-hidden animate-gradient"
+                    style={{
+                      background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                      padding: '3px',
+                    }}
+                  >
+                    <div className="relative rounded-2xl overflow-hidden bg-black">
+                      <video
+                        controls
+                        className="w-full h-auto"
+                        preload="metadata"
+                      >
+                        <source src="/PoseVisionDemo.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  </div>
+                </div>
+
+                {/* PoseVision Text */}
+                <div className="lg:w-2/3">
+                  <h4 className="text-lg font-semibold text-white mb-1">Fullstack AI Developer | SASEHacks (PoseVision)</h4>
+                  <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                    <li>Won 1st place for developing PoseVision in a team of 3, an injury prevention tool utilising deep learning & pose estimation from user-uploaded videos for injury prevention in the squat.</li>
+                    <li>Developed Python script with MediaPipe & OpenCV to detect squat asymmetries & enhance UI/UX with visual feedback.</li>
+                    <li>Containerised Docker pipeline deployed on AWS EC2, with Flask integration using git (version control) to display results.</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Credit Compass - Image on left, text on right */}
+              <div className="flex flex-col lg:flex-row gap-8 mb-8">
+                {/* Image with gradient border */}
+                <div className="lg:w-1/3 relative group">
+                  <div
+                    className="relative rounded-2xl overflow-hidden animate-gradient"
+                    style={{
+                      background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                      padding: '3px',
+                    }}
+                  >
+                    <div className="relative rounded-2xl overflow-hidden bg-black">
+                      <Image
+                        src="/Hackathon.png"
+                        alt="Credit Compass Hackathon"
+                        width={400}
+                        height={300}
+                        className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Credit Compass Text */}
+                <div className="lg:w-2/3">
+                  <h4 className="text-lg font-semibold text-white mb-1">Fullstack AI Developer | HackMercedX (Credit Compass)</h4>
+                  <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                    <li>Won Alumni Prize for developing Credit Compass in a team of 3, an AI-powered platform that delivers long-term, personalised credit card recommendations by leveraging real-time internet data.</li>
+                    <li>Built a REST pipeline with the Letta AI API, JavaScript & HTML/CSS to display the personalised credit timeline in Flask.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </section>
         );
       case "Leadership & Community":
         return (
           <section className="p-2">
-            <div className="flex flex-col lg:flex-row gap-8">
-              {/* Image Column */}
-              <div className="lg:w-1/3 flex flex-col gap-8">
-                <div
-                  className="relative rounded-2xl overflow-hidden animate-gradient"
-                  style={{
-                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
-                    padding: '3px',
-                  }}
-                >
-                  <div className="relative rounded-2xl overflow-hidden bg-black">
-                    <Image
-                      src="/SHPE.png"
-                      alt="Leadership & Community"
-                      width={400}
-                      height={300}
-                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                </div>
+            <h2 className="text-3xl font-bold mb-6 text-white border-b border-white/20 pb-2">Leadership & Community</h2>
+
+            {/* Perplexity AI Campus Ambassador */}
+            <div className="flex flex-col lg:flex-row gap-8 mb-8">
+              {/* Image with gradient border */}
+              <div className="lg:w-1/3 relative group">
                 <div
                   className="relative rounded-2xl overflow-hidden animate-gradient"
                   style={{
@@ -190,41 +342,89 @@ export default function Home() {
                   <div className="relative rounded-2xl overflow-hidden bg-black">
                     <Image
                       src="/Perplexity.jpeg"
-                      alt="Perplexity AI"
+                      alt="Perplexity AI Ambassador"
                       width={400}
                       height={300}
-                      className="w-full h-auto object-cover"
+                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
                 </div>
               </div>
 
-              {/* Content Column */}
+              {/* Content */}
               <div className="lg:w-2/3">
-                <h2 className="text-3xl font-bold mb-8 text-white">Leadership & Community</h2>
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-white mb-1">AI Campus Ambassador | Perplexity</h3>
-                  <p className="text-gray-400 mb-3">June 2025 - Present</p>
-                  <ul className="list--disc list-inside ml-4 space-y-2 text-gray-300">
-                    <li>Developed & executed a responsible AI adoption marketing strategy on campus through tailored presentations to clubs & classes engaging 300+ in-person students to date & working toward 500 sign-ups to secure Perplexity hackathon sponsorship.</li>
-                  </ul>
-                  <p className="text-gray-400 mt-2">Placeholder text for the Perplexity image. Let me know what you'd like to write here!</p>
+                <h3 className="text-xl font-semibold text-white mb-1">AI Campus Ambassador | Perplexity</h3>
+                <p className="text-gray-400 mb-3">June 2025 - Present</p>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                  <li>Developed & executed a responsible AI adoption marketing strategy on campus through tailored presentations to clubs & classes engaging 300+ in-person students to date & working toward 500 sign-ups to secure Perplexity hackathon sponsorship.</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* HackMercedX Organiser */}
+            <div className="flex flex-col lg:flex-row gap-8 mb-8">
+              {/* Image with gradient border */}
+              <div className="lg:w-1/3 relative group">
+                <div
+                  className="relative rounded-2xl overflow-hidden animate-gradient"
+                  style={{
+                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    padding: '3px',
+                  }}
+                >
+                  <div className="relative rounded-2xl overflow-hidden bg-black">
+                    <Image
+                      src="/Hackathon.png"
+                      alt="HackMercedX Organiser"
+                      width={400}
+                      height={300}
+                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
                 </div>
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-white mb-1">Hackathon Organiser | HackMercedX</h3>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                    <li>Worked in Backend & Outreach teams, managing hackathon website while pursuing company sponsorships & participant outreach.</li>
-                  </ul>
+              </div>
+
+              {/* Content */}
+              <div className="lg:w-2/3">
+                <h3 className="text-xl font-semibold text-white mb-1">Hackathon Organiser | HackMercedX</h3>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                  <li>Worked in Backend & Outreach teams, managing hackathon website while pursuing company sponsorships & participant outreach.</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Theta Tau */}
+            <div className="flex flex-col lg:flex-row gap-8 mb-8">
+              {/* Image with gradient border */}
+              <div className="lg:w-1/3 relative group">
+                <div
+                  className="relative rounded-2xl overflow-hidden animate-gradient"
+                  style={{
+                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                    padding: '3px',
+                  }}
+                >
+                  <div className="relative rounded-2xl overflow-hidden bg-black">
+                    <Image
+                      src="/SHPE.png"
+                      alt="Theta Tau Leadership"
+                      width={400}
+                      height={300}
+                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
                 </div>
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-white mb-1">Executive Board/Recruitment | Theta Tau</h3>
-                  <p className="text-400 mb-3">Mar 2024 - Present</p>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
-                    <li>As recruitment chair, led a committee of 9, with a $2,000 budget & organised class presentations to 1,000+ students.</li>
-                    <li>Increased chapter growth by 70% through 5 daily events with 50+ daily attendees & created a detailed manual for future chairs.</li>
-                    <li>As Executive Board, oversaw chapter operations & presented to regional executives preparing to run for President next semester.</li>
-                  </ul>
-                </div>
+              </div>
+
+              {/* Content */}
+              <div className="lg:w-2/3">
+                <h3 className="text-xl font-semibold text-white mb-1">Executive Board/Recruitment | Theta Tau</h3>
+                <p className="text-gray-400 mb-3">Mar 2024 - Present</p>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-gray-300">
+                  <li>As recruitment chair, led a committee of 9, with a $2,000 budget & organised class presentations to 1,000+ students.</li>
+                  <li>Increased chapter growth by 70% through 5 daily events with 50+ daily attendees & created a detailed manual for future chairs.</li>
+                  <li>As Executive Board, oversaw chapter operations & presented to regional executives preparing to run for President next semester.</li>
+                </ul>
               </div>
             </div>
           </section>
@@ -255,6 +455,43 @@ export default function Home() {
             </div>
           </section>
         );
+      case "Resume":
+        return (
+          <section className="p-2">
+            <h2 className="text-3xl font-bold mb-8 text-white">Resume</h2>
+            <div className="w-full">
+              {/* PDF Embed without border */}
+              <iframe
+                src="/RoshanSanjeev_Resume.pdf"
+                className="w-full h-[800px] rounded-lg mb-4"
+                title="Roshan Sanjeev Resume"
+              />
+              {/* Download Button */}
+              <div className="mt-4 flex justify-center">
+                <a
+                  href="/RoshanSanjeev_Resume.pdf"
+                  download="RoshanSanjeev_Resume.pdf"
+                  className="relative group/btn rounded-full inline-block"
+                >
+                  <span
+                    className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient"
+                    style={{
+                      background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                      padding: '3px',
+                      WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                      WebkitMaskComposite: 'xor',
+                      maskComposite: 'exclude',
+                      pointerEvents: 'none',
+                    }}
+                  />
+                  <span className="bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20 relative z-10 inline-block text-white font-medium hover:bg-white/20 transition-all duration-300">
+                    Download Resume
+                  </span>
+                </a>
+              </div>
+            </div>
+          </section>
+        );
       default:
         return null;
     }
@@ -266,6 +503,7 @@ export default function Home() {
     "Product Development",
     "Leadership & Community",
     "Technical Skills",
+    "Resume",
   ];
 
   return (
@@ -274,6 +512,45 @@ export default function Home() {
         {/* Interactive Grid Background */}
         <div className="absolute inset-0 z-0 h-[70vh] semi-circle-mask">
           <InteractiveGrid />
+        </div>
+
+        {/* Social Media Links - Top Right */}
+        <div className="absolute top-8 right-8 z-20">
+          <div className="relative group rounded-full">
+            <span
+              className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient"
+              style={{
+                background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
+                padding: '3px',
+                WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                WebkitMaskComposite: 'xor',
+                maskComposite: 'exclude',
+                pointerEvents: 'none',
+              }}
+            />
+            <div className="bg-white/10 backdrop-blur-sm rounded-full px-4 py-3 border border-white/20 relative z-10 flex items-center gap-4">
+              {/* GitHub */}
+              <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+
+              {/* Discord */}
+              <a href="https://discord.com/users/youruserid" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+              </a>
+
+              {/* LinkedIn */}
+              <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* Content Layer */}
@@ -325,28 +602,13 @@ export default function Home() {
         <nav className="flex flex-wrap justify-center gap-4 mb-10">
           {hats.map((hat) => (
             <div key={hat} className="relative group rounded-full">
-              {/* Animated gradient for SELECTED state - brighter colors */}
+              {/* Animated gradient border for SELECTED button only */}
               {activeHat === hat && (
                 <span
                   className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient"
                   style={{
                     background: 'linear-gradient(135deg, rgb(100, 160, 255) 0%, rgb(200, 170, 255) 25%, rgb(255, 130, 180) 50%, rgb(255, 150, 110) 75%, rgb(255, 200, 120) 100%)',
-                    padding: '4px',
-                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                    WebkitMaskComposite: 'xor',
-                    maskComposite: 'exclude',
-                    pointerEvents: 'none',
-                  }}
-                />
-              )}
-
-              {/* Hover gradient effect for NON-SELECTED state */}
-              {activeHat !== hat && (
-                <span
-                  className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-0 group-hover:opacity-100 animate-gradient"
-                  style={{
-                    background: 'linear-gradient(135deg, rgb(64, 115, 191) 0%, rgb(153, 128, 191) 25%, rgb(191, 89, 128) 50%, rgb(217, 115, 89) 75%, rgb(230, 153, 77) 100%)',
-                    padding: '4px',
+                    padding: '3px',
                     WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                     WebkitMaskComposite: 'xor',
                     maskComposite: 'exclude',
@@ -356,23 +618,15 @@ export default function Home() {
               )}
 
               <button
-                onClick={() => setActiveHat(hat)}
-                className={`px-6 py-3 rounded-full text-base font-medium transition-all duration-300 backdrop-blur-sm relative ${
+                onClick={() => handleHatChange(hat)}
+                className={`px-6 py-3 rounded-full text-base font-medium transition-all duration-300 backdrop-blur-sm relative bg-white/10 border border-white/20 ${
                   activeHat === hat
-                    ? "bg-white/10 text-white shadow-lg"
-                    : "bg-white/10 text-gray-300"
+                    ? "text-white shadow-lg"
+                    : "text-gray-300"
                 }`}
               >
                 <span className="relative z-10">{hat}</span>
               </button>
-
-              {/* Default border for inactive non-hovered state */}
-              {activeHat !== hat && (
-                <span
-                  className="absolute inset-0 rounded-full border-2 border-white/20 group-hover:opacity-0 transition-opacity duration-300"
-                  style={{ pointerEvents: 'none' }}
-                />
-              )}
             </div>
           ))}
         </nav>
@@ -391,7 +645,13 @@ export default function Home() {
             }}
           />
           <div className="w-full h-full bg-white/10 backdrop-blur-sm shadow-2xl rounded-2xl p-8 border border-white/20 relative z-10 overflow-visible">
-            {renderContent()}
+            <div
+              className={`transition-all duration-300 ${
+                isTransitioning ? 'opacity-0 translate-x-4' : 'opacity-100 translate-x-0'
+              }`}
+            >
+              {renderContent()}
+            </div>
 
             {/* Draggable GT3RS with rainbow trail - positioned below content */}
             <div className="relative w-full">
