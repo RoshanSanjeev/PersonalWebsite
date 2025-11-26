@@ -80,6 +80,7 @@ export default function Home() {
                       <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | UC, Merced</h3>
                       <p className="text-[var(--text-secondary)] ml-2">Aug 2025 - Present</p>
                     </div>
+                    <p className="text-[var(--text-secondary)] text-sm">Flask, Redis, Nginx, React, Agile, REST APIs, OAuth 2.0</p>
                   </div>
                 </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
@@ -128,6 +129,7 @@ export default function Home() {
                       <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | PosTrue</h3>
                       <p className="text-[var(--text-secondary)] ml-2">Mar 2024 - Jun 2024</p>
                     </div>
+                    <p className="text-[var(--text-secondary)] text-sm">Django, Bootstrap, PostgreSQL, Real-time Analytics, UI/UX</p>
                   </div>
                 </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
@@ -272,6 +274,7 @@ export default function Home() {
                       <h3 className="text-xl font-semibold text-[var(--text-primary)]">Machine Learning Research Intern | Mi3 Lab</h3>
                       <p className="text-[var(--text-secondary)] ml-2">Jun 2025 - Present</p>
                     </div>
+                    <p className="text-[var(--text-secondary)] text-sm">VLLM, CVPR, ICCV, GPT-4o, VideoLLaMa, Pandas, Matplotlib</p>
                   </div>
                 </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
@@ -327,6 +330,7 @@ export default function Home() {
                         <h3 className="text-xl font-semibold text-[var(--text-primary)]">Product Development Intern | Plant Culture Systems</h3>
                         <p className="text-[var(--text-secondary)] ml-2">Jul 2024 - Oct 2024</p>
                       </div>
+                      <p className="text-[var(--text-secondary)] text-sm">AI, Flutterflow, Firebase, Figma, Agile, ChatGPT API</p>
                     </div>
                   </div>
                   <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
@@ -477,6 +481,7 @@ export default function Home() {
                       <h3 className="text-xl font-semibold text-[var(--text-primary)]">AI Campus Ambassador | Perplexity</h3>
                       <p className="text-[var(--text-secondary)] ml-2">June 2025 - Present</p>
                     </div>
+                    <p className="text-[var(--text-secondary)] text-sm">AI Marketing, Marketing Strategy, Community Engagement</p>
                   </div>
                 </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
@@ -566,6 +571,7 @@ export default function Home() {
                       <h3 className="text-xl font-semibold text-[var(--text-primary)]">Executive Board/Recruitment | Theta Tau</h3>
                       <p className="text-[var(--text-secondary)] ml-2">Mar 2024 - Present</p>
                     </div>
+                    <p className="text-[var(--text-secondary)] text-sm">Leadership, Recruitment, Budget Management, Event Planning</p>
                   </div>
                 </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
