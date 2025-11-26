@@ -118,7 +118,7 @@ export default function Home() {
               <div className="lg:w-2/3">
                 <div className="flex gap-4 mb-3">
                   <Image
-                    src="/unnamed.png"
+                    src="/postrue-logo.png"
                     alt="PosTrue Logo"
                     width={60}
                     height={60}
@@ -460,7 +460,7 @@ export default function Home() {
                 >
                   <div className="relative rounded-2xl overflow-hidden bg-black">
                     <Image
-                      src="/Perplexity.jpeg"
+                      src="/PerplexPrese.jpeg"
                       width={400}
                       height={300}
                       className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
