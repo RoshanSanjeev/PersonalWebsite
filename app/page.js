@@ -104,7 +104,7 @@ export default function Home() {
                 >
                   <div className="relative rounded-2xl overflow-hidden bg-black">
                     <Image
-                      src="/dine board soft launch-5.png"
+                      src="/PostrueMain.png"
                       alt="PosTrue Software Engineering"
                       width={400}
                       height={300}
@@ -176,6 +176,7 @@ export default function Home() {
                   />
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold text-[var(--text-primary)]">Fullstack AI Developer | SASEHacks (PoseVision)</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">AI, Deep Learning, Pose Estimation, Python, MediaPipe, OpenCV, Docker, Flask, AWS EC2</p>
                   </div>
                 </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
@@ -221,6 +222,7 @@ export default function Home() {
                   />
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold text-[var(--text-primary)]">Fullstack AI Developer | HackMercedX (Credit Compass)</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">AI, REST API, Flask, JavaScript, HTML/CSS</p>
                   </div>
                 </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
