@@ -461,7 +461,6 @@ export default function Home() {
                   <div className="relative rounded-2xl overflow-hidden bg-black">
                     <Image
                       src="/Perplexity.jpeg"
-                      alt="Perplexity AI Ambassador"
                       width={400}
                       height={300}
                       className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
@@ -474,7 +473,7 @@ export default function Home() {
               <div className="lg:w-2/3">
                 <div className="flex gap-4 mb-3">
                   <Image
-                    src="/Perplexity.png"
+                    src="/PerplexLogo.webp"
                     alt="Perplexity Logo"
                     width={60}
                     height={60}
@@ -529,6 +528,7 @@ export default function Home() {
                   />
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold text-[var(--text-primary)]">Hackathon Organiser | HackMercedX</h3>
+                    <p className="text-[var(--text-secondary)] text-sm">Backend Management, Frontend, Firebase, Sponsorship, Outreach</p>
                   </div>
                 </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
@@ -564,10 +564,10 @@ export default function Home() {
               <div className="lg:w-2/3">
                 <div className="flex gap-4 mb-3">
                   <Image
-                    src="/ThetaTau.jpg"
+                    src="/ThetaTau.png"
                     alt="Theta Tau Logo"
-                    width={60}
-                    height={60}
+                    width={45}
+                    height={45}
                     className="object-contain self-start"
                   />
                   <div className="flex-1">
