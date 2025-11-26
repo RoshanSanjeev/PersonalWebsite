@@ -43,12 +43,12 @@ export const colorThemes = [
 ];
 
 export const backgroundColors = [
+  { name: 'Charcoal', color: '#1a1a1a', textColor: '#ffffff', secondaryTextColor: '#d1d5db' },
   { name: 'Black', color: '#000000', textColor: '#ffffff', secondaryTextColor: '#d1d5db' },
   { name: 'White', color: '#ffffff', textColor: '#000000', secondaryTextColor: '#4b5563' },
   { name: 'Pastel Gray', color: '#d3d3d3', textColor: '#1f2937', secondaryTextColor: '#374151' },
   { name: 'Beige', color: '#f5f5dc', textColor: '#1f2937', secondaryTextColor: '#374151' },
   { name: 'Navy', color: '#0a1628', textColor: '#ffffff', secondaryTextColor: '#d1d5db' },
-  { name: 'Charcoal', color: '#1a1a1a', textColor: '#ffffff', secondaryTextColor: '#d1d5db' },
   { name: 'Soft Blue', color: '#e6f3ff', textColor: '#1f2937', secondaryTextColor: '#374151' },
 ];
 

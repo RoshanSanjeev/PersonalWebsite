@@ -9,22 +9,34 @@ import Image from "next/image";
 
 export default function Home() {
   const { gradient, backgroundColor, textColor, secondaryTextColor } = useTheme();
-  const [activeHat, setActiveHat] = useState("Software Engineering"); // Default active hat
+  const [activeSection, setActiveSection] = useState("Experience"); // Main section
+  const [activeExperience, setActiveExperience] = useState("Software Engineering"); // Sub-section for Experience
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Handle smooth transitions between sections
-  const handleHatChange = (hat) => {
-    if (hat !== activeHat) {
+  const handleSectionChange = (section) => {
+    if (section !== activeSection) {
       setIsTransitioning(true);
       setTimeout(() => {
-        setActiveHat(hat);
+        setActiveSection(section);
         setIsTransitioning(false);
-      }, 150); // Half of the fade duration for crossfade effect
+      }, 150);
     }
   };
 
-  const renderContent = () => {
-    switch (activeHat) {
+  // Handle experience sub-navigation
+  const handleExperienceChange = (experience) => {
+    if (experience !== activeExperience) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setActiveExperience(experience);
+        setIsTransitioning(false);
+      }, 150);
+    }
+  };
+
+  const renderExperienceContent = () => {
+    switch (activeExperience) {
       case "Software Engineering":
         return (
           <section className="p-2">
@@ -500,13 +512,105 @@ export default function Home() {
     }
   };
 
-  const hats = [
+  const renderContent = () => {
+    switch (activeSection) {
+      case "Experience":
+        return renderExperienceContent();
+      case "Skills":
+        return (
+          <section className="p-2">
+            <h2 className="text-3xl font-bold mb-8 text-[var(--text-primary)]">Skills</h2>
+            <div className="mb-6">
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Languages</h3>
+              <p className="text-[var(--text-secondary)]">Python, C/C++, JavaScript, R, SQL, Java, HTML/CSS, MIPS Assembly, LaTeX</p>
+            </div>
+            <div className="mb-6">
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Frameworks</h3>
+              <p className="text-[var(--text-secondary)]">Flask, Django, React, Pandas, Matplotlib, MediaPipe, OpenCV, Bootstrap, FlutterFlow</p>
+            </div>
+            <div className="mb-6">
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Tools & Platforms</h3>
+              <p className="text-[var(--text-secondary)]">Azure, AWS EC2, Git, Docker, PostgreSQL, Redis, Linux, Microsoft Suite, Claude Code, Firebase, Figma</p>
+            </div>
+            <div className="mb-6">
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">AI/ML</h3>
+              <p className="text-[var(--text-secondary)]">Computer Vision, HuggingFace, PyTorch, TensorFlow, CrewAI Agents, MediaPipe, Vapi, Nous, Masumi</p>
+            </div>
+            <div className="mb-6">
+              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Methodologies</h3>
+              <p className="text-[var(--text-secondary)]">OOP, Agile, Scrum, Responsive Design, UI/UX, CI/CD, DevOps</p>
+            </div>
+          </section>
+        );
+      case "About Me":
+        return (
+          <section className="p-2">
+            <h2 className="text-3xl font-bold mb-8 text-[var(--text-primary)]">About Me</h2>
+            <div className="space-y-4 text-[var(--text-secondary)] leading-relaxed">
+              <p>
+                My name is Roshan Sanjeev, a third year computer science and engineering major at the University of California, Merced and I am passionate about building products that connect technology with user experience. My technical background spans full-stack development, cloud systems, and AI/ML, with experience interning across software engineering and app development. I have also co-authored computer vision research presented at world-renowned conferences such as CVPR in Nashville and ICCV in Hawaii.
+              </p>
+              <p>
+                Beyond technical work, I embrace leadership and outreach. As an organizer for HackMerced, I mentor students and create opportunities for them to grow, collaborate, and bring new ideas to life. As a Perplexity Campus Ambassador, I connect my peers with cutting-edge AI tools, and I am currently leading a drive to reach 500 sign-ups to unlock Hackathon funding from Perplexity. Previously, as Recruitment Chair for Theta Tau, I led a nine-member committee, managed a $2000 budget, and organized events that reached over 1,000 students.
+              </p>
+              <p>
+                I thrive in competitive and creative environments. My projects include PoseVision, a first-place winning deep learning tool for movement feedback at SASEHacks, and Credit Compass, an Alumni Prize-winning AI recommendation system at HackMerced.
+              </p>
+              <p>
+                With a mix of technical expertise, product thinking, and leadership experience, I am motivated to contribute to impactful projects in technology and beyond.
+              </p>
+            </div>
+          </section>
+        );
+      case "Resume":
+        return (
+          <section className="p-2">
+            <h2 className="text-3xl font-bold mb-8 text-[var(--text-primary)]">Resume</h2>
+            <div className="w-full">
+              {/* PDF Embed without border */}
+              <iframe
+                src="/RoshanSanjeev_Resume.pdf"
+                className="w-full h-[800px] rounded-lg mb-4"
+                title="Roshan Sanjeev Resume"
+              />
+              {/* Download Button */}
+              <div className="mt-4 flex justify-center">
+                <a
+                  href="/RoshanSanjeev_Resume.pdf"
+                  download="RoshanSanjeev_Resume.pdf"
+                  className="relative group/btn rounded-full inline-block"
+                >
+                  <span
+                    className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient"
+                    style={{
+                      background: gradient,
+                      padding: '3px',
+                      WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                      WebkitMaskComposite: 'xor',
+                      maskComposite: 'exclude',
+                      pointerEvents: 'none',
+                    }}
+                  />
+                  <span className="bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20 relative z-10 inline-block text-[var(--text-primary)] font-medium hover:bg-white/20 transition-all duration-300">
+                    Download Resume
+                  </span>
+                </a>
+              </div>
+            </div>
+          </section>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const sections = ["Experience", "Skills", "About Me", "Resume"];
+
+  const experienceTypes = [
     "Software Engineering",
     "AI/ML Research",
     "Product Development",
     "Leadership & Community",
-    "Technical Skills",
-    "Resume",
   ];
 
   return (
@@ -599,7 +703,7 @@ export default function Home() {
             <div className="bg-white/10 backdrop-blur-sm rounded-3xl px-8 py-6 pb-6 border border-white/20 relative z-10 overflow-visible">
               <h1 className="text-5xl font-bold text-[var(--text-primary)] mb-6 tracking-tight text-center">Roshan Sanjeev</h1>
               <p className="max-w-3xl text-center text-lg text-[var(--text-secondary)] leading-relaxed mb-4">
-                Nice to virtually meet you! As a Product Manager and Software Engineer, I thrive at the intersection of technology and user needs. Explore the different types of hats I wear by clicking on the categories below in software development, AI/ML research, product, leadership, and more.
+                Nice to virtually meet you! As a Product Manager and Software Engineer, I thrive at the intersection of technology and user needs. Explore my experience, learn about me, or view my resume below.
               </p>
 
               {/* GT3RS at bottom of hero container */}
@@ -609,12 +713,12 @@ export default function Home() {
             </div>
           </div>
 
-        {/* Navigation for Hats */}
+        {/* Main Navigation */}
         <nav className="flex flex-wrap justify-center gap-4 mb-10">
-          {hats.map((hat) => (
-            <div key={hat} className="relative group rounded-full">
+          {sections.map((section) => (
+            <div key={section} className="relative group rounded-full">
               {/* Animated gradient border for SELECTED button only */}
-              {activeHat === hat && (
+              {activeSection === section && (
                 <span
                   className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient"
                   style={{
@@ -629,14 +733,14 @@ export default function Home() {
               )}
 
               <button
-                onClick={() => handleHatChange(hat)}
+                onClick={() => handleSectionChange(section)}
                 className={`px-6 py-3 rounded-full text-base font-medium transition-all duration-300 backdrop-blur-sm relative bg-white/10 border border-white/20 ${
-                  activeHat === hat
+                  activeSection === section
                     ? "text-[var(--text-primary)] shadow-lg"
                     : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/15 hover:scale-105 hover:shadow-md"
                 }`}
               >
-                <span className="relative z-10">{hat}</span>
+                <span className="relative z-10">{section}</span>
               </button>
             </div>
           ))}
@@ -656,17 +760,31 @@ export default function Home() {
             }}
           />
           <div className="w-full h-full bg-white/10 backdrop-blur-sm shadow-2xl rounded-2xl p-8 border border-white/20 relative z-10 overflow-visible">
+            {/* Experience Sub-Navigation */}
+            {activeSection === "Experience" && (
+              <div className="flex flex-wrap justify-center gap-2 mb-6">
+                {experienceTypes.map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => handleExperienceChange(type)}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                      activeExperience === type
+                        ? "bg-white/20 text-[var(--text-primary)] shadow-md"
+                        : "bg-white/5 text-[var(--text-secondary)] hover:bg-white/10 hover:text-[var(--text-primary)]"
+                    }`}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+            )}
+
             <div
               className={`transition-all duration-300 ${
                 isTransitioning ? 'opacity-0 translate-x-4' : 'opacity-100 translate-x-0'
               }`}
             >
               {renderContent()}
-            </div>
-
-            {/* Draggable GT3RS with rainbow trail - positioned below content */}
-            <div className="relative w-full">
-              <DraggableGT3RS />
             </div>
           </div>
         </div>
