@@ -118,7 +118,7 @@ export default function Home() {
               <div className="lg:w-2/3">
                 <div className="flex gap-4 mb-3">
                   <Image
-                    src="/postrue-logo.png"
+                    src="/PosTrueLogo.png"
                     alt="PosTrue Logo"
                     width={60}
                     height={60}
