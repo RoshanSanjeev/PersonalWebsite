@@ -76,8 +76,10 @@ export default function Home() {
                     className="object-contain self-start"
                   />
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Software Engineer Intern | UC, Merced</h3>
-                    <p className="text-[var(--text-secondary)]">Aug 2025 - Present</p>
+                    <div className="flex items-baseline">
+                      <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | UC, Merced</h3>
+                      <p className="text-[var(--text-secondary)] ml-2">Aug 2025 - Present</p>
+                    </div>
                   </div>
                 </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
@@ -122,8 +124,10 @@ export default function Home() {
                     className="object-contain self-start"
                   />
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Software Engineer Intern | PosTrue</h3>
-                    <p className="text-[var(--text-secondary)]">Mar 2024 - Jun 2024</p>
+                    <div className="flex items-baseline">
+                      <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | PosTrue</h3>
+                      <p className="text-[var(--text-secondary)] ml-2">Mar 2024 - Jun 2024</p>
+                    </div>
                   </div>
                 </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
@@ -264,8 +268,10 @@ export default function Home() {
                     className="object-contain self-start"
                   />
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Machine Learning Research Intern | Mi3 Lab</h3>
-                    <p className="text-[var(--text-secondary)]">Jun 2025 - Present</p>
+                    <div className="flex items-baseline">
+                      <h3 className="text-xl font-semibold text-[var(--text-primary)]">Machine Learning Research Intern | Mi3 Lab</h3>
+                      <p className="text-[var(--text-secondary)] ml-2">Jun 2025 - Present</p>
+                    </div>
                   </div>
                 </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
@@ -317,8 +323,10 @@ export default function Home() {
                       className="object-contain self-start"
                     />
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Product Development Intern | Plant Culture Systems</h3>
-                      <p className="text-[var(--text-secondary)]">Jul 2024 - Oct 2024</p>
+                      <div className="flex items-baseline">
+                        <h3 className="text-xl font-semibold text-[var(--text-primary)]">Product Development Intern | Plant Culture Systems</h3>
+                        <p className="text-[var(--text-secondary)] ml-2">Jul 2024 - Oct 2024</p>
+                      </div>
                     </div>
                   </div>
                   <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
@@ -465,8 +473,10 @@ export default function Home() {
                     className="object-contain self-start"
                   />
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">AI Campus Ambassador | Perplexity</h3>
-                    <p className="text-[var(--text-secondary)]">June 2025 - Present</p>
+                    <div className="flex items-baseline">
+                      <h3 className="text-xl font-semibold text-[var(--text-primary)]">AI Campus Ambassador | Perplexity</h3>
+                      <p className="text-[var(--text-secondary)] ml-2">June 2025 - Present</p>
+                    </div>
                   </div>
                 </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
@@ -552,8 +562,10 @@ export default function Home() {
                     className="object-contain self-start"
                   />
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Executive Board/Recruitment | Theta Tau</h3>
-                    <p className="text-[var(--text-secondary)]">Mar 2024 - Present</p>
+                    <div className="flex items-baseline">
+                      <h3 className="text-xl font-semibold text-[var(--text-primary)]">Executive Board/Recruitment | Theta Tau</h3>
+                      <p className="text-[var(--text-secondary)] ml-2">Mar 2024 - Present</p>
+                    </div>
                   </div>
                 </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
