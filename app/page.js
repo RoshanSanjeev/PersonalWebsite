@@ -384,6 +384,7 @@ export default function Home() {
                     />
                     <div className="flex-1">
                       <h4 className="text-lg font-semibold text-[var(--text-primary)]">Fullstack AI Developer | SASEHacks (PoseVision)</h4>
+                      <p className="text-[var(--text-secondary)] text-sm">AI, Deep Learning, Pose Estimation, Python, MediaPipe, OpenCV, Docker, Flask, AWS EC2</p>
                     </div>
                   </div>
                   <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
@@ -429,6 +430,7 @@ export default function Home() {
                     />
                     <div className="flex-1">
                       <h4 className="text-lg font-semibold text-[var(--text-primary)]">Fullstack AI Developer | HackMercedX (Credit Compass)</h4>
+                      <p className="text-[var(--text-secondary)] text-sm">AI, REST API, Flask, JavaScript, HTML/CSS</p>
                     </div>
                   </div>
                   <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
