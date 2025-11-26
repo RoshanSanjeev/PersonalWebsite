@@ -67,8 +67,19 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Software Engineer Intern | UC, Merced</h3>
-                <p className="text-[var(--text-secondary)] mb-3">Aug 2025 - Present</p>
+                <div className="flex gap-4 mb-3">
+                  <Image
+                    src="/UCM_Logo.png"
+                    alt="UC Merced Logo"
+                    width={60}
+                    height={60}
+                    className="object-contain self-start"
+                  />
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Software Engineer Intern | UC, Merced</h3>
+                    <p className="text-[var(--text-secondary)]">Aug 2025 - Present</p>
+                  </div>
+                </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Built DineBoard enterprise system serving 2,500+ students daily using Agile methodology</li>
                   <li>Engineered secure REST APIs with OAuth 2.0, driving 80% productivity increase for staff</li>
@@ -102,8 +113,19 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Software Engineer Intern | PosTrue</h3>
-                <p className="text-[var(--text-secondary)] mb-3">Mar 2024 - Jun 2024</p>
+                <div className="flex gap-4 mb-3">
+                  <Image
+                    src="/unnamed.png"
+                    alt="PosTrue Logo"
+                    width={60}
+                    height={60}
+                    className="object-contain self-start"
+                  />
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Software Engineer Intern | PosTrue</h3>
+                    <p className="text-[var(--text-secondary)]">Mar 2024 - Jun 2024</p>
+                  </div>
+                </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Developed Django website with real-time wearable sensor analytics and ergonomic feedback</li>
                   <li>Designed responsive UI/UX with Bootstrap, HTML/CSS/JavaScript following brand standards</li>
@@ -138,7 +160,18 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Fullstack AI Developer | SASEHacks (PoseVision)</h3>
+                <div className="flex gap-4 mb-3">
+                  <Image
+                    src="/Sase.png"
+                    alt="SASE Logo"
+                    width={45}
+                    height={45}
+                    className="object-contain self-start"
+                  />
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-[var(--text-primary)]">Fullstack AI Developer | SASEHacks (PoseVision)</h3>
+                  </div>
+                </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Won 1st place building AI injury prevention tool using deep learning pose estimation</li>
                   <li>Developed Python script with MediaPipe & OpenCV detecting squat asymmetries with visual feedback</li>
@@ -172,7 +205,18 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Fullstack AI Developer | HackMercedX (Credit Compass)</h3>
+                <div className="flex gap-4 mb-3">
+                  <Image
+                    src="/HackMerced.png"
+                    alt="HackMerced Logo"
+                    width={45}
+                    height={45}
+                    className="object-contain self-start"
+                  />
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-[var(--text-primary)]">Fullstack AI Developer | HackMercedX (Credit Compass)</h3>
+                  </div>
+                </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Won Alumni Prize building AI platform delivering personalized credit card recommendations using real-time data</li>
                   <li>Built REST pipeline with Letta AI API and Flask frontend using JavaScript & HTML/CSS</li>
@@ -211,8 +255,19 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Machine Learning Research Intern | Mi3 Lab</h3>
-                <p className="text-[var(--text-secondary)] mb-3">Jun 2025 - Present</p>
+                <div className="flex gap-4 mb-3">
+                  <Image
+                    src="/VideoLlama.png"
+                    alt="Mi3 Lab Logo"
+                    width={60}
+                    height={60}
+                    className="object-contain self-start"
+                  />
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Machine Learning Research Intern | Mi3 Lab</h3>
+                    <p className="text-[var(--text-secondary)]">Jun 2025 - Present</p>
+                  </div>
+                </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Co-authored VLLM paper published at CVPR 2025 & ICCV 2025 generating real-time navigation for visually impaired users</li>
                   <li>Outperformed GPT-4o by 43.84% finetuning VideoLLaMa3-7B across ROUGE-L, Timing F1/AUC, & Action F1 metrics</li>
@@ -253,8 +308,19 @@ export default function Home() {
               {/* Content */}
               <div className="lg:w-2/3">
                 <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Product Development Intern | Plant Culture Systems</h3>
-                  <p className="text-[var(--text-secondary)] mb-3">Jul 2024 - Oct 2024</p>
+                  <div className="flex gap-4 mb-3">
+                    <Image
+                      src="/PlantCultureSystems.webp"
+                      alt="Plant Culture Systems Logo"
+                      width={60}
+                      height={60}
+                      className="object-contain self-start"
+                    />
+                    <div className="flex-1">
+                      <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Product Development Intern | Plant Culture Systems</h3>
+                      <p className="text-[var(--text-secondary)]">Jul 2024 - Oct 2024</p>
+                    </div>
+                  </div>
                   <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                     <li>Designed AI landing page for OurGarden using Flutterflow, enhancing engagement for 500+ users</li>
                     <li>Led AI image analysis feature improving engagement metrics by 50% through Agile sprints</li>
@@ -294,7 +360,18 @@ export default function Home() {
 
                 {/* PoseVision Text */}
                 <div className="lg:w-2/3">
-                  <h4 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Fullstack AI Developer | SASEHacks (PoseVision)</h4>
+                  <div className="flex gap-4 mb-3">
+                    <Image
+                      src="/Sase.png"
+                      alt="SASE Logo"
+                      width={45}
+                      height={45}
+                      className="object-contain self-start"
+                    />
+                    <div className="flex-1">
+                      <h4 className="text-lg font-semibold text-[var(--text-primary)]">Fullstack AI Developer | SASEHacks (PoseVision)</h4>
+                    </div>
+                  </div>
                   <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                     <li>Won 1st place building AI injury prevention tool using deep learning pose estimation</li>
                     <li>Developed Python script with MediaPipe & OpenCV detecting squat asymmetries with visual feedback</li>
@@ -328,7 +405,18 @@ export default function Home() {
 
                 {/* Credit Compass Text */}
                 <div className="lg:w-2/3">
-                  <h4 className="text-lg font-semibold text-[var(--text-primary)] mb-1">Fullstack AI Developer | HackMercedX (Credit Compass)</h4>
+                  <div className="flex gap-4 mb-3">
+                    <Image
+                      src="/HackMerced.png"
+                      alt="HackMerced Logo"
+                      width={60}
+                      height={60}
+                      className="object-contain self-start"
+                    />
+                    <div className="flex-1">
+                      <h4 className="text-lg font-semibold text-[var(--text-primary)]">Fullstack AI Developer | HackMercedX (Credit Compass)</h4>
+                    </div>
+                  </div>
                   <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                     <li>Won Alumni Prize building AI platform delivering personalized credit card recommendations using real-time data</li>
                     <li>Built REST pipeline with Letta AI API and Flask frontend using JavaScript & HTML/CSS</li>
@@ -368,8 +456,19 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">AI Campus Ambassador | Perplexity</h3>
-                <p className="text-[var(--text-secondary)] mb-3">June 2025 - Present</p>
+                <div className="flex gap-4 mb-3">
+                  <Image
+                    src="/Perplexity.png"
+                    alt="Perplexity Logo"
+                    width={60}
+                    height={60}
+                    className="object-contain self-start"
+                  />
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">AI Campus Ambassador | Perplexity</h3>
+                    <p className="text-[var(--text-secondary)]">June 2025 - Present</p>
+                  </div>
+                </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Executed responsible AI marketing strategy engaging 300+ students, working toward 500 sign-ups for hackathon sponsorship</li>
                 </ul>
@@ -401,7 +500,18 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Hackathon Organiser | HackMercedX</h3>
+                <div className="flex gap-4 mb-3">
+                  <Image
+                    src="/HackMerced.png"
+                    alt="HackMerced Logo"
+                    width={45}
+                    height={45}
+                    className="object-contain self-start"
+                  />
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-[var(--text-primary)]">Hackathon Organiser | HackMercedX</h3>
+                  </div>
+                </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Managed hackathon website backend while securing company sponsorships and coordinating participant outreach</li>
                 </ul>
@@ -433,8 +543,19 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Executive Board/Recruitment | Theta Tau</h3>
-                <p className="text-[var(--text-secondary)] mb-3">Mar 2024 - Present</p>
+                <div className="flex gap-4 mb-3">
+                  <Image
+                    src="/ThetaTau.jpg"
+                    alt="Theta Tau Logo"
+                    width={60}
+                    height={60}
+                    className="object-contain self-start"
+                  />
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-1">Executive Board/Recruitment | Theta Tau</h3>
+                    <p className="text-[var(--text-secondary)]">Mar 2024 - Present</p>
+                  </div>
+                </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Led recruitment committee of 9 with $2,000 budget, organizing presentations to 1,000+ students</li>
                   <li>Increased chapter growth by 70% through daily events with 50+ attendees, created succession manual</li>
