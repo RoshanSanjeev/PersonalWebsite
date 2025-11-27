@@ -10,7 +10,6 @@ import Image from "next/image";
 export default function Home() {
   const { gradient, backgroundColor, textColor, secondaryTextColor } = useTheme();
   const [activeSection, setActiveSection] = useState("Experience"); // Main section
-  const [activeExperience, setActiveExperience] = useState("Software Engineering"); // Sub-section for Experience
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Handle smooth transitions between sections
@@ -24,23 +23,12 @@ export default function Home() {
     }
   };
 
-  // Handle experience sub-navigation
-  const handleExperienceChange = (experience) => {
-    if (experience !== activeExperience) {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setActiveExperience(experience);
-        setIsTransitioning(false);
-      }, 150);
-    }
-  };
-
-  const renderExperienceContent = () => {
-    switch (activeExperience) {
-      case "Software Engineering":
+  const renderContent = () => {
+    switch (activeSection) {
+      case "Experience":
         return (
           <section className="p-2">
-            <h2 className="text-3xl font-bold mb-6 text-[var(--text-primary)] border-b border-white/20 pb-2">Software Engineering</h2>
+            <h2 className="text-3xl font-bold mb-6 text-[var(--text-primary)] border-b border-white/20 pb-2">Experience</h2>
 
             {/* UC Merced - DineBoard */}
             <div className="flex flex-col lg:flex-row gap-8 mb-8">
@@ -76,7 +64,7 @@ export default function Home() {
                     className="object-contain self-start"
                   />
                   <div className="flex-1">
-                    <div className="flex items-baseline">
+                    <div className="flex items-center">
                       <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | UC, Merced</h3>
                       <p className="text-[var(--text-secondary)] ml-2">Aug 2025 - Present</p>
                     </div>
@@ -87,6 +75,55 @@ export default function Home() {
                   <li>Built DineBoard enterprise system serving 2,500+ students daily using Agile methodology</li>
                   <li>Engineered secure REST APIs with OAuth 2.0, driving 80% productivity increase for staff</li>
                   <li>Architected Flask/Redis backend with Nginx & React frontend for scalable performance</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Mi3 Lab Research */}
+            <div className="flex flex-col lg:flex-row gap-8 mb-8">
+              {/* Image with gradient border */}
+              <div className="lg:w-1/3 relative group">
+                <div
+                  className="relative rounded-2xl overflow-hidden animate-gradient"
+                  style={{
+                    background: gradient,
+                    padding: '3px',
+                  }}
+                >
+                  <div className="relative rounded-2xl overflow-hidden bg-black">
+                    <Image
+                      src="/Research.png"
+                      alt="AI/ML Research"
+                      width={400}
+                      height={300}
+                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="lg:w-2/3">
+                <div className="flex gap-4 mb-3">
+                  <Image
+                    src="/VideoLlama.png"
+                    alt="Mi3 Lab Logo"
+                    width={60}
+                    height={60}
+                    className="object-contain self-start"
+                  />
+                  <div className="flex-1">
+                    <div className="flex items-center">
+                      <h3 className="text-xl font-semibold text-[var(--text-primary)]">Machine Learning Research Intern | Mi3 Lab</h3>
+                      <p className="text-[var(--text-secondary)] ml-2">Jun 2025 - Present</p>
+                    </div>
+                    <p className="text-[var(--text-secondary)] text-sm">VLLM, CVPR, ICCV, GPT-4o, VideoLLaMa, Pandas, Matplotlib</p>
+                  </div>
+                </div>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
+                  <li>Co-authored VLLM paper published at CVPR 2025 & ICCV 2025 generating real-time navigation for visually impaired users</li>
+                  <li>Outperformed GPT-4o by 43.84% finetuning VideoLLaMa3-7B across ROUGE-L, Timing F1/AUC, & Action F1 metrics</li>
+                  <li>Built data visualizations using Pandas/Matplotlib for JSON post-processing and conference presentations</li>
                 </ul>
               </div>
             </div>
@@ -126,7 +163,7 @@ export default function Home() {
                       className="object-contain self-start"
                     />
                     <div className="flex-1">
-                      <div className="flex items-baseline">
+                      <div className="flex items-center">
                         <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | Plant Culture Systems</h3>
                         <p className="text-[var(--text-secondary)] ml-2">Jul 2024 - Oct 2024</p>
                       </div>
@@ -176,7 +213,7 @@ export default function Home() {
                     className="object-contain self-start"
                   />
                   <div className="flex-1">
-                    <div className="flex items-baseline">
+                    <div className="flex items-center">
                       <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | PosTrue</h3>
                       <p className="text-[var(--text-secondary)] ml-2">Mar 2024 - Jun 2024</p>
                     </div>
@@ -190,6 +227,12 @@ export default function Home() {
                 </ul>
               </div>
             </div>
+          </section>
+        );
+      case "Hackathons/Projects":
+        return (
+          <section className="p-2">
+            <h2 className="text-3xl font-bold mb-6 text-[var(--text-primary)] border-b border-white/20 pb-2">Hackathons/Projects</h2>
 
             {/* PoseVision */}
             <div className="flex flex-col lg:flex-row gap-8 mb-8">
@@ -284,219 +327,10 @@ export default function Home() {
             </div>
           </section>
         );
-      case "AI/ML Research":
+      case "Leadership & Communication":
         return (
           <section className="p-2">
-            <h2 className="text-3xl font-bold mb-6 text-[var(--text-primary)] border-b border-white/20 pb-2">AI/ML Research</h2>
-
-            {/* Mi3 Lab Research */}
-            <div className="flex flex-col lg:flex-row gap-8 mb-8">
-              {/* Image with gradient border */}
-              <div className="lg:w-1/3 relative group">
-                <div
-                  className="relative rounded-2xl overflow-hidden animate-gradient"
-                  style={{
-                    background: gradient,
-                    padding: '3px',
-                  }}
-                >
-                  <div className="relative rounded-2xl overflow-hidden bg-black">
-                    <Image
-                      src="/Research.png"
-                      alt="AI/ML Research"
-                      width={400}
-                      height={300}
-                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="lg:w-2/3">
-                <div className="flex gap-4 mb-3">
-                  <Image
-                    src="/VideoLlama.png"
-                    alt="Mi3 Lab Logo"
-                    width={60}
-                    height={60}
-                    className="object-contain self-start"
-                  />
-                  <div className="flex-1">
-                    <div className="flex items-baseline">
-                      <h3 className="text-xl font-semibold text-[var(--text-primary)]">Machine Learning Research Intern | Mi3 Lab</h3>
-                      <p className="text-[var(--text-secondary)] ml-2">Jun 2025 - Present</p>
-                    </div>
-                    <p className="text-[var(--text-secondary)] text-sm">VLLM, CVPR, ICCV, GPT-4o, VideoLLaMa, Pandas, Matplotlib</p>
-                  </div>
-                </div>
-                <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                  <li>Co-authored VLLM paper published at CVPR 2025 & ICCV 2025 generating real-time navigation for visually impaired users</li>
-                  <li>Outperformed GPT-4o by 43.84% finetuning VideoLLaMa3-7B across ROUGE-L, Timing F1/AUC, & Action F1 metrics</li>
-                  <li>Built data visualizations using Pandas/Matplotlib for JSON post-processing and conference presentations</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-        );
-      case "Product Development":
-        return (
-          <section className="p-2">
-            <h2 className="text-3xl font-bold mb-6 text-[var(--text-primary)] border-b border-white/20 pb-2">Product Development</h2>
-
-            {/* Plant Culture Systems */}
-            <div className="flex flex-col lg:flex-row gap-8 mb-8">
-              {/* Image with gradient border */}
-              <div className="lg:w-1/3 relative group">
-                <div
-                  className="relative rounded-2xl overflow-hidden animate-gradient"
-                  style={{
-                    background: gradient,
-                    padding: '3px',
-                  }}
-                >
-                  <div className="relative rounded-2xl overflow-hidden bg-black">
-                    <Image
-                      src="/PlantCultureSystems.webp"
-                      alt="Plant Culture Systems"
-                      width={400}
-                      height={300}
-                      className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="lg:w-2/3">
-                <div className="mb-8">
-                  <div className="flex gap-4 mb-3">
-                    <Image
-                      src="/PlantCultureSystems.webp"
-                      alt="Plant Culture Systems Logo"
-                      width={60}
-                      height={60}
-                      className="object-contain self-start"
-                    />
-                    <div className="flex-1">
-                      <div className="flex items-baseline">
-                        <h3 className="text-xl font-semibold text-[var(--text-primary)]">Product Development Intern | Plant Culture Systems</h3>
-                        <p className="text-[var(--text-secondary)] ml-2">Jul 2024 - Oct 2024</p>
-                      </div>
-                      <p className="text-[var(--text-secondary)] text-sm">AI, Flutterflow, Firebase, Figma, Agile, ChatGPT API</p>
-                    </div>
-                  </div>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                    <li>Designed AI landing page for OurGarden using Flutterflow, enhancing engagement for 500+ users</li>
-                    <li>Led image analysis feature as A.I. subteam lead, improving engagement metrics by ~50% in Agile sprints with customers & users..</li>
-                    <li>Integrated ChatGPT API chatbot, Firebase user management, and Figma frontend planning</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Hackathons Subsection */}
-            <div className="mb-8">
-              <h3 className="text-2xl font-semibold text-[var(--text-primary)] mb-6 border-b border-white/20 pb-2">Hackathons</h3>
-
-              {/* PoseVision - Video on left, text on right */}
-              <div className="flex flex-col lg:flex-row gap-8 mb-8">
-                {/* Video with gradient border */}
-                <div className="lg:w-1/3 relative group">
-                  <div
-                    className="relative rounded-2xl overflow-hidden animate-gradient"
-                    style={{
-                      background: gradient,
-                      padding: '3px',
-                    }}
-                  >
-                    <div className="relative rounded-2xl overflow-hidden bg-black">
-                      <video
-                        controls
-                        className="w-full h-auto"
-                        preload="metadata"
-                      >
-                        <source src="/PoseVisionDemo.mp4" type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    </div>
-                  </div>
-                </div>
-
-                {/* PoseVision Text */}
-                <div className="lg:w-2/3">
-                  <div className="flex gap-4 mb-3">
-                    <Image
-                      src="/Sase.png"
-                      alt="SASE Logo"
-                      width={45}
-                      height={45}
-                      className="object-contain self-start"
-                    />
-                    <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-[var(--text-primary)]">Fullstack AI Developer | SASEHacks (PoseVision)</h4>
-                      <p className="text-[var(--text-secondary)] text-sm">AI, Deep Learning, Pose Estimation, Python, MediaPipe, OpenCV, Docker, Flask, AWS EC2</p>
-                    </div>
-                  </div>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                    <li>Won 1st place building AI injury prevention tool using deep learning pose estimation</li>
-                    <li>Developed Python script with MediaPipe & OpenCV detecting squat asymmetries with visual feedback</li>
-                    <li>Deployed Dockerized Flask pipeline on AWS EC2 with git version control</li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Credit Compass - Image on left, text on right */}
-              <div className="flex flex-col lg:flex-row gap-8 mb-8">
-                {/* Image with gradient border */}
-                <div className="lg:w-1/3 relative group">
-                  <div
-                    className="relative rounded-2xl overflow-hidden animate-gradient"
-                    style={{
-                      background: gradient,
-                      padding: '3px',
-                    }}
-                  >
-                    <div className="relative rounded-2xl overflow-hidden bg-black">
-                      <Image
-                        src="/Hackathon.png"
-                        alt="Credit Compass Hackathon"
-                        width={400}
-                        height={300}
-                        className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Credit Compass Text */}
-                <div className="lg:w-2/3">
-                  <div className="flex gap-4 mb-3">
-                    <Image
-                      src="/HackMerced.png"
-                      alt="HackMerced Logo"
-                      width={60}
-                      height={60}
-                      className="object-contain self-start"
-                    />
-                    <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-[var(--text-primary)]">Fullstack AI Developer | HackMercedX (Credit Compass)</h4>
-                      <p className="text-[var(--text-secondary)] text-sm">AI, REST API, Flask, JavaScript, HTML/CSS</p>
-                    </div>
-                  </div>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                    <li>Won Alumni Prize building AI platform delivering personalized credit card recommendations using real-time data</li>
-                    <li>Built REST pipeline with Letta AI API and Flask frontend using JavaScript & HTML/CSS</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </section>
-        );
-      case "Leadership & Community":
-        return (
-          <section className="p-2">
-            <h2 className="text-3xl font-bold mb-6 text-[var(--text-primary)] border-b border-white/20 pb-2">Leadership & Community</h2>
+            <h2 className="text-3xl font-bold mb-6 text-[var(--text-primary)] border-b border-white/20 pb-2">Leadership & Communication</h2>
 
             {/* Perplexity AI Campus Ambassador */}
             <div className="flex flex-col lg:flex-row gap-8 mb-8">
@@ -531,7 +365,7 @@ export default function Home() {
                     className="object-contain self-start"
                   />
                   <div className="flex-1">
-                    <div className="flex items-baseline">
+                    <div className="flex items-center">
                       <h3 className="text-xl font-semibold text-[var(--text-primary)]">AI Campus Ambassador | Perplexity</h3>
                       <p className="text-[var(--text-secondary)] ml-2">June 2025 - Present</p>
                     </div>
@@ -625,7 +459,7 @@ export default function Home() {
                     className="object-contain self-start"
                   />
                   <div className="flex-1">
-                    <div className="flex items-baseline">
+                    <div className="flex items-center">
                       <h3 className="text-xl font-semibold text-[var(--text-primary)]">Executive Board/Recruitment | Theta Tau</h3>
                       <p className="text-[var(--text-secondary)] ml-2">Mar 2024 - Present</p>
                     </div>
@@ -641,78 +475,6 @@ export default function Home() {
             </div>
           </section>
         );
-      case "Technical Skills":
-        return (
-          <section className="p-2">
-            <h2 className="text-3xl font-bold mb-8 text-[var(--text-primary)]">Technical Skills</h2>
-            <div className="mb-6">
-              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Languages</h3>
-              <p className="text-[var(--text-secondary)]">Python, C/C++, JavaScript, R, SQL, Java, HTML/CSS, MIPS Assembly, LaTeX</p>
-            </div>
-            <div className="mb-6">
-              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Frameworks</h3>
-              <p className="text-[var(--text-secondary)]">Flask, Django, React, Pandas, Matplotlib, MediaPipe, OpenCV, Bootstrap, FlutterFlow</p>
-            </div>
-            <div className="mb-6">
-              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Tools & Platforms</h3>
-              <p className="text-[var(--text-secondary)]">Azure, AWS EC2, Git, Docker, PostgreSQL, Redis, Linux, Microsoft Suite, Claude Code, Firebase, Figma</p>
-            </div>
-            <div className="mb-6">
-              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">AI/ML</h3>
-              <p className="text-[var(--text-secondary)]">Computer Vision, HuggingFace, PyTorch, TensorFlow, CrewAI Agents, MediaPipe, Vapi, Nous, Masumi</p>
-            </div>
-            <div className="mb-6">
-              <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Methodologies</h3>
-              <p className="text-[var(--text-secondary)]">OOP, Agile, Scrum, Responsive Design, UI/UX, CI/CD, DevOps</p>
-            </div>
-          </section>
-        );
-      case "Resume":
-        return (
-          <section className="p-2">
-            <h2 className="text-3xl font-bold mb-8 text-[var(--text-primary)]">Resume</h2>
-            <div className="w-full">
-              {/* PDF Embed without border */}
-              <iframe
-                src="/RoshanSanjeev_Resume.pdf"
-                className="w-full h-[800px] rounded-lg mb-4"
-                title="Roshan Sanjeev Resume"
-              />
-              {/* Download Button */}
-              <div className="mt-4 flex justify-center">
-                <a
-                  href="/RoshanSanjeev_Resume.pdf"
-                  download="RoshanSanjeev_Resume.pdf"
-                  className="relative group/btn rounded-full inline-block"
-                >
-                  <span
-                    className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient"
-                    style={{
-                      background: gradient,
-                      padding: '3px',
-                      WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                      WebkitMaskComposite: 'xor',
-                      maskComposite: 'exclude',
-                      pointerEvents: 'none',
-                    }}
-                  />
-                  <span className="bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20 relative z-10 inline-block text-[var(--text-primary)] font-medium hover:bg-white/20 transition-all duration-300">
-                    Download Resume
-                  </span>
-                </a>
-              </div>
-            </div>
-          </section>
-        );
-      default:
-        return null;
-    }
-  };
-
-  const renderContent = () => {
-    switch (activeSection) {
-      case "Experience":
-        return renderExperienceContent();
       case "Skills":
         return (
           <section className="p-2">
@@ -739,26 +501,6 @@ export default function Home() {
             </div>
           </section>
         );
-      case "About Me":
-        return (
-          <section className="p-2">
-            <h2 className="text-3xl font-bold mb-8 text-[var(--text-primary)]">About Me</h2>
-            <div className="space-y-4 text-[var(--text-secondary)] leading-relaxed">
-              <p>
-                My name is Roshan Sanjeev, a third year computer science and engineering major at the University of California, Merced and I am passionate about building products that connect technology with user experience. My technical background spans full-stack development, cloud systems, and AI/ML, with experience interning across software engineering and app development. I have also co-authored computer vision research presented at world-renowned conferences such as CVPR in Nashville and ICCV in Hawaii.
-              </p>
-              <p>
-                Beyond technical work, I embrace leadership and outreach. As an organizer for HackMerced, I mentor students and create opportunities for them to grow, collaborate, and bring new ideas to life. As a Perplexity Campus Ambassador, I connect my peers with cutting-edge AI tools, and I am currently leading a drive to reach 500 sign-ups to unlock Hackathon funding from Perplexity. Previously, as Recruitment Chair for Theta Tau, I led a nine-member committee, managed a $2000 budget, and organized events that reached over 1,000 students.
-              </p>
-              <p>
-                I thrive in competitive and creative environments. My projects include PoseVision, a first-place winning deep learning tool for movement feedback at SASEHacks, and Credit Compass, an Alumni Prize-winning AI recommendation system at HackMerced.
-              </p>
-              <p>
-                With a mix of technical expertise, product thinking, and leadership experience, I am motivated to contribute to impactful projects in technology and beyond.
-              </p>
-            </div>
-          </section>
-        );
       case "Resume":
         return (
           <section className="p-2">
@@ -796,19 +538,32 @@ export default function Home() {
             </div>
           </section>
         );
+      case "About Me":
+        return (
+          <section className="p-2">
+            <h2 className="text-3xl font-bold mb-8 text-[var(--text-primary)]">About Me</h2>
+            <div className="space-y-4 text-[var(--text-secondary)] leading-relaxed">
+              <p>
+                My name is Roshan Sanjeev, a third year computer science and engineering major at the University of California, Merced and I am passionate about building products that connect technology with user experience. My technical background spans full-stack development, cloud systems, and AI/ML, with experience interning across software engineering and app development. I have also co-authored computer vision research presented at world-renowned conferences such as CVPR in Nashville and ICCV in Hawaii.
+              </p>
+              <p>
+                Beyond technical work, I embrace leadership and outreach. As an organizer for HackMerced, I mentor students and create opportunities for them to grow, collaborate, and bring new ideas to life. As a Perplexity Campus Ambassador, I connect my peers with cutting-edge AI tools, and I am currently leading a drive to reach 500 sign-ups to unlock Hackathon funding from Perplexity. Previously, as Recruitment Chair for Theta Tau, I led a nine-member committee, managed a $2000 budget, and organized events that reached over 1,000 students.
+              </p>
+              <p>
+                I thrive in competitive and creative environments. My projects include PoseVision, a first-place winning deep learning tool for movement feedback at SASEHacks, and Credit Compass, an Alumni Prize-winning AI recommendation system at HackMerced.
+              </p>
+              <p>
+                With a mix of technical expertise, product thinking, and leadership experience, I am motivated to contribute to impactful projects in technology and beyond.
+              </p>
+            </div>
+          </section>
+        );
       default:
         return null;
     }
   };
 
-  const sections = ["Experience", "Skills", "About Me", "Resume"];
-
-  const experienceTypes = [
-    "Software Engineering",
-    "AI/ML Research",
-    "Product Development",
-    "Leadership & Community",
-  ];
+  const sections = ["Experience", "Hackathons/Projects", "Leadership & Communication", "Skills", "About Me", "Resume"];
 
   return (
     <main style={{ backgroundColor, color: textColor }}>
@@ -957,25 +712,6 @@ export default function Home() {
             }}
           />
           <div className="w-full h-full bg-white/10 backdrop-blur-sm shadow-2xl rounded-2xl p-8 border border-white/20 relative z-10 overflow-visible">
-            {/* Experience Sub-Navigation */}
-            {activeSection === "Experience" && (
-              <div className="flex flex-wrap justify-center gap-2 mb-6">
-                {experienceTypes.map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => handleExperienceChange(type)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                      activeExperience === type
-                        ? "bg-white/20 text-[var(--text-primary)] shadow-md"
-                        : "bg-white/5 text-[var(--text-secondary)] hover:bg-white/10 hover:text-[var(--text-primary)]"
-                    }`}
-                  >
-                    {type}
-                  </button>
-                ))}
-              </div>
-            )}
-
             <div
               className={`transition-all duration-300 ${
                 isTransitioning ? 'opacity-0 translate-x-4' : 'opacity-100 translate-x-0'
