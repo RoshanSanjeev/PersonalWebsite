@@ -145,7 +145,7 @@ export default function Home() {
                 >
                   <div className="relative rounded-2xl overflow-hidden bg-black">
                     <Image
-                      src="/PlantCultureSystems.webp"
+                      src="/plantCultureSys.jpeg"
                       alt="Plant Culture Systems"
                       width={400}
                       height={300}
