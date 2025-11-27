@@ -56,13 +56,15 @@ export default function Home() {
               {/* Content */}
               <div className="lg:w-2/3">
                 <div className="flex gap-4 mb-3">
-                  <Image
-                    src="/UCM_Logo.png"
-                    alt="UC Merced Logo"
-                    width={60}
-                    height={60}
-                    className="object-contain self-start"
-                  />
+                  <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
+                    <Image
+                      src="/UCM_Logo.png"
+                      alt="UC Merced Logo"
+                      width={48}
+                      height={48}
+                      className="object-contain"
+                    />
+                  </div>
                   <div className="flex-1">
                     <div className="flex items-center">
                       <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | UC, Merced</h3>
@@ -105,13 +107,15 @@ export default function Home() {
               {/* Content */}
               <div className="lg:w-2/3">
                 <div className="flex gap-4 mb-3">
-                  <Image
-                    src="/VideoLlama.png"
-                    alt="Mi3 Lab Logo"
-                    width={60}
-                    height={60}
-                    className="object-contain self-start"
-                  />
+                  <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
+                    <Image
+                      src="/VideoLlama.png"
+                      alt="Mi3 Lab Logo"
+                      width={48}
+                      height={48}
+                      className="object-contain"
+                    />
+                  </div>
                   <div className="flex-1">
                     <div className="flex items-center">
                       <h3 className="text-xl font-semibold text-[var(--text-primary)]">Machine Learning Research Intern | Mi3 Lab</h3>
@@ -155,14 +159,15 @@ export default function Home() {
               <div className="lg:w-2/3">
                 <div className="mb-8">
                   <div className="flex gap-4 mb-3">
+                                      <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
                     <Image
                       src="/PlantCultureSystems.webp"
                       alt="Plant Culture Systems Logo"
-                      width={60}
-                      height={60}
-                      className="object-contain self-start"
+                      width={48}
+                      height={48}
+                      className="object-contain"
                     />
-                    <div className="flex-1">
+                  </div>                    <div className="flex-1">
                       <div className="flex items-center">
                         <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | Plant Culture Systems</h3>
                         <p className="text-[var(--text-secondary)] ml-2">Jul 2024 - Oct 2024</p>
@@ -205,13 +210,15 @@ export default function Home() {
               {/* Content */}
               <div className="lg:w-2/3">
                 <div className="flex gap-4 mb-3">
-                  <Image
-                    src="/PosTrueLogo.png"
-                    alt="PosTrue Logo"
-                    width={60}
-                    height={60}
-                    className="object-contain self-start"
-                  />
+                  <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
+                    <Image
+                      src="/PosTrueLogo.png"
+                      alt="PosTrue Logo"
+                      width={48}
+                      height={48}
+                      className="object-contain"
+                    />
+                  </div>
                   <div className="flex-1">
                     <div className="flex items-center">
                       <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | PosTrue</h3>
@@ -261,13 +268,15 @@ export default function Home() {
               {/* Content */}
               <div className="lg:w-2/3">
                 <div className="flex gap-4 mb-3">
-                  <Image
-                    src="/Sase.png"
-                    alt="SASE Logo"
-                    width={45}
-                    height={45}
-                    className="object-contain self-start"
-                  />
+                  <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center">
+                    <Image
+                      src="/Sase.png"
+                      alt="SASE Logo"
+                      width={40}
+                      height={40}
+                      className="object-contain"
+                    />
+                  </div>
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold text-[var(--text-primary)]">Fullstack AI Developer | SASEHacks (PoseVision)</h3>
                     <p className="text-[var(--text-secondary)] text-sm">AI, Deep Learning, Pose Estimation, Python, MediaPipe, OpenCV, Docker, Flask, AWS EC2</p>
@@ -307,13 +316,15 @@ export default function Home() {
               {/* Content */}
               <div className="lg:w-2/3">
                 <div className="flex gap-4 mb-3">
-                  <Image
-                    src="/HackMerced.png"
-                    alt="HackMerced Logo"
-                    width={45}
-                    height={45}
-                    className="object-contain self-start"
-                  />
+                  <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
+                    <Image
+                      src="/HackMerced.png"
+                      alt="HackMerced Logo"
+                      width={48}
+                      height={48}
+                      className="object-contain"
+                    />
+                  </div>
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold text-[var(--text-primary)]">Fullstack AI Developer | HackMercedX (Credit Compass)</h3>
                     <p className="text-[var(--text-secondary)] text-sm">AI, REST API, Flask, JavaScript, HTML/CSS</p>
@@ -345,7 +356,7 @@ export default function Home() {
                 >
                   <div className="relative rounded-2xl overflow-hidden bg-black">
                     <Image
-                      src="/Perplexity.jpeg"
+                      src="/PerplexPrese.jpeg"
                       width={400}
                       height={300}
                       className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
@@ -357,13 +368,15 @@ export default function Home() {
               {/* Content */}
               <div className="lg:w-2/3">
                 <div className="flex gap-4 mb-3">
-                  <Image
-                    src="/PerplexLogo.webp"
-                    alt="Perplexity Logo"
-                    width={60}
-                    height={60}
-                    className="object-contain self-start"
-                  />
+                  <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
+                    <Image
+                      src="/PerplexLogo.webp"
+                      alt="Perplexity Logo"
+                      width={48}
+                      height={48}
+                      className="object-contain"
+                    />
+                  </div>
                   <div className="flex-1">
                     <div className="flex items-center">
                       <h3 className="text-xl font-semibold text-[var(--text-primary)]">AI Campus Ambassador | Perplexity</h3>
@@ -406,13 +419,15 @@ export default function Home() {
               {/* Content */}
               <div className="lg:w-2/3">
                 <div className="flex gap-4 mb-3">
-                  <Image
-                    src="/HackMerced.png"
-                    alt="HackMerced Logo"
-                    width={45}
-                    height={45}
-                    className="object-contain self-start"
-                  />
+                  <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
+                    <Image
+                      src="/HackMerced.png"
+                      alt="HackMerced Logo"
+                      width={48}
+                      height={48}
+                      className="object-contain"
+                    />
+                  </div>
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold text-[var(--text-primary)]">Hackathon Organiser | HackMercedX</h3>
                     <p className="text-[var(--text-secondary)] text-sm">Backend Management, Frontend, Firebase, Sponsorship, Outreach</p>
@@ -451,13 +466,15 @@ export default function Home() {
               {/* Content */}
               <div className="lg:w-2/3">
                 <div className="flex gap-4 mb-3">
-                  <Image
-                    src="/ThetaTau.png"
-                    alt="Theta Tau Logo"
-                    width={45}
-                    height={45}
-                    className="object-contain self-start"
-                  />
+                  <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center">
+                    <Image
+                      src="/ThetaTau.png"
+                      alt="Theta Tau Logo"
+                      width={40}
+                      height={40}
+                      className="object-contain"
+                    />
+                  </div>
                   <div className="flex-1">
                     <div className="flex items-center">
                       <h3 className="text-xl font-semibold text-[var(--text-primary)]">Executive Board/Recruitment | Theta Tau</h3>
