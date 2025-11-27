@@ -406,7 +406,7 @@ export default function Home() {
                 >
                   <div className="relative rounded-2xl overflow-hidden bg-black">
                     <Image
-                      src="/Hackathon.png"
+                      src="/HackathonOrganizer.png"
                       alt="HackMercedX Organiser"
                       width={400}
                       height={300}
