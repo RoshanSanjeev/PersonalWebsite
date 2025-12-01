@@ -657,7 +657,7 @@ export default function Home() {
           </div>
 
           {/* Text container with gradient border - same style as content container */}
-          <div className="relative group rounded-3xl mb-12">
+          <div className="w-full max-w-5xl relative group rounded-3xl mb-12">
             <span
               className="absolute inset-0 rounded-3xl transition-opacity duration-300 opacity-100 animate-gradient"
               style={{
@@ -671,8 +671,8 @@ export default function Home() {
             />
             <div className="bg-white/10 backdrop-blur-sm rounded-3xl px-8 py-6 pb-6 border border-white/20 relative z-10 overflow-visible">
               <h1 className="text-5xl font-bold text-[var(--text-primary)] mb-6 tracking-tight text-center">Roshan Sanjeev</h1>
-              <p className="max-w-3xl text-center text-lg text-[var(--text-secondary)] leading-relaxed mb-4">
-                Nice to virtually meet you! As a Product Manager and Software Engineer, I thrive at the intersection of technology and user needs. Explore my experience, learn about me, or view my resume below.
+              <p className="w-full text-center text-lg text-[var(--text-secondary)] leading-relaxed mb-4">
+                Nice to virtually meet you! As a Software Engineer, Machine Learning Researcher, and Product Manager, I thrive at the intersection of technology and user needs. Explore my experience, learn about me, or view my resume below.
               </p>
 
               {/* GT3RS at bottom of hero container */}
