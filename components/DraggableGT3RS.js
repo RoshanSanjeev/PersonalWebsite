@@ -154,7 +154,7 @@ export default function DraggableGT3RS() {
             style={{
               left: "-4px",
               right: "-4px",
-              top: "52px",
+              top: "16px",
               bottom: "16px",
               borderRadius: "12px",
               boxShadow: "0 0 15px 3px rgba(100, 160, 255, 0.5), 0 0 15px 3px rgba(255, 130, 180, 0.3)",
@@ -170,8 +170,8 @@ export default function DraggableGT3RS() {
           onMouseEnter={() => setIsHoveringCar(true)}
           onMouseLeave={() => setIsHoveringCar(false)}
           style={{
-            paddingTop: "42px",
-            paddingBottom: "7px",
+            paddingTop: "0px",
+            paddingBottom: "0px",
           }}
         >
           <Image
@@ -190,7 +190,7 @@ export default function DraggableGT3RS() {
             className="absolute left-1/2 transition-opacity duration-300 pointer-events-none"
             style={{
               transform: facingLeft ? "translateX(-50%) scaleX(-1)" : "translateX(-50%)",
-              top: "30px",
+              top: "8px",
             }}
           >
             <span className="text-xs text-white bg-black/70 px-3 py-1 rounded-full whitespace-nowrap backdrop-blur-sm border border-white/20">
