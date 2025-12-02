@@ -1,12 +1,19 @@
 "use client";
 
 import { useTheme, colorThemes, backgroundColors } from '../contexts/ThemeContext';
+import { useState } from 'react';
 
 export default function ColorThemeSelector() {
   const { currentTheme, setCurrentTheme, gradient, currentBackground, setCurrentBackground } = useTheme();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="absolute top-8 left-8 z-30 flex flex-col gap-3 opacity-40 hover:opacity-100 transition-opacity duration-300">
+    <div
+      className="absolute top-8 left-8 z-30 flex flex-col gap-3 opacity-40 hover:opacity-100 transition-opacity duration-300 animate-fadeInUp"
+      style={{ animationDelay: '0.1s' }}
+      onMouseEnter={() => setIsExpanded(true)}
+      onMouseLeave={() => setIsExpanded(false)}
+    >
       {/* Gradient Color Selector */}
       <div className="relative group rounded-full">
         <span

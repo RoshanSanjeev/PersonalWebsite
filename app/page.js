@@ -558,7 +558,9 @@ export default function Home() {
       case "About Me":
         return (
           <section className="p-2">
-            <h2 className="text-3xl font-bold mb-8 text-[var(--text-primary)]">About Me</h2>
+            <h2 className="text-3xl font-bold mb-6 text-[var(--text-primary)] border-b border-white/20 pb-2">About Me</h2>
+
+            {/* About Me Text */}
             <div className="space-y-4 text-[var(--text-secondary)] leading-relaxed">
               <p>
                 My name is Roshan Sanjeev, a third year computer science and engineering major at the University of California, Merced and I am passionate about building products that connect technology with user experience. My technical background spans full-stack development, cloud systems, and AI/ML, with experience interning across software engineering and app development. I have also co-authored computer vision research presented at world-renowned conferences such as CVPR in Nashville and ICCV in Hawaii.
@@ -594,7 +596,7 @@ export default function Home() {
         <ColorThemeSelector />
 
         {/* Social Media Links - Top Right */}
-        <div className="absolute top-8 right-8 z-20">
+        <div className="absolute top-8 right-8 z-20 animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
           <div className="relative group rounded-full">
             <span
               className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient"
@@ -634,59 +636,60 @@ export default function Home() {
 
         {/* Content Layer */}
         <div className="relative z-10 flex flex-col items-center px-4">
-          {/* Hero Section with Profile Picture and Text Side by Side */}
-          <div className="w-full max-w-5xl flex flex-col lg:flex-row items-center gap-8 mb-12">
-            {/* Text container with gradient border */}
-            <div className="flex-1 relative group rounded-3xl">
-              <span
-                className="absolute inset-0 rounded-3xl transition-opacity duration-300 opacity-100 animate-gradient"
-                style={{
-                  background: gradient,
-                  padding: '5px',
-                  WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                  WebkitMaskComposite: 'xor',
-                  maskComposite: 'exclude',
-                  pointerEvents: 'none',
-                }}
-              />
-              <div className="bg-white/10 backdrop-blur-sm rounded-3xl px-8 py-6 pb-6 border border-white/20 relative z-10 overflow-visible">
-                <h1 className="text-5xl font-bold text-[var(--text-primary)] mb-6 tracking-tight">Roshan Sanjeev</h1>
-                <p className="w-full text-lg text-[var(--text-secondary)] leading-relaxed mb-4">
-                  Nice to virtually meet you! As a Software Engineer, Machine Learning Researcher, and Product Manager, I thrive at the intersection of technology and user needs. Explore my experience, learn about me, or view my resume below.
-                </p>
+          {/* Hero Section with Text */}
+          <div className="w-full max-w-5xl mb-12 animate-fadeInUp">
+            <div className="flex flex-col lg:flex-row gap-6 items-start">
+              {/* Text container with gradient border */}
+              <div className="relative group rounded-3xl flex-1">
+                <span
+                  className="absolute inset-0 rounded-3xl transition-opacity duration-300 opacity-100 animate-gradient"
+                  style={{
+                    background: gradient,
+                    padding: '5px',
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    maskComposite: 'exclude',
+                    pointerEvents: 'none',
+                  }}
+                />
+                <div className="bg-white/10 backdrop-blur-sm rounded-3xl px-8 py-6 pb-6 border border-white/20 relative z-10 overflow-visible">
+                  <h1 className="text-5xl font-bold text-[var(--text-primary)] mb-6 tracking-tight animate-fadeInUp" style={{ animationDelay: '0.3s' }}>Roshan Sanjeev</h1>
+                  <p className="w-full text-lg text-[var(--text-secondary)] leading-relaxed mb-4 animate-fadeInUp" style={{ animationDelay: '0.5s' }}>
+                    Nice to virtually meet you! As a Software Engineer, Machine Learning Researcher, and Product Manager, I thrive at the intersection of technology and user needs. Explore my experience, learn about me, or view my resume below.
+                  </p>
 
-                {/* GT3RS at bottom of hero container */}
-                <div className="relative w-full mt-2">
-                  <DraggableGT3RS />
+                  {/* GT3RS at bottom of hero container */}
+                  <div className="relative w-full mt-2 animate-fadeInUp" style={{ animationDelay: '0.7s' }}>
+                    <DraggableGT3RS />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Profile Picture */}
-            <div className="relative group flex-shrink-0">
-              <div
-                className="relative w-64 h-64 rounded-full animate-gradient"
-                style={{
-                  background: gradient,
-                  padding: '4px',
-                }}
-              >
-                <div className="w-full h-full rounded-full overflow-hidden bg-black">
-                  <Image
-                    src="/pfp.png"
-                    alt="Roshan Sanjeev"
-                    width={256}
-                    height={256}
-                    className="w-full h-full object-cover rounded-full"
-                    priority
-                  />
+              {/* Profile Picture */}
+              <div className="relative group flex-shrink-0 animate-fadeInUp" style={{ animationDelay: '0.4s' }}>
+                <div
+                  className="relative w-48 h-48 lg:w-56 lg:h-56 rounded-full animate-gradient"
+                  style={{
+                    background: gradient,
+                    padding: '4px',
+                  }}
+                >
+                  <div className="w-full h-full rounded-full overflow-hidden bg-black">
+                    <Image
+                      src="/pfp.png"
+                      alt="Roshan Sanjeev"
+                      width={224}
+                      height={224}
+                      className="w-full h-full object-cover rounded-full"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
         {/* Main Navigation */}
-        <nav className="flex flex-wrap justify-center gap-4 mb-10">
+        <nav className="flex flex-wrap justify-center gap-4 mb-10 animate-fadeInUp" style={{ animationDelay: '0.9s' }}>
           {sections.map((section) => (
             <div key={section} className="relative group rounded-full">
               {/* Animated gradient border for SELECTED button only */}
@@ -719,7 +722,7 @@ export default function Home() {
         </nav>
 
         {/* Content Display Area */}
-        <div className="w-full max-w-5xl relative group rounded-2xl">
+        <div className="w-full max-w-5xl relative group rounded-2xl animate-fadeInUp" style={{ animationDelay: '1.1s' }}>
           <span
             className="absolute inset-0 rounded-2xl transition-opacity duration-300 opacity-100 animate-gradient"
             style={{

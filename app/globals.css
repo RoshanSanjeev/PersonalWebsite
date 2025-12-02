@@ -40,3 +40,20 @@
 .semi-circle-mask {
   clip-path: ellipse(150% 100% at 50% 0%);
 }
+
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
