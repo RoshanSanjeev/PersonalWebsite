@@ -3,18 +3,46 @@
 import { useTheme, colorThemes, backgroundColors } from '../contexts/ThemeContext';
 import { useState } from 'react';
 
-export default function ColorThemeSelector() {
-  const { currentTheme, setCurrentTheme, gradient, currentBackground, setCurrentBackground } = useTheme();
+export default function ColorThemeSelector({ compact = false }) {
+  const { currentTheme, setCurrentTheme, gradient, currentBackground, setCurrentBackground, glassColor, borderColor, secondaryTextColor, boxColor, navColor } = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div
-      className="absolute top-8 left-8 z-30 flex flex-col gap-3 opacity-40 hover:opacity-100 transition-opacity duration-300 animate-fadeInUp"
-      style={{ animationDelay: '0.1s' }}
-      onMouseEnter={() => setIsExpanded(true)}
-      onMouseLeave={() => setIsExpanded(false)}
-    >
-      {/* Gradient Color Selector */}
+    <div className="flex flex-col gap-2 relative z-50">
+      {/* Color Theme Row */}
+      <div className="relative group rounded-full">
+        <span
+          className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient pointer-events-none"
+          style={{
+            background: gradient,
+            padding: '2px',
+            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+            WebkitMaskComposite: 'xor',
+            maskComposite: 'exclude',
+          }}
+        />
+        <div
+          className={`backdrop-blur-sm shadow-2xl border rounded-full relative z-10 flex items-center ${compact ? 'px-2 py-1 gap-1' : 'px-3 py-2 gap-2'}`}
+          style={{ backgroundColor: glassColor, borderColor: borderColor }}
+        >
+          {/* Color theme buttons */}
+          {colorThemes.map((theme, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentTheme(index)}
+              className={`rounded-full transition-transform hover:scale-110 ${compact ? 'w-4 h-4' : 'w-6 h-6'}`}
+              style={{
+                background: `linear-gradient(135deg, ${theme.colors[0]} 0%, ${theme.colors[1]} 25%, ${theme.colors[2]} 50%, ${theme.colors[3]} 75%, ${theme.colors[4]} 100%)`,
+                border: currentTheme === index ? '2px solid white' : 'none',
+                boxShadow: currentTheme === index ? '0 0 10px rgba(255,255,255,0.5)' : 'none'
+              }}
+              aria-label={theme.name}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Background Theme Row */}
       <div className="relative group rounded-full">
         <span
           className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-50 group-hover:opacity-100 animate-gradient"
@@ -27,61 +55,26 @@ export default function ColorThemeSelector() {
             pointerEvents: 'none',
           }}
         />
-        <div className="bg-white/5 backdrop-blur-sm rounded-full px-3 py-2 border border-white/10 relative z-10 flex items-center gap-2">
-          {/* Color theme buttons */}
-          {colorThemes.map((theme, index) => (
+        <div
+          className={`backdrop-blur-sm rounded-full border relative z-10 flex items-center ${compact ? 'px-2 py-1 gap-1' : 'px-3 py-2 gap-2'}`}
+          style={{ backgroundColor: navColor, borderColor: borderColor }}
+        >
+          {/* Background color buttons */}
+          {backgroundColors.map((bg, index) => (
             <button
-              key={theme.name}
-              onClick={() => setCurrentTheme(index)}
-              className={`w-6 h-6 rounded-full transition-all duration-200 ${
-                currentTheme === index
-                  ? 'ring-1 ring-white/60 ring-offset-1 ring-offset-black/30 scale-105'
-                  : 'hover:scale-110 opacity-60 hover:opacity-100'
-              }`}
+              key={index}
+              onClick={() => setCurrentBackground(index)}
+              className={`rounded-full transition-transform hover:scale-110 border border-white/20 ${compact ? 'w-4 h-4' : 'w-6 h-6'}`}
               style={{
-                background: `linear-gradient(135deg, ${theme.colors[0]} 0%, ${theme.colors[2]} 50%, ${theme.colors[4]} 100%)`,
+                backgroundColor: bg.color,
+                boxShadow: currentBackground === index ? '0 0 0 2px white, 0 0 10px rgba(255,255,255,0.3)' : 'none'
               }}
-              title={theme.name}
+              aria-label={bg.name}
             />
           ))}
         </div>
       </div>
-
-      {/* Background Color Selector */}
-      <div className="flex flex-col gap-1">
-        <div className="relative group rounded-full">
-          <span
-            className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-50 group-hover:opacity-100 animate-gradient"
-            style={{
-              background: gradient,
-              padding: '2px',
-              WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-              WebkitMaskComposite: 'xor',
-              maskComposite: 'exclude',
-              pointerEvents: 'none',
-            }}
-          />
-          <div className="bg-white/5 backdrop-blur-sm rounded-full px-3 py-2 border border-white/10 relative z-10 flex items-center gap-2">
-            {/* Background color buttons */}
-            {backgroundColors.map((bg, index) => (
-              <button
-                key={bg.name}
-                onClick={() => setCurrentBackground(index)}
-                className={`w-6 h-6 rounded-full transition-all duration-200 border ${
-                  currentBackground === index
-                    ? 'ring-1 ring-white/60 ring-offset-1 ring-offset-black/30 scale-105 border-white/50'
-                    : 'hover:scale-110 opacity-60 hover:opacity-100 border-white/20'
-                }`}
-                style={{
-                  backgroundColor: bg.color,
-                }}
-                title={bg.name}
-              />
-            ))}
-          </div>
-        </div>
-        <p className="text-gray-400 text-xs text-center opacity-70">Choose to your liking</p>
-      </div>
+      {!compact && <p className="text-xs text-center opacity-70" style={{ color: secondaryTextColor }}>Choose to your liking</p>}
     </div>
   );
 }

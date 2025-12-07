@@ -42,15 +42,17 @@ export const colorThemes = [
   },
 ];
 
+
 export const backgroundColors = [
-  { name: 'Charcoal', color: '#1a1a1a', textColor: '#ffffff', secondaryTextColor: '#d1d5db' },
-  { name: 'Black', color: '#000000', textColor: '#ffffff', secondaryTextColor: '#d1d5db' },
-  { name: 'White', color: '#ffffff', textColor: '#000000', secondaryTextColor: '#4b5563' },
-  { name: 'Pastel Gray', color: '#d3d3d3', textColor: '#1f2937', secondaryTextColor: '#374151' },
-  { name: 'Beige', color: '#f5f5dc', textColor: '#1f2937', secondaryTextColor: '#374151' },
-  { name: 'Navy', color: '#0a1628', textColor: '#ffffff', secondaryTextColor: '#d1d5db' },
-  { name: 'Soft Blue', color: '#e6f3ff', textColor: '#1f2937', secondaryTextColor: '#374151' },
+  { name: 'Charcoal', color: '#1a1a1a', textColor: '#ffffff', secondaryTextColor: '#d1d5db', glassColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(255, 255, 255, 0.2)', boxColor: 'rgba(255, 255, 255, 0.15)', navColor: 'rgba(26, 26, 26, 0.85)' },
+  { name: 'Black', color: '#000000', textColor: '#ffffff', secondaryTextColor: '#d1d5db', glassColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(255, 255, 255, 0.2)', boxColor: 'rgba(255, 255, 255, 0.15)', navColor: 'rgba(0, 0, 0, 0.85)' },
+  { name: 'White', color: '#ffffff', textColor: '#000000', secondaryTextColor: '#4b5563', glassColor: 'rgba(0, 0, 0, 0.05)', borderColor: 'rgba(0, 0, 0, 0.1)', boxColor: 'rgba(0, 0, 0, 0.1)', navColor: 'rgba(255, 255, 255, 0.85)' },
+  { name: 'Pastel Gray', color: '#d3d3d3', textColor: '#1f2937', secondaryTextColor: '#374151', glassColor: 'rgba(0, 0, 0, 0.05)', borderColor: 'rgba(0, 0, 0, 0.1)', boxColor: 'rgba(0, 0, 0, 0.1)', navColor: 'rgba(211, 211, 211, 0.85)' },
+  { name: 'Beige', color: '#f5f5dc', textColor: '#1f2937', secondaryTextColor: '#374151', glassColor: 'rgba(0, 0, 0, 0.05)', borderColor: 'rgba(0, 0, 0, 0.1)', boxColor: 'rgba(0, 0, 0, 0.1)', navColor: 'rgba(245, 245, 220, 0.85)' },
+  { name: 'Navy', color: '#0a1628', textColor: '#ffffff', secondaryTextColor: '#d1d5db', glassColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(255, 255, 255, 0.2)', boxColor: 'rgba(255, 255, 255, 0.15)', navColor: 'rgba(10, 22, 40, 0.85)' },
+  { name: 'Soft Blue', color: '#e6f3ff', textColor: '#1f2937', secondaryTextColor: '#374151', glassColor: 'rgba(0, 0, 0, 0.05)', borderColor: 'rgba(0, 0, 0, 0.1)', boxColor: 'rgba(0, 0, 0, 0.1)', navColor: 'rgba(230, 243, 255, 0.85)' },
 ];
+
 
 export function ThemeProvider({ children }) {
   const [currentTheme, setCurrentTheme] = useState(0); // Chroma theme (index 0)
@@ -71,6 +73,10 @@ export function ThemeProvider({ children }) {
     backgroundColor: backgroundColors[currentBackground].color,
     textColor: backgroundColors[currentBackground].textColor,
     secondaryTextColor: backgroundColors[currentBackground].secondaryTextColor,
+    glassColor: backgroundColors[currentBackground].glassColor,
+    borderColor: backgroundColors[currentBackground].borderColor,
+    boxColor: backgroundColors[currentBackground].boxColor,
+    navColor: backgroundColors[currentBackground].navColor,
   };
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
