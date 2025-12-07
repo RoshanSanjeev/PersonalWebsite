@@ -51,7 +51,8 @@ export default function Home() {
                       alt="DineBoard Software Engineering"
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      style={{ objectPosition: '50% 39%' }}
                     />
                   </div>
                 </div>
@@ -600,10 +601,10 @@ export default function Home() {
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-3rem)] rounded-full animate-fadeInUp">
           {/* Gradient Outline (Masked) */}
           <span
-            className="absolute inset-0 rounded-full animate-gradient pointer-events-none"
+            className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient pointer-events-none"
             style={{
               background: gradient,
-              padding: '3px',
+              padding: '2px',
               WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
               WebkitMaskComposite: 'xor',
               maskComposite: 'exclude',
@@ -640,9 +641,9 @@ export default function Home() {
                   <div key={section} className="relative group rounded-full flex-shrink-0">
                     {isActive && (
                       <span
-                        className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient"
+                        className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100"
                         style={{
-                          background: gradient,
+                          background: 'white',
                           padding: '2px',
                           WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                           WebkitMaskComposite: 'xor',
