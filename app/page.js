@@ -804,7 +804,7 @@ export default function Home() {
               }}
             />
             <div
-              className="backdrop-blur-sm shadow-2xl rounded-[2.5rem] py-16 px-8 pb-32 lg:py-20 lg:px-12 lg:pb-40 relative flex flex-col items-center gap-8 overflow-visible border"
+              className="backdrop-blur-sm shadow-2xl rounded-[2.5rem] py-16 px-8 pb-32 lg:py-20 lg:px-12 lg:pb-28 relative flex flex-col items-center gap-8 overflow-visible border"
               style={{
                 background: `linear-gradient(${glassColor}, ${glassColor})`,
                 borderColor: borderColor
@@ -841,12 +841,12 @@ export default function Home() {
                 </p>
               </div>
 
-              <ScrollIndicator />
-
               {/* GT3RS - Bottom of container */}
               <div className="absolute bottom-6 left-8 w-full animate-fadeInUp" style={{ animationDelay: '0.7s' }}>
                 <DraggableGT3RS />
               </div>
+
+              <ScrollIndicator />
             </div>
           </div>
 
