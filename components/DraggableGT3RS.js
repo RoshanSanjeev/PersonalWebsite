@@ -103,6 +103,58 @@ export default function DraggableGT3RS() {
     setIsDragging(true);
   };
 
+  const handleTouchStart = (e) => {
+    // Prevent default to avoid scrolling on some devices immediately, though strictly 'touch-action: none' in CSS is better
+    // But we will use preventDefault in move
+    const touch = e.touches[0];
+    const rect = e.currentTarget.getBoundingClientRect();
+    const offsetX = touch.clientX - rect.left;
+    setDragOffset(offsetX);
+    lastX.current = touch.clientX - offsetX;
+    setTrail([]);
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e) => {
+    if (isDragging) {
+      // Critical: prevent page scrolling while dragging
+      e.preventDefault();
+      e.stopPropagation();
+
+      const touch = e.touches[0];
+      const container = carRef.current?.parentElement?.parentElement;
+      if (!container) return;
+
+      const containerRect = container.getBoundingClientRect();
+      const minX = containerRect.left - 40;
+      const maxX = containerRect.right - carWidth - 30;
+
+      const newX = Math.max(minX, Math.min(maxX, touch.clientX - dragOffset));
+
+      if (newX < lastX.current) {
+        setFacingLeft(true);
+      } else if (newX > lastX.current) {
+        setFacingLeft(false);
+      }
+      lastX.current = newX;
+
+      setPosition({ x: newX - containerRect.left });
+
+      const trailX = facingLeft ? newX + carWidth : newX;
+      setTrail((prevTrail) => [
+        ...prevTrail,
+        {
+          x: trailX - containerRect.left,
+          id: Date.now() + Math.random(),
+        },
+      ]);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
   return (
     <>
       {/* Rainbow trail - starts from back of car */}
@@ -169,6 +221,9 @@ export default function DraggableGT3RS() {
           onMouseDown={handleMouseDown}
           onMouseEnter={() => setIsHoveringCar(true)}
           onMouseLeave={() => setIsHoveringCar(false)}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
           style={{
             paddingTop: "0px",
             paddingBottom: "0px",
