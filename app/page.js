@@ -27,35 +27,32 @@ export default function Home() {
     switch (activeSection) {
       case "Experience":
         return (
-          <section className="p-2">
-            <h2 className="text-3xl font-bold mb-6 text-[var(--text-primary)] border-b pb-2" style={{ borderColor: borderColor }}>Experience</h2>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* UC Merced - DineBoard */}
-              <div className="flex flex-col gap-4">
-                {/* Image with gradient border */}
-                <div className="w-full relative group">
-                  <div
-                    className="relative rounded-2xl overflow-hidden animate-gradient"
-                    style={{
-                      background: gradient,
-                      padding: '3px',
-                    }}
-                  >
-                    <div className="relative rounded-2xl overflow-hidden bg-black aspect-video">
-                      <Image
-                        src="/dine board soft launch-5.png"
-                        alt="DineBoard Software Engineering"
-                        width={400}
-                        height={300}
-                        className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                      />
-                    </div>
+          <section className="space-y-12">
+            {/* UC Merced - DineBoard */}
+            <div className="flex flex-col lg:flex-row gap-8 pb-12 border-b" style={{ borderColor: borderColor }}>
+              {/* Image with gradient border */}
+              <div className="lg:w-1/3 relative group">
+                <div
+                  className="relative rounded-2xl overflow-hidden animate-gradient"
+                  style={{
+                    background: gradient,
+                    padding: '3px',
+                  }}
+                >
+                  <div className="relative rounded-2xl overflow-hidden bg-black aspect-video">
+                    <Image
+                      src="/dine board soft launch-5.png"
+                      alt="DineBoard Software Engineering"
+                      width={400}
+                      height={300}
+                      className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                    />
                   </div>
                 </div>
+              </div>
 
-                {/* Content */}
-                <div className="w-full">
+              {/* Content */}
+              <div className="lg:w-2/3">
                   <div className="flex gap-4 mb-3">
                     <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
                       <Image
@@ -74,39 +71,39 @@ export default function Home() {
                       <p className="text-[var(--text-secondary)] text-sm mt-1">Flask, Redis, Nginx, React, Agile, REST APIs, OAuth 2.0</p>
                     </div>
                   </div>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                    <li>Built DineBoard enterprise system serving 2,500+ students daily using Agile methodology</li>
-                    <li>Engineered secure REST APIs with OAuth 2.0, driving 80% productivity increase for staff</li>
-                    <li>Architected Flask/Redis backend with Nginx & React frontend for scalable performance</li>
-                  </ul>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
+                  <li>Built DineBoard enterprise system serving 2,500+ students daily using Agile methodology</li>
+                  <li>Engineered secure REST APIs with OAuth 2.0, driving 80% productivity increase for staff</li>
+                  <li>Architected Flask/Redis backend with Nginx & React frontend for scalable performance</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Mi3 Lab Research */}
+            <div className="flex flex-col lg:flex-row gap-8 pb-12 border-b" style={{ borderColor: borderColor }}>
+              {/* Image with gradient border */}
+              <div className="lg:w-1/3 relative group">
+                <div
+                  className="relative rounded-2xl overflow-hidden animate-gradient"
+                  style={{
+                    background: gradient,
+                    padding: '3px',
+                  }}
+                >
+                  <div className="relative rounded-2xl overflow-hidden bg-black aspect-video">
+                    <Image
+                      src="/Research.png"
+                      alt="AI/ML Research"
+                      width={400}
+                      height={300}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
                 </div>
               </div>
 
-              {/* Mi3 Lab Research */}
-              <div className="flex flex-col gap-4">
-                {/* Image with gradient border */}
-                <div className="w-full relative group">
-                  <div
-                    className="relative rounded-2xl overflow-hidden animate-gradient"
-                    style={{
-                      background: gradient,
-                      padding: '3px',
-                    }}
-                  >
-                    <div className="relative rounded-2xl overflow-hidden bg-black aspect-video">
-                      <Image
-                        src="/Research.png"
-                        alt="AI/ML Research"
-                        width={400}
-                        height={300}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="w-full">
+              {/* Content */}
+              <div className="lg:w-2/3">
                   <div className="flex gap-4 mb-3">
                     <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
                       <Image
@@ -125,39 +122,39 @@ export default function Home() {
                       <p className="text-[var(--text-secondary)] text-sm mt-1">VLLM, CVPR, ICCV, GPT-4o, VideoLLaMa, Pandas, Matplotlib</p>
                     </div>
                   </div>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                    <li>Co-authored VLLM paper published at CVPR 2025 & ICCV 2025 generating real-time navigation for visually impaired users</li>
-                    <li>Outperformed GPT-4o by 43.84% finetuning VideoLLaMa3-7B across ROUGE-L, Timing F1/AUC, & Action F1 metrics</li>
-                    <li>Built data visualizations using Pandas/Matplotlib for JSON post-processing and conference presentations</li>
-                  </ul>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
+                  <li>Co-authored VLLM paper published at CVPR 2025 & ICCV 2025 generating real-time navigation for visually impaired users</li>
+                  <li>Outperformed GPT-4o by 43.84% finetuning VideoLLaMa3-7B across ROUGE-L, Timing F1/AUC, & Action F1 metrics</li>
+                  <li>Built data visualizations using Pandas/Matplotlib for JSON post-processing and conference presentations</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Plant Culture Systems */}
+            <div className="flex flex-col lg:flex-row gap-8 pb-12 border-b" style={{ borderColor: borderColor }}>
+              {/* Image with gradient border */}
+              <div className="lg:w-1/3 relative group">
+                <div
+                  className="relative rounded-2xl overflow-hidden animate-gradient"
+                  style={{
+                    background: gradient,
+                    padding: '3px',
+                  }}
+                >
+                  <div className="relative rounded-2xl overflow-hidden bg-black aspect-video">
+                    <Image
+                      src="/plantCultureSys.jpeg"
+                      alt="Plant Culture Systems"
+                      width={400}
+                      height={300}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
                 </div>
               </div>
 
-              {/* Plant Culture Systems */}
-              <div className="flex flex-col gap-4">
-                {/* Image with gradient border */}
-                <div className="w-full relative group">
-                  <div
-                    className="relative rounded-2xl overflow-hidden animate-gradient"
-                    style={{
-                      background: gradient,
-                      padding: '3px',
-                    }}
-                  >
-                    <div className="relative rounded-2xl overflow-hidden bg-black aspect-video">
-                      <Image
-                        src="/plantCultureSys.jpeg"
-                        alt="Plant Culture Systems"
-                        width={400}
-                        height={300}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="w-full">
+              {/* Content */}
+              <div className="lg:w-2/3">
                   <div className="flex gap-4 mb-3">
                     <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
                       <Image
@@ -176,39 +173,39 @@ export default function Home() {
                       <p className="text-[var(--text-secondary)] text-sm mt-1">AI, Flutterflow, Firebase, Figma, Agile, ChatGPT API</p>
                     </div>
                   </div>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                    <li>Designed AI landing page for OurGarden using Flutterflow, enhancing engagement for 500+ users</li>
-                    <li>Led image analysis feature as A.I. subteam lead, improving engagement metrics by ~50% in Agile sprints with customers & users..</li>
-                    <li>Integrated ChatGPT API chatbot, Firebase user management, and Figma frontend planning</li>
-                  </ul>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
+                  <li>Designed AI landing page for OurGarden using Flutterflow, enhancing engagement for 500+ users</li>
+                  <li>Led image analysis feature as A.I. subteam lead, improving engagement metrics by ~50% in Agile sprints with customers & users..</li>
+                  <li>Integrated ChatGPT API chatbot, Firebase user management, and Figma frontend planning</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* PosTrue */}
+            <div className="flex flex-col lg:flex-row gap-8">
+              {/* Image with gradient border */}
+              <div className="lg:w-1/3 relative group">
+                <div
+                  className="relative rounded-2xl overflow-hidden animate-gradient"
+                  style={{
+                    background: gradient,
+                    padding: '3px',
+                  }}
+                >
+                  <div className="relative rounded-2xl overflow-hidden bg-black aspect-video">
+                    <Image
+                      src="/PostrueMain.png"
+                      alt="PosTrue Software Engineering"
+                      width={400}
+                      height={300}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
                 </div>
               </div>
 
-              {/* PosTrue */}
-              <div className="flex flex-col gap-4">
-                {/* Image with gradient border */}
-                <div className="w-full relative group">
-                  <div
-                    className="relative rounded-2xl overflow-hidden animate-gradient"
-                    style={{
-                      background: gradient,
-                      padding: '3px',
-                    }}
-                  >
-                    <div className="relative rounded-2xl overflow-hidden bg-black aspect-video">
-                      <Image
-                        src="/PostrueMain.png"
-                        alt="PosTrue Software Engineering"
-                        width={400}
-                        height={300}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="w-full">
+              {/* Content */}
+              <div className="lg:w-2/3">
                   <div className="flex gap-4 mb-3">
                     <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
                       <Image
@@ -227,23 +224,20 @@ export default function Home() {
                       <p className="text-[var(--text-secondary)] text-sm mt-1">Django, Bootstrap, PostgreSQL, Real-time Analytics, UI/UX</p>
                     </div>
                   </div>
-                  <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                    <li>Developed Django website with real-time wearable sensor analytics and ergonomic feedback</li>
-                    <li>Designed responsive UI/UX with Bootstrap, HTML/CSS/JavaScript following brand standards</li>
-                    <li>Built PostgreSQL dashboard visualizing real-time posture data with actionable insights</li>
-                  </ul>
-                </div>
+                <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
+                  <li>Developed Django website with real-time wearable sensor analytics and ergonomic feedback</li>
+                  <li>Designed responsive UI/UX with Bootstrap, HTML/CSS/JavaScript following brand standards</li>
+                  <li>Built PostgreSQL dashboard visualizing real-time posture data with actionable insights</li>
+                </ul>
               </div>
             </div>
           </section>
         );
       case "Hackathons/Projects":
         return (
-          <section className="p-2">
-            <h2 className="text-3xl font-bold mb-6 text-[var(--text-primary)] border-b pb-2" style={{ borderColor: borderColor }}>Hackathons/Projects</h2>
-
+          <section className="space-y-12">
             {/* PoseVision */}
-            <div className="flex flex-col lg:flex-row gap-8 mb-8">
+            <div className="flex flex-col lg:flex-row gap-8 pb-12 border-b" style={{ borderColor: borderColor }}>
               {/* Video with gradient border */}
               <div className="lg:w-1/3 relative group">
                 <div
@@ -292,7 +286,7 @@ export default function Home() {
             </div>
 
             {/* Credit Compass */}
-            <div className="flex flex-col lg:flex-row gap-8 mb-8">
+            <div className="flex flex-col lg:flex-row gap-8">
               {/* Image with gradient border */}
               <div className="lg:w-1/3 relative group">
                 <div
@@ -341,11 +335,9 @@ export default function Home() {
         );
       case "Leadership & Communication":
         return (
-          <section className="p-2">
-            <h2 className="text-3xl font-bold mb-6 text-[var(--text-primary)] border-b pb-2" style={{ borderColor: borderColor }}>Leadership & Communication</h2>
-
+          <section className="space-y-12">
             {/* Perplexity AI Campus Ambassador */}
-            <div className="flex flex-col lg:flex-row gap-8 mb-8">
+            <div className="flex flex-col lg:flex-row gap-8 pb-12 border-b" style={{ borderColor: borderColor }}>
               {/* Image with gradient border */}
               <div className="lg:w-1/3 relative group">
                 <div
@@ -395,7 +387,7 @@ export default function Home() {
             </div>
 
             {/* HackMercedX Organiser */}
-            <div className="flex flex-col lg:flex-row gap-8 mb-8">
+            <div className="flex flex-col lg:flex-row gap-8 pb-12 border-b" style={{ borderColor: borderColor }}>
               {/* Image with gradient border */}
               <div className="lg:w-1/3 relative group">
                 <div
@@ -442,7 +434,7 @@ export default function Home() {
             </div>
 
             {/* Theta Tau */}
-            <div className="flex flex-col lg:flex-row gap-8 mb-8">
+            <div className="flex flex-col lg:flex-row gap-8">
               {/* Image with gradient border */}
               <div className="lg:w-1/3 relative group">
                 <div
@@ -591,7 +583,7 @@ export default function Home() {
 
   return (
     <main style={{ backgroundColor, color: textColor }}>
-      <div className="min-h-screen text-foreground flex flex-col items-center justify-center pt-32 pb-10 relative" style={{ backgroundColor, '--text-primary': textColor, '--text-secondary': secondaryTextColor }}>
+      <div className="min-h-screen text-foreground flex flex-col items-center pt-24 pb-10 relative" style={{ backgroundColor, '--text-primary': textColor, '--text-secondary': secondaryTextColor }}>
         {/* Interactive Grid Background */}
         {/* <div className="absolute inset-0 z-0 h-[70vh] semi-circle-mask">
           <InteractiveGrid />
@@ -625,7 +617,7 @@ export default function Home() {
               }}
             />
             <div
-              className="backdrop-blur-sm shadow-2xl rounded-[2.5rem] py-24 px-12 pb-56 lg:py-32 lg:px-16 lg:pb-64 relative flex flex-col items-center gap-12 overflow-visible border"
+              className="backdrop-blur-sm shadow-2xl rounded-[2.5rem] py-16 px-8 pb-32 lg:py-20 lg:px-12 lg:pb-40 relative flex flex-col items-center gap-8 overflow-visible border"
               style={{
                 background: `linear-gradient(${glassColor}, ${glassColor})`,
                 borderColor: borderColor
@@ -811,28 +803,12 @@ export default function Home() {
         </div>
 
         {/* Content Display Area */}
-        <div className="w-full max-w-7xl relative group rounded-2xl animate-fadeInUp" style={{ animationDelay: '1.1s' }}>
-          <span
-            className="absolute inset-0 rounded-2xl transition-opacity duration-300 opacity-100 animate-gradient"
-            style={{
-              background: gradient,
-              padding: '5px',
-              WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-              WebkitMaskComposite: 'xor',
-              maskComposite: 'exclude',
-              pointerEvents: 'none',
-            }}
-          />
+        <div className="w-full max-w-7xl px-4 animate-fadeInUp" style={{ animationDelay: '1.1s' }}>
           <div
-            className="w-full h-full backdrop-blur-sm shadow-2xl rounded-2xl p-8 border relative z-10 overflow-visible"
-            style={{ backgroundColor: glassColor, borderColor: borderColor }}
+            className={`transition-all duration-300 ${isTransitioning ? 'opacity-0 translate-x-4' : 'opacity-100 translate-x-0'
+              }`}
           >
-            <div
-              className={`transition-all duration-300 ${isTransitioning ? 'opacity-0 translate-x-4' : 'opacity-100 translate-x-0'
-                }`}
-            >
-              {renderContent()}
-            </div>
+            {renderContent()}
           </div>
         </div>
       </div>
