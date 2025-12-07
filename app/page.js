@@ -60,24 +60,24 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                  <div className="flex gap-4 mb-3">
-                    <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
-                      <Image
-                        src="/UCM_Logo.png"
-                        alt="UC Merced Logo"
-                        width={48}
-                        height={48}
-                        className="object-contain"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex flex-col">
-                        <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | UC, Merced</h3>
-                        <p className="text-[var(--text-secondary)]">Aug 2025 - Present</p>
-                      </div>
-                      <p className="text-[var(--text-secondary)] text-sm mt-1">Flask, Redis, Nginx, React, Agile, REST APIs, OAuth 2.0</p>
-                    </div>
+                <div className="flex gap-4 mb-3">
+                  <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
+                    <Image
+                      src="/UCM_Logo.png"
+                      alt="UC Merced Logo"
+                      width={48}
+                      height={48}
+                      className="object-contain"
+                    />
                   </div>
+                  <div className="flex-1">
+                    <div className="flex flex-col">
+                      <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | UC, Merced</h3>
+                      <p className="text-[var(--text-secondary)]">Aug 2025 - Present</p>
+                    </div>
+                    <p className="text-[var(--text-secondary)] text-sm mt-1">Flask, Redis, Nginx, React, Agile, REST APIs, OAuth 2.0</p>
+                  </div>
+                </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Built DineBoard enterprise system serving 2,500+ students daily using Agile methodology</li>
                   <li>Engineered secure REST APIs with OAuth 2.0, driving 80% productivity increase for staff</li>
@@ -111,24 +111,24 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                  <div className="flex gap-4 mb-3">
-                    <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
-                      <Image
-                        src="/VideoLlama.png"
-                        alt="Mi3 Lab Logo"
-                        width={48}
-                        height={48}
-                        className="object-contain"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex flex-col">
-                        <h3 className="text-xl font-semibold text-[var(--text-primary)]">Machine Learning Research Intern | Mi3 Lab</h3>
-                        <p className="text-[var(--text-secondary)]">Jun 2025 - Present</p>
-                      </div>
-                      <p className="text-[var(--text-secondary)] text-sm mt-1">VLLM, CVPR, ICCV, GPT-4o, VideoLLaMa, Pandas, Matplotlib</p>
-                    </div>
+                <div className="flex gap-4 mb-3">
+                  <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
+                    <Image
+                      src="/VideoLlama.png"
+                      alt="Mi3 Lab Logo"
+                      width={48}
+                      height={48}
+                      className="object-contain"
+                    />
                   </div>
+                  <div className="flex-1">
+                    <div className="flex flex-col">
+                      <h3 className="text-xl font-semibold text-[var(--text-primary)]">Machine Learning Research Intern | Mi3 Lab</h3>
+                      <p className="text-[var(--text-secondary)]">Jun 2025 - Present</p>
+                    </div>
+                    <p className="text-[var(--text-secondary)] text-sm mt-1">VLLM, CVPR, ICCV, GPT-4o, VideoLLaMa, Pandas, Matplotlib</p>
+                  </div>
+                </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Co-authored VLLM paper published at CVPR 2025 & ICCV 2025 generating real-time navigation for visually impaired users</li>
                   <li>Outperformed GPT-4o by 43.84% finetuning VideoLLaMa3-7B across ROUGE-L, Timing F1/AUC, & Action F1 metrics</li>
@@ -162,24 +162,24 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                  <div className="flex gap-4 mb-3">
-                    <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
-                      <Image
-                        src="/PlantCultureSystems.webp"
-                        alt="Plant Culture Systems Logo"
-                        width={48}
-                        height={48}
-                        className="object-contain"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex flex-col">
-                        <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | Plant Culture Systems</h3>
-                        <p className="text-[var(--text-secondary)]">Jul 2024 - Oct 2024</p>
-                      </div>
-                      <p className="text-[var(--text-secondary)] text-sm mt-1">AI, Flutterflow, Firebase, Figma, Agile, ChatGPT API</p>
-                    </div>
+                <div className="flex gap-4 mb-3">
+                  <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
+                    <Image
+                      src="/PlantCultureSystems.webp"
+                      alt="Plant Culture Systems Logo"
+                      width={48}
+                      height={48}
+                      className="object-contain"
+                    />
                   </div>
+                  <div className="flex-1">
+                    <div className="flex flex-col">
+                      <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | Plant Culture Systems</h3>
+                      <p className="text-[var(--text-secondary)]">Jul 2024 - Oct 2024</p>
+                    </div>
+                    <p className="text-[var(--text-secondary)] text-sm mt-1">AI, Flutterflow, Firebase, Figma, Agile, ChatGPT API</p>
+                  </div>
+                </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Designed AI landing page for OurGarden using Flutterflow, enhancing engagement for 500+ users</li>
                   <li>Led image analysis feature as A.I. subteam lead, improving engagement metrics by ~50% in Agile sprints with customers & users..</li>
@@ -213,24 +213,24 @@ export default function Home() {
 
               {/* Content */}
               <div className="lg:w-2/3">
-                  <div className="flex gap-4 mb-3">
-                    <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
-                      <Image
-                        src="/PosTrueLogo.png"
-                        alt="PosTrue Logo"
-                        width={48}
-                        height={48}
-                        className="object-contain"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex flex-col">
-                        <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | PosTrue</h3>
-                        <p className="text-[var(--text-secondary)]">Mar 2024 - Jun 2024</p>
-                      </div>
-                      <p className="text-[var(--text-secondary)] text-sm mt-1">Django, Bootstrap, PostgreSQL, Real-time Analytics, UI/UX</p>
-                    </div>
+                <div className="flex gap-4 mb-3">
+                  <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
+                    <Image
+                      src="/PosTrueLogo.png"
+                      alt="PosTrue Logo"
+                      width={48}
+                      height={48}
+                      className="object-contain"
+                    />
                   </div>
+                  <div className="flex-1">
+                    <div className="flex flex-col">
+                      <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | PosTrue</h3>
+                      <p className="text-[var(--text-secondary)]">Mar 2024 - Jun 2024</p>
+                    </div>
+                    <p className="text-[var(--text-secondary)] text-sm mt-1">Django, Bootstrap, PostgreSQL, Real-time Analytics, UI/UX</p>
+                  </div>
+                </div>
                 <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
                   <li>Developed Django website with real-time wearable sensor analytics and ergonomic feedback</li>
                   <li>Designed responsive UI/UX with Bootstrap, HTML/CSS/JavaScript following brand standards</li>
@@ -601,7 +601,7 @@ export default function Home() {
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-3rem)] rounded-full animate-fadeInUp">
           {/* Gradient Outline (Masked) */}
           <span
-            className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient pointer-events-none"
+            className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient pointer-events-none z-20"
             style={{
               background: gradient,
               padding: '2px',
