@@ -75,3 +75,34 @@
   animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   opacity: 0;
 }
+
+/* Interval Bounce Animation */
+@keyframes bounce-interval {
+  0% {
+    transform: translateY(0);
+  }
+
+  15% {
+    transform: translateY(8px);
+  }
+
+  30% {
+    transform: translateY(0);
+  }
+
+  45% {
+    transform: translateY(4px);
+  }
+
+  60% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-bounce-interval {
+  animation: bounce-interval 3s ease-in-out infinite;
+}

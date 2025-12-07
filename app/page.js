@@ -4,6 +4,7 @@ import { useState } from "react";
 import InteractiveGrid from "../components/InteractiveGrid";
 import DraggableGT3RS from "../components/DraggableGT3RS";
 import ColorThemeSelector from "../components/ColorThemeSelector";
+import ScrollIndicator from "../components/ScrollIndicator";
 import { useTheme } from "../contexts/ThemeContext";
 import Image from "next/image";
 
@@ -806,6 +807,8 @@ export default function Home() {
                   Nice to virtually meet you! As a Software Engineer, Machine Learning Researcher, and Product Manager, I thrive at the intersection of technology and user needs. Explore my experience, learn about me, or view my resume below.
                 </p>
               </div>
+
+              <ScrollIndicator />
 
               {/* GT3RS - Bottom of container */}
               <div className="absolute bottom-6 left-8 w-full animate-fadeInUp" style={{ animationDelay: '0.7s' }}>
