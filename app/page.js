@@ -597,7 +597,7 @@ export default function Home() {
 
 
         {/* Fixed Top Navigation Bar */}
-        <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-3rem)] rounded-full animate-fadeInUp">
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-3rem)] rounded-full animate-fadeInUp">
           {/* Gradient Outline (Masked) */}
           <span
             className="absolute inset-0 rounded-full animate-gradient pointer-events-none"
