@@ -16,41 +16,23 @@ export const colorThemes = [
     trailColors: ['rgb(30, 144, 255)', 'rgb(0, 191, 255)', 'rgb(135, 206, 250)', 'rgb(176, 224, 230)', 'rgb(173, 216, 230)'],
   },
   {
-    name: 'Sunset',
-    colors: ['rgb(255, 94, 77)', 'rgb(255, 154, 88)', 'rgb(255, 183, 77)', 'rgb(255, 214, 102)', 'rgb(252, 234, 146)'],
-    trailColors: ['rgb(255, 120, 100)', 'rgb(255, 170, 110)', 'rgb(255, 200, 100)', 'rgb(255, 220, 130)', 'rgb(255, 240, 170)'],
-  },
-  {
     name: 'Forest',
     colors: ['rgb(34, 139, 34)', 'rgb(60, 179, 113)', 'rgb(102, 205, 170)', 'rgb(144, 238, 144)', 'rgb(152, 251, 152)'],
     trailColors: ['rgb(50, 160, 50)', 'rgb(80, 200, 140)', 'rgb(120, 220, 190)', 'rgb(160, 240, 160)', 'rgb(180, 255, 180)'],
-  },
-  {
-    name: 'Purple Dream',
-    colors: ['rgb(138, 43, 226)', 'rgb(153, 50, 204)', 'rgb(186, 85, 211)', 'rgb(216, 191, 216)', 'rgb(221, 160, 221)'],
-    trailColors: ['rgb(160, 70, 240)', 'rgb(180, 90, 220)', 'rgb(200, 120, 230)', 'rgb(220, 160, 240)', 'rgb(230, 190, 250)'],
   },
   {
     name: 'Fire',
     colors: ['rgb(139, 0, 0)', 'rgb(220, 20, 60)', 'rgb(255, 69, 0)', 'rgb(255, 140, 0)', 'rgb(255, 215, 0)'],
     trailColors: ['rgb(180, 30, 30)', 'rgb(240, 50, 80)', 'rgb(255, 100, 30)', 'rgb(255, 160, 50)', 'rgb(255, 230, 50)'],
   },
-  {
-    name: 'Mint',
-    colors: ['rgb(0, 128, 128)', 'rgb(32, 178, 170)', 'rgb(64, 224, 208)', 'rgb(127, 255, 212)', 'rgb(175, 238, 238)'],
-    trailColors: ['rgb(30, 150, 150)', 'rgb(60, 200, 190)', 'rgb(90, 240, 220)', 'rgb(150, 255, 230)', 'rgb(190, 250, 240)'],
-  },
 ];
 
 
 export const backgroundColors = [
-  { name: 'Charcoal', color: '#1a1a1a', textColor: '#ffffff', secondaryTextColor: '#d1d5db', glassColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(255, 255, 255, 0.2)', boxColor: 'rgba(255, 255, 255, 0.15)', navColor: 'rgba(26, 26, 26, 0.85)' },
   { name: 'Black', color: '#000000', textColor: '#ffffff', secondaryTextColor: '#d1d5db', glassColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(255, 255, 255, 0.2)', boxColor: 'rgba(255, 255, 255, 0.15)', navColor: 'rgba(0, 0, 0, 0.85)' },
   { name: 'White', color: '#ffffff', textColor: '#000000', secondaryTextColor: '#4b5563', glassColor: 'rgba(0, 0, 0, 0.05)', borderColor: 'rgba(0, 0, 0, 0.1)', boxColor: 'rgba(0, 0, 0, 0.1)', navColor: 'rgba(255, 255, 255, 0.85)' },
   { name: 'Pastel Gray', color: '#d3d3d3', textColor: '#1f2937', secondaryTextColor: '#374151', glassColor: 'rgba(0, 0, 0, 0.05)', borderColor: 'rgba(0, 0, 0, 0.1)', boxColor: 'rgba(0, 0, 0, 0.1)', navColor: 'rgba(211, 211, 211, 0.85)' },
-  { name: 'Beige', color: '#f5f5dc', textColor: '#1f2937', secondaryTextColor: '#374151', glassColor: 'rgba(0, 0, 0, 0.05)', borderColor: 'rgba(0, 0, 0, 0.1)', boxColor: 'rgba(0, 0, 0, 0.1)', navColor: 'rgba(245, 245, 220, 0.85)' },
   { name: 'Navy', color: '#0a1628', textColor: '#ffffff', secondaryTextColor: '#d1d5db', glassColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(255, 255, 255, 0.2)', boxColor: 'rgba(255, 255, 255, 0.15)', navColor: 'rgba(10, 22, 40, 0.85)' },
-  { name: 'Soft Blue', color: '#e6f3ff', textColor: '#1f2937', secondaryTextColor: '#374151', glassColor: 'rgba(0, 0, 0, 0.05)', borderColor: 'rgba(0, 0, 0, 0.1)', boxColor: 'rgba(0, 0, 0, 0.1)', navColor: 'rgba(230, 243, 255, 0.85)' },
 ];
 
 

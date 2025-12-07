@@ -8,8 +8,8 @@ export default function ColorThemeSelector({ compact = false }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="flex flex-col gap-2 relative z-50">
-      {/* Color Theme Row */}
+    <div className="relative z-50 flex flex-col items-center gap-2">
+      {/* Combined Color Selector */}
       <div className="relative group rounded-full">
         <span
           className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient pointer-events-none"
@@ -25,7 +25,7 @@ export default function ColorThemeSelector({ compact = false }) {
           className={`backdrop-blur-sm shadow-2xl border rounded-full relative z-10 flex items-center ${compact ? 'px-2 py-1 gap-1' : 'px-3 py-2 gap-2'}`}
           style={{ backgroundColor: glassColor, borderColor: borderColor }}
         >
-          {/* Color theme buttons */}
+          {/* Gradient theme buttons */}
           {colorThemes.map((theme, index) => (
             <button
               key={index}
@@ -39,26 +39,13 @@ export default function ColorThemeSelector({ compact = false }) {
               aria-label={theme.name}
             />
           ))}
-        </div>
-      </div>
 
-      {/* Background Theme Row */}
-      <div className="relative group rounded-full">
-        <span
-          className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-50 group-hover:opacity-100 animate-gradient"
-          style={{
-            background: gradient,
-            padding: '2px',
-            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-            WebkitMaskComposite: 'xor',
-            maskComposite: 'exclude',
-            pointerEvents: 'none',
-          }}
-        />
-        <div
-          className={`backdrop-blur-sm rounded-full border relative z-10 flex items-center ${compact ? 'px-2 py-1 gap-1' : 'px-3 py-2 gap-2'}`}
-          style={{ backgroundColor: navColor, borderColor: borderColor }}
-        >
+          {/* Separator */}
+          <div
+            className={`${compact ? 'h-4 w-[1px]' : 'h-6 w-[2px]'} rounded-full`}
+            style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}
+          />
+
           {/* Background color buttons */}
           {backgroundColors.map((bg, index) => (
             <button
@@ -74,7 +61,7 @@ export default function ColorThemeSelector({ compact = false }) {
           ))}
         </div>
       </div>
-      {!compact && <p className="text-xs text-center opacity-70" style={{ color: secondaryTextColor }}>Choose to your liking</p>}
+      {!compact && <p className="text-xs opacity-70" style={{ color: secondaryTextColor }}>Choose to your liking</p>}
     </div>
   );
 }
