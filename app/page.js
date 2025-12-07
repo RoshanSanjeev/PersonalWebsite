@@ -616,7 +616,7 @@ export default function Home() {
             style={{ backgroundColor: navColor, borderColor: borderColor }}
           >
             {/* Mobile Layout: Socials | (Centered Bubble Hamburger) | Theme */}
-            <div className="2xl:hidden grid grid-cols-[1fr_auto_1fr] w-full items-center px-2 mt-2">
+            <div className="2xl:hidden grid grid-cols-[1fr_auto_1fr] w-full items-center px-2 py-1">
               {/* Left: Social Icons */}
               <div className="justify-self-start flex items-center gap-4">
                 <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
