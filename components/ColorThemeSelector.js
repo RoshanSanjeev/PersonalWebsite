@@ -179,7 +179,7 @@ export default function ColorThemeSelector({ compact = false, stacked = false, r
             <button
               key={index}
               onClick={() => setCurrentTheme(index)}
-              className={`rounded-full transition-transform hover:scale-110 ${compact ? 'w-4 h-4' : 'w-6 h-6'}`}
+              className={`rounded-full transition-transform hover:scale-110 ${compact ? 'w-4 h-4' : 'w-5 h-5'}`}
               style={{
                 background: `linear-gradient(135deg, ${theme.colors[0]} 0%, ${theme.colors[1]} 25%, ${theme.colors[2]} 50%, ${theme.colors[3]} 75%, ${theme.colors[4]} 100%)`,
                 border: currentTheme === index ? '2px solid white' : 'none',
