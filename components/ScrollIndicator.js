@@ -2,9 +2,19 @@
 
 export default function ScrollIndicator() {
   const handleScrollClick = () => {
-    const contentSection = document.getElementById('content-section');
-    if (contentSection) {
-      contentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const experienceSection = document.getElementById('Experience');
+    if (experienceSection) {
+      // Offset for fixed header
+      const offset = 100;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = experienceSection.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
     }
   };
 
