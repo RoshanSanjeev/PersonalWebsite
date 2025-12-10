@@ -137,7 +137,7 @@ export default function Home() {
                 </a>
               </div>
 
-              {/* Center: Hamburger (Bubble Style) */}
+              {/* Center: Section Title Dropdown */}
               <div className="justify-self-center relative group rounded-full">
                 <span
                   className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient pointer-events-none"
@@ -151,19 +151,21 @@ export default function Home() {
                 />
                 <button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="backdrop-blur-sm shadow-2xl border rounded-full relative z-10 flex items-center justify-center w-10 h-10 transition-transform active:scale-95"
+                  className="backdrop-blur-sm shadow-2xl border rounded-full relative z-10 flex items-center justify-center gap-2 px-5 py-2 transition-transform active:scale-95"
                   style={{ backgroundColor: glassColor, borderColor: borderColor }}
                   aria-label="Toggle menu"
                 >
-                  {isMenuOpen ? (
-                    <svg className="w-5 h-5 text-[var(--text-secondary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  ) : (
-                    <svg className="w-5 h-5 text-[var(--text-secondary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                  )}
+                  <span className="text-sm font-medium text-[var(--text-primary)] truncate max-w-[150px] sm:max-w-none">
+                    {activeSection}
+                  </span>
+                  <svg
+                    className={`w-4 h-4 text-[var(--text-secondary)] transition-transform duration-300 ${isMenuOpen ? 'rotate-180' : ''}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
                 </button>
               </div>
 
