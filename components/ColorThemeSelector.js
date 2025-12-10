@@ -187,9 +187,10 @@ export default function ColorThemeSelector({ compact = false, stacked = false, r
             />
             {/* Current Background Color */}
             <div
-              className="rounded-full w-5 h-5 border border-white/30 shadow-lg"
+              className="rounded-full w-5 h-5 shadow-lg"
               style={{
                 backgroundColor: backgroundColors[currentBackground].color,
+                border: '1.5px solid white',
               }}
             />
           </div>
