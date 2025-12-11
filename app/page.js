@@ -71,7 +71,7 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.2, rootMargin: "-20% 0px -50% 0px" }
+      { threshold: 0.05, rootMargin: "-10% 0px -40% 0px" }
     );
 
     sections.forEach((section) => {
