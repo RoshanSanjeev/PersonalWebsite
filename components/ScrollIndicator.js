@@ -21,10 +21,11 @@ export default function ScrollIndicator() {
   return (
     <button
       onClick={handleScrollClick}
-      className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20 cursor-pointer transition-opacity hover:opacity-80"
+      className="flex flex-col items-center gap-2 z-20 cursor-pointer transition-all duration-300 hover:opacity-80 will-change-transform"
       aria-label="Scroll to content"
+      style={{ transform: 'translateZ(0)' }}
     >
-      <span className="text-[var(--text-secondary)] text-sm font-medium">Scroll down to see my work</span>
+      <span className="text-neutral-600 dark:text-neutral-400 text-sm font-medium">Scroll down to see my work</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
@@ -35,7 +36,7 @@ export default function ScrollIndicator() {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="text-[var(--text-secondary)] animate-bounce-interval"
+        className="text-neutral-600 dark:text-neutral-400 animate-bounce"
       >
         <path d="M12 5v14" />
         <path d="m19 12-7 7-7-7" />

@@ -38,7 +38,7 @@ export const backgroundColors = [
 
 export function ThemeProvider({ children }) {
   const [currentTheme, setCurrentTheme] = useState(0); // Chroma theme (index 0)
-  const [currentBackground, setCurrentBackground] = useState(0); // Black (index 0)
+  const [currentBackground, setCurrentBackground] = useState(1); // White (index 1) for Light Mode default
 
   const getGradient = (colors) => {
     return `linear-gradient(135deg, ${colors[0]} 0%, ${colors[1]} 25%, ${colors[2]} 50%, ${colors[3]} 75%, ${colors[4]} 100%)`;

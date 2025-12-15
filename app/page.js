@@ -1,67 +1,64 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import InteractiveGrid from "../components/InteractiveGrid";
-import DraggableGT3RS from "../components/DraggableGT3RS";
-import ColorThemeSelector from "../components/ColorThemeSelector";
-import ScrollIndicator from "../components/ScrollIndicator";
-import { useTheme } from "../contexts/ThemeContext";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useTheme } from "../contexts/ThemeContext";
+import DraggableGT3RS from "../components/DraggableGT3RS";
+import ScrollIndicator from "../components/ScrollIndicator";
+import { AuroraBackground } from "../components/ui/aurora-background";
+import { Timeline } from "../components/ui/timeline";
+import { BentoGrid, BentoGridItem } from "../components/ui/bento-grid";
+import { InfiniteMovingCards } from "../components/ui/infinite-moving-cards";
+import { TextGenerateEffect } from "../components/ui/text-generate-effect";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
 
-// Sections data defined outside to avoid dependency issues
+// Icons
+import { Github, Linkedin, MessageSquare, Download, Menu, Terminal, Code, Sun, Moon, Mail } from "lucide-react";
+
+// Sections data
 const sections = [
   "Home",
   "Experience",
   "Hackathons/Projects",
-  "Leadership & Communication",
+  "Leadership",
   "Skills",
-  "About Me",
+  "About",
   "Resume"
 ];
 
-// ScrollReveal Component for animations
+// Helper for animations
 const ScrollReveal = ({ children, className = "", delay = 0 }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const currentRef = ref.current;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) observer.disconnect();
-    };
-  }, []);
-
   return (
-    <div
-      ref={ref}
-      className={`${className} ${isVisible ? "animate-fadeInUp" : "opacity-0"}`}
-      style={{ animationDelay: `${delay}s` }}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
     >
       {children}
-    </div>
+    </motion.div>
   );
 };
 
 export default function Home() {
-  const { gradient, backgroundColor, textColor, secondaryTextColor, glassColor, borderColor, boxColor, navColor } = useTheme();
+  const { gradient, backgroundColor, textColor, navColor, currentBackground, setCurrentBackground } = useTheme();
   const [activeSection, setActiveSection] = useState("Home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Scroll Spy to update active section
+  // Toggle Theme Function
+  const toggleTheme = () => {
+    // 0 is Black (Dark), 1 is White (Light)
+    setCurrentBackground(currentBackground === 0 ? 1 : 0);
+  };
+
+  const isDarkMode = currentBackground === 0 || currentBackground === 3; // Assuming 0 and 3 are dark themes
+
+  // Scroll Spy
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -85,7 +82,6 @@ export default function Home() {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      // Offset for fixed header (approx 100px)
       const offset = 100;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
@@ -101,616 +97,501 @@ export default function Home() {
     setIsMenuOpen(false);
   };
 
+  // Timeline Data - Enhanced with Cards
+  const experienceData = [
+    {
+      title: "Aug 2025 - Present",
+      content: (
+        <Card className="bg-background/40 backdrop-blur-md border border-white/10 shadow-xl overflow-hidden">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-primary">Software Engineer Intern @ UC Merced</CardTitle>
+            <p className="text-muted-foreground italic font-medium">
+              Flask, Redis, Nginx, React, Agile, REST APIs
+            </p>
+          </CardHeader>
+          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div className="relative h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner bg-black/20">
+              <Image src="/dine board soft launch-5.png" alt="DineBoard" fill className="object-contain" />
+            </div>
+            <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+              <li>Built <span className="text-primary font-semibold">DineBoard</span> enterprise system serving 2,500+ students daily.</li>
+              <li>Engineered secure REST APIs with <span className="text-primary font-semibold">OAuth 2.0</span>, increasing productivity by 80%.</li>
+              <li>Architected scalable <span className="text-primary font-semibold">Flask/Redis</span> backend for high-performance data handling.</li>
+            </ul>
+          </CardContent>
+        </Card>
+      ),
+    },
+    {
+      title: "Jun 2025 - Present",
+      content: (
+        <Card className="bg-background/40 backdrop-blur-md border border-white/10 shadow-xl overflow-hidden">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-primary">ML Research Intern @ Mi3 Lab</CardTitle>
+            <p className="text-muted-foreground italic font-medium">
+              VLLM, CVPR, ICCV, GPT-4o, VideoLLaMa
+            </p>
+          </CardHeader>
+          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div className="relative h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner bg-black/20">
+              <Image src="/Research.png" alt="Research" fill className="object-contain" />
+            </div>
+            <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+              <li>Co-authored <span className="text-primary font-semibold">VLLM paper</span> published at CVPR & ICCV 2025.</li>
+              <li>Outperformed <span className="text-primary font-semibold">GPT-4o by 43.84%</span> finetuning VideoLLaMa3-7B.</li>
+              <li>Built complex data visualizations for international conference presentations.</li>
+            </ul>
+          </CardContent>
+        </Card>
+      ),
+    },
+    {
+      title: "Jul 2024 - Oct 2024",
+      content: (
+        <Card className="bg-background/40 backdrop-blur-md border border-white/10 shadow-xl overflow-hidden">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-primary">SWE Intern @ Plant Culture Systems</CardTitle>
+            <p className="text-muted-foreground italic font-medium">
+              Flutterflow, Firebase, Figma, AI
+            </p>
+          </CardHeader>
+          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div className="relative h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner bg-black/20">
+              <Image src="/plantCultureSys.jpeg" alt="Plant Culture" fill className="object-contain" />
+            </div>
+            <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+              <li>Designed AI landing page for <span className="text-primary font-semibold">OurGarden</span>, enhancing engagement for 500+ users.</li>
+              <li>Led image analysis feature using computer vision, improving app engagement by 50%.</li>
+            </ul>
+          </CardContent>
+        </Card>
+      ),
+    },
+    {
+      title: "Mar 2024 - Jun 2024",
+      content: (
+        <Card className="bg-background/40 backdrop-blur-md border border-white/10 shadow-xl overflow-hidden">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-primary">SWE Intern @ PosTrue</CardTitle>
+            <p className="text-muted-foreground italic font-medium">
+              Django, Bootstrap, PostgreSQL, Real-time Analytics
+            </p>
+          </CardHeader>
+          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div className="relative h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner bg-black/20">
+              <Image src="/PostrueMain.png" alt="PosTrue" fill className="object-contain" />
+            </div>
+            <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+              <li>Developed Django website with <span className="text-primary font-semibold">real-time wearable sensor analytics</span>.</li>
+              <li>Designed responsive UI/UX with Bootstrap, reducing bounce rate by 25%.</li>
+            </ul>
+          </CardContent>
+        </Card>
+      ),
+    },
+  ];
+
+  // Bento Grid Data
+  const projectsData = [
+    {
+      title: "PoseVision",
+      description: "AI Injury Prevention Tool. 1st Place @ SASEHacks.",
+      header: (
+        <div className="flex flex-1 w-full h-full min-h-[20rem] rounded-xl bg-black border border-transparent dark:border-white/[0.2] overflow-hidden">
+          <video controls className="w-full h-full object-contain">
+            <source src="/PoseVisionDemo.mp4" type="video/mp4" />
+          </video>
+        </div>
+      ),
+      icon: <Terminal className="h-4 w-4 text-neutral-500" />,
+      className: "md:col-span-2",
+    },
+    {
+      title: "Credit Compass",
+      description: "AI Personalized Credit Recommendations. Alumni Prize @ HackMercedX.",
+      header: (
+        <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl overflow-hidden border border-neutral-200 dark:border-white/[0.2]">
+          <Image src="/Hackathon.png" alt="Credit Compass" width={400} height={300} className="w-full h-full object-cover" />
+        </div>
+      ),
+      icon: <Code className="h-4 w-4 text-neutral-500" />,
+      className: "md:col-span-1",
+    },
+  ];
+
+  // Skills Data - Categorized
+  const skillsCategories = [
+    {
+      title: "Languages",
+      skills: ["Python", "C++", "Java", "JavaScript", "TypeScript", "SQL", "HTML/CSS"]
+    },
+    {
+      title: "Frameworks & Libraries",
+      skills: ["React", "Next.js", "Django", "Flask", "TailwindCSS", "Node.js"]
+    },
+    {
+      title: "AI & Data Science",
+      skills: ["PyTorch", "TensorFlow", "Pandas", "NumPy", "OpenCV", "Scikit-learn"]
+    },
+    {
+      title: "Tools & Cloud",
+      skills: ["Git", "Docker", "AWS", "Firebase", "PostgreSQL", "Redis", "Linux"]
+    },
+    {
+      title: "Design & Soft Skills",
+      skills: ["Figma", "Product Management", "Agile", "User Research", "Public Speaking"]
+    }
+  ];
+
   return (
-    <main style={{ backgroundColor, color: textColor }}>
-      <div className="min-h-screen text-foreground flex flex-col items-center pt-18 pb-10 relative" style={{ backgroundColor, '--text-primary': textColor, '--text-secondary': secondaryTextColor }}>
+    <main className="min-h-screen relative overflow-x-hidden selection:bg-primary/20 transition-colors duration-500" style={{ backgroundColor, color: textColor }}>
 
-        {/* Floating Scrollable Elements (Aligns with Fixed Nav at top) */}
-
-        {/* Floating Scrollable Elements Container - Aligned with Hero Content Width */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[95rem] px-4 z-40 pointer-events-none h-10">
-
-          {/* Left: Social Icons */}
-          <div className="absolute top-4 left-4 2xl:left-0 pointer-events-auto animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
-            <div className="relative group rounded-full">
-              <span
-                className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient pointer-events-none"
-                style={{
-                  background: gradient,
-                  padding: '2px',
-                  WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                  WebkitMaskComposite: 'xor',
-                  maskComposite: 'exclude',
-                }}
-              />
-              <div
-                className="backdrop-blur-sm shadow-2xl border rounded-full relative z-10 flex items-center px-3 py-2 gap-2"
-                style={{ backgroundColor: glassColor, borderColor: borderColor }}
+      {/* FLOATING GLASS NAVIGATION */}
+      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full px-4 md:auto pointer-events-none flex justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: -20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          className="pointer-events-auto bg-background/60 backdrop-blur-xl border border-white/10 shadow-2xl rounded-full px-2 py-2 flex items-center gap-2 md:gap-4 overflow-x-auto max-w-[95vw]"
+          style={{ backgroundColor: navColor }}
+        >
+          {/* Desktop Nav Items */}
+          <div className="hidden md:flex items-center gap-1">
+            {sections.map((section) => (
+              <Button
+                key={section}
+                variant="ghost"
+                size="sm"
+                onClick={() => scrollToSection(section)}
+                className={cn(
+                  "rounded-full text-xs font-medium transition-all hover:bg-white/10 px-3 py-1.5 h-8",
+                  activeSection === section ? "bg-white/15 text-primary shadow-sm" : "text-muted-foreground/80 hover:text-primary"
+                )}
               >
-                {/* GitHub */}
-                <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors p-1">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
-                </a>
-                {/* Discord */}
-                <a href="https://discord.com/users/Proats" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors p-1">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" /></svg>
-                </a>
-                {/* LinkedIn */}
-                <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors p-1">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
-                </a>
-              </div>
-            </div>
+                {section}
+              </Button>
+            ))}
           </div>
 
-          {/* Right: Color Theme Selector */}
-          <div className="absolute top-4 right-4 2xl:right-0 pointer-events-auto animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
-            <ColorThemeSelector />
-          </div>
-        </div>
-
-        {/* Fixed Top Navigation Bar */}
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[95rem] rounded-full animate-fadeInUp">
-          {/* Gradient Outline (Masked) */}
-          <span
-            className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient pointer-events-none z-20"
-            style={{
-              background: gradient,
-              padding: '2px',
-              WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-              WebkitMaskComposite: 'xor',
-              maskComposite: 'exclude',
-            }}
-          />
-          <nav
-            className="relative z-10 rounded-full backdrop-blur-sm flex items-center justify-center p-1 shadow-2xl transition-all duration-300 border whitespace-nowrap"
-            style={{ backgroundColor: navColor, borderColor: borderColor }}
-          >
-            {/* Mobile Layout: Center Section Title Dropdown ONLY */}
-            <div className="2xl:hidden flex items-center justify-center px-3 py-2">
-              {/* Center: Section Title Dropdown */}
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="flex items-center justify-center gap-2 text-sm font-medium text-[var(--text-primary)] transition-transform active:scale-95 w-full h-full"
-                aria-label="Toggle menu"
-              >
-                <span className="truncate max-w-[150px] sm:max-w-none">
-                  {activeSection}
-                </span>
-                <svg
-                  className={`w-4 h-4 text-[var(--text-secondary)] transition-transform duration-300 ${isMenuOpen ? 'rotate-180' : ''}`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Center: Navigation Links (Desktop) */}
-            <div className="hidden 2xl:flex items-center justify-center gap-2 flex-1 px-4 overflow-x-auto no-scrollbar">
-              {sections.map((section) => {
-                const isActive = activeSection === section;
-                return (
-                  <div key={section} className="relative group rounded-full flex-shrink-0">
-                    {isActive && (
-                      <span
-                        className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100"
-                        style={{
-                          background: 'white',
-                          padding: '2px',
-                          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                          WebkitMaskComposite: 'xor',
-                          maskComposite: 'exclude',
-                          pointerEvents: 'none',
-                        }}
-                      />
-                    )}
-                    <button
-                      onClick={() => scrollToSection(section)}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 relative z-10 ${isActive
-                        ? "text-[var(--text-primary)] shadow-md"
-                        : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:scale-105"
-                        }`}
-                      style={{
-                        backgroundColor: isActive ? boxColor : 'transparent',
-                      }}
-                    >
-                      {section}
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-
-          </nav>
-
-          {/* Mobile Menu Dropdown */}
-          {isMenuOpen && (
-            <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 mt-2 p-1 z-0 animate-fadeInUp">
-              <div
-                className="relative rounded-3xl overflow-hidden animate-gradient"
-                style={{
-                  background: gradient,
-                  padding: '3px',
-                }}
-              >
-                <div
-                  className="backdrop-blur-2xl rounded-3xl p-4 flex flex-col gap-2 shadow-xl"
-                  style={{ backgroundColor: navColor }}
-                >
-                  {sections.map((section) => (
-                    <button
-                      key={section}
-                      onClick={() => scrollToSection(section)}
-                      className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 relative ${activeSection === section
-                        ? "text-[var(--text-primary)] bg-white/10"
-                        : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/5"
-                        }`}
-                    >
-                      {section}
-                      {activeSection === section && (
-                        <span className="absolute right-4 w-2 h-2 rounded-full animate-gradient" style={{ background: gradient }} />
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Content Container */}
-        <div className="relative z-10 flex flex-col items-center w-full px-4 pt-2">
-
-          {/* HOME / HERO SECTION */}
-          <section id="Home" className="w-full max-w-[95rem] mb-2 relative min-h-[50vh] flex flex-col justify-center">
-
-
-            {/* Gradient Background Layer */}
-            <div
-              className="absolute inset-0 rounded-[2.5rem] animate-gradient opacity-5 blur-md"
-              style={{
-                background: gradient,
-              }}
-            />
-            {/* Gradient Outline (Masked) */}
-            <span
-              className="absolute inset-0 rounded-[2.5rem] animate-gradient pointer-events-none"
-              style={{
-                background: gradient,
-                padding: '5px',
-                WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                WebkitMaskComposite: 'xor',
-                maskComposite: 'exclude',
-              }}
-            />
-            <div
-              className="backdrop-blur-sm shadow-2xl rounded-[2.5rem] py-16 px-8 pb-32 lg:py-20 lg:px-12 lg:pb-28 relative flex flex-col items-center gap-8 overflow-visible border"
-              style={{
-                background: `linear-gradient(${glassColor}, ${glassColor})`,
-                borderColor: borderColor
-              }}
+          {/* Mobile Nav Trigger */}
+          <div className="md:hidden">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="rounded-full px-3 h-8 flex items-center gap-2 hover:bg-white/10"
             >
-              {/* Profile Picture - Engulfed */}
-              <div className="relative flex-shrink-0 animate-fadeInUp" style={{ animationDelay: '0.3s' }}>
-                <div
-                  className="relative w-56 h-56 lg:w-72 lg:h-72 rounded-full animate-gradient"
-                  style={{
-                    background: gradient,
-                    padding: '4px',
-                  }}
+              <Menu className="w-4 h-4" />
+              <span className="text-xs font-medium">{activeSection}</span>
+            </Button>
+          </div>
+
+          {/* Vertical Separator */}
+          <div className="h-4 w-[1px] bg-white/10 mx-1 hidden md:block"></div>
+
+          {/* Socials & Theme Toggle */}
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-white/10 hover:text-primary hover:scale-110 transition-all" asChild>
+              <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer"> <Github className="w-4 h-4" /> </a>
+            </Button>
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-white/10 hover:text-primary hover:scale-110 transition-all" asChild>
+              <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer"> <Linkedin className="w-4 h-4" /> </a>
+            </Button>
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-white/10 hover:text-primary hover:scale-110 transition-all" asChild>
+              <a href="mailto:roshan@example.com" target="_blank" rel="noopener noreferrer"> <Mail className="w-4 h-4" /> </a>
+            </Button>
+
+            {/* Theme Toggle Button */}
+            <div className="w-[1px] bg-white/10 h-4 mx-1"></div>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className="h-8 w-8 rounded-full hover:bg-white/10 hover:text-yellow-400 transition-all"
+            >
+              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </Button>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="fixed top-20 left-1/2 -translate-x-1/2 z-40 w-64 md:hidden pointer-events-auto"
+          >
+            <div className="bg-background/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl p-2 flex flex-col gap-1">
+              {sections.map((section) => (
+                <Button
+                  key={section}
+                  variant="ghost"
+                  onClick={() => scrollToSection(section)}
+                  className={cn(
+                    "w-full justify-start rounded-xl text-sm h-10 px-4",
+                    activeSection === section ? "bg-white/15 text-primary" : "text-muted-foreground hover:bg-white/10"
+                  )}
                 >
-                  <div className="w-full h-full rounded-full overflow-hidden bg-black">
-                    <Image
-                      src="/pfp.png"
-                      alt="Roshan Sanjeev"
-                      width={288}
-                      height={288}
-                      className="w-full h-full object-cover rounded-full"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Text Content */}
-              <div className="flex flex-col items-center text-center">
-                <h1 className="text-5xl lg:text-7xl font-bold text-[var(--text-primary)] mb-8 tracking-tight animate-fadeInUp" style={{ animationDelay: '0.4s' }}>
-                  Roshan Sanjeev
-                </h1>
-                <p className="text-xl text-[var(--text-secondary)] leading-relaxed mb-8 max-w-2xl animate-fadeInUp" style={{ animationDelay: '0.5s' }}>
-                  Nice to virtually meet you! As a Software Engineer, Machine Learning Researcher, and Product Manager, I thrive at the intersection of technology and user needs. Explore my experience, learn about me, or view my resume below.
-                </p>
-              </div>
-
-              {/* GT3RS - Bottom of container */}
-              <div className="absolute bottom-6 left-8 w-full animate-fadeInUp" style={{ animationDelay: '0.7s' }}>
-                <DraggableGT3RS />
-              </div>
-
-              <ScrollIndicator />
+                  {section}
+                </Button>
+              ))}
             </div>
-          </section>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-          {/* EXPERIENCE SECTION */}
-          <section id="Experience" className="w-full max-w-7xl px-4 py-12 scroll-mt-24">
-            <ScrollReveal>
-              <h2 className="text-4xl font-bold mb-12 text-[var(--text-primary)] border-l-4 pl-4" style={{ borderColor: borderColor }}>Experience</h2>
-              <div className="space-y-12">
-                {/* UC Merced - DineBoard */}
-                <div className="flex flex-col lg:flex-row gap-8 pb-12 border-b" style={{ borderColor: borderColor }}>
-                  <div className="lg:w-1/3 relative group">
-                    <div className="relative rounded-2xl overflow-hidden animate-gradient" style={{ background: gradient, padding: '3px' }}>
-                      <div className="relative rounded-2xl overflow-hidden bg-black aspect-video">
-                        <Image src="/dine board soft launch-5.png" alt="DineBoard Software Engineering" width={400} height={300} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" style={{ objectPosition: '50% 39%' }} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="lg:w-2/3">
-                    <div className="flex gap-4 mb-3">
-                      <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
-                        <Image src="/UCM_Logo.png" alt="UC Merced Logo" width={48} height={48} className="object-contain" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex flex-col">
-                          <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | UC, Merced</h3>
-                          <p className="text-[var(--text-secondary)]">Aug 2025 - Present</p>
-                        </div>
-                        <p className="text-[var(--text-secondary)] text-sm mt-1">Flask, Redis, Nginx, React, Agile, REST APIs, OAuth 2.0</p>
-                      </div>
-                    </div>
-                    <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                      <li>Built DineBoard enterprise system serving 2,500+ students daily using Agile methodology</li>
-                      <li>Engineered secure REST APIs with OAuth 2.0, driving 80% productivity increase for staff</li>
-                      <li>Architected Flask/Redis backend with Nginx & React frontend for scalable performance</li>
-                    </ul>
-                  </div>
-                </div>
 
-                {/* Mi3 Lab Research */}
-                <div className="flex flex-col lg:flex-row gap-8 pb-12 border-b" style={{ borderColor: borderColor }}>
-                  <div className="lg:w-1/3 relative group">
-                    <div className="relative rounded-2xl overflow-hidden animate-gradient" style={{ background: gradient, padding: '3px' }}>
-                      <div className="relative rounded-2xl overflow-hidden bg-black aspect-video">
-                        <Image src="/Research.png" alt="AI/ML Research" width={400} height={300} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="lg:w-2/3">
-                    <div className="flex gap-4 mb-3">
-                      <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
-                        <Image src="/VideoLlama.png" alt="Mi3 Lab Logo" width={48} height={48} className="object-contain" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex flex-col">
-                          <h3 className="text-xl font-semibold text-[var(--text-primary)]">Machine Learning Research Intern | Mi3 Lab</h3>
-                          <p className="text-[var(--text-secondary)]">Jun 2025 - Present</p>
-                        </div>
-                        <p className="text-[var(--text-secondary)] text-sm mt-1">VLLM, CVPR, ICCV, GPT-4o, VideoLLaMa, Pandas, Matplotlib</p>
-                      </div>
-                    </div>
-                    <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                      <li>Co-authored VLLM paper published at CVPR 2025 & ICCV 2025 generating real-time navigation for visually impaired users</li>
-                      <li>Outperformed GPT-4o by 43.84% finetuning VideoLLaMa3-7B across ROUGE-L, Timing F1/AUC, & Action F1 metrics</li>
-                      <li>Built data visualizations using Pandas/Matplotlib for JSON post-processing and conference presentations</li>
-                    </ul>
-                  </div>
-                </div>
+      {/* HERO SECTION WITH AURORA & BOLD FADE-IN */}
+      <AuroraBackground className="h-[calc(100vh-6rem)] mt-0 md:mt-0 w-full" id="Home">
+        <motion.div
+          initial={{ opacity: 0.0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="flex flex-col gap-4 items-center justify-center px-4"
+        >
+          <div className="flex flex-col items-center z-20 relative">
+            {/* Name: Fading effect, smaller, cleaner */}
+            <h1 className="text-6xl md:text-8xl font-bold text-center tracking-tighter pb-4 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-500 to-neutral-200 select-none opacity-80">
+              Roshan Sanjeev
+            </h1>
+            {/* Job Title: Skinny, no container */}
+            <div className="mt-2 font-extralight text-xl md:text-3xl text-neutral-600 text-center">
+              Product Manager & Software Engineer
+            </div>
 
-                {/* Plant Culture Systems */}
-                <div className="flex flex-col lg:flex-row gap-8 pb-12 border-b" style={{ borderColor: borderColor }}>
-                  <div className="lg:w-1/3 relative group">
-                    <div className="relative rounded-2xl overflow-hidden animate-gradient" style={{ background: gradient, padding: '3px' }}>
-                      <div className="relative rounded-2xl overflow-hidden bg-black aspect-video">
-                        <Image src="/plantCultureSys.jpeg" alt="Plant Culture Systems" width={400} height={300} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="lg:w-2/3">
-                    <div className="flex gap-4 mb-3">
-                      <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
-                        <Image src="/PlantCultureSystems.webp" alt="Plant Culture Systems Logo" width={48} height={48} className="object-contain" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex flex-col">
-                          <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | Plant Culture Systems</h3>
-                          <p className="text-[var(--text-secondary)]">Jul 2024 - Oct 2024</p>
-                        </div>
-                        <p className="text-[var(--text-secondary)] text-sm mt-1">AI, Flutterflow, Firebase, Figma, Agile, ChatGPT API</p>
-                      </div>
-                    </div>
-                    <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                      <li>Designed AI landing page for OurGarden using Flutterflow, enhancing engagement for 500+ users</li>
-                      <li>Led image analysis feature as A.I. subteam lead, improving engagement metrics by ~50% in Agile sprints with customers & users..</li>
-                      <li>Integrated ChatGPT API chatbot, Firebase user management, and Figma frontend planning</li>
-                    </ul>
-                  </div>
-                </div>
+            {/* Blurb restored */}
+            <p className="mt-4 text-sm md:text-lg font-light text-neutral-500 max-w-lg text-center leading-relaxed">
+              I blend technical expertise with user empathy.
+            </p>
+          </div>
+        </motion.div>
 
-                {/* PosTrue */}
-                <div className="flex flex-col lg:flex-row gap-8">
-                  <div className="lg:w-1/3 relative group">
-                    <div className="relative rounded-2xl overflow-hidden animate-gradient" style={{ background: gradient, padding: '3px' }}>
-                      <div className="relative rounded-2xl overflow-hidden bg-black aspect-video">
-                        <Image src="/PostrueMain.png" alt="PosTrue Software Engineering" width={400} height={300} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="lg:w-2/3">
-                    <div className="flex gap-4 mb-3">
-                      <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
-                        <Image src="/PosTrueLogo.png" alt="PosTrue Logo" width={48} height={48} className="object-contain" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex flex-col">
-                          <h3 className="text-xl font-semibold text-[var(--text-primary)]">Software Engineer Intern | PosTrue</h3>
-                          <p className="text-[var(--text-secondary)]">Mar 2024 - Jun 2024</p>
-                        </div>
-                        <p className="text-[var(--text-secondary)] text-sm mt-1">Django, Bootstrap, PostgreSQL, Real-time Analytics, UI/UX</p>
-                      </div>
-                    </div>
-                    <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                      <li>Developed Django website with real-time wearable sensor analytics and ergonomic feedback</li>
-                      <li>Designed responsive UI/UX with Bootstrap, HTML/CSS/JavaScript following brand standards</li>
-                      <li>Built PostgreSQL dashboard visualizing real-time posture data with actionable insights</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          </section>
-
-          {/* HACKATHONS/PROJECTS SECTION */}
-          <section id="Hackathons/Projects" className="w-full max-w-7xl px-4 py-20 scroll-mt-24">
-            <ScrollReveal>
-              <h2 className="text-4xl font-bold mb-12 text-[var(--text-primary)] border-l-4 pl-4" style={{ borderColor: borderColor }}>Hackathons/Projects</h2>
-              <div className="space-y-12">
-                {/* PoseVision */}
-                <div className="flex flex-col lg:flex-row gap-8 pb-12 border-b" style={{ borderColor: borderColor }}>
-                  <div className="lg:w-1/3 relative group">
-                    <div className="relative rounded-2xl overflow-hidden animate-gradient" style={{ background: gradient, padding: '3px' }}>
-                      <div className="relative rounded-2xl overflow-hidden bg-black">
-                        <video controls className="w-full h-auto" preload="metadata">
-                          <source src="/PoseVisionDemo.mp4" type="video/mp4" />
-                          Your browser does not support the video tag.
-                        </video>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="lg:w-2/3">
-                    <div className="flex gap-4 mb-3">
-                      <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center">
-                        <Image src="/Sase.png" alt="SASE Logo" width={40} height={40} className="object-contain" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-[var(--text-primary)]">Fullstack AI Developer | SASEHacks (PoseVision)</h3>
-                        <p className="text-[var(--text-secondary)] text-sm">AI, Deep Learning, Pose Estimation, Python, MediaPipe, OpenCV, Docker, Flask, AWS EC2</p>
-                      </div>
-                    </div>
-                    <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                      <li>Won 1st place building AI injury prevention tool using deep learning pose estimation</li>
-                      <li>Developed Python script with MediaPipe & OpenCV detecting squat asymmetries with visual feedback</li>
-                      <li>Deployed Dockerized Flask pipeline on AWS EC2 with git version control</li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Credit Compass */}
-                <div className="flex flex-col lg:flex-row gap-8">
-                  <div className="lg:w-1/3 relative group">
-                    <div className="relative rounded-2xl overflow-hidden animate-gradient" style={{ background: gradient, padding: '3px' }}>
-                      <div className="relative rounded-2xl overflow-hidden bg-black">
-                        <Image src="/Hackathon.png" alt="Credit Compass Hackathon" width={400} height={300} className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="lg:w-2/3">
-                    <div className="flex gap-4 mb-3">
-                      <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
-                        <Image src="/HackMerced.png" alt="HackMerced Logo" width={48} height={48} className="object-contain" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-[var(--text-primary)]">Fullstack AI Developer | HackMercedX (Credit Compass)</h3>
-                        <p className="text-[var(--text-secondary)] text-sm">AI, REST API, Flask, JavaScript, HTML/CSS</p>
-                      </div>
-                    </div>
-                    <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                      <li>Won Alumni Prize building AI platform delivering personalized credit card recommendations using real-time data</li>
-                      <li>Built REST pipeline with Letta AI API and Flask frontend using JavaScript & HTML/CSS</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          </section>
-
-          {/* LEADERSHIP SECTION */}
-          <section id="Leadership & Communication" className="w-full max-w-7xl px-4 py-20 scroll-mt-24">
-            <ScrollReveal>
-              <h2 className="text-4xl font-bold mb-12 text-[var(--text-primary)] border-l-4 pl-4" style={{ borderColor: borderColor }}>Leadership & Communication</h2>
-              <div className="space-y-12">
-                {/* Perplexity AI Campus Ambassador */}
-                <div className="flex flex-col lg:flex-row gap-8 pb-12 border-b" style={{ borderColor: borderColor }}>
-                  <div className="lg:w-1/3 relative group">
-                    <div className="relative rounded-2xl overflow-hidden animate-gradient" style={{ background: gradient, padding: '3px' }}>
-                      <div className="relative rounded-2xl overflow-hidden bg-black">
-                        <Image src="/PerplexPrese.jpeg" alt="Perplexity Presentation" width={400} height={300} className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="lg:w-2/3">
-                    <div className="flex gap-4 mb-3">
-                      <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
-                        <Image src="/PerplexLogo.webp" alt="Perplexity Logo" width={48} height={48} className="object-contain" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center">
-                          <h3 className="text-xl font-semibold text-[var(--text-primary)]">AI Campus Ambassador | Perplexity</h3>
-                          <p className="text-[var(--text-secondary)] ml-2">June 2025 - Present</p>
-                        </div>
-                        <p className="text-[var(--text-secondary)] text-sm">AI Marketing, Marketing Strategy, Community Engagement</p>
-                      </div>
-                    </div>
-                    <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                      <li>Executed responsible AI marketing strategy (via social media posts, flyers, and tabling) to engage 300+ students.</li>
-                      <li>Working toward 500 sign-ups for hackathon sponsorship.</li>
-                      <li>Promoted cutting-edge AI tools and resources to the university community.</li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* HackMercedX Organiser */}
-                <div className="flex flex-col lg:flex-row gap-8 pb-12 border-b" style={{ borderColor: borderColor }}>
-                  <div className="lg:w-1/3 relative group">
-                    <div className="relative rounded-2xl overflow-hidden animate-gradient" style={{ background: gradient, padding: '3px' }}>
-                      <div className="relative rounded-2xl overflow-hidden bg-black">
-                        <Image src="/HackathonOrganizer.png" alt="HackMercedX Organiser" width={400} height={300} className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="lg:w-2/3">
-                    <div className="flex gap-4 mb-3">
-                      <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center">
-                        <Image src="/HackMerced.png" alt="HackMerced Logo" width={48} height={48} className="object-contain" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-[var(--text-primary)]">Hackathon Organiser | HackMercedX</h3>
-                        <p className="text-[var(--text-secondary)] text-sm">Backend Management, Frontend, Firebase, Sponsorship, Outreach</p>
-                      </div>
-                    </div>
-                    <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                      <li>Managed hackathon website backend while securing company sponsorships and coordinating participant outreach</li>
-                      <li>Coordinated participant outreach, event logistics, and workshop schedules.</li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Theta Tau */}
-                <div className="flex flex-col lg:flex-row gap-8">
-                  <div className="lg:w-1/3 relative group">
-                    <div className="relative rounded-2xl overflow-hidden animate-gradient" style={{ background: gradient, padding: '3px' }}>
-                      <div className="relative rounded-2xl overflow-hidden bg-black">
-                        <Image src="/SHPE.png" alt="Theta Tau Leadership" width={400} height={300} className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="lg:w-2/3">
-                    <div className="flex gap-4 mb-3">
-                      <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center">
-                        <Image src="/ThetaTau.png" alt="Theta Tau Logo" width={40} height={40} className="object-contain" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center">
-                          <h3 className="text-xl font-semibold text-[var(--text-primary)]">Executive Board/Recruitment | Theta Tau</h3>
-                          <p className="text-[var(--text-secondary)] ml-2">Mar 2024 - Present</p>
-                        </div>
-                        <p className="text-[var(--text-secondary)] text-sm">Leadership, Recruitment, Budget Management, Event Planning</p>
-                      </div>
-                    </div>
-                    <ul className="list-disc list-inside ml-4 space-y-2 text-[var(--text-secondary)]">
-                      <li>Led recruitment committee of 9 with $2,000 budget, organizing presentations to 1,000+ students</li>
-                      <li>Increased chapter growth by 70% through daily events with 50+ attendees, created succession manual</li>
-                      <li>Oversaw chapter operations as Executive Board member, preparing for President role next semester</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          </section>
-
-          {/* SKILLS SECTION */}
-          <section id="Skills" className="w-full max-w-7xl px-4 py-20 scroll-mt-24">
-            <ScrollReveal>
-              <h2 className="text-4xl font-bold mb-12 text-[var(--text-primary)] border-l-4 pl-4" style={{ borderColor: borderColor }}>Skills</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="mb-6 p-6 rounded-2xl border bg-black/5" style={{ borderColor: borderColor }}>
-                  <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Languages</h3>
-                  <p className="text-[var(--text-secondary)]">Python, C/C++, JavaScript, R, SQL, Java, HTML/CSS, MIPS Assembly, LaTeX</p>
-                </div>
-                <div className="mb-6 p-6 rounded-2xl border bg-black/5" style={{ borderColor: borderColor }}>
-                  <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Frameworks</h3>
-                  <p className="text-[var(--text-secondary)]">Flask, Django, React, Pandas, Matplotlib, MediaPipe, OpenCV, Bootstrap, FlutterFlow</p>
-                </div>
-                <div className="mb-6 p-6 rounded-2xl border bg-black/5" style={{ borderColor: borderColor }}>
-                  <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Tools & Platforms</h3>
-                  <p className="text-[var(--text-secondary)]">Azure, AWS EC2, Git, Docker, PostgreSQL, Redis, Linux, Microsoft Suite, Claude Code, Firebase, Figma</p>
-                </div>
-                <div className="mb-6 p-6 rounded-2xl border bg-black/5" style={{ borderColor: borderColor }}>
-                  <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">AI/ML</h3>
-                  <p className="text-[var(--text-secondary)]">Computer Vision, HuggingFace, PyTorch, TensorFlow, CrewAI Agents, MediaPipe, Vapi, Nous, Masumi</p>
-                </div>
-                <div className="mb-6 p-6 rounded-2xl border bg-black/5" style={{ borderColor: borderColor }}>
-                  <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">Methodologies</h3>
-                  <p className="text-[var(--text-secondary)]">OOP, Agile, Scrum, Responsive Design, UI/UX, CI/CD, DevOps</p>
-                </div>
-              </div>
-            </ScrollReveal>
-          </section>
-
-          {/* ABOUT ME SECTION */}
-          <section id="About Me" className="w-full max-w-7xl px-4 py-20 scroll-mt-24">
-            <ScrollReveal>
-              <h2 className="text-4xl font-bold mb-12 text-[var(--text-primary)] border-l-4 pl-4" style={{ borderColor: borderColor }}>About Me</h2>
-              <div className="space-y-4 text-[var(--text-secondary)] leading-relaxed text-lg">
-                <p>
-                  My name is Roshan Sanjeev, a third year computer science and engineering major at the University of California, Merced and I am passionate about building products that connect technology with user experience. My technical background spans full-stack development, cloud systems, and AI/ML, with experience interning across software engineering and app development. I have also co-authored computer vision research presented at world-renowned conferences such as CVPR in Nashville and ICCV in Hawaii.
-                </p>
-                <p>
-                  Beyond technical work, I embrace leadership and outreach. As an organizer for HackMerced, I mentor students and create opportunities for them to grow, collaborate, and bring new ideas to life. As a Perplexity Campus Ambassador, I connect my peers with cutting-edge AI tools, and I am currently leading a drive to reach 500 sign-ups to unlock Hackathon funding from Perplexity. Previously, as Recruitment Chair for Theta Tau, I led a nine-member committee, managed a $2000 budget, and organized events that reached over 1,000 students.
-                </p>
-                <p>
-                  I thrive in competitive and creative environments. My projects include PoseVision, a first-place winning deep learning tool for movement feedback at SASEHacks, and Credit Compass, an Alumni Prize-winning AI recommendation system at HackMerced.
-                </p>
-                <p>
-                  With a mix of technical expertise, product thinking, and leadership experience, I am motivated to contribute to impactful projects in technology and beyond.
-                </p>
-              </div>
-            </ScrollReveal>
-          </section>
-
-          {/* RESUME SECTION */}
-          <section id="Resume" className="w-full max-w-7xl px-4 py-20 pb-40 scroll-mt-24">
-            <ScrollReveal>
-              <h2 className="text-4xl font-bold mb-12 text-[var(--text-primary)] border-l-4 pl-4" style={{ borderColor: borderColor }}>Resume</h2>
-              <div className="w-full">
-                {/* PDF Embed without border */}
-                <iframe
-                  src="/RoshanSanjeev_Resume.pdf"
-                  className="w-full h-[800px] rounded-lg mb-4 shadow-2xl"
-                  title="Roshan Sanjeev Resume"
-                />
-                {/* Download Button */}
-                <div className="mt-8 flex justify-center">
-                  <a
-                    href="/RoshanSanjeev_Resume.pdf"
-                    download="RoshanSanjeev_Resume.pdf"
-                    className="relative group/btn rounded-full inline-block"
-                  >
-                    <span
-                      className="absolute inset-0 rounded-full transition-opacity duration-300 opacity-100 animate-gradient"
-                      style={{
-                        background: gradient,
-                        padding: '3px',
-                        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                        WebkitMaskComposite: 'xor',
-                        maskComposite: 'exclude',
-                        pointerEvents: 'none',
-                      }}
-                    />
-                    <span
-                      className="backdrop-blur-sm rounded-full px-8 py-4 border relative z-10 inline-block text-[var(--text-primary)] font-medium transition-all duration-300 transform group-hover/btn:scale-105"
-                      style={{ backgroundColor: glassColor, borderColor: borderColor }}
-                    >
-                      Download Resume
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </ScrollReveal>
-          </section>
-
+        {/* Scroll Indicator - Positioned at bottom */}
+        <div className="absolute bottom-32 left-1/2 -translate-x-1/2 flex flex-col gap-4 items-center z-20">
+          <ScrollIndicator />
+          <DraggableGT3RS />
         </div>
+      </AuroraBackground>
+
+      <div className="relative z-10 flex flex-col items-center w-full max-w-[95rem] mx-auto px-4 pb-10">
+
+        {/* EXPERIENCE - TIMELINE WITH CARDS */}
+        <section id="Experience" className="w-full max-w-7xl px-4 py-12 scroll-mt-24">
+          <ScrollReveal>
+            <div className="flex items-center gap-4 mb-4 pl-4 md:pl-10">
+              <div className="h-10 w-1.5 rounded-full" style={{ background: gradient }} />
+              <h2 className="text-4xl font-bold">Experience</h2>
+            </div>
+            {/* Timeline with new Card-based data */}
+            <Timeline data={experienceData} className="bg-transparent dark:bg-transparent" />
+          </ScrollReveal>
+        </section>
+
+        {/* PROJECTS - CLEAN GRID LAYOUT */}
+        <section id="Hackathons/Projects" className="w-full max-w-6xl px-4 py-12 scroll-mt-24">
+          <ScrollReveal>
+            <div className="flex items-center justify-between mb-12">
+              <div className="flex items-center gap-4">
+                <div className="h-10 w-1.5 rounded-full" style={{ background: gradient }} />
+                <h2 className="text-4xl font-bold">Projects</h2>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* PoseVision */}
+              <Card className="group overflow-hidden bg-card border-border hover:shadow-xl transition-all duration-300">
+                <div className="relative h-64 bg-black overflow-hidden">
+                  <video controls className="w-full h-full object-contain">
+                    <source src="/PoseVisionDemo.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <CardTitle className="text-xl font-bold">PoseVision</CardTitle>
+                    <div className="flex gap-2">
+                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
+                        Python
+                      </span>
+                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
+                        OpenCV
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    AI Injury Prevention Tool. 1st Place @ SASEHacks.
+                  </p>
+                </CardHeader>
+              </Card>
+
+              {/* Credit Compass */}
+              <Card className="group overflow-hidden bg-card border-border hover:shadow-xl transition-all duration-300">
+                <div className="relative h-64 overflow-hidden">
+                  <Image
+                    src="/Hackathon.png"
+                    alt="Credit Compass"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <CardTitle className="text-xl font-bold">Credit Compass</CardTitle>
+                    <div className="flex gap-2">
+                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
+                        React
+                      </span>
+                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
+                        Flask
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    AI Personalized Credit Recommendations. Alumni Prize @ HackMercedX.
+                  </p>
+                </CardHeader>
+              </Card>
+            </div>
+          </ScrollReveal>
+        </section>
+
+        {/* LEADERSHIP */}
+        <section id="Leadership" className="w-full max-w-6xl px-4 py-12 scroll-mt-24">
+          <ScrollReveal>
+            <div className="flex items-center gap-4 mb-12">
+              <div className="h-10 w-1.5 rounded-full" style={{ background: gradient }} />
+              <h2 className="text-4xl font-bold">Leadership</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { title: "HackMercedX Organizer", desc: "Managed backend, secured sponsorships.", img: "/HackathonOrganizer.png" },
+                { title: "Perplexity Ambassador", desc: "AI Marketing & Strategy.", img: "/PerplexPrese.jpeg" },
+                { title: "Theta Tau Exec Board", desc: "Recruitment & Professional Dev.", img: "/SHPE.png" }
+              ].map((item, i) => (
+                <Card key={i} className="bg-background/50 backdrop-blur-sm border-white/10 overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
+                  <div className="h-48 w-full relative">
+                    <Image src={item.img} alt={item.title} fill className="object-cover" />
+                  </div>
+                  <CardHeader>
+                    <CardTitle>{item.title}</CardTitle>
+                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                  </CardHeader>
+                </Card>
+              ))}
+            </div>
+          </ScrollReveal>
+        </section>
+
+        {/* SKILLS - CATEGORIZED GRID */}
+        <section id="Skills" className="w-full max-w-6xl px-4 py-12 scroll-mt-24">
+          <ScrollReveal>
+            <div className="flex items-center gap-4 mb-12">
+              <div className="h-10 w-1.5 rounded-full" style={{ background: gradient }} />
+              <h2 className="text-4xl font-bold">Skills</h2>
+            </div>
+
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {skillsCategories.map((category, idx) => (
+                <div key={idx} className="flex flex-col gap-4">
+                  <h3 className="text-xl font-bold text-foreground border-b border-border pb-2">
+                    {category.title}
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills.map((skill, sIdx) => (
+                      <span
+                        key={sIdx}
+                        className="px-3 py-1.5 rounded-md text-sm font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors cursor-default select-none"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+        </section>
+
+        {/* ABOUT ME - WITH PHOTO */}
+        <section id="About" className="w-full max-w-4xl px-4 py-12 scroll-mt-24 text-center mx-auto">
+          <ScrollReveal>
+            <h2 className="text-4xl font-bold mb-8">About Me</h2>
+
+            {/* Photo - Subtle Professional Animation */}
+            <div className="mb-8 flex justify-center">
+              <motion.div
+                className="relative"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                animate={{
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  y: {
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  },
+                  opacity: { duration: 0.6, ease: "easeOut" }
+                }}
+              >
+                {/* Subtle static glow */}
+                <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-purple-200 via-pink-200 to-blue-200 dark:from-purple-900 dark:via-pink-900 dark:to-blue-900 opacity-30 blur-xl" />
+
+                {/* Avatar with clean border */}
+                <Avatar className="w-40 h-40 lg:w-56 lg:h-56 border-4 border-white dark:border-neutral-800 shadow-2xl relative ring-1 ring-neutral-200 dark:ring-neutral-700">
+                  <AvatarImage src="/pfp.png" alt="Roshan Sanjeev" className="object-cover" />
+                  <AvatarFallback>RS</AvatarFallback>
+                </Avatar>
+              </motion.div>
+            </div>
+
+            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+              <p>
+                My name is Roshan Sanjeev, a third year computer science and engineering major at the University of California, Merced and I am passionate about building products that connect technology with user experience. My technical background spans full-stack development, cloud systems, and AI/ML.
+              </p>
+              <p>
+                Beyond technical work, I embrace leadership and outreach. As an organizer for HackMerced, I mentor students and create opportunities for them to grow.
+              </p>
+            </div>
+          </ScrollReveal>
+        </section>
+
+        {/* RESUME */}
+        <section id="Resume" className="w-full max-w-6xl px-4 py-12 pb-40 scroll-mt-24">
+          <ScrollReveal>
+            <div className="flex items-center gap-4 mb-12">
+              <div className="h-10 w-1.5 rounded-full" style={{ background: gradient }} />
+              <h2 className="text-4xl font-bold">Resume</h2>
+            </div>
+            <Card className="border-border/50 bg-white shadow-2xl overflow-hidden">
+              <div className="w-full h-[800px]">
+                <iframe src="/RoshanSanjeev_Resume.pdf" className="w-full h-full" title="Roshan Sanjeev Resume" />
+              </div>
+              <div className="p-8 flex justify-center bg-neutral-50 border-t border-neutral-200">
+                <Button
+                  size="lg"
+                  className="px-8 h-12 rounded-full bg-white text-neutral-800 text-base font-medium border border-neutral-200 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:bg-neutral-50 hover:scale-[1.02] transition-all duration-300"
+                  asChild
+                >
+                  <a href="/RoshanSanjeev_Resume.pdf" download="RoshanSanjeev_Resume.pdf" className="flex items-center gap-3">
+                    <Download className="w-4 h-4 text-neutral-500" />
+                    <span className="tracking-tight">Download Resume</span>
+                  </a>
+                </Button>
+              </div>
+            </Card>
+          </ScrollReveal>
+        </section>
+
       </div>
     </main>
   );
