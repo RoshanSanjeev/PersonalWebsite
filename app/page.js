@@ -376,7 +376,6 @@ export default function Home() {
         {/* Scroll Indicator - Positioned at bottom */}
         <div className="absolute bottom-32 left-1/2 -translate-x-1/2 flex flex-col gap-4 items-center z-20">
           <ScrollIndicator />
-          <DraggableGT3RS />
         </div>
       </AuroraBackground>
 
@@ -592,6 +591,11 @@ export default function Home() {
           </ScrollReveal>
         </section>
 
+      </div>
+
+      {/* GT3RS - Below resume section */}
+      <div className="relative w-full h-32 pointer-events-none -mt-40">
+        <DraggableGT3RS />
       </div>
     </main>
   );

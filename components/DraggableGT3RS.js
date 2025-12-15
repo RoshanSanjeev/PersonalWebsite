@@ -6,7 +6,7 @@ import { useTheme } from "../contexts/ThemeContext";
 export default function DraggableGT3RS() {
     const { theme } = useTheme();
     // Drag sensitivity improved by removing artificial dragOffset lag or complex smoothing
-    const [position, setPosition] = useState({ x: -40 });
+    const [position, setPosition] = useState({ x: 50 }); // Start at left boundary
     const [isDragging, setIsDragging] = useState(false);
     const [trail, setTrail] = useState([]);
     const [facingLeft, setFacingLeft] = useState(false);
@@ -19,15 +19,12 @@ export default function DraggableGT3RS() {
     useEffect(() => {
         const handleMouseMove = (e) => {
             if (isDragging) {
-                const container = carRef.current?.parentElement?.parentElement;
-                if (!container) return;
+                // Use viewport width for boundaries - tighter range
+                const viewportWidth = window.innerWidth;
+                const minX = 50; // Start further right
+                const maxX = viewportWidth - carWidth - 50; // End further left
 
-                const containerRect = container.getBoundingClientRect();
-                const minX = containerRect.left - 40;
-                const maxX = containerRect.right - carWidth - 30;
-
-                // Calculate new position directly relative to mouse with offset
-                // This ensures 1:1 movement
+                // Calculate new position directly from mouse X
                 const rawNewX = e.clientX - dragOffset;
                 const newX = Math.max(minX, Math.min(maxX, rawNewX));
 
@@ -39,14 +36,14 @@ export default function DraggableGT3RS() {
                 }
                 lastX.current = newX;
 
-                setPosition({ x: newX - containerRect.left });
+                setPosition({ x: newX });
 
                 // Add to rainbow trail
                 const trailX = facingLeft ? newX + carWidth : newX;
                 setTrail((prevTrail) => [
                     ...prevTrail,
                     {
-                        x: trailX - containerRect.left,
+                        x: trailX,
                         id: Date.now() + Math.random(),
                     },
                 ]);
@@ -122,13 +119,12 @@ export default function DraggableGT3RS() {
             if (e.cancelable) e.preventDefault();
 
             const touch = e.touches[0];
-            const container = carRef.current?.parentElement?.parentElement || document.body;
-            const containerRect = container.getBoundingClientRect();
+            const viewportWidth = window.innerWidth;
 
-            const minX = -40;
-            const maxX = containerRect.width - carWidth + 30;
+            const minX = 50; // Start further right
+            const maxX = viewportWidth - carWidth - 50; // End further left
 
-            let newX = touch.clientX - dragOffset - containerRect.left;
+            let newX = touch.clientX - dragOffset;
             newX = Math.max(minX, Math.min(maxX, newX));
 
             if (newX < lastX.current) {
