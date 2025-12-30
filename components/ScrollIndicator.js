@@ -25,7 +25,7 @@ export default function ScrollIndicator() {
       aria-label="Scroll to content"
       style={{ transform: 'translateZ(0)' }}
     >
-      <span className="text-neutral-600 dark:text-neutral-400 text-sm font-medium">Scroll down to see my work</span>
+      <span className="text-neutral-600 dark:text-neutral-400 text-sm font-medium">Details below</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"

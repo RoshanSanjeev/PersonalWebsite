@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 const ThemeContext = createContext();
 
@@ -39,6 +39,16 @@ export const backgroundColors = [
 export function ThemeProvider({ children }) {
   const [currentTheme, setCurrentTheme] = useState(0); // Chroma theme (index 0)
   const [currentBackground, setCurrentBackground] = useState(1); // White (index 1) for Light Mode default
+
+  useEffect(() => {
+    // 0 is Black, 3 is Navy -> Dark Mode
+    const isDark = currentBackground === 0 || currentBackground === 3;
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [currentBackground]);
 
   const getGradient = (colors) => {
     return `linear-gradient(135deg, ${colors[0]} 0%, ${colors[1]} 25%, ${colors[2]} 50%, ${colors[3]} 75%, ${colors[4]} 100%)`;
