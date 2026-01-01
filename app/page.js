@@ -24,7 +24,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 
 // Icons
-import { Github, Linkedin, MessageSquare, Download, Menu, Terminal, Code, Sun, Moon, Mail, ChevronDown, ExternalLink } from "lucide-react";
+import { Github, Linkedin, MessageSquare, Download, Menu, Terminal, Code, Sun, Moon, Mail, ChevronDown, ExternalLink, Copy, Check } from "lucide-react";
 
 // Sections data
 const sections = [
@@ -51,6 +51,7 @@ export default function Home() {
   const { gradient, backgroundColor, textColor, navColor, currentBackground, setCurrentBackground } = useTheme();
   const [activeSection, setActiveSection] = useState("Home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [emailCopied, setEmailCopied] = useState(false);
 
   // Toggle Theme Function
   const toggleTheme = () => {
@@ -324,21 +325,21 @@ export default function Home() {
                         size="sm"
                         onClick={() => scrollToSection("About")}
                         className={cn(
-                          "rounded-full text-xs font-medium transition-all hover:bg-white/10 px-3 py-1.5 h-8 gap-1",
-                          activeSection === "About" || activeSection === "Experience" || activeSection === "Leadership" || activeSection === "Skills" ? "bg-white/15 text-primary shadow-sm" : "text-muted-foreground/80 hover:text-primary"
+                          "rounded-full text-xs font-medium transition-all hover:bg-black/5 dark:hover:bg-white/10 px-3 py-1.5 h-8 gap-1",
+                          activeSection === "About" || activeSection === "Experience" || activeSection === "Leadership" || activeSection === "Skills" ? "bg-black/5 dark:bg-white/15 text-primary shadow-sm" : "text-muted-foreground/80 hover:text-primary"
                         )}
                       >
                         About <ChevronDown className="w-3 h-3 opacity-50" />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="center" className="bg-background/80 backdrop-blur-xl border border-white/10 shadow-2xl rounded-xl p-1 w-40 mt-2">
-                      <DropdownMenuItem onClick={() => scrollToSection("Experience")} className="cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-white/10 hover:text-primary transition-colors focus:bg-white/10 focus:text-primary">
+                      <DropdownMenuItem onClick={() => scrollToSection("Experience")} className="cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors focus:bg-black/5 dark:focus:bg-white/10 focus:text-primary">
                         Experience
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => scrollToSection("Leadership")} className="cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-white/10 hover:text-primary transition-colors focus:bg-white/10 focus:text-primary">
+                      <DropdownMenuItem onClick={() => scrollToSection("Leadership")} className="cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors focus:bg-black/5 dark:focus:bg-white/10 focus:text-primary">
                         Leadership
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => scrollToSection("Resume")} className="cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-white/10 hover:text-primary transition-colors focus:bg-white/10 focus:text-primary">
+                      <DropdownMenuItem onClick={() => scrollToSection("Resume")} className="cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors focus:bg-black/5 dark:focus:bg-white/10 focus:text-primary">
                         Resume
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -352,8 +353,8 @@ export default function Home() {
                   size="sm"
                   onClick={() => scrollToSection(section)}
                   className={cn(
-                    "rounded-full text-xs font-medium transition-all hover:bg-white/10 px-3 py-1.5 h-8",
-                    activeSection === section ? "bg-white/15 text-primary shadow-sm" : "text-muted-foreground/80 hover:text-primary"
+                    "rounded-full text-xs font-medium transition-all hover:bg-black/5 dark:hover:bg-white/10 px-3 py-1.5 h-8",
+                    activeSection === section ? "bg-black/5 dark:bg-white/15 text-primary shadow-sm" : "text-muted-foreground/80 hover:text-primary"
                   )}
                 >
                   {section}
@@ -367,26 +368,46 @@ export default function Home() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="rounded-full text-xs font-medium transition-all hover:bg-white/10 px-3 py-1.5 h-8 gap-1 text-muted-foreground/80 hover:text-primary data-[state=open]:bg-white/10 data-[state=open]:text-primary"
+                  className="rounded-full text-xs font-medium transition-all hover:bg-black/5 dark:hover:bg-white/10 px-3 py-1.5 h-8 gap-1 text-muted-foreground/80 hover:text-primary data-[state=open]:bg-black/5 dark:data-[state=open]:bg-white/10 data-[state=open]:text-primary"
                 >
                   Contact <ChevronDown className="w-3 h-3 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="bg-background/80 backdrop-blur-xl border border-white/10 shadow-2xl rounded-xl p-1 w-40 mt-2">
+              <DropdownMenuContent align="end" className="bg-background/80 backdrop-blur-xl border border-white/10 shadow-2xl rounded-xl p-1 w-64 mt-2">
+                <div className="relative flex items-center gap-1 p-1">
+                  <DropdownMenuItem asChild className="flex-1">
+                    <a
+                      href="mailto:roshan.sanjeev@gmail.com"
+                      className="flex items-center gap-2 cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors focus:bg-black/5 dark:focus:bg-white/10 focus:text-primary truncate"
+                    >
+                      <Mail className="w-3.5 h-3.5 shrink-0" />
+                      <span className="truncate">roshan.sanjeev@gmail.com</span>
+                    </a>
+                  </DropdownMenuItem>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 shrink-0 text-muted-foreground hover:text-primary hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 transition-all rounded-full"
+                    title="Copy Email"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      navigator.clipboard.writeText("roshan.sanjeev@gmail.com");
+                      setEmailCopied(true);
+                      setTimeout(() => setEmailCopied(false), 2000);
+                    }}
+                  >
+                    {emailCopied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
+                  </Button>
+                </div>
                 <DropdownMenuItem asChild>
-                  <a href="mailto:roshan@example.com" className="flex items-center gap-2 cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-white/10 hover:text-primary transition-colors focus:bg-white/10 focus:text-primary">
-                    <Mail className="w-3.5 h-3.5" />
-                    <span>Email</span>
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-white/10 hover:text-primary transition-colors focus:bg-white/10 focus:text-primary">
+                  <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors focus:bg-black/5 dark:focus:bg-white/10 focus:text-primary">
                     <Linkedin className="w-3.5 h-3.5" />
                     <span>LinkedIn</span>
                   </a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-white/10 hover:text-primary transition-colors focus:bg-white/10 focus:text-primary">
+                  <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors focus:bg-black/5 dark:focus:bg-white/10 focus:text-primary">
                     <Github className="w-3.5 h-3.5" />
                     <span>GitHub</span>
                   </a>
@@ -402,7 +423,7 @@ export default function Home() {
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="h-8 w-8 rounded-full hover:bg-white/10 hover:text-yellow-400 transition-all"
+              className="h-8 w-8 rounded-full hover:bg-black/5 dark:hover:bg-white/10 hover:text-yellow-400 transition-all"
             >
               {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
