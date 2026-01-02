@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Roshan Sanjeev - Product Manager & Software Engineer",
-  description: "Personal portfolio of Roshan Sanjeev, focusing on Product Management and Software Engineering experiences.",
+  title: "SmoothDescent - Roshan Sanjeev",
+  description: "SmoothDescent: The personal portfolio of Roshan Sanjeev, focusing on Product Management and Software Engineering experiences.",
   icons: {
     icon: '/GT3RS.png',
     shortcut: '/GT3RS.png',
