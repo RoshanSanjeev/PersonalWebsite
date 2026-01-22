@@ -48,12 +48,12 @@ export default function Navbar({ activeSection = "Home", onSectionClick }) {
   };
 
   const handleMouseLeave = (setter, timeoutRef) => {
-    timeoutRef.current = setTimeout(() => setter(false), 150);
+    timeoutRef.current = setTimeout(() => setter(false), 300);
   };
 
   return (
     <>
-      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full px-4 pointer-events-none flex justify-center">
+      <div className="fixed top-6 left-0 right-0 z-50 px-4 pointer-events-none flex justify-center">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -84,7 +84,7 @@ export default function Navbar({ activeSection = "Home", onSectionClick }) {
                     >
                       Projects
                     </Button>
-                    <DropdownMenu open={projectsOpen} onOpenChange={setProjectsOpen}>
+                    <DropdownMenu open={projectsOpen} onOpenChange={(open) => open && setProjectsOpen(true)} modal={false}>
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="ghost"
@@ -174,7 +174,7 @@ export default function Navbar({ activeSection = "Home", onSectionClick }) {
                     >
                       Experience
                     </Button>
-                    <DropdownMenu open={experienceOpen} onOpenChange={setExperienceOpen}>
+                    <DropdownMenu open={experienceOpen} onOpenChange={(open) => open && setExperienceOpen(true)} modal={false}>
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="ghost"
@@ -237,7 +237,7 @@ export default function Navbar({ activeSection = "Home", onSectionClick }) {
               onMouseEnter={() => handleMouseEnter(setContactOpen, contactTimeout)}
               onMouseLeave={() => handleMouseLeave(setContactOpen, contactTimeout)}
             >
-              <DropdownMenu open={contactOpen} onOpenChange={setContactOpen}>
+              <DropdownMenu open={contactOpen} onOpenChange={(open) => open && setContactOpen(true)} modal={false}>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="rounded-full text-sm font-medium px-4 py-2 h-9 gap-1 text-muted-foreground hover:text-foreground cursor-pointer">
                     Contact <ChevronDown className="w-3 h-3 opacity-60" />

@@ -72,7 +72,7 @@ export const ProjectCarousel = ({ media, className }) => {
                             variant="ghost"
                             size="icon"
                             onClick={prevSlide}
-                            className="pointer-events-auto h-9 w-9 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-sm shadow-lg border border-white/10"
+                            className="pointer-events-auto h-9 w-9 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-sm shadow-lg border border-white/10 cursor-pointer"
                         >
                             <ChevronLeft className="h-5 w-5" />
                         </Button>
@@ -80,7 +80,7 @@ export const ProjectCarousel = ({ media, className }) => {
                             variant="ghost"
                             size="icon"
                             onClick={nextSlide}
-                            className="pointer-events-auto h-9 w-9 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-sm shadow-lg border border-white/10"
+                            className="pointer-events-auto h-9 w-9 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-sm shadow-lg border border-white/10 cursor-pointer"
                         >
                             <ChevronRight className="h-5 w-5" />
                         </Button>
@@ -92,7 +92,7 @@ export const ProjectCarousel = ({ media, className }) => {
                             <button
                                 key={index}
                                 onClick={(e) => goToSlide(index, e)}
-                                className={`h-2 rounded-full transition-all duration-300 shadow-sm ${currentIndex === index
+                                className={`h-2 rounded-full transition-all duration-300 shadow-sm cursor-pointer ${currentIndex === index
                                     ? "bg-white w-4"
                                     : "bg-white/60 hover:bg-white/90 w-2"
                                     }`}

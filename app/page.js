@@ -132,7 +132,7 @@ export default function Home() {
   };
 
   const handleMouseLeave = (setter, timeoutRef) => {
-    timeoutRef.current = setTimeout(() => setter(false), 150);
+    timeoutRef.current = setTimeout(() => setter(false), 300);
   };
 
   // Scroll Spy
@@ -364,7 +364,7 @@ export default function Home() {
     <main className="min-h-screen relative selection:bg-primary/20 transition-colors duration-500" style={{ backgroundColor, color: textColor }}>
 
       {/* NAVIGATION */}
-      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full px-4 pointer-events-none flex justify-center">
+      <div className="fixed top-6 left-0 right-0 z-50 px-4 pointer-events-none flex justify-center">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -395,7 +395,7 @@ export default function Home() {
                     >
                       Projects
                     </Button>
-                    <DropdownMenu open={projectsOpen} onOpenChange={setProjectsOpen}>
+                    <DropdownMenu open={projectsOpen} onOpenChange={(open) => open && setProjectsOpen(true)} modal={false}>
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="ghost"
@@ -485,7 +485,7 @@ export default function Home() {
                     >
                       Experience
                     </Button>
-                    <DropdownMenu open={experienceOpen} onOpenChange={setExperienceOpen}>
+                    <DropdownMenu open={experienceOpen} onOpenChange={(open) => open && setExperienceOpen(true)} modal={false}>
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="ghost"
@@ -548,7 +548,7 @@ export default function Home() {
               onMouseEnter={() => handleMouseEnter(setContactOpen, contactTimeout)}
               onMouseLeave={() => handleMouseLeave(setContactOpen, contactTimeout)}
             >
-              <DropdownMenu open={contactOpen} onOpenChange={setContactOpen}>
+              <DropdownMenu open={contactOpen} onOpenChange={(open) => open && setContactOpen(true)} modal={false}>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="rounded-full text-xs font-medium px-2 sm:px-3 py-1 h-7 sm:h-8 gap-0.5 text-muted-foreground hover:text-foreground cursor-pointer">
                     Contact <ChevronDown className="w-3 h-3 opacity-60" />
@@ -696,7 +696,7 @@ export default function Home() {
                 whileHover={{ scale: 1.02, y: -4 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                <div className="relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10 transition-all duration-500 cursor-pointer">
+                <div className="relative h-full rounded-2xl overflow-hidden border border-border/30 transition-all duration-500 cursor-pointer">
                   <Image
                     src="/clockin.png"
                     alt="ClockIn"
@@ -744,7 +744,7 @@ export default function Home() {
                 className="h-full"
               >
                 <Link href="/projects/posevision" className="block h-full">
-                  <div className="group relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-amber-500/40 transition-all duration-500 cursor-pointer">
+                  <div className="group relative h-full rounded-2xl overflow-hidden border border-border/30 transition-all duration-500 cursor-pointer">
                     <ProjectCarousel
                       media={[
                         { type: "video", src: "/PoseVisionDemo.mp4", alt: "PoseVision Demo" },
@@ -787,7 +787,7 @@ export default function Home() {
                 className="h-full"
               >
                 <Link href="/projects/creditcompass" className="block h-full">
-                  <div className="group relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-blue-500/40 transition-all duration-500 cursor-pointer">
+                  <div className="group relative h-full rounded-2xl overflow-hidden border border-border/30 transition-all duration-500 cursor-pointer">
                     <ProjectCarousel
                       media={[
                         { type: "image", src: "/Hackathon.png", alt: "Credit Compass", imageClassName: "object-cover" },
@@ -830,7 +830,7 @@ export default function Home() {
                 className="h-full"
               >
                 <Link href="/projects/serenityhelp" className="block h-full">
-                  <div className="group relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-purple-500/40 transition-all duration-500 cursor-pointer">
+                  <div className="group relative h-full rounded-2xl overflow-hidden border border-border/30 transition-all duration-500 cursor-pointer">
                     <ProjectCarousel
                       media={[
                         { type: "image", src: "/serenity2.png", alt: "SerenityHelp", imageClassName: "object-cover" },
