@@ -774,9 +774,10 @@ export default function Home() {
                       AI personal trainer with real-time form correction via computer vision
                     </p>
                     <div className="flex flex-wrap gap-1">
-                      {["Python", "OpenCV"].map((t) => (
+                      {["Python", "OpenCV", "Flask"].map((t) => (
                         <span key={t} className="flex items-center gap-1 px-2 py-0.5 text-[10px] bg-white/10 backdrop-blur-sm rounded-full text-white/80 border border-white/10">
                           {getTechIcon(t)}
+                          <span>{t}</span>
                         </span>
                       ))}
                     </div>
@@ -813,6 +814,7 @@ export default function Home() {
                       {["React", "Flask", "Python"].map((t) => (
                         <span key={t} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-white/10 backdrop-blur-sm rounded-full text-white/80 border border-white/10">
                           {getTechIcon(t)}
+                          <span>{t}</span>
                         </span>
                       ))}
                     </div>
@@ -850,6 +852,7 @@ export default function Home() {
                       {["Python", "React"].map((t) => (
                         <span key={t} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-white/10 backdrop-blur-sm rounded-full text-white/80 border border-white/10">
                           {getTechIcon(t)}
+                          <span>{t}</span>
                         </span>
                       ))}
                     </div>
