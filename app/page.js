@@ -729,7 +729,7 @@ export default function Home() {
                       </span>
                     </div>
                     <p className="text-white/80 text-sm md:text-base max-w-lg mb-3 leading-relaxed">
-                      ADHD-backed accountability system that turns focus sessions into timelapse recordings. Gamified streaks meet body doubling.
+                      Shipping Accountability SaaS webapp that makes focusing on work effortless. Turns every focus session into time-lapse recordings, applying body doubling strategy endorsed by ADHD experts and clinical psychologists nationwide.
                     </p>
                     <div className="flex items-center justify-between">
                       <div className="flex flex-wrap gap-1.5">
