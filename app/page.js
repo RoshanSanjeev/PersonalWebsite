@@ -71,8 +71,8 @@ const ResumeViewer = ({ isDarkMode }) => {
             onClick={() => setActiveResume(resume.id)}
             className="px-6 py-2.5 text-sm font-semibold rounded-full transition-all duration-200"
             style={activeResume === resume.id
-              ? { backgroundColor: '#171717', color: '#ffffff', border: 'none' }
-              : { backgroundColor: 'transparent', color: '#6b7280', border: '1px solid #d1d5db' }
+              ? { backgroundColor: isDarkMode ? '#ffffff' : '#171717', color: isDarkMode ? '#171717' : '#ffffff', border: 'none' }
+              : { backgroundColor: 'transparent', color: isDarkMode ? '#9ca3af' : '#6b7280', border: `1px solid ${isDarkMode ? '#404040' : '#d1d5db'}` }
             }
           >
             {resume.label}
