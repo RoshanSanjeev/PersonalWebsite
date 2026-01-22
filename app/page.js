@@ -231,7 +231,7 @@ export default function Home() {
       ],
       tech: ["Python", "TensorFlow", "Pandas"],
       highlights: [
-        { value: "43.84%", label: "vs GPT-4o" },
+        { value: "43.84%", label: "better than GPT-4o" },
         { value: "2", label: "publications" },
       ],
       bullets: [
@@ -297,7 +297,8 @@ export default function Home() {
       logo: "/ThetaTau.png",
       images: [
         { type: "image", src: "/ThetaTau0.png", alt: "Theta Tau Recruitment Booth", imageClassName: "object-cover" },
-        { type: "image", src: "/ThetaTau2.jpeg", alt: "Theta Tau Presentation", imageClassName: "object-cover", imageStyle: { objectPosition: "center 40%" } }
+        { type: "image", src: "/ThetaTau2.jpeg", alt: "Theta Tau Presentation", imageClassName: "object-cover", imageStyle: { objectPosition: "center 40%" } },
+        { type: "image", src: "/ThetaTau1.jpeg", alt: "Theta Tau Brothers", imageClassName: "object-cover", imageStyle: { objectPosition: "center 20%" } }
       ],
       highlights: [{ value: "70%", label: "chapter growth" }, { value: "$2K", label: "budget" }],
       description: "Led committee of 9, grew membership from ~10 to 40+ members. Organized presentations reaching 1,000+ students."
