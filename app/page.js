@@ -2,18 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useTheme } from "../contexts/ThemeContext";
 import DraggableGT3RS from "../components/DraggableGT3RS";
 import ScrollIndicator from "../components/ScrollIndicator";
 import { AuroraBackground } from "../components/ui/aurora-background";
-import { Timeline } from "../components/ui/timeline";
 import { ProjectCarousel } from "../components/ui/project-carousel";
-import { BentoGrid, BentoGridItem } from "../components/ui/bento-grid";
-import { InfiniteMovingCards } from "../components/ui/infinite-moving-cards";
-import { TextGenerateEffect } from "../components/ui/text-generate-effect";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
@@ -23,29 +19,36 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Icons
-import { Github, Linkedin, MessageSquare, Download, Menu, Terminal, Code, Sun, Moon, Mail, ChevronDown, ExternalLink, Copy, Check } from "lucide-react";
+// Lucide Icons
+import {
+  Github, Linkedin, Download, Sun, Moon, Mail, ChevronDown, Copy, Check, ArrowUpRight, Menu, X
+} from "lucide-react";
 
-// Sections data
-const sections = [
-  "Home",
-  "About",
-  "Projects"
-];
-// Helper for animations
-const ScrollReveal = ({ children, className = "", delay = 0 }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-};
+// Real Brand Icons from react-icons
+import {
+  SiPython, SiReact, SiFlask, SiDjango, SiPostgresql, SiRedis, SiDocker,
+  SiTypescript, SiJavascript, SiNextdotjs, SiTailwindcss, SiFirebase,
+  SiTensorflow, SiFigma, SiGit, SiNginx, SiOpenai, SiNodedotjs,
+  SiPandas, SiNumpy, SiOpencv, SiAmazon, SiLinux, SiFlutter, SiSupabase,
+  SiPytorch, SiCplusplus, SiHtml5, SiBootstrap
+} from "react-icons/si";
+import { VscAzure } from "react-icons/vsc";
+
+// Sections
+const sections = ["Home", "Projects", "Experience"];
+
+// Scroll animation helper
+const ScrollReveal = ({ children, className = "", delay = 0 }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 32 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-60px" }}
+    transition={{ duration: 0.6, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+    className={className}
+  >
+    {children}
+  </motion.div>
+);
 
 export default function Home() {
   const { gradient, backgroundColor, textColor, navColor, currentBackground, setCurrentBackground } = useTheme();
@@ -53,297 +56,272 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [emailCopied, setEmailCopied] = useState(false);
 
-  // Toggle Theme Function
-  const toggleTheme = () => {
-    // 0 is Black (Dark), 1 is White (Light)
-    setCurrentBackground(currentBackground === 0 ? 1 : 0);
-  };
-
-  const isDarkMode = currentBackground === 0 || currentBackground === 3; // Assuming 0 and 3 are dark themes
+  const toggleTheme = () => setCurrentBackground(currentBackground === 0 ? 1 : 0);
+  const isDarkMode = currentBackground === 0 || currentBackground === 3;
 
   // Scroll Spy
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
+      (entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) setActiveSection(entry.target.id);
+      }),
       { threshold: 0.05, rootMargin: "-10% 0px -40% 0px" }
     );
-
     sections.forEach((section) => {
-      const element = document.getElementById(section);
-      if (element) observer.observe(element);
+      const el = document.getElementById(section);
+      if (el) observer.observe(el);
     });
-
     return () => observer.disconnect();
   }, []);
 
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
+    const el = document.getElementById(sectionId);
+    if (el) {
       const offset = 100;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+      const pos = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: pos, behavior: "smooth" });
     }
     setActiveSection(sectionId);
     setIsMenuOpen(false);
   };
 
-  // Timeline Data - Enhanced with Cards
+  // Real Tech Icons Map
+  const techIcons = {
+    "Python": { icon: SiPython, color: "#3776AB" },
+    "React": { icon: SiReact, color: "#61DAFB" },
+    "React Native": { icon: SiReact, color: "#61DAFB" },
+    "Flask": { icon: SiFlask, color: isDarkMode ? "#FFFFFF" : "#000000" },
+    "Django": { icon: SiDjango, color: isDarkMode ? "#44B78B" : "#092E20" },
+    "PostgreSQL": { icon: SiPostgresql, color: "#4169E1" },
+    "Redis": { icon: SiRedis, color: "#DC382D" },
+    "Docker": { icon: SiDocker, color: "#2496ED" },
+    "TypeScript": { icon: SiTypescript, color: "#3178C6" },
+    "JavaScript": { icon: SiJavascript, color: "#F7DF1E" },
+    "Next.js": { icon: SiNextdotjs, color: isDarkMode ? "#FFFFFF" : "#000000" },
+    "Tailwind CSS": { icon: SiTailwindcss, color: "#06B6D4" },
+    "TailwindCSS": { icon: SiTailwindcss, color: "#06B6D4" },
+    "Firebase": { icon: SiFirebase, color: "#FFCA28" },
+    "TensorFlow": { icon: SiTensorflow, color: "#FF6F00" },
+    "Figma": { icon: SiFigma, color: "#F24E1E" },
+    "Git": { icon: SiGit, color: "#F05032" },
+    "Nginx": { icon: SiNginx, color: "#009639" },
+    "Node.js": { icon: SiNodedotjs, color: "#339933" },
+    "Pandas": { icon: SiPandas, color: "#150458" },
+    "NumPy": { icon: SiNumpy, color: "#013243" },
+    "OpenCV": { icon: SiOpencv, color: "#5C3EE8" },
+    "AWS": { icon: SiAmazon, color: "#FF9900" },
+    "Linux": { icon: SiLinux, color: "#FCC624" },
+    "Supabase": { icon: SiSupabase, color: "#3FCF8E" },
+    "PyTorch": { icon: SiPytorch, color: "#EE4C2C" },
+    "C++": { icon: SiCplusplus, color: "#00599C" },
+    "HTML/CSS": { icon: SiHtml5, color: "#E34F26" },
+    "Bootstrap": { icon: SiBootstrap, color: "#7952B3" },
+    "Flutterflow": { icon: SiFlutter, color: "#02569B" },
+    "Azure OAuth": { icon: VscAzure, color: "#0078D4" },
+    "GitHub Actions": { icon: Github, color: isDarkMode ? "#FFFFFF" : "#181717" },
+    "ChatGPT API": { icon: SiOpenai, color: "#412991" },
+    "OpenAI": { icon: SiOpenai, color: "#412991" },
+    "Scikit-learn": { icon: SiPython, color: "#F7931E" },
+  };
+
+  const getTechIcon = (tech) => {
+    const mapping = techIcons[tech];
+    if (mapping) {
+      const IconComponent = mapping.icon;
+      return <IconComponent style={{ color: mapping.color }} className="w-4 h-4" />;
+    }
+    return null;
+  };
+
+  // Experience Data
   const experienceData = [
     {
-      title: "Jul 2025 - Present",
-      content: (
-        <Card className="bg-background/40 backdrop-blur-md border border-white/10 shadow-xl overflow-hidden">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold text-primary">Software Engineer Intern, Enterprise Systems</CardTitle>
-            <p className="text-xl font-semibold text-foreground">University of California, Merced</p>
-            <p className="text-muted-foreground italic font-medium">
-              Flask, Nginx, Gunicorn, Azure OAuth 2.0, GitHub Actions
-            </p>
-          </CardHeader>
-          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            <div className="relative h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner bg-white/5 p-4">
-              <Image src="/dine board soft launch-5.png" alt="UC Merced" fill className="object-contain p-2" />
-            </div>
-            <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
-              <li>UCM Dining Website development (1,800,000 page views this semester).</li>
-              <li>Empathized with UCM Dining stakeholders to develop <span className="text-primary font-semibold">DineBoard</span>, an enterprise software system serving 2,500+ students daily.</li>
-              <li>Built a secure REST API in <span className="text-primary font-semibold">Flask</span> with rate limiting, integrating stateless Azure OAuth 2.0 authentication.</li>
-              <li>Automated CI/CD pipelines via GitHub Actions, and production hosting using Nginx with Gunicorn.</li>
-            </ul>
-          </CardContent>
-        </Card>
-      ),
+      role: "Software Engineer Intern",
+      company: "University of California, Merced",
+      team: "Enterprise Application Services",
+      date: "Aug 2025 - Present",
+      current: true,
+      image: "/dine board soft launch-5.png",
+      tech: ["Flask", "React", "Redis", "Azure OAuth", "Nginx", "GitHub Actions"],
+      highlights: [
+        { value: "2,500+", label: "daily users" },
+        { value: "80%", label: "productivity gain" },
+      ],
+      bullets: [
+        "Built enterprise web apps serving 2,500+ daily users, resolving Jira tickets in Agile sprints",
+        "Integrated Azure Entra ID OAuth 2.0, driving 80% staff productivity increase",
+        "Architected Nginx + Gunicorn hosting with Flask/Redis backend & React frontend",
+      ]
     },
     {
-      title: "Jun 2025 - Present",
-      content: (
-        <Card className="bg-background/40 backdrop-blur-md border border-white/10 shadow-xl overflow-hidden">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold text-primary">Event Organizer, Backend / Logistics</CardTitle>
-            <p className="text-xl font-semibold text-foreground">HackMerced</p>
-            <p className="text-muted-foreground italic font-medium">
-              Event Management, Logistics, Backend Support
-            </p>
-          </CardHeader>
-          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            <div className="relative h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner bg-white/5 p-4">
-              <Image src="/HackMerced.png" alt="HackMerced" fill className="object-contain p-2" />
-            </div>
-            <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
-              <li>Largest Hackathon in the San Joaquin Valley.</li>
-            </ul>
-          </CardContent>
-        </Card>
-      ),
+      role: "Machine Learning Research Intern",
+      company: "Mi3 Lab, UC Merced",
+      team: "Computer Vision Research",
+      date: "Jun 2025 - Present",
+      current: true,
+      images: [
+        { type: "image", src: "/Research.png", alt: "Research" },
+        { type: "image", src: "/Mi31.jpeg", alt: "ICCV 2025 Honolulu" }
+      ],
+      tech: ["Python", "TensorFlow", "Pandas"],
+      highlights: [
+        { value: "43.84%", label: "vs GPT-4o" },
+        { value: "2", label: "publications" },
+      ],
+      bullets: [
+        "Published at CVPR 2025 & ICCV 2025 for VLLM navigation for visually impaired users",
+        "Outperformed GPT-4o baseline by 43.84% via frame sampling & model finetuning",
+        "Developed visualizations with Pandas/Matplotlib for paper & conference presentation",
+      ]
     },
     {
-      title: "May 2025 - Present",
-      content: (
-        <Card className="bg-background/40 backdrop-blur-md border border-white/10 shadow-xl overflow-hidden">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold text-primary">Published Machine Learning Research Intern</CardTitle>
-            <p className="text-xl font-semibold text-foreground">UC Merced Mi3 Lab</p>
-            <p className="text-muted-foreground italic font-medium">
-              VideoLLaMA3-7B, VLLM, HPC, Python
-            </p>
-          </CardHeader>
-          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            <div className="relative h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner bg-white/5 p-4">
-              <Image src="/Research.png" alt="UC Merced Mi3 Lab" fill className="object-contain p-2" />
-            </div>
-            <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
-              <li>Co-authored paper, published & presented at <span className="text-primary font-semibold">CVPR 2025 & ICCV 2025</span> conferences for our VLLM, which generates accurate real-time navigation instructions.</li>
-              <li>Leveraged Linux HPC and prompt engineering to fine-tune <span className="text-primary font-semibold">VideoLLaMA3-7B</span>, outperforming GPT-4o baseline by 43.84%.</li>
-              <li>Developed data visualization scripts using Pandas, Matplotlib & Python post-processing script for JSON data.</li>
-            </ul>
-          </CardContent>
-        </Card>
-      ),
+      role: "Product Development Intern",
+      company: "Plant Culture Systems",
+      team: "AI Product Team Lead",
+      date: "Jul 2024 - Oct 2024",
+      image: "/plantCultureSys.jpeg",
+      tech: ["Flutterflow", "Firebase", "ChatGPT API", "Figma"],
+      highlights: [
+        { value: "500+", label: "users" },
+        { value: "50%", label: "engagement lift" },
+      ],
+      bullets: [
+        "Designed AI landing page for OurGarden using Flutterflow, engaging 500+ users",
+        "Led image analysis feature as A.I. subteam lead, improving engagement by 50%",
+        "Integrated ChatGPT API & Firebase, designed component system in Figma",
+      ]
     },
     {
-      title: "Jan 2024 - Present",
-      content: (
-        <Card className="bg-background/40 backdrop-blur-md border border-white/10 shadow-xl overflow-hidden">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold text-primary">Executive Board (Recruitment Co-Chair)</CardTitle>
-            <p className="text-xl font-semibold text-foreground">Theta Tau - Mu Delta Chapter</p>
-            <p className="text-muted-foreground italic font-medium">
-              Leadership, Recruitment, Strategic Planning
-            </p>
-          </CardHeader>
-          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            <div className="relative h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner bg-white/5 p-4">
-              <Image src="/ThetaTau.png" alt="Theta Tau" fill className="object-contain p-2" />
-            </div>
-            <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
-              <li>Led a committee of 7, managing a ~$2000 budget, and leading to a <span className="text-primary font-semibold">70% increase in chapter growth</span>.</li>
-              <li>Organized presentations to 500+ students, with daily recruitment events with 50+ attendees.</li>
-              <li>Documented a detailed strategic manual for future recruitment chairs to follow.</li>
-              <li>Achieved 90% chapter growth, increasing membership from 20 to 38 members.</li>
-              <li>Raised over $500 through organized food & unique merchandise fundraising.</li>
-              <li>Edited and formatted 20+ resumes for active & potential members.</li>
-            </ul>
-          </CardContent>
-        </Card>
-      ),
-    },
-    {
-      title: "May 2024 - May 2025",
-      content: (
-        <Card className="bg-background/40 backdrop-blur-md border border-white/10 shadow-xl overflow-hidden">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold text-primary">Product Development Intern</CardTitle>
-            <p className="text-xl font-semibold text-foreground">Plant Culture Systems</p>
-            <p className="text-muted-foreground italic font-medium">
-              Flutterflow, Figma, Chatbot Development, LLMs
-            </p>
-          </CardHeader>
-          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            <div className="relative h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner bg-white/5 p-4">
-              <Image src="/plantCultureSys.jpeg" alt="Plant Culture Systems" fill className="object-contain p-2" />
-            </div>
-            <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
-              <li>Designed & developed AI landing page for <span className="text-primary font-semibold">OurGarden</span>, using Flutterflow, integrating UI/UX feedback to enhance targeted user engagement for 500+ users.</li>
-              <li>Spearheaded image analysis API feature as A.I. subteam lead, collaborating in Agile Scrum sprints to meet release goals.</li>
-              <li>Utilized Firebase database in backend user chat management/recommended questions, & Figma for frontend planning.</li>
-            </ul>
-          </CardContent>
-        </Card>
-      ),
-    },
-    {
-      title: "Feb 2024 - Jun 2024",
-      content: (
-        <Card className="bg-background/40 backdrop-blur-md border border-white/10 shadow-xl overflow-hidden">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold text-primary">Web Developer</CardTitle>
-            <p className="text-xl font-semibold text-foreground">PosTrue</p>
-            <p className="text-muted-foreground italic font-medium">
-              Django, PostgreSQL, HTML/CSS/JS, Bootstrap
-            </p>
-          </CardHeader>
-          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            <div className="relative h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner bg-white/5 p-4">
-              <Image src="/PostrueMain.png" alt="PosTrue" fill className="object-contain p-2" />
-            </div>
-            <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
-              <li>Engineered a <span className="text-primary font-semibold">Django analytics dashboard</span> with PostgreSQL to visualize real-time sensor data for user posture insights.</li>
-              <li>Designed UI/UX with HTML, CSS, JavaScript, and Bootstrap, following responsive design & brand standards.</li>
-              <li>Designed to display postural analytics over time with data visualizations, ensuring a seamless user experience.</li>
-            </ul>
-          </CardContent>
-        </Card>
-      ),
-    },
-  ];
-
-  // Bento Grid Data
-  const projectsData = [
-    {
-      title: "PoseVision",
-      description: "AI Injury Prevention Tool. 1st Place @ SASEHacks.",
-      header: (
-        <div className="flex flex-1 w-full h-full min-h-[20rem] rounded-xl bg-black border border-transparent dark:border-white/[0.2] overflow-hidden">
-          <video controls className="w-full h-full object-contain">
-            <source src="/PoseVisionDemo.mp4" type="video/mp4" />
-          </video>
-        </div>
-      ),
-      icon: <Terminal className="h-4 w-4 text-neutral-500" />,
-      className: "md:col-span-2",
-    },
-    {
-      title: "Credit Compass",
-      description: "AI Personalized Credit Recommendations. Alumni Prize @ HackMercedX.",
-      header: (
-        <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl overflow-hidden border border-neutral-200 dark:border-white/[0.2]">
-          <Image src="/Hackathon.png" alt="Credit Compass" width={400} height={300} className="w-full h-full object-cover" />
-        </div>
-      ),
-      icon: <Code className="h-4 w-4 text-neutral-500" />,
-      className: "md:col-span-1",
-    },
-  ];
-
-  // Skills Data - Categorized
-  const skillsCategories = [
-    {
-      title: "Languages",
-      skills: ["Python", "C++", "Java", "JavaScript", "TypeScript", "SQL", "HTML/CSS"]
-    },
-    {
-      title: "Frameworks & Libraries",
-      skills: ["React", "Next.js", "Django", "Flask", "TailwindCSS", "Node.js"]
-    },
-    {
-      title: "AI & Data Science",
-      skills: ["PyTorch", "TensorFlow", "Pandas", "NumPy", "OpenCV", "Scikit-learn"]
-    },
-    {
-      title: "Tools & Cloud",
-      skills: ["Git", "Docker", "AWS", "Firebase", "PostgreSQL", "Redis", "Linux"]
-    },
-    {
-      title: "Design & Soft Skills",
-      skills: ["Figma", "Product Management", "Agile", "User Research", "Public Speaking"]
+      role: "Software Engineer Intern",
+      company: "PosTrue",
+      team: "Analytics Platform",
+      date: "Mar 2024 - Jun 2024",
+      image: "/PostrueMain.png",
+      tech: ["Django", "PostgreSQL", "JavaScript", "Bootstrap"],
+      highlights: [
+        { value: "Real-time", label: "analytics" },
+      ],
+      bullets: [
+        "Translated customer requirements into technical specs for posture analytics",
+        "Designed responsive UI with HTML, CSS, JavaScript & Bootstrap",
+        "Built PostgreSQL analytics dashboard for real-time sensor visualization",
+      ]
     }
+  ];
+
+  // Leadership Data
+  const leadershipData = [
+    {
+      title: "AI Campus Ambassador",
+      org: "Perplexity",
+      date: "Sept 2025 - Present",
+      image: "/PerplexPrese.jpeg",
+      highlights: [{ value: "300+", label: "students engaged" }],
+      description: "Developing AI adoption strategy for Comet browser through tailored presentations, working toward 500 sign-ups for hackathon sponsorship."
+    },
+    {
+      title: "Executive Board & Recruitment Chair",
+      org: "Theta Tau Engineering Fraternity",
+      date: "Mar 2024 - Present",
+      images: [
+        { type: "image", src: "/ThetaTau3.jpeg", alt: "Theta Tau Recruitment Booth" },
+        { type: "image", src: "/ThetaTau.png", alt: "Theta Tau Chapter" },
+        { type: "image", src: "/ThetaTau2.jpeg", alt: "Theta Tau Presentation" }
+      ],
+      highlights: [{ value: "70%", label: "chapter growth" }, { value: "$2K", label: "budget" }],
+      description: "Led committee of 9, grew membership from ~10 to 40+ members. Organized presentations reaching 1,000+ students."
+    }
+  ];
+
+  // Skills with icons
+  const skillsData = [
+    { category: "Languages", skills: [
+      { name: "Python", icon: SiPython, color: "#3776AB" },
+      { name: "C++", icon: SiCplusplus, color: "#00599C" },
+      { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
+      { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+      { name: "SQL", icon: SiPostgresql, color: "#4169E1" },
+    ]},
+    { category: "Frameworks", skills: [
+      { name: "React", icon: SiReact, color: "#61DAFB" },
+      { name: "Next.js", icon: SiNextdotjs, color: isDarkMode ? "#fff" : "#000" },
+      { name: "Django", icon: SiDjango, color: "#092E20" },
+      { name: "Flask", icon: SiFlask, color: isDarkMode ? "#fff" : "#000" },
+      { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
+    ]},
+    { category: "AI/ML", skills: [
+      { name: "PyTorch", icon: SiPytorch, color: "#EE4C2C" },
+      { name: "TensorFlow", icon: SiTensorflow, color: "#FF6F00" },
+      { name: "Pandas", icon: SiPandas, color: "#150458" },
+      { name: "OpenCV", icon: SiOpencv, color: "#5C3EE8" },
+    ]},
+    { category: "Infrastructure", skills: [
+      { name: "Docker", icon: SiDocker, color: "#2496ED" },
+      { name: "AWS", icon: SiAmazon, color: "#FF9900" },
+      { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
+      { name: "Redis", icon: SiRedis, color: "#DC382D" },
+      { name: "Git", icon: SiGit, color: "#F05032" },
+    ]},
   ];
 
   return (
     <main className="min-h-screen relative selection:bg-primary/20 transition-colors duration-500" style={{ backgroundColor, color: textColor }}>
 
-      {/* FLOATING GLASS NAVIGATION */}
-      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full px-4 md:auto pointer-events-none flex justify-center">
+      {/* NAVIGATION */}
+      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full px-4 pointer-events-none flex justify-center">
         <motion.div
-          initial={{ opacity: 0, y: -20, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          className="pointer-events-auto bg-background/60 backdrop-blur-xl border border-white/10 shadow-2xl rounded-full px-2 py-2 flex items-center gap-2 md:gap-4 overflow-x-auto max-w-[95vw]"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="pointer-events-auto bg-background/70 backdrop-blur-2xl border border-border/50 shadow-xl rounded-full px-3 py-2 flex items-center gap-1"
           style={{ backgroundColor: navColor }}
         >
-          {/* Desktop Nav Items */}
           <div className="hidden md:flex items-center gap-1">
             {sections.map((section) => {
-              if (section === "About") {
+              if (section === "Experience") {
                 return (
-                  <DropdownMenu key={section}>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => scrollToSection("About")}
-                        className={cn(
-                          "rounded-full text-xs font-medium transition-all hover:bg-black/5 dark:hover:bg-white/10 px-3 py-1.5 h-8 gap-1",
-                          activeSection === "About" || activeSection === "Experience" || activeSection === "Leadership" || activeSection === "Skills" ? "bg-black/5 dark:bg-white/15 text-primary shadow-sm" : "text-muted-foreground/80 hover:text-primary"
-                        )}
-                      >
-                        About <ChevronDown className="w-3 h-3 opacity-50" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="center" className="bg-background/80 backdrop-blur-xl border border-white/10 shadow-2xl rounded-xl p-1 w-40 mt-2">
-                      <DropdownMenuItem onClick={() => scrollToSection("Experience")} className="cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors focus:bg-black/5 dark:focus:bg-white/10 focus:text-primary">
-                        Experience
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => scrollToSection("Leadership")} className="cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors focus:bg-black/5 dark:focus:bg-white/10 focus:text-primary">
-                        Leadership
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => scrollToSection("Resume")} className="cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors focus:bg-black/5 dark:focus:bg-white/10 focus:text-primary">
-                        Resume
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  <div key={section} className="flex items-center">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => scrollToSection("Experience")}
+                      className={cn(
+                        "rounded-full text-sm font-medium px-4 py-2 h-9 transition-all rounded-r-none pr-2",
+                        activeSection === "Experience" || activeSection === "Leadership" || activeSection === "Resume" || activeSection === "About"
+                          ? "bg-foreground/10 text-foreground"
+                          : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
+                      )}
+                    >
+                      Experience
+                    </Button>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className={cn(
+                            "rounded-full text-sm font-medium px-2 py-2 h-9 transition-all rounded-l-none",
+                            activeSection === "Experience" || activeSection === "Leadership" || activeSection === "Resume" || activeSection === "About"
+                              ? "bg-foreground/10 text-foreground"
+                              : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
+                          )}
+                        >
+                          <ChevronDown className="w-3 h-3 opacity-60" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="center" className="bg-background/95 backdrop-blur-xl border-border/50 rounded-xl p-1.5 min-w-[140px] mt-2">
+                        {["Leadership", "Resume", "About"].map((item) => (
+                          <DropdownMenuItem
+                            key={item}
+                            onClick={() => scrollToSection(item)}
+                            className="cursor-pointer rounded-lg px-3 py-2 text-sm font-medium"
+                          >
+                            {item}
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
                 );
               }
               return (
@@ -353,8 +331,10 @@ export default function Home() {
                   size="sm"
                   onClick={() => scrollToSection(section)}
                   className={cn(
-                    "rounded-full text-xs font-medium transition-all hover:bg-black/5 dark:hover:bg-white/10 px-3 py-1.5 h-8",
-                    activeSection === section ? "bg-black/5 dark:bg-white/15 text-primary shadow-sm" : "text-muted-foreground/80 hover:text-primary"
+                    "rounded-full text-sm font-medium px-4 py-2 h-9 transition-all",
+                    activeSection === section
+                      ? "bg-foreground/10 text-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
                   )}
                 >
                   {section}
@@ -362,415 +342,474 @@ export default function Home() {
               );
             })}
 
-            {/* Contact Dropdown - Integrated into list for better spacing */}
+            {/* Contact */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="rounded-full text-xs font-medium transition-all hover:bg-black/5 dark:hover:bg-white/10 px-3 py-1.5 h-8 gap-1 text-muted-foreground/80 hover:text-primary data-[state=open]:bg-black/5 dark:data-[state=open]:bg-white/10 data-[state=open]:text-primary"
-                >
-                  Contact <ChevronDown className="w-3 h-3 opacity-50" />
+                <Button variant="ghost" size="sm" className="rounded-full text-sm font-medium px-4 py-2 h-9 gap-1 text-muted-foreground hover:text-foreground">
+                  Contact <ChevronDown className="w-3 h-3 opacity-60" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="bg-background/80 backdrop-blur-xl border border-white/10 shadow-2xl rounded-xl p-1 w-64 mt-2">
-                <div className="relative flex items-center gap-1 p-1">
-                  <DropdownMenuItem asChild className="flex-1">
-                    <a
-                      href="mailto:roshan.sanjeev@gmail.com"
-                      className="flex items-center gap-2 cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors focus:bg-black/5 dark:focus:bg-white/10 focus:text-primary truncate"
-                    >
-                      <Mail className="w-3.5 h-3.5 shrink-0" />
-                      <span className="truncate">roshan.sanjeev@gmail.com</span>
-                    </a>
-                  </DropdownMenuItem>
+              <DropdownMenuContent align="end" className="bg-background/95 backdrop-blur-xl border-border/50 rounded-xl p-1.5 w-72 mt-2">
+                <div className="flex items-center gap-2 p-2">
+                  <a href="mailto:roshan.sanjeev@gmail.com" className="flex-1 flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
+                    <Mail className="w-4 h-4" />
+                    roshan.sanjeev@gmail.com
+                  </a>
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-7 w-7 shrink-0 text-muted-foreground hover:text-primary hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 transition-all rounded-full"
-                    title="Copy Email"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
+                    className="h-8 w-8 rounded-full"
+                    onClick={() => {
                       navigator.clipboard.writeText("roshan.sanjeev@gmail.com");
                       setEmailCopied(true);
                       setTimeout(() => setEmailCopied(false), 2000);
                     }}
                   >
-                    {emailCopied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
+                    {emailCopied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
                   </Button>
                 </div>
                 <DropdownMenuItem asChild>
-                  <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors focus:bg-black/5 dark:focus:bg-white/10 focus:text-primary">
-                    <Linkedin className="w-3.5 h-3.5" />
-                    <span>LinkedIn</span>
+                  <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2">
+                    <Linkedin className="w-4 h-4" /> LinkedIn
                   </a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 cursor-pointer rounded-lg px-2 py-2 text-xs font-medium text-foreground/80 dark:text-white hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary transition-colors focus:bg-black/5 dark:focus:bg-white/10 focus:text-primary">
-                    <Github className="w-3.5 h-3.5" />
-                    <span>GitHub</span>
+                  <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2">
+                    <Github className="w-4 h-4" /> GitHub
                   </a>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Vertical Separator */}
-            <div className="h-4 w-[1px] bg-white/10 mx-1"></div>
+            <div className="h-5 w-px bg-border/50 mx-2" />
 
-            {/* Theme Toggle Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="h-8 w-8 rounded-full hover:bg-black/5 dark:hover:bg-white/10 hover:text-yellow-400 transition-all"
-            >
+            <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-9 w-9 rounded-full">
               {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
           </div>
-        </motion.div>
-      </div >
 
-      {/* Mobile Menu Dropdown */}
-      < AnimatePresence >
+          {/* Mobile Controls */}
+          <div className="flex md:hidden items-center gap-1">
+            <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-9 w-9 rounded-full">
+              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </Button>
+            <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)} className="h-9 w-9 rounded-full">
+              {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </Button>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="fixed top-20 left-1/2 -translate-x-1/2 z-40 w-64 md:hidden pointer-events-auto"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="fixed top-20 left-1/2 -translate-x-1/2 z-40 w-72 md:hidden px-4"
           >
-            <div className="bg-background/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl p-2 flex flex-col gap-1">
+            <div className="bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl p-2 flex flex-col gap-1" style={{ backgroundColor: navColor }}>
               {sections.map((section) => (
-                <Button
-                  key={section}
-                  variant="ghost"
-                  onClick={() => scrollToSection(section)}
-                  className={cn(
-                    "w-full justify-start rounded-xl text-sm h-10 px-4",
-                    activeSection === section ? "bg-white/15 text-primary" : "text-muted-foreground hover:bg-white/10"
-                  )}
-                >
+                <Button key={section} variant="ghost" onClick={() => scrollToSection(section)}
+                  className={cn("w-full justify-start rounded-xl text-sm h-10 px-4",
+                    activeSection === section ? "bg-foreground/10" : ""
+                  )}>
                   {section}
                 </Button>
               ))}
+              <div className="h-px bg-border/50 my-1" />
+              {["Leadership", "Resume", "About"].map((item) => (
+                <Button key={item} variant="ghost" onClick={() => scrollToSection(item)}
+                  className="w-full justify-start rounded-xl text-sm h-10 px-4 text-muted-foreground">
+                  {item}
+                </Button>
+              ))}
+              <div className="h-px bg-border/50 my-1" />
+              <div className="px-4 py-2 flex items-center gap-3">
+                <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
+                  <Github className="w-5 h-5" />
+                </a>
+                <a href="mailto:roshan.sanjeev@gmail.com" className="text-muted-foreground hover:text-foreground">
+                  <Mail className="w-5 h-5" />
+                </a>
+              </div>
             </div>
           </motion.div>
-        )
-        }
-      </AnimatePresence >
+        )}
+      </AnimatePresence>
 
-
-      {/* HERO SECTION WITH AURORA & BOLD FADE-IN */}
-      < AuroraBackground className="h-[calc(100vh-6rem)] mt-0 md:mt-0 w-full" id="Home" >
+      {/* HERO */}
+      <AuroraBackground className="min-h-screen w-full" id="Home">
         <motion.div
-          initial={{ opacity: 0.0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
-          className="flex flex-col gap-4 items-center justify-center px-4"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
+          className="flex flex-col items-center justify-center px-4 text-center"
         >
-          <div className="flex flex-col items-center z-20 relative">
-            {/* Name: Fading effect, smaller, cleaner */}
-            <h1 className="text-6xl md:text-8xl font-bold text-center tracking-tighter pb-4 pr-2 bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-500 to-neutral-200 dark:from-white dark:via-white dark:to-neutral-500 select-none opacity-80">
-              Roshan Sanjeev
-            </h1>
-            {/* Job Title: Skinny, no container */}
-            {/* Job Title: Skinny, no container */}
-            <div className="mt-2 font-extralight text-xl md:text-3xl text-neutral-600 dark:text-neutral-300 text-center">
-              Software Engineer → Published ML Researcher → AI Product Builder
-            </div>
+          {/* Name with gradient fade */}
+          <motion.h1
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-500 to-neutral-300 dark:from-white dark:via-white dark:to-neutral-500 select-none"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 0.85, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            Roshan Sanjeev
+          </motion.h1>
 
-            {/* Blurb restored */}
-            <p className="mt-4 text-sm md:text-md font-light text-neutral-500 dark:text-neutral-400 max-w-2xl text-center leading-relaxed">
-              Built enterprise software serving 2,500+ daily users.
-              <br />
-              Published ML Research at CVPR & ICCV 2025.
-              <br />
-              Perplexity AI Ambassador, Hackathon Winner & Organizer, Theta Tau Executive Board
-              <br />
-              <br />
-              <span className="font-normal italic">Seeking SWE & PM 2026 internships</span>
-            </p>
-          </div>
+          {/* Title with arrows */}
+          <motion.p
+            className="mt-4 text-lg sm:text-xl md:text-2xl font-light text-muted-foreground"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            Software Engineer → Published ML Researcher → AI Product Builder
+          </motion.p>
+
+          {/* Blurb - line by line */}
+          <motion.div
+            className="mt-6 text-sm md:text-base font-light text-muted-foreground/80 max-w-2xl leading-relaxed"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <p>Built enterprise software serving 2,500+ daily users.</p>
+            <p>Published ML Research at CVPR & ICCV 2025.</p>
+            <p>Perplexity AI Ambassador, Hackathon Winner & Organizer, Theta Tau Executive Board</p>
+          </motion.div>
+
+          {/* Seeking internships */}
+          <motion.p
+            className="mt-6 text-sm md:text-base text-primary font-medium italic"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 1 }}
+          >
+            Seeking SWE & PM 2026 internships
+          </motion.p>
         </motion.div>
 
-        {/* Scroll Indicator - Positioned at bottom */}
-        {/* Scroll Indicator - Positioned at bottom */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col gap-4 items-center z-20">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
           <ScrollIndicator />
         </div>
-      </AuroraBackground >
+      </AuroraBackground>
 
-      <div className="relative z-10 flex flex-col items-center w-full max-w-[95rem] mx-auto px-4 pb-10">
+      {/* MAIN CONTENT */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6">
 
-        {/* PROJECTS - CLEAN GRID LAYOUT */}
-        {/* PROJECTS - CLEAN GRID LAYOUT */}
-        <section id="Projects" className="w-full max-w-6xl px-4 py-12 scroll-mt-24">
+        {/* PROJECTS */}
+        <section id="Projects" className="py-24 scroll-mt-24">
           <ScrollReveal>
-            <div className="flex items-center justify-between mb-12">
-              <div className="flex items-center gap-4">
-                <div className="h-10 w-1.5 rounded-full" style={{ background: gradient }} />
-                <h2 className="text-4xl font-bold">Projects</h2>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* ClockIn */}
-              <Card className="group overflow-hidden bg-card border-border hover:shadow-xl transition-all duration-300">
-                <a href="https://www.clockin.now/" target="_blank" rel="noopener noreferrer" className="block relative h-64 overflow-hidden">
-                  <Image
-                    src="/clockin.png"
-                    alt="ClockIn"
-                    fill
-                    className="object-contain bg-neutral-900 group-hover:scale-105 transition-transform duration-300"
-                  />
-                </a>
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-2">
-                    <CardTitle className="text-xl font-bold">ClockIn</CardTitle>
-                    <div className="flex gap-2 flex-wrap justify-end">
-                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
-                        React Native
-                      </span>
-                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
-                        Node.js
-                      </span>
-                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
-                        Firebase
-                      </span>
-                    </div>
-                  </div>
-                  <p className="text-sm text-muted-foreground space-y-2">
-                    <div>Shipping Accountability Platform, proven by Clinical ADHD research to effortlessly help you get work done. Turns Every Focus Session Into Visually Verifiable Progress through time-lapse Recordings, taking advantage of the "Body Doubling" effect. Gamified Streaks + GitHub-Style Activity Charts Drive Daily Engagement. Beta Validates $2M Physical Device market.</div>
-                    <div>Currently live, check it out for free.</div>
-                    <a href="https://www.clockin.now/" className="inline-flex items-center gap-1 text-primary hover:text-blue-500 hover:underline font-medium transition-colors" target="_blank" rel="noopener noreferrer">
-                      clockin.now <ExternalLink className="w-3 h-3" />
-                    </a>
-                  </p>
-                </CardHeader>
-              </Card>
-
-              {/* PoseVision */}
-              <Card className="group overflow-hidden bg-card border-border hover:shadow-xl transition-all duration-300">
-                <div className="relative h-64 overflow-hidden">
-                  <ProjectCarousel
-                    media={[
-                      { type: "video", src: "/PoseVisionDemo.mp4", alt: "PoseVision Demo" },
-                      { type: "image", src: "/PoseVision2.png", alt: "PoseVision Image", imageClassName: "object-contain bg-black" } // Assuming png
-                    ]}
-                  />
-                </div>
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-2">
-                    <CardTitle className="text-xl font-bold">PoseVision</CardTitle>
-                    <div className="flex gap-2">
-                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
-                        Python
-                      </span>
-                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
-                        OpenCV
-                      </span>
-                    </div>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    AI Personal Trainer utilizing computer vision for form correction. 1st Place @ SASEHacks.
-                  </p>
-                </CardHeader>
-              </Card>
-
-              {/* Credit Compass */}
-              <Card className="group overflow-hidden bg-card border-border hover:shadow-xl transition-all duration-300">
-                <div className="relative h-64 overflow-hidden">
-                  <ProjectCarousel
-                    media={[
-                      { type: "image", src: "/Hackathon.png", alt: "Credit Compass Main" },
-                      { type: "video", src: "/CreditCompassDemo.mov", alt: "Credit Compass Demo" }
-                    ]}
-                  />
-                </div>
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-2">
-                    <CardTitle className="text-xl font-bold">Credit Compass</CardTitle>
-                    <div className="flex gap-2">
-                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
-                        React
-                      </span>
-                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
-                        Flask
-                      </span>
-                    </div>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    AI Personalized Credit Recommendations. Alumni Prize @ HackMercedX.
-                  </p>
-                </CardHeader>
-              </Card>
-
-              {/* SerenityHelp */}
-              <Card className="group overflow-hidden bg-card border-border hover:shadow-xl transition-all duration-300">
-                <div className="relative h-64 overflow-hidden">
-                  <ProjectCarousel
-                    media={[
-                      { type: "image", src: "/serenity1.png", alt: "SerenityHelp 1", imageClassName: "object-cover object-top" },
-                      { type: "image", src: "/serenity2.png", alt: "SerenityHelp 2", imageClassName: "object-cover object-top" },
-                      { type: "image", src: "/serenity3.png", alt: "SerenityHelp 3", imageClassName: "object-cover object-top" }
-                    ]}
-                  />
-                </div>
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-2">
-                    <CardTitle className="text-xl font-bold">SerenityHelp</CardTitle>
-                    <div className="flex gap-2">
-                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
-                        AI
-                      </span>
-                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
-                        Mental Health
-                      </span>
-                    </div>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    AI Voice Agent Helpline for mental health crises. Built with Vapi, Fetch.ai, Groq, and Deepgram. Triages calls using multimodal sentiment analysis for 4 dimensions of distress.
-                  </p>
-                </CardHeader>
-              </Card>
-
+            <div className="flex items-center gap-4 mb-12">
+              <div className="h-12 w-1 rounded-full bg-gradient-to-b from-primary to-primary/20" />
+              <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">Projects</h2>
             </div>
           </ScrollReveal>
-        </section>
 
-        {/* ABOUT ME - WITH PHOTO, EXPERIENCE & SKILLS */}
-        <section id="About" className="w-full max-w-6xl px-4 py-12 scroll-mt-24 text-center mx-auto">
-          <ScrollReveal>
-            <h2 className="text-4xl font-bold mb-8">About Me</h2>
-
-            {/* Photo - Subtle Professional Animation */}
-            <div className="mb-8 flex justify-center">
-              <motion.div
-                className="relative"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                animate={{
-                  y: [0, -10, 0],
-                }}
-                transition={{
-                  y: {
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  },
-                  opacity: { duration: 0.6, ease: "easeOut" }
-                }}
-              >
-                {/* Subtle static glow */}
-                <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-purple-200 via-pink-200 to-blue-200 dark:from-purple-900 dark:via-pink-900 dark:to-blue-900 opacity-30 blur-xl" />
-
-                {/* Avatar with clean border */}
-                <Avatar className="w-40 h-40 lg:w-56 lg:h-56 border-4 border-white dark:border-neutral-800 shadow-2xl relative ring-1 ring-neutral-200 dark:ring-neutral-700">
-                  <AvatarImage src="/pfp.png" alt="Roshan Sanjeev" className="object-cover" />
-                  <AvatarFallback>RS</AvatarFallback>
-                </Avatar>
-              </motion.div>
-            </div>
-
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed max-w-4xl mx-auto mb-16">
-              <p>
-                My name is Roshan Sanjeev, a third year computer science and engineering major at the University of California, Merced and I am passionate about building products that connect technology with user experience. My technical background spans full-stack development, cloud systems, and AI/ML.
-              </p>
-              <p>
-                Beyond technical work, I embrace leadership and outreach. As an organizer for HackMerced, I mentor students and create opportunities for them to grow.
-              </p>
-            </div>
-
-            {/* EXPERIENCE in About */}
-            <div id="Experience" className="mb-16 text-left scroll-mt-24">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="h-8 w-1.5 rounded-full" style={{ background: gradient }} />
-                <h3 className="text-2xl font-bold">Experience</h3>
-              </div>
-              <Timeline data={experienceData} className="bg-transparent dark:bg-transparent" />
-            </div>
-
-
-            {/* LEADERSHIP in About */}
-            <div id="Leadership" className="mb-16 text-left scroll-mt-24">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="h-8 w-1.5 rounded-full" style={{ background: gradient }} />
-                <h3 className="text-2xl font-bold">Leadership</h3>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {[
-                  { title: "HackMercedX Organizer", desc: "Managed backend, secured sponsorships.", img: "/HackathonOrganizer.png" },
-                  { title: "Perplexity Ambassador", desc: "AI Marketing & Strategy.", img: "/PerplexPrese.jpeg" },
-                  { title: "Theta Tau Exec Board", desc: "Recruitment & Professional Dev.", img: "/SHPE.png" }
-                ].map((item, i) => (
-                  <Card key={i} className="bg-background/50 backdrop-blur-sm border-white/10 overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-                    <div className="h-48 w-full relative">
-                      <Image src={item.img} alt={item.title} fill className="object-cover" />
+          <div className="space-y-4">
+            {/* Row 1: ClockIn (larger) + PoseVision (smaller) */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* ClockIn - takes 2 columns */}
+              <ScrollReveal delay={0.1} className="md:col-span-2">
+                <a href="https://www.clockin.now/" target="_blank" rel="noopener noreferrer" className="group block h-full">
+                  <Card className="overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-300 h-full cursor-pointer">
+                    <div className="relative h-44 overflow-hidden">
+                      <Image src="/clockin.png" alt="ClockIn" fill className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-700" />
                     </div>
-                    <CardHeader>
-                      <CardTitle>{item.title}</CardTitle>
-                      <p className="text-sm text-muted-foreground">{item.desc}</p>
+                    <CardHeader className="p-4 space-y-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <CardTitle className="text-lg font-bold">ClockIn</CardTitle>
+                        <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-green-500/10 text-green-500 border border-green-500/20">LIVE</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground line-clamp-2">ADHD-backed accountability system. Turns focus sessions into timelapse recordings.</p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex flex-wrap gap-1">
+                          {["React Native", "Next.js", "TypeScript", "Supabase"].map((tech) => (
+                            <span key={tech} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-secondary/50 rounded">
+                              {getTechIcon(tech)}
+                            </span>
+                          ))}
+                        </div>
+                        <span className="flex items-center gap-1 text-primary font-medium text-xs group-hover:gap-1.5 transition-all whitespace-nowrap">
+                          clockin.now <ArrowUpRight className="w-3 h-3" />
+                        </span>
+                      </div>
                     </CardHeader>
                   </Card>
-                ))}
-              </div>
+                </a>
+              </ScrollReveal>
+
+              {/* PoseVision - takes 1 column */}
+              <ScrollReveal delay={0.15}>
+                <Link href="/projects/posevision" className="block h-full">
+                  <Card className="group overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-300 h-full cursor-pointer">
+                    <div className="relative h-44 overflow-hidden">
+                      <ProjectCarousel media={[
+                        { type: "video", src: "/PoseVisionDemo.mp4", alt: "PoseVision Demo" },
+                        { type: "image", src: "/PoseVision2.png", alt: "PoseVision" }
+                      ]} />
+                    </div>
+                    <CardHeader className="p-4 space-y-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <CardTitle className="text-lg font-bold">PoseVision</CardTitle>
+                        <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 whitespace-nowrap">1st Place</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground line-clamp-2">AI personal trainer using computer vision for real-time form correction.</p>
+                      <div className="flex flex-wrap gap-1">
+                        {["Python", "OpenCV"].map((t) => (
+                          <span key={t} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-secondary/50 rounded">
+                            {getTechIcon(t)}
+                          </span>
+                        ))}
+                      </div>
+                    </CardHeader>
+                  </Card>
+                </Link>
+              </ScrollReveal>
             </div>
 
-            {/* SKILLS in About */}
-            <div className="text-left">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="h-8 w-1.5 rounded-full" style={{ background: gradient }} />
-                <h3 className="text-2xl font-bold">Skills</h3>
+            {/* Row 2: Credit Compass + SerenityHelp */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Credit Compass */}
+              <ScrollReveal delay={0.2}>
+                <Link href="/projects/creditcompass" className="block h-full">
+                  <Card className="group overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-300 h-full cursor-pointer">
+                    <div className="relative h-40 overflow-hidden">
+                      <ProjectCarousel media={[
+                        { type: "image", src: "/Hackathon.png", alt: "Credit Compass" },
+                        { type: "video", src: "/CreditCompassDemo.mov", alt: "Demo" }
+                      ]} />
+                    </div>
+                    <CardHeader className="p-4 space-y-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <CardTitle className="text-base font-bold">Credit Compass</CardTitle>
+                        <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-blue-500/10 text-blue-500 border border-blue-500/20">Winner</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground line-clamp-2">AI-powered personalized credit card recommendations using LLMs.</p>
+                      <div className="flex flex-wrap gap-1">
+                        {["React", "Flask", "Python"].map((t) => (
+                          <span key={t} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-secondary/50 rounded">
+                            {getTechIcon(t)}
+                          </span>
+                        ))}
+                      </div>
+                    </CardHeader>
+                  </Card>
+                </Link>
+              </ScrollReveal>
+
+              {/* SerenityHelp */}
+              <ScrollReveal delay={0.25}>
+                <Link href="/projects/serenityhelp" className="block h-full">
+                  <Card className="group overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-300 h-full cursor-pointer">
+                    <div className="relative h-40 overflow-hidden">
+                      <ProjectCarousel media={[
+                        { type: "image", src: "/serenity1.png", alt: "SerenityHelp 1" },
+                        { type: "image", src: "/serenity2.png", alt: "SerenityHelp 2" },
+                        { type: "image", src: "/serenity3.png", alt: "SerenityHelp 3" }
+                      ]} />
+                    </div>
+                    <CardHeader className="p-4 space-y-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <CardTitle className="text-base font-bold">SerenityHelp</CardTitle>
+                        <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-purple-500/10 text-purple-500 border border-purple-500/20">Hackathon</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground line-clamp-2">AI voice agent for mental health crisis intervention.</p>
+                      <div className="flex flex-wrap gap-1">
+                        {["Python", "React"].map((t) => (
+                          <span key={t} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-secondary/50 rounded">
+                            {getTechIcon(t)}
+                          </span>
+                        ))}
+                      </div>
+                    </CardHeader>
+                  </Card>
+                </Link>
+              </ScrollReveal>
+            </div>
+          </div>
+        </section>
+
+        {/* EXPERIENCE */}
+        <section id="Experience" className="py-24 scroll-mt-24">
+          <div className="mb-24">
+            <ScrollReveal>
+              <div className="flex items-center gap-4 mb-12">
+                <div className="h-12 w-1 rounded-full bg-gradient-to-b from-primary to-primary/20" />
+                <div>
+                  <h3 className="text-3xl sm:text-4xl font-bold">Experience</h3>
+                  <p className="text-sm text-muted-foreground mt-1">Professional journey</p>
+                </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {skillsCategories.map((category, idx) => (
-                  <div key={idx} className="flex flex-col gap-4">
-                    <h4 className="text-xl font-bold text-foreground border-b border-border pb-2">
-                      {category.title}
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {category.skills.map((skill, sIdx) => (
-                        <span
-                          key={sIdx}
-                          className="px-3 py-1.5 rounded-md text-sm font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors cursor-default select-none"
-                        >
-                          {skill}
-                        </span>
-                      ))}
+            </ScrollReveal>
+
+            <div className="space-y-6">
+              {experienceData.map((exp, idx) => (
+                <ScrollReveal key={idx} delay={idx * 0.1}>
+                  <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card hover:border-border transition-all duration-300">
+                    <div className="grid md:grid-cols-12 gap-0">
+                      {/* Image or Carousel */}
+                      <div className="relative md:col-span-4 h-48 md:h-auto md:min-h-[260px] overflow-hidden" style={{ backgroundColor: isDarkMode ? '#171717' : '#e5e5e5' }}>
+                        {exp.images ? (
+                          <ProjectCarousel media={exp.images} />
+                        ) : (
+                          <Image src={exp.image} alt={exp.company} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
+                        {exp.current && (
+                          <div className="absolute top-4 left-4 z-10">
+                            <span className="px-2 py-1 text-xs font-bold rounded bg-green-500/20 text-green-400 border border-green-500/30 backdrop-blur-sm">
+                              Current
+                            </span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Content */}
+                      <div className="md:col-span-8 p-6 md:p-8">
+                        <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
+                          <h4 className="text-xl md:text-2xl font-bold">{exp.role}</h4>
+                          <span className="text-sm text-muted-foreground">{exp.date}</span>
+                        </div>
+                        <p className="text-sm text-primary font-medium mb-4">{exp.company} · {exp.team}</p>
+
+                        {/* Highlights */}
+                        <div className="flex flex-wrap gap-4 mb-5">
+                          {exp.highlights.map((h, i) => (
+                            <div key={i} className="text-center">
+                              <div className="text-2xl md:text-3xl font-bold text-foreground">{h.value}</div>
+                              <div className="text-xs text-muted-foreground">{h.label}</div>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Tech */}
+                        <div className="flex flex-wrap gap-1.5 mb-4">
+                          {exp.tech.map((tech) => (
+                            <span key={tech} className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-secondary/50 rounded-md">
+                              {getTechIcon(tech)} {tech}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Bullets */}
+                        <ul className="space-y-1.5 text-sm text-muted-foreground">
+                          {exp.bullets.map((b, i) => (
+                            <li key={i} className="flex gap-2">
+                              <span className="text-primary mt-1.5 text-xs">●</span>
+                              <span>{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                ))}
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+
+          {/* LEADERSHIP */}
+          <div id="Leadership" className="scroll-mt-24 mb-24">
+            <ScrollReveal>
+              <div className="flex items-center gap-4 mb-12">
+                <div className="h-12 w-1 rounded-full bg-gradient-to-b from-primary to-primary/20" />
+                <div>
+                  <h3 className="text-3xl sm:text-4xl font-bold">Leadership</h3>
+                  <p className="text-sm text-muted-foreground mt-1">Impact & community</p>
+                </div>
               </div>
+            </ScrollReveal>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {leadershipData.map((role, idx) => (
+                <ScrollReveal key={idx} delay={idx * 0.1}>
+                  <div className="group overflow-hidden rounded-2xl border border-border/50 bg-card hover:border-border transition-all duration-300 h-full">
+                    <div className="relative h-48 overflow-hidden" style={{ backgroundColor: isDarkMode ? '#171717' : '#e5e5e5' }}>
+                      {role.images ? (
+                        <ProjectCarousel media={role.images} />
+                      ) : (
+                        <Image src={role.image} alt={role.org} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent pointer-events-none" />
+                      <div className="absolute bottom-4 left-4 right-4 pointer-events-none">
+                        <div className="flex gap-3">
+                          {role.highlights.map((h, i) => (
+                            <div key={i} className="text-white">
+                              <div className="text-2xl font-bold">{h.value}</div>
+                              <div className="text-xs text-white/70">{h.label}</div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <div className="flex items-start justify-between gap-2 mb-1">
+                        <h4 className="text-lg font-bold">{role.title}</h4>
+                        <span className="text-xs text-muted-foreground whitespace-nowrap">{role.date}</span>
+                      </div>
+                      <p className="text-sm text-primary font-medium mb-3">{role.org}</p>
+                      <p className="text-sm text-muted-foreground">{role.description}</p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+
+          {/* SKILLS */}
+          <ScrollReveal>
+            <div className="flex items-center gap-4 mb-10">
+              <div className="h-10 w-1 rounded-full bg-gradient-to-b from-primary to-primary/20" />
+              <h3 className="text-2xl font-bold">Skills</h3>
             </div>
           </ScrollReveal>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {skillsData.map((cat, idx) => (
+              <ScrollReveal key={idx} delay={idx * 0.05}>
+                <div className="p-4 rounded-xl border border-border/40 bg-card/30 hover:bg-card hover:border-border transition-all duration-300">
+                  <h4 className="text-xs font-bold text-primary uppercase tracking-wider mb-4">{cat.category}</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {cat.skills.map((skill) => {
+                      const Icon = skill.icon;
+                      return (
+                        <div key={skill.name} className="flex items-center gap-1.5 px-2 py-1 text-xs font-medium bg-secondary/40 rounded-md hover:bg-secondary transition-colors">
+                          <Icon style={{ color: skill.color }} className="w-3.5 h-3.5" />
+                          {skill.name}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
         </section>
 
         {/* RESUME */}
-        <section id="Resume" className="w-full max-w-6xl px-4 py-12 pb-40 scroll-mt-24">
+        <section id="Resume" className="py-24 scroll-mt-24">
           <ScrollReveal>
             <div className="flex items-center gap-4 mb-12">
-              <div className="h-10 w-1.5 rounded-full" style={{ background: gradient }} />
+              <div className="h-12 w-1 rounded-full bg-gradient-to-b from-primary to-primary/20" />
               <h2 className="text-4xl font-bold">Resume</h2>
             </div>
-            <Card className="border-border/50 bg-white shadow-2xl overflow-hidden">
-              <div className="w-full h-[800px]">
-                <iframe src="/RoshanSanjeev_Resume.pdf" className="w-full h-full" title="Roshan Sanjeev Resume" />
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.1}>
+            <Card className="border-border/50 overflow-hidden">
+              <div className="w-full h-[700px] bg-white">
+                <iframe src="/RoshanSanjeev_Resume.pdf" className="w-full h-full" title="Resume" />
               </div>
-              <div className="p-8 flex justify-center bg-neutral-50 border-t border-neutral-200">
-                <Button
-                  size="lg"
-                  className="px-8 h-12 rounded-full bg-white text-neutral-800 text-base font-medium border border-neutral-200 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:bg-neutral-50 hover:scale-[1.02] transition-all duration-300"
-                  asChild
-                >
-                  <a href="/RoshanSanjeev_Resume.pdf" download="RoshanSanjeev_Resume.pdf" className="flex items-center gap-3">
-                    <Download className="w-4 h-4 text-neutral-500" />
-                    <span className="tracking-tight">Download Resume</span>
+              <div className="p-6 flex justify-center bg-secondary/30 border-t border-border/50">
+                <Button asChild className="rounded-full px-6">
+                  <a href="/RoshanSanjeev_Resume.pdf" download className="flex items-center gap-2">
+                    <Download className="w-4 h-4" />
+                    Download Resume
                   </a>
                 </Button>
               </div>
@@ -778,12 +817,73 @@ export default function Home() {
           </ScrollReveal>
         </section>
 
+        {/* ABOUT */}
+        <section id="About" className="py-24 pb-40 scroll-mt-24">
+          <ScrollReveal>
+            <div className="flex items-center gap-4 mb-12">
+              <div className="h-12 w-1 rounded-full bg-gradient-to-b from-primary to-primary/20" />
+              <div>
+                <h2 className="text-4xl font-bold">About Me</h2>
+                <p className="text-sm text-muted-foreground mt-1">The person behind the code</p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid md:grid-cols-5 gap-8 items-start">
+            {/* Photo Gallery */}
+            <ScrollReveal delay={0.1} className="md:col-span-2">
+              <div className="relative rounded-2xl overflow-hidden border border-border/50 shadow-xl">
+                <div className="aspect-[4/5]">
+                  <ProjectCarousel
+                    media={[
+                      { type: "image", src: "/Life0.png", alt: "Life moment" },
+                      { type: "image", src: "/Life2.jpeg", alt: "Life moment" },
+                      { type: "image", src: "/Life1.png", alt: "Life moment" },
+                      { type: "image", src: "/life5.jpeg", alt: "Life moment" },
+                    ]}
+                  />
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* About Content */}
+            <ScrollReveal delay={0.2} className="md:col-span-3 space-y-6">
+              <div className="space-y-4">
+                <p className="text-xl md:text-2xl font-light leading-relaxed text-foreground/90">
+                  Third-year Computer Science & Engineering student at <span className="text-primary font-medium">UC Merced</span>, building products that connect technology with exceptional user experience.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  I thrive at the intersection of engineering and product thinking. Whether it's architecting enterprise systems serving thousands of users, publishing ML research at top-tier venues, or leading teams to build impactful solutions—I'm driven by the challenge of turning complex problems into elegant experiences.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  Beyond code, I'm passionate about community building. As Theta Tau's Recruitment Chair, I've grown our chapter by 70%. As a HackMerced organizer, I help students discover their potential through hackathons. And as a Perplexity AI Ambassador, I'm helping shape how the next generation interacts with AI.
+                </p>
+              </div>
+
+              {/* Quick Stats */}
+              <div className="grid grid-cols-3 gap-4 pt-4">
+                <div className="text-center p-4 rounded-xl border border-border/40 bg-card/30">
+                  <div className="text-2xl md:text-3xl font-bold text-primary">2</div>
+                  <div className="text-xs text-muted-foreground mt-1">Publications</div>
+                </div>
+                <div className="text-center p-4 rounded-xl border border-border/40 bg-card/30">
+                  <div className="text-2xl md:text-3xl font-bold text-primary">2,500+</div>
+                  <div className="text-xs text-muted-foreground mt-1">Users Served</div>
+                </div>
+                <div className="text-center p-4 rounded-xl border border-border/40 bg-card/30">
+                  <div className="text-2xl md:text-3xl font-bold text-primary">4</div>
+                  <div className="text-xs text-muted-foreground mt-1">Hackathon Wins</div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
       </div>
 
-      {/* GT3RS - Below resume section */}
+      {/* GT3RS Easter Egg */}
       <div className="relative w-full h-32 pointer-events-none -mt-40">
         <DraggableGT3RS />
       </div>
-    </main >
+    </main>
   );
 }
