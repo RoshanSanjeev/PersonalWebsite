@@ -532,17 +532,21 @@ export default function Home() {
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
                     <CardTitle className="text-xl font-bold">ClockIn</CardTitle>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 flex-wrap justify-end">
                       <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
                         React Native
                       </span>
-                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-green-500/10 text-green-500 border border-green-500/20">
-                        Subscription Based
+                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
+                        Node.js
+                      </span>
+                      <span className="px-2 py-1 text-xs font-medium rounded-md bg-secondary text-secondary-foreground">
+                        Firebase
                       </span>
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground flex items-center gap-1 flex-wrap">
-                    An app that helps you stay accountable by recording timelapses of you working, so you can “clock in” with social proof.
+                  <p className="text-sm text-muted-foreground space-y-2">
+                    <div>Shipping Accountability Platform, proven by Clinical ADHD research to effortlessly help you get work done. Turns Every Focus Session Into Visually Verifiable Progress through time-lapse Recordings, taking advantage of the "Body Doubling" effect. Gamified Streaks + GitHub-Style Activity Charts Drive Daily Engagement. Beta Validates $2M Physical Device market.</div>
+                    <div>Currently live, check it out for free.</div>
                     <a href="https://www.clockin.now/" className="inline-flex items-center gap-1 text-primary hover:text-blue-500 hover:underline font-medium transition-colors" target="_blank" rel="noopener noreferrer">
                       clockin.now <ExternalLink className="w-3 h-3" />
                     </a>
