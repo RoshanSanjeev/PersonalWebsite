@@ -232,8 +232,8 @@ export default function Home() {
       org: "Theta Tau Engineering Fraternity",
       date: "Mar 2024 - Present",
       images: [
-        { type: "image", src: "/ThetaTau3.jpeg", alt: "Theta Tau Recruitment Booth", imageClassName: "object-cover" },
-        { type: "image", src: "/ThetaTau2.jpeg", alt: "Theta Tau Presentation", imageClassName: "object-cover", imageStyle: { objectPosition: "center 25%" } }
+        { type: "image", src: "/ThetaTau0.png", alt: "Theta Tau Recruitment Booth", imageClassName: "object-cover" },
+        { type: "image", src: "/ThetaTau2.jpeg", alt: "Theta Tau Presentation", imageClassName: "object-cover", imageStyle: { objectPosition: "center 40%" } }
       ],
       highlights: [{ value: "70%", label: "chapter growth" }, { value: "$2K", label: "budget" }],
       description: "Led committee of 9, grew membership from ~10 to 40+ members. Organized presentations reaching 1,000+ students."
@@ -293,6 +293,89 @@ export default function Home() {
         >
           <div className="hidden md:flex items-center gap-1">
             {sections.map((section) => {
+              if (section === "Projects") {
+                return (
+                  <div key={section} className="flex items-center">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => scrollToSection("Projects")}
+                      className={cn(
+                        "rounded-full text-sm font-medium px-4 py-2 h-9 transition-all rounded-r-none pr-2",
+                        activeSection === "Projects"
+                          ? "bg-foreground/10 text-foreground"
+                          : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
+                      )}
+                    >
+                      Projects
+                    </Button>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className={cn(
+                            "rounded-full text-sm font-medium px-2 py-2 h-9 transition-all rounded-l-none",
+                            activeSection === "Projects"
+                              ? "bg-foreground/10 text-foreground"
+                              : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
+                          )}
+                        >
+                          <ChevronDown className="w-3 h-3 opacity-60" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent
+                        align="center"
+                        className="backdrop-blur-xl rounded-xl p-1.5 min-w-[160px] mt-2 border"
+                        style={{
+                          backgroundColor: isDarkMode ? 'rgba(23, 23, 23, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                          borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+                        }}
+                      >
+                        <DropdownMenuItem asChild>
+                          <a
+                            href="https://www.clockin.now/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="cursor-pointer rounded-lg px-3 py-2 text-sm font-medium flex items-center justify-between"
+                            style={{ color: isDarkMode ? '#ffffff' : '#171717' }}
+                          >
+                            ClockIn
+                            <ArrowUpRight className="w-3 h-3 opacity-60" />
+                          </a>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link
+                            href="/projects/posevision"
+                            className="cursor-pointer rounded-lg px-3 py-2 text-sm font-medium"
+                            style={{ color: isDarkMode ? '#ffffff' : '#171717' }}
+                          >
+                            PoseVision
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link
+                            href="/projects/creditcompass"
+                            className="cursor-pointer rounded-lg px-3 py-2 text-sm font-medium"
+                            style={{ color: isDarkMode ? '#ffffff' : '#171717' }}
+                          >
+                            Credit Compass
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link
+                            href="/projects/serenityhelp"
+                            className="cursor-pointer rounded-lg px-3 py-2 text-sm font-medium"
+                            style={{ color: isDarkMode ? '#ffffff' : '#171717' }}
+                          >
+                            SerenityHelp
+                          </Link>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                );
+              }
               if (section === "Experience") {
                 return (
                   <div key={section} className="flex items-center">
@@ -812,17 +895,6 @@ export default function Home() {
                       ) : (
                         <Image src={role.image} alt={role.org} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent pointer-events-none" />
-                      <div className="absolute bottom-4 left-4 right-4 pointer-events-none">
-                        <div className="flex gap-3">
-                          {role.highlights.map((h, i) => (
-                            <div key={i} className="text-white">
-                              <div className="text-2xl font-bold">{h.value}</div>
-                              <div className="text-xs text-white/70">{h.label}</div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
                     </div>
                     <div className="p-5 flex-grow">
                       <div className="flex items-start justify-between gap-2 mb-1">
