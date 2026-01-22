@@ -6,7 +6,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useTheme } from "../../../contexts/ThemeContext";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import { ArrowLeft, ExternalLink, Github, Sun, Moon, Home } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 // Animation variants
 const fadeInUp = {
@@ -167,8 +168,9 @@ export default function ProjectPage() {
   const params = useParams();
   const slug = params.slug;
   const project = projects[slug];
-  const { backgroundColor, textColor, currentBackground } = useTheme();
+  const { backgroundColor, textColor, navColor, currentBackground, setCurrentBackground } = useTheme();
   const isDarkMode = currentBackground === 0 || currentBackground === 3;
+  const toggleTheme = () => setCurrentBackground(currentBackground === 0 ? 1 : 0);
 
   if (!project) {
     return notFound();
@@ -176,21 +178,52 @@ export default function ProjectPage() {
 
   return (
     <main className="min-h-screen py-24 px-4" style={{ backgroundColor, color: textColor }}>
+      {/* Navigation */}
+      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full px-4 pointer-events-none flex justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="pointer-events-auto bg-background/70 backdrop-blur-2xl border border-border/50 shadow-xl rounded-full px-3 py-2 flex items-center gap-1"
+          style={{ backgroundColor: navColor }}
+        >
+          <Link href="/">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="rounded-full text-sm font-medium px-4 py-2 h-9 text-muted-foreground hover:text-foreground hover:bg-foreground/5"
+            >
+              <Home className="w-4 h-4 mr-2" />
+              Home
+            </Button>
+          </Link>
+          <Link href="/#Projects">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="rounded-full text-sm font-medium px-4 py-2 h-9 bg-foreground/10 text-foreground"
+            >
+              Projects
+            </Button>
+          </Link>
+          <div className="w-px h-5 bg-border/50 mx-1" />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTheme}
+            className="rounded-full h-9 w-9 text-muted-foreground hover:text-foreground hover:bg-foreground/5"
+          >
+            {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </Button>
+        </motion.div>
+      </div>
+
       <motion.div
         className="max-w-4xl mx-auto"
         initial="hidden"
         animate="visible"
         variants={staggerContainer}
       >
-        {/* Back Button */}
-        <motion.div variants={fadeInLeft} transition={{ duration: 0.4 }}>
-          <Link href="/#Projects">
-            <Button variant="ghost" className="mb-8 gap-2 hover:gap-3 transition-all">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Projects
-            </Button>
-          </Link>
-        </motion.div>
 
         {/* Header */}
         <motion.div variants={fadeInUp} className="mb-8">

@@ -50,6 +50,67 @@ const ScrollReveal = ({ children, className = "", delay = 0 }) => (
   </motion.div>
 );
 
+// Resume Viewer Component with Tabs
+const ResumeViewer = ({ isDarkMode }) => {
+  const [activeResume, setActiveResume] = useState("technical");
+
+  const resumes = [
+    { id: "technical", label: "Technical", file: "/RoshanSanjeev_Resume_Technical.pdf" },
+    { id: "product", label: "Product & Consulting", file: "/RoshanSanjeev_Resume.pdf" },
+  ];
+
+  const currentResume = resumes.find(r => r.id === activeResume);
+
+  return (
+    <Card className="border-border/50 overflow-hidden">
+      {/* Tab Buttons */}
+      <div className="flex justify-center gap-2 p-4 bg-secondary/30 border-b border-border/50">
+        {resumes.map((resume) => (
+          <button
+            key={resume.id}
+            onClick={() => setActiveResume(resume.id)}
+            className="px-6 py-2.5 text-sm font-semibold rounded-full transition-all duration-200"
+            style={activeResume === resume.id
+              ? { backgroundColor: '#171717', color: '#ffffff', border: 'none' }
+              : { backgroundColor: 'transparent', color: '#6b7280', border: '1px solid #d1d5db' }
+            }
+          >
+            {resume.label}
+          </button>
+        ))}
+      </div>
+
+      {/* PDF Viewer */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeResume}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="w-full h-[700px] bg-white"
+        >
+          <iframe
+            src={currentResume.file}
+            className="w-full h-full"
+            title={`${currentResume.label} Resume`}
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Download Button */}
+      <div className="p-6 flex justify-center bg-secondary/30 border-t border-border/50">
+        <Button asChild className="rounded-full px-6">
+          <a href={currentResume.file} download className="flex items-center gap-2">
+            <Download className="w-4 h-4" />
+            Download {currentResume.label} Resume
+          </a>
+        </Button>
+      </div>
+    </Card>
+  );
+};
+
 export default function Home() {
   const { gradient, backgroundColor, textColor, navColor, currentBackground, setCurrentBackground } = useTheme();
   const [activeSection, setActiveSection] = useState("Home");
@@ -220,6 +281,8 @@ export default function Home() {
       title: "AI Campus Ambassador",
       org: "Perplexity",
       date: "Sept 2025 - Present",
+      logo: "/PerplexLogo.webp",
+      logoStyle: "invert", // Invert for dark backgrounds
       images: [
         { type: "image", src: "/perplexity2.jpeg", alt: "Perplexity Campus Partner Presentation" },
         { type: "image", src: "/PerplexPrese.jpeg", alt: "Perplexity Presentation" }
@@ -231,6 +294,7 @@ export default function Home() {
       title: "Executive Board & Recruitment Chair",
       org: "Theta Tau Engineering Fraternity",
       date: "Mar 2024 - Present",
+      logo: "/ThetaTau.png",
       images: [
         { type: "image", src: "/ThetaTau0.png", alt: "Theta Tau Recruitment Booth", imageClassName: "object-cover" },
         { type: "image", src: "/ThetaTau2.jpeg", alt: "Theta Tau Presentation", imageClassName: "object-cover", imageStyle: { objectPosition: "center 40%" } }
@@ -242,6 +306,7 @@ export default function Home() {
       title: "Hackathon Organizer",
       org: "HackMerced",
       date: "2024 - Present",
+      logo: "/HackMerced.png",
       image: "/HackathonOrganizer.png",
       highlights: [{ value: "500+", label: "participants" }],
       description: "Organizing the largest hackathon in the San Joaquin Valley, coordinating logistics, sponsors, and workshops to foster student innovation."
@@ -895,6 +960,34 @@ export default function Home() {
                       ) : (
                         <Image src={role.image} alt={role.org} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                       )}
+                      {/* Logo Badge */}
+                      {role.logo && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.2 + idx * 0.1, type: "spring", stiffness: 200 }}
+                          className="absolute bottom-3 left-3 z-10"
+                        >
+                          <div
+                            className="p-1.5 rounded-xl backdrop-blur-md shadow-lg border w-11 h-11 flex items-center justify-center"
+                            style={{
+                              backgroundColor: isDarkMode ? 'rgba(23, 23, 23, 0.85)' : 'rgba(255, 255, 255, 0.9)',
+                              borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)'
+                            }}
+                          >
+                            <Image
+                              src={role.logo}
+                              alt={`${role.org} logo`}
+                              width={32}
+                              height={32}
+                              className={cn(
+                                "w-8 h-8 object-contain",
+                                role.logoStyle === "invert" && isDarkMode && "invert"
+                              )}
+                            />
+                          </div>
+                        </motion.div>
+                      )}
                     </div>
                     <div className="p-5 flex-grow">
                       <div className="flex items-start justify-between gap-2 mb-1">
@@ -950,19 +1043,7 @@ export default function Home() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
-            <Card className="border-border/50 overflow-hidden">
-              <div className="w-full h-[700px] bg-white">
-                <iframe src="/RoshanSanjeev_Resume.pdf" className="w-full h-full" title="Resume" />
-              </div>
-              <div className="p-6 flex justify-center bg-secondary/30 border-t border-border/50">
-                <Button asChild className="rounded-full px-6">
-                  <a href="/RoshanSanjeev_Resume.pdf" download className="flex items-center gap-2">
-                    <Download className="w-4 h-4" />
-                    Download Resume
-                  </a>
-                </Button>
-              </div>
-            </Card>
+            <ResumeViewer isDarkMode={isDarkMode} />
           </ScrollReveal>
         </section>
 
@@ -1006,6 +1087,9 @@ export default function Home() {
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
                   Beyond code, I'm passionate about community building. As Theta Tau's Recruitment Chair, I've grown our chapter by 70%. As a HackMerced organizer, I help students discover their potential through hackathons. And as a Perplexity AI Ambassador, I'm helping shape how the next generation interacts with AI.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  PS: The last slide is a funny video of my dog Zoey when she was a puppy.
                 </p>
               </div>
 
