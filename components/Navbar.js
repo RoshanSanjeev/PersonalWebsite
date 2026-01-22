@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTheme } from "../contexts/ThemeContext";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  Github, Linkedin, Sun, Moon, Mail, ChevronDown, Copy, Check, ArrowUpRight, Menu, X
+  Github, Linkedin, Sun, Moon, Mail, ChevronDown, Copy, Check, ArrowUpRight
 } from "lucide-react";
 
 const sections = ["Home", "Projects", "Experience"];
@@ -22,8 +22,14 @@ const sections = ["Home", "Projects", "Experience"];
 export default function Navbar({ activeSection = "Home", onSectionClick }) {
   const router = useRouter();
   const { navColor, currentBackground, setCurrentBackground } = useTheme();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [emailCopied, setEmailCopied] = useState(false);
+  const [projectsOpen, setProjectsOpen] = useState(false);
+  const [experienceOpen, setExperienceOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
+
+  const projectsTimeout = useRef(null);
+  const experienceTimeout = useRef(null);
+  const contactTimeout = useRef(null);
 
   const isDarkMode = currentBackground === 0 || currentBackground === 3;
   const toggleTheme = () => setCurrentBackground(currentBackground === 0 ? 1 : 0);
@@ -32,10 +38,17 @@ export default function Navbar({ activeSection = "Home", onSectionClick }) {
     if (onSectionClick) {
       onSectionClick(sectionId);
     } else {
-      // Navigate to home page with section hash
       router.push(`/#${sectionId}`);
     }
-    setIsMenuOpen(false);
+  };
+
+  const handleMouseEnter = (setter, timeoutRef) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setter(true);
+  };
+
+  const handleMouseLeave = (setter, timeoutRef) => {
+    timeoutRef.current = setTimeout(() => setter(false), 150);
   };
 
   return (
@@ -52,13 +65,18 @@ export default function Navbar({ activeSection = "Home", onSectionClick }) {
             {sections.map((section) => {
               if (section === "Projects") {
                 return (
-                  <div key={section} className="flex items-center">
+                  <div
+                    key={section}
+                    className="flex items-center"
+                    onMouseEnter={() => handleMouseEnter(setProjectsOpen, projectsTimeout)}
+                    onMouseLeave={() => handleMouseLeave(setProjectsOpen, projectsTimeout)}
+                  >
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => handleSectionClick("Projects")}
                       className={cn(
-                        "rounded-full text-xs font-medium px-2 sm:px-3 py-1 h-7 sm:h-8 transition-all rounded-r-none pr-1",
+                        "rounded-full text-xs font-medium px-2 sm:px-3 py-1 h-7 sm:h-8 transition-all rounded-r-none pr-1 cursor-pointer",
                         activeSection === "Projects"
                           ? "bg-foreground/10 text-foreground"
                           : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
@@ -66,13 +84,13 @@ export default function Navbar({ activeSection = "Home", onSectionClick }) {
                     >
                       Projects
                     </Button>
-                    <DropdownMenu>
+                    <DropdownMenu open={projectsOpen} onOpenChange={setProjectsOpen}>
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="ghost"
                           size="sm"
                           className={cn(
-                            "rounded-full text-xs font-medium px-1 py-1 h-7 sm:h-8 transition-all rounded-l-none",
+                            "rounded-full text-xs font-medium px-1 py-1 h-7 sm:h-8 transition-all rounded-l-none cursor-pointer",
                             activeSection === "Projects"
                               ? "bg-foreground/10 text-foreground"
                               : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
@@ -88,6 +106,8 @@ export default function Navbar({ activeSection = "Home", onSectionClick }) {
                           backgroundColor: isDarkMode ? 'rgba(23, 23, 23, 0.95)' : 'rgba(255, 255, 255, 0.95)',
                           borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
                         }}
+                        onMouseEnter={() => handleMouseEnter(setProjectsOpen, projectsTimeout)}
+                        onMouseLeave={() => handleMouseLeave(setProjectsOpen, projectsTimeout)}
                       >
                         <DropdownMenuItem asChild>
                           <a
@@ -135,13 +155,18 @@ export default function Navbar({ activeSection = "Home", onSectionClick }) {
               }
               if (section === "Experience") {
                 return (
-                  <div key={section} className="flex items-center">
+                  <div
+                    key={section}
+                    className="flex items-center"
+                    onMouseEnter={() => handleMouseEnter(setExperienceOpen, experienceTimeout)}
+                    onMouseLeave={() => handleMouseLeave(setExperienceOpen, experienceTimeout)}
+                  >
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => handleSectionClick("Experience")}
                       className={cn(
-                        "rounded-full text-sm font-medium px-4 py-2 h-9 transition-all rounded-r-none pr-2",
+                        "rounded-full text-sm font-medium px-4 py-2 h-9 transition-all rounded-r-none pr-2 cursor-pointer",
                         activeSection === "Experience" || activeSection === "Leadership" || activeSection === "Resume" || activeSection === "About"
                           ? "bg-foreground/10 text-foreground"
                           : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
@@ -149,13 +174,13 @@ export default function Navbar({ activeSection = "Home", onSectionClick }) {
                     >
                       Experience
                     </Button>
-                    <DropdownMenu>
+                    <DropdownMenu open={experienceOpen} onOpenChange={setExperienceOpen}>
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="ghost"
                           size="sm"
                           className={cn(
-                            "rounded-full text-sm font-medium px-2 py-2 h-9 transition-all rounded-l-none",
+                            "rounded-full text-sm font-medium px-2 py-2 h-9 transition-all rounded-l-none cursor-pointer",
                             activeSection === "Experience" || activeSection === "Leadership" || activeSection === "Resume" || activeSection === "About"
                               ? "bg-foreground/10 text-foreground"
                               : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
@@ -171,6 +196,8 @@ export default function Navbar({ activeSection = "Home", onSectionClick }) {
                           backgroundColor: isDarkMode ? 'rgba(23, 23, 23, 0.95)' : 'rgba(255, 255, 255, 0.95)',
                           borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
                         }}
+                        onMouseEnter={() => handleMouseEnter(setExperienceOpen, experienceTimeout)}
+                        onMouseLeave={() => handleMouseLeave(setExperienceOpen, experienceTimeout)}
                       >
                         {["Leadership", "Resume", "About"].map((item) => (
                           <DropdownMenuItem
@@ -194,7 +221,7 @@ export default function Navbar({ activeSection = "Home", onSectionClick }) {
                   size="sm"
                   onClick={() => handleSectionClick(section)}
                   className={cn(
-                    "rounded-full text-sm font-medium px-4 py-2 h-9 transition-all",
+                    "rounded-full text-sm font-medium px-4 py-2 h-9 transition-all cursor-pointer",
                     activeSection === section
                       ? "bg-foreground/10 text-foreground"
                       : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
@@ -206,55 +233,62 @@ export default function Navbar({ activeSection = "Home", onSectionClick }) {
             })}
 
             {/* Contact */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="rounded-full text-sm font-medium px-4 py-2 h-9 gap-1 text-muted-foreground hover:text-foreground">
-                  Contact <ChevronDown className="w-3 h-3 opacity-60" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="end"
-                className="backdrop-blur-xl rounded-xl p-1.5 w-72 mt-2 border"
-                style={{
-                  backgroundColor: isDarkMode ? 'rgba(23, 23, 23, 0.95)' : 'rgba(255, 255, 255, 0.95)',
-                  borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
-                  color: isDarkMode ? '#ffffff' : '#171717'
-                }}
-              >
-                <div className="flex items-center gap-2 p-2">
-                  <a href="mailto:roshan.sanjeev@gmail.com" className="flex-1 flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
-                    <Mail className="w-4 h-4" />
-                    roshan.sanjeev@gmail.com
-                  </a>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-8 w-8 rounded-full"
-                    onClick={() => {
-                      navigator.clipboard.writeText("roshan.sanjeev@gmail.com");
-                      setEmailCopied(true);
-                      setTimeout(() => setEmailCopied(false), 2000);
-                    }}
-                  >
-                    {emailCopied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+            <div
+              onMouseEnter={() => handleMouseEnter(setContactOpen, contactTimeout)}
+              onMouseLeave={() => handleMouseLeave(setContactOpen, contactTimeout)}
+            >
+              <DropdownMenu open={contactOpen} onOpenChange={setContactOpen}>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="rounded-full text-sm font-medium px-4 py-2 h-9 gap-1 text-muted-foreground hover:text-foreground cursor-pointer">
+                    Contact <ChevronDown className="w-3 h-3 opacity-60" />
                   </Button>
-                </div>
-                <DropdownMenuItem asChild>
-                  <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2" style={{ color: isDarkMode ? '#ffffff' : '#171717' }}>
-                    <Linkedin className="w-4 h-4" /> LinkedIn
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2" style={{ color: isDarkMode ? '#ffffff' : '#171717' }}>
-                    <Github className="w-4 h-4" /> GitHub
-                  </a>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="end"
+                  className="backdrop-blur-xl rounded-xl p-1.5 w-72 mt-2 border"
+                  style={{
+                    backgroundColor: isDarkMode ? 'rgba(23, 23, 23, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                    borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+                    color: isDarkMode ? '#ffffff' : '#171717'
+                  }}
+                  onMouseEnter={() => handleMouseEnter(setContactOpen, contactTimeout)}
+                  onMouseLeave={() => handleMouseLeave(setContactOpen, contactTimeout)}
+                >
+                  <div className="flex items-center gap-2 p-2">
+                    <a href="mailto:roshan.sanjeev@gmail.com" className="flex-1 flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
+                      <Mail className="w-4 h-4" />
+                      roshan.sanjeev@gmail.com
+                    </a>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 rounded-full cursor-pointer"
+                      onClick={() => {
+                        navigator.clipboard.writeText("roshan.sanjeev@gmail.com");
+                        setEmailCopied(true);
+                        setTimeout(() => setEmailCopied(false), 2000);
+                      }}
+                    >
+                      {emailCopied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+                    </Button>
+                  </div>
+                  <DropdownMenuItem asChild>
+                    <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2 cursor-pointer" style={{ color: isDarkMode ? '#ffffff' : '#171717' }}>
+                      <Linkedin className="w-4 h-4" /> LinkedIn
+                    </a>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2 cursor-pointer" style={{ color: isDarkMode ? '#ffffff' : '#171717' }}>
+                      <Github className="w-4 h-4" /> GitHub
+                    </a>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
 
             <div className="h-4 w-px bg-border/50 mx-1" />
 
-            <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-7 w-7 sm:h-8 sm:w-8 rounded-full">
+            <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-7 w-7 sm:h-8 sm:w-8 rounded-full cursor-pointer">
               {isDarkMode ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
             </Button>
           </div>

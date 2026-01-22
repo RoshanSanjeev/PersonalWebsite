@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "../contexts/ThemeContext";
@@ -21,7 +21,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // Lucide Icons
 import {
-  Github, Linkedin, Download, Sun, Moon, Mail, ChevronDown, Copy, Check, ArrowUpRight, Menu, X
+  Github, Linkedin, Download, Sun, Moon, Mail, ChevronDown, Copy, Check, ArrowUpRight
 } from "lucide-react";
 
 // Real Brand Icons from react-icons
@@ -112,13 +112,28 @@ const ResumeViewer = ({ isDarkMode }) => {
 };
 
 export default function Home() {
-  const { gradient, backgroundColor, textColor, navColor, currentBackground, setCurrentBackground } = useTheme();
+  const { backgroundColor, textColor, navColor, currentBackground, setCurrentBackground } = useTheme();
   const [activeSection, setActiveSection] = useState("Home");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [emailCopied, setEmailCopied] = useState(false);
+  const [projectsOpen, setProjectsOpen] = useState(false);
+  const [experienceOpen, setExperienceOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
+
+  const projectsTimeout = useRef(null);
+  const experienceTimeout = useRef(null);
+  const contactTimeout = useRef(null);
 
   const toggleTheme = () => setCurrentBackground(currentBackground === 0 ? 1 : 0);
   const isDarkMode = currentBackground === 0 || currentBackground === 3;
+
+  const handleMouseEnter = (setter, timeoutRef) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setter(true);
+  };
+
+  const handleMouseLeave = (setter, timeoutRef) => {
+    timeoutRef.current = setTimeout(() => setter(false), 150);
+  };
 
   // Scroll Spy
   useEffect(() => {
@@ -361,13 +376,18 @@ export default function Home() {
             {sections.map((section) => {
               if (section === "Projects") {
                 return (
-                  <div key={section} className="flex items-center">
+                  <div
+                    key={section}
+                    className="flex items-center"
+                    onMouseEnter={() => handleMouseEnter(setProjectsOpen, projectsTimeout)}
+                    onMouseLeave={() => handleMouseLeave(setProjectsOpen, projectsTimeout)}
+                  >
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => scrollToSection("Projects")}
                       className={cn(
-                        "rounded-full text-xs font-medium px-2 sm:px-3 py-1 h-7 sm:h-8 transition-all rounded-r-none pr-1",
+                        "rounded-full text-xs font-medium px-2 sm:px-3 py-1 h-7 sm:h-8 transition-all rounded-r-none pr-1 cursor-pointer",
                         activeSection === "Projects"
                           ? "bg-foreground/10 text-foreground"
                           : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
@@ -375,13 +395,13 @@ export default function Home() {
                     >
                       Projects
                     </Button>
-                    <DropdownMenu>
+                    <DropdownMenu open={projectsOpen} onOpenChange={setProjectsOpen}>
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="ghost"
                           size="sm"
                           className={cn(
-                            "rounded-full text-xs font-medium px-1 py-1 h-7 sm:h-8 transition-all rounded-l-none",
+                            "rounded-full text-xs font-medium px-1 py-1 h-7 sm:h-8 transition-all rounded-l-none cursor-pointer",
                             activeSection === "Projects"
                               ? "bg-foreground/10 text-foreground"
                               : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
@@ -397,6 +417,8 @@ export default function Home() {
                           backgroundColor: isDarkMode ? 'rgba(23, 23, 23, 0.95)' : 'rgba(255, 255, 255, 0.95)',
                           borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
                         }}
+                        onMouseEnter={() => handleMouseEnter(setProjectsOpen, projectsTimeout)}
+                        onMouseLeave={() => handleMouseLeave(setProjectsOpen, projectsTimeout)}
                       >
                         <DropdownMenuItem asChild>
                           <a
@@ -444,13 +466,18 @@ export default function Home() {
               }
               if (section === "Experience") {
                 return (
-                  <div key={section} className="flex items-center">
+                  <div
+                    key={section}
+                    className="flex items-center"
+                    onMouseEnter={() => handleMouseEnter(setExperienceOpen, experienceTimeout)}
+                    onMouseLeave={() => handleMouseLeave(setExperienceOpen, experienceTimeout)}
+                  >
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => scrollToSection("Experience")}
                       className={cn(
-                        "rounded-full text-xs font-medium px-2 sm:px-3 py-1 h-7 sm:h-8 transition-all rounded-r-none pr-1",
+                        "rounded-full text-xs font-medium px-2 sm:px-3 py-1 h-7 sm:h-8 transition-all rounded-r-none pr-1 cursor-pointer",
                         activeSection === "Experience" || activeSection === "Leadership" || activeSection === "Resume" || activeSection === "About"
                           ? "bg-foreground/10 text-foreground"
                           : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
@@ -458,13 +485,13 @@ export default function Home() {
                     >
                       Experience
                     </Button>
-                    <DropdownMenu>
+                    <DropdownMenu open={experienceOpen} onOpenChange={setExperienceOpen}>
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="ghost"
                           size="sm"
                           className={cn(
-                            "rounded-full text-xs font-medium px-1 py-1 h-7 sm:h-8 transition-all rounded-l-none",
+                            "rounded-full text-xs font-medium px-1 py-1 h-7 sm:h-8 transition-all rounded-l-none cursor-pointer",
                             activeSection === "Experience" || activeSection === "Leadership" || activeSection === "Resume" || activeSection === "About"
                               ? "bg-foreground/10 text-foreground"
                               : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
@@ -480,6 +507,8 @@ export default function Home() {
                           backgroundColor: isDarkMode ? 'rgba(23, 23, 23, 0.95)' : 'rgba(255, 255, 255, 0.95)',
                           borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
                         }}
+                        onMouseEnter={() => handleMouseEnter(setExperienceOpen, experienceTimeout)}
+                        onMouseLeave={() => handleMouseLeave(setExperienceOpen, experienceTimeout)}
                       >
                         {["Leadership", "Resume", "About"].map((item) => (
                           <DropdownMenuItem
@@ -503,7 +532,7 @@ export default function Home() {
                   size="sm"
                   onClick={() => scrollToSection(section)}
                   className={cn(
-                    "rounded-full text-xs font-medium px-2 sm:px-3 py-1 h-7 sm:h-8 transition-all",
+                    "rounded-full text-xs font-medium px-2 sm:px-3 py-1 h-7 sm:h-8 transition-all cursor-pointer",
                     activeSection === section
                       ? "bg-foreground/10 text-foreground"
                       : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
@@ -515,55 +544,62 @@ export default function Home() {
             })}
 
             {/* Contact */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="rounded-full text-xs font-medium px-2 sm:px-3 py-1 h-7 sm:h-8 gap-0.5 text-muted-foreground hover:text-foreground">
-                  Contact <ChevronDown className="w-3 h-3 opacity-60" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="end"
-                className="backdrop-blur-xl rounded-xl p-1.5 w-72 mt-2 border"
-                style={{
-                  backgroundColor: isDarkMode ? 'rgba(23, 23, 23, 0.95)' : 'rgba(255, 255, 255, 0.95)',
-                  borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
-                  color: isDarkMode ? '#ffffff' : '#171717'
-                }}
-              >
-                <div className="flex items-center gap-2 p-2">
-                  <a href="mailto:roshan.sanjeev@gmail.com" className="flex-1 flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
-                    <Mail className="w-4 h-4" />
-                    roshan.sanjeev@gmail.com
-                  </a>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-8 w-8 rounded-full"
-                    onClick={() => {
-                      navigator.clipboard.writeText("roshan.sanjeev@gmail.com");
-                      setEmailCopied(true);
-                      setTimeout(() => setEmailCopied(false), 2000);
-                    }}
-                  >
-                    {emailCopied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+            <div
+              onMouseEnter={() => handleMouseEnter(setContactOpen, contactTimeout)}
+              onMouseLeave={() => handleMouseLeave(setContactOpen, contactTimeout)}
+            >
+              <DropdownMenu open={contactOpen} onOpenChange={setContactOpen}>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="rounded-full text-xs font-medium px-2 sm:px-3 py-1 h-7 sm:h-8 gap-0.5 text-muted-foreground hover:text-foreground cursor-pointer">
+                    Contact <ChevronDown className="w-3 h-3 opacity-60" />
                   </Button>
-                </div>
-                <DropdownMenuItem asChild>
-                  <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2" style={{ color: isDarkMode ? '#ffffff' : '#171717' }}>
-                    <Linkedin className="w-4 h-4" /> LinkedIn
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2" style={{ color: isDarkMode ? '#ffffff' : '#171717' }}>
-                    <Github className="w-4 h-4" /> GitHub
-                  </a>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="end"
+                  className="backdrop-blur-xl rounded-xl p-1.5 w-72 mt-2 border"
+                  style={{
+                    backgroundColor: isDarkMode ? 'rgba(23, 23, 23, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                    borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+                    color: isDarkMode ? '#ffffff' : '#171717'
+                  }}
+                  onMouseEnter={() => handleMouseEnter(setContactOpen, contactTimeout)}
+                  onMouseLeave={() => handleMouseLeave(setContactOpen, contactTimeout)}
+                >
+                  <div className="flex items-center gap-2 p-2">
+                    <a href="mailto:roshan.sanjeev@gmail.com" className="flex-1 flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
+                      <Mail className="w-4 h-4" />
+                      roshan.sanjeev@gmail.com
+                    </a>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 rounded-full cursor-pointer"
+                      onClick={() => {
+                        navigator.clipboard.writeText("roshan.sanjeev@gmail.com");
+                        setEmailCopied(true);
+                        setTimeout(() => setEmailCopied(false), 2000);
+                      }}
+                    >
+                      {emailCopied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+                    </Button>
+                  </div>
+                  <DropdownMenuItem asChild>
+                    <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2 cursor-pointer" style={{ color: isDarkMode ? '#ffffff' : '#171717' }}>
+                      <Linkedin className="w-4 h-4" /> LinkedIn
+                    </a>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2 cursor-pointer" style={{ color: isDarkMode ? '#ffffff' : '#171717' }}>
+                      <Github className="w-4 h-4" /> GitHub
+                    </a>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
 
             <div className="h-4 w-px bg-border/50 mx-1" />
 
-            <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-7 w-7 sm:h-8 sm:w-8 rounded-full">
+            <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-7 w-7 sm:h-8 sm:w-8 rounded-full cursor-pointer">
               {isDarkMode ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
             </Button>
           </div>
@@ -658,13 +694,20 @@ export default function Home() {
 
             {/* ClockIn - Hero card, spans 8 cols */}
             <ScrollReveal delay={0.1} className="md:col-span-8 md:row-span-2">
-              <a href="https://www.clockin.now/" target="_blank" rel="noopener noreferrer" className="group block h-full">
-                <div className="relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-primary/40 transition-all duration-500 cursor-pointer">
+              <motion.a
+                href="https://www.clockin.now/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block h-full"
+                whileHover={{ scale: 1.02, y: -4 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <div className="relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10 transition-all duration-500 cursor-pointer">
                   <Image
                     src="/clockin.png"
                     alt="ClockIn"
                     fill
-                    className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-700"
+                    className="object-cover object-top"
                   />
                   {/* Gradient overlay - stronger on mobile */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20 sm:from-black/90 sm:via-black/30 sm:to-transparent" />
@@ -677,15 +720,16 @@ export default function Home() {
                         LIVE
                       </span>
                     </div>
-                    <p className="text-white/80 text-xs sm:text-sm md:text-base max-w-lg mb-2 sm:mb-3 leading-relaxed line-clamp-2 sm:line-clamp-none">
-                      Shipping Accountability SaaS webapp that makes focusing on work effortless. Turns every focus session into time-lapse recordings.
+                    <p className="text-white/80 text-xs sm:text-sm md:text-base max-w-lg mb-2 sm:mb-3 leading-relaxed">
+                      <span className="sm:hidden">Shipping Accountability SaaS that makes focusing on work effortless. Backed by ADHD Clinical research.</span>
+                      <span className="hidden sm:inline">Shipping Accountability SaaS webapp that makes focusing on work effortless. Turns every focus session into time-lapse recordings.</span>
                     </p>
                     <div className="flex items-center justify-between">
                       <div className="flex flex-wrap gap-1 sm:gap-1.5">
                         {["React Native", "Next.js", "TypeScript", "Supabase"].map((tech) => (
                           <span key={tech} className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs bg-white/10 backdrop-blur-sm rounded-full text-white/90 border border-white/10">
                             {getTechIcon(tech)}
-                            <span className="hidden sm:inline">{tech}</span>
+                            <span>{tech}</span>
                           </span>
                         ))}
                       </div>
@@ -695,119 +739,137 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </a>
+              </motion.a>
             </ScrollReveal>
 
             {/* PoseVision - Tall vertical card, spans 4 cols, 2 rows */}
             <ScrollReveal delay={0.15} className="md:col-span-4 md:row-span-2">
-              <Link href="/projects/posevision" className="block h-full">
-                <div className="group relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-amber-500/40 transition-all duration-500 cursor-pointer">
-                  <ProjectCarousel
-                    media={[
-                      { type: "video", src: "/PoseVisionDemo.mp4", alt: "PoseVision Demo" },
-                      { type: "image", src: "/PoseVision2.png", alt: "PoseVision", imageClassName: "object-cover" }
-                    ]}
-                  />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-10" />
+              <motion.div
+                whileHover={{ scale: 1.02, y: -4 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="h-full"
+              >
+                <Link href="/projects/posevision" className="block h-full">
+                  <div className="group relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-amber-500/40 transition-all duration-500 cursor-pointer">
+                    <ProjectCarousel
+                      media={[
+                        { type: "video", src: "/PoseVisionDemo.mp4", alt: "PoseVision Demo" },
+                        { type: "image", src: "/PoseVision2.png", alt: "PoseVision", imageClassName: "object-cover" }
+                      ]}
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-10" />
 
-                  {/* Content overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 z-10 pointer-events-none">
-                    <div className="flex items-center gap-2 mb-2">
-                      <h3 className="text-xl md:text-2xl font-bold text-white">PoseVision</h3>
-                      <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 backdrop-blur-sm">
-                        1st Place
-                      </span>
-                    </div>
-                    <p className="text-white/70 text-xs md:text-sm mb-3 line-clamp-2">
-                      AI personal trainer with real-time form correction via computer vision
-                    </p>
-                    <div className="flex flex-wrap gap-1">
-                      {["Python", "OpenCV", "Flask"].map((t) => (
-                        <span key={t} className="flex items-center gap-1 px-2 py-0.5 text-[10px] bg-white/10 backdrop-blur-sm rounded-full text-white/80 border border-white/10">
-                          {getTechIcon(t)}
-                          <span>{t}</span>
+                    {/* Content overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 z-10 pointer-events-none">
+                      <div className="flex items-center gap-2 mb-2">
+                        <h3 className="text-xl md:text-2xl font-bold text-white">PoseVision</h3>
+                        <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 backdrop-blur-sm">
+                          1st Place
                         </span>
-                      ))}
+                      </div>
+                      <p className="text-white/70 text-xs md:text-sm mb-3 line-clamp-2">
+                        AI personal trainer with real-time form correction via computer vision
+                      </p>
+                      <div className="flex flex-wrap gap-1">
+                        {["Python", "OpenCV", "Flask"].map((t) => (
+                          <span key={t} className="flex items-center gap-1 px-2 py-0.5 text-[10px] bg-white/10 backdrop-blur-sm rounded-full text-white/80 border border-white/10">
+                            {getTechIcon(t)}
+                            <span>{t}</span>
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             </ScrollReveal>
 
             {/* Credit Compass - Wide horizontal card */}
             <ScrollReveal delay={0.2} className="md:col-span-5 md:row-span-1">
-              <Link href="/projects/creditcompass" className="block h-full">
-                <div className="group relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-blue-500/40 transition-all duration-500 cursor-pointer">
-                  <ProjectCarousel
-                    media={[
-                      { type: "image", src: "/Hackathon.png", alt: "Credit Compass", imageClassName: "object-cover" },
-                      { type: "video", src: "/CreditCompassDemo.mov", alt: "Demo" }
-                    ]}
-                  />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none z-10" />
+              <motion.div
+                whileHover={{ scale: 1.02, y: -4 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="h-full"
+              >
+                <Link href="/projects/creditcompass" className="block h-full">
+                  <div className="group relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-blue-500/40 transition-all duration-500 cursor-pointer">
+                    <ProjectCarousel
+                      media={[
+                        { type: "image", src: "/Hackathon.png", alt: "Credit Compass", imageClassName: "object-cover" },
+                        { type: "video", src: "/CreditCompassDemo.mov", alt: "Demo" }
+                      ]}
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none z-10" />
 
-                  {/* Content overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 z-10 pointer-events-none">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <h3 className="text-lg md:text-xl font-bold text-white">Credit Compass</h3>
-                      <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 backdrop-blur-sm">
-                        Winner
-                      </span>
-                    </div>
-                    <p className="text-white/70 text-xs mb-2 line-clamp-1">
-                      AI-powered personalized credit card recommendations
-                    </p>
-                    <div className="flex flex-wrap gap-1">
-                      {["React", "Flask", "Python"].map((t) => (
-                        <span key={t} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-white/10 backdrop-blur-sm rounded-full text-white/80 border border-white/10">
-                          {getTechIcon(t)}
-                          <span>{t}</span>
+                    {/* Content overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4 z-10 pointer-events-none">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <h3 className="text-lg md:text-xl font-bold text-white">Credit Compass</h3>
+                        <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 backdrop-blur-sm">
+                          Winner
                         </span>
-                      ))}
+                      </div>
+                      <p className="text-white/70 text-xs mb-2 line-clamp-1">
+                        AI-powered personalized credit card recommendations
+                      </p>
+                      <div className="flex flex-wrap gap-1">
+                        {["React", "Flask", "Python"].map((t) => (
+                          <span key={t} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-white/10 backdrop-blur-sm rounded-full text-white/80 border border-white/10">
+                            {getTechIcon(t)}
+                            <span>{t}</span>
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             </ScrollReveal>
 
             {/* SerenityHelp - Square-ish card */}
             <ScrollReveal delay={0.25} className="md:col-span-7 md:row-span-1">
-              <Link href="/projects/serenityhelp" className="block h-full">
-                <div className="group relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-purple-500/40 transition-all duration-500 cursor-pointer">
-                  <ProjectCarousel
-                    media={[
-                      { type: "image", src: "/serenity2.png", alt: "SerenityHelp", imageClassName: "object-cover" },
-                      { type: "image", src: "/serenity1.png", alt: "SerenityHelp 1", imageClassName: "object-cover" },
-                      { type: "image", src: "/serenity3.png", alt: "SerenityHelp 3", imageClassName: "object-cover" }
-                    ]}
-                  />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none z-10" />
+              <motion.div
+                whileHover={{ scale: 1.02, y: -4 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="h-full"
+              >
+                <Link href="/projects/serenityhelp" className="block h-full">
+                  <div className="group relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-purple-500/40 transition-all duration-500 cursor-pointer">
+                    <ProjectCarousel
+                      media={[
+                        { type: "image", src: "/serenity2.png", alt: "SerenityHelp", imageClassName: "object-cover" },
+                        { type: "image", src: "/serenity1.png", alt: "SerenityHelp 1", imageClassName: "object-cover" },
+                        { type: "image", src: "/serenity3.png", alt: "SerenityHelp 3", imageClassName: "object-cover" }
+                      ]}
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none z-10" />
 
-                  {/* Content overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 z-10 pointer-events-none">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <h3 className="text-lg md:text-xl font-bold text-white">SerenityHelp</h3>
-                      <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-purple-600 text-white border border-purple-400/50 shadow-lg">
-                        Hackathon
-                      </span>
-                    </div>
-                    <p className="text-white/70 text-xs mb-2 line-clamp-1">
-                      AI voice agent for mental health crisis intervention with multimodal sentiment analysis
-                    </p>
-                    <div className="flex flex-wrap gap-1">
-                      {["Python", "React"].map((t) => (
-                        <span key={t} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-white/10 backdrop-blur-sm rounded-full text-white/80 border border-white/10">
-                          {getTechIcon(t)}
-                          <span>{t}</span>
+                    {/* Content overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4 z-10 pointer-events-none">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <h3 className="text-lg md:text-xl font-bold text-white">SerenityHelp</h3>
+                        <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-purple-600 text-white border border-purple-400/50 shadow-lg">
+                          Hackathon
                         </span>
-                      ))}
+                      </div>
+                      <p className="text-white/70 text-xs mb-2 line-clamp-1">
+                        AI voice agent for mental health crisis intervention with multimodal sentiment analysis
+                      </p>
+                      <div className="flex flex-wrap gap-1">
+                        {["Python", "React"].map((t) => (
+                          <span key={t} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-white/10 backdrop-blur-sm rounded-full text-white/80 border border-white/10">
+                            {getTechIcon(t)}
+                            <span>{t}</span>
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             </ScrollReveal>
           </div>
         </section>
