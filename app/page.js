@@ -69,7 +69,7 @@ const ResumeViewer = ({ isDarkMode }) => {
           <button
             key={resume.id}
             onClick={() => setActiveResume(resume.id)}
-            className="px-6 py-2.5 text-sm font-semibold rounded-full transition-all duration-200"
+            className="px-6 py-2.5 text-sm font-semibold rounded-full transition-all duration-200 cursor-pointer"
             style={activeResume === resume.id
               ? { backgroundColor: isDarkMode ? '#ffffff' : '#171717', color: isDarkMode ? '#171717' : '#ffffff', border: 'none' }
               : { backgroundColor: 'transparent', color: isDarkMode ? '#9ca3af' : '#6b7280', border: `1px solid ${isDarkMode ? '#404040' : '#d1d5db'}` }
@@ -565,24 +565,18 @@ export default function Home() {
                   onMouseEnter={() => handleMouseEnter(setContactOpen, contactTimeout)}
                   onMouseLeave={() => handleMouseLeave(setContactOpen, contactTimeout)}
                 >
-                  <div className="flex items-center gap-2 p-2">
-                    <a href="mailto:roshan.sanjeev@gmail.com" className="flex-1 flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
-                      <Mail className="w-4 h-4" />
-                      roshan.sanjeev@gmail.com
-                    </a>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8 rounded-full cursor-pointer"
-                      onClick={() => {
-                        navigator.clipboard.writeText("roshan.sanjeev@gmail.com");
-                        setEmailCopied(true);
-                        setTimeout(() => setEmailCopied(false), 2000);
-                      }}
-                    >
-                      {emailCopied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
-                    </Button>
-                  </div>
+                  <button
+                    className="flex items-center gap-2 p-2 w-full text-sm font-medium hover:text-primary transition-colors cursor-pointer"
+                    onClick={() => {
+                      navigator.clipboard.writeText("roshan.sanjeev@gmail.com");
+                      setEmailCopied(true);
+                      setTimeout(() => setEmailCopied(false), 2000);
+                    }}
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span className="flex-1 text-left">roshan.sanjeev@gmail.com</span>
+                    {emailCopied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4 opacity-60" />}
+                  </button>
                   <DropdownMenuItem asChild>
                     <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2 cursor-pointer" style={{ color: isDarkMode ? '#ffffff' : '#171717' }}>
                       <Linkedin className="w-4 h-4" /> LinkedIn
