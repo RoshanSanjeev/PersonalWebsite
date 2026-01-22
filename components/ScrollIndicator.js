@@ -2,12 +2,12 @@
 
 export default function ScrollIndicator() {
   const handleScrollClick = () => {
-    const experienceSection = document.getElementById('Experience');
-    if (experienceSection) {
+    const projectsSection = document.getElementById('Projects');
+    if (projectsSection) {
       // Offset for fixed header
       const offset = 100;
       const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = experienceSection.getBoundingClientRect().top;
+      const elementRect = projectsSection.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
       const offsetPosition = elementPosition - offset;
 

@@ -48,6 +48,10 @@ export function ThemeProvider({ children }) {
     } else {
       document.documentElement.classList.remove('dark');
     }
+    // Set body and html background to match theme
+    const bgColor = backgroundColors[currentBackground].color;
+    document.body.style.backgroundColor = bgColor;
+    document.documentElement.style.backgroundColor = bgColor;
   }, [currentBackground]);
 
   const getGradient = (colors) => {

@@ -57,9 +57,11 @@ The system analyzes body posture in real-time using MediaPipe and OpenCV, provid
       { name: "Python", icon: SiPython, color: "#3776AB" },
       { name: "OpenCV", icon: SiOpencv, color: "#5C3EE8" },
     ],
-    images: [
-      { src: "/PoseVision2.png", alt: "PoseVision Interface" },
+    media: [
+      { type: "video", src: "/PoseVisionDemo.mp4", alt: "PoseVision Demo" },
+      { type: "image", src: "/PoseVision2.png", alt: "PoseVision Interface" },
     ],
+    sideBySide: true,
     links: {},
     status: "1st Place - SASEHacks",
     features: [
@@ -164,25 +166,54 @@ export default function ProjectPage() {
           <p className="text-xl text-muted-foreground">{project.tagline}</p>
         </motion.div>
 
-        {/* Image Gallery */}
+        {/* Media Gallery */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mb-12"
         >
-          <div className="grid gap-4">
-            {project.images.map((img, idx) => (
-              <div key={idx} className="relative aspect-video rounded-2xl overflow-hidden border border-border/50" style={{ backgroundColor: isDarkMode ? '#171717' : '#e5e5e5' }}>
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  className="object-contain"
-                />
-              </div>
-            ))}
-          </div>
+          {/* Side by side layout for projects with media array and sideBySide flag */}
+          {project.media && project.sideBySide ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {project.media.map((item, idx) => (
+                <div key={idx} className="relative aspect-video rounded-2xl overflow-hidden border border-border/50" style={{ backgroundColor: isDarkMode ? '#171717' : '#e5e5e5' }}>
+                  {item.type === "video" ? (
+                    <video
+                      src={item.src}
+                      controls
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      fill
+                      className="object-cover"
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            /* Default stacked layout for images */
+            <div className="grid gap-4">
+              {(project.images || []).map((img, idx) => (
+                <div key={idx} className="relative aspect-video rounded-2xl overflow-hidden border border-border/50" style={{ backgroundColor: isDarkMode ? '#171717' : '#e5e5e5' }}>
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </motion.div>
 
         {/* Links */}

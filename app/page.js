@@ -9,7 +9,7 @@ import ScrollIndicator from "../components/ScrollIndicator";
 import { AuroraBackground } from "../components/ui/aurora-background";
 import { ProjectCarousel } from "../components/ui/project-carousel";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
@@ -75,11 +75,16 @@ export default function Home() {
   }, []);
 
   const scrollToSection = (sectionId) => {
-    const el = document.getElementById(sectionId);
-    if (el) {
-      const offset = 100;
-      const pos = el.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top: pos, behavior: "smooth" });
+    // For About section, scroll to bottom of page
+    if (sectionId === "About") {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    } else {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        const offset = 100;
+        const pos = el.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: pos, behavior: "smooth" });
+      }
     }
     setActiveSection(sectionId);
     setIsMenuOpen(false);
@@ -161,7 +166,7 @@ export default function Home() {
       current: true,
       images: [
         { type: "image", src: "/Research.png", alt: "Research" },
-        { type: "image", src: "/Mi31.jpeg", alt: "ICCV 2025 Honolulu" }
+        { type: "image", src: "/Mi31.jpeg", alt: "ICCV 2025 Honolulu", imageClassName: "object-cover object-left" }
       ],
       tech: ["Python", "TensorFlow", "Pandas"],
       highlights: [
@@ -225,11 +230,18 @@ export default function Home() {
       date: "Mar 2024 - Present",
       images: [
         { type: "image", src: "/ThetaTau3.jpeg", alt: "Theta Tau Recruitment Booth" },
-        { type: "image", src: "/ThetaTau.png", alt: "Theta Tau Chapter" },
-        { type: "image", src: "/ThetaTau2.jpeg", alt: "Theta Tau Presentation" }
+        { type: "image", src: "/ThetaTau2.jpeg", alt: "Theta Tau Presentation", imageClassName: "object-cover object-top" }
       ],
       highlights: [{ value: "70%", label: "chapter growth" }, { value: "$2K", label: "budget" }],
       description: "Led committee of 9, grew membership from ~10 to 40+ members. Organized presentations reaching 1,000+ students."
+    },
+    {
+      title: "Hackathon Organizer",
+      org: "HackMerced",
+      date: "2024 - Present",
+      image: "/HackathonOrganizer.png",
+      highlights: [{ value: "500+", label: "participants" }],
+      description: "Organizing UC Merced's largest hackathon, coordinating logistics, sponsors, and workshops to foster student innovation."
     }
   ];
 
@@ -309,12 +321,20 @@ export default function Home() {
                           <ChevronDown className="w-3 h-3 opacity-60" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="center" className="bg-background/95 backdrop-blur-xl border-border/50 rounded-xl p-1.5 min-w-[140px] mt-2">
+                      <DropdownMenuContent
+                        align="center"
+                        className="backdrop-blur-xl rounded-xl p-1.5 min-w-[140px] mt-2 border"
+                        style={{
+                          backgroundColor: isDarkMode ? 'rgba(23, 23, 23, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                          borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+                        }}
+                      >
                         {["Leadership", "Resume", "About"].map((item) => (
                           <DropdownMenuItem
                             key={item}
                             onClick={() => scrollToSection(item)}
                             className="cursor-pointer rounded-lg px-3 py-2 text-sm font-medium"
+                            style={{ color: isDarkMode ? '#ffffff' : '#171717' }}
                           >
                             {item}
                           </DropdownMenuItem>
@@ -349,7 +369,15 @@ export default function Home() {
                   Contact <ChevronDown className="w-3 h-3 opacity-60" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="bg-background/95 backdrop-blur-xl border-border/50 rounded-xl p-1.5 w-72 mt-2">
+              <DropdownMenuContent
+                align="end"
+                className="backdrop-blur-xl rounded-xl p-1.5 w-72 mt-2 border"
+                style={{
+                  backgroundColor: isDarkMode ? 'rgba(23, 23, 23, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                  borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+                  color: isDarkMode ? '#ffffff' : '#171717'
+                }}
+              >
                 <div className="flex items-center gap-2 p-2">
                   <a href="mailto:roshan.sanjeev@gmail.com" className="flex-1 flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
                     <Mail className="w-4 h-4" />
@@ -369,12 +397,12 @@ export default function Home() {
                   </Button>
                 </div>
                 <DropdownMenuItem asChild>
-                  <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2">
+                  <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2" style={{ color: isDarkMode ? '#ffffff' : '#171717' }}>
                     <Linkedin className="w-4 h-4" /> LinkedIn
                   </a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2">
+                  <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2" style={{ color: isDarkMode ? '#ffffff' : '#171717' }}>
                     <Github className="w-4 h-4" /> GitHub
                   </a>
                 </DropdownMenuItem>
@@ -452,9 +480,14 @@ export default function Home() {
         >
           {/* Name with gradient fade */}
           <motion.h1
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 via-neutral-500 to-neutral-300 dark:from-white dark:via-white dark:to-neutral-500 select-none"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter bg-clip-text text-transparent select-none"
+            style={{
+              backgroundImage: isDarkMode
+                ? 'linear-gradient(to bottom, #ffffff, #ffffff, #a3a3a3)'
+                : 'linear-gradient(to bottom, #171717, #737373, #d4d4d4)'
+            }}
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 0.85, y: 0 }}
+            animate={{ opacity: 0.9, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             Roshan Sanjeev
@@ -462,7 +495,8 @@ export default function Home() {
 
           {/* Title with arrows */}
           <motion.p
-            className="mt-4 text-lg sm:text-xl md:text-2xl font-light text-muted-foreground"
+            className="mt-4 text-lg sm:text-xl md:text-2xl font-light"
+            style={{ color: isDarkMode ? '#d4d4d4' : '#525252' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
@@ -472,7 +506,8 @@ export default function Home() {
 
           {/* Blurb - line by line */}
           <motion.div
-            className="mt-6 text-sm md:text-base font-light text-muted-foreground/80 max-w-2xl leading-relaxed"
+            className="mt-6 text-sm md:text-base font-light max-w-2xl leading-relaxed"
+            style={{ color: isDarkMode ? '#a3a3a3' : '#737373' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.8 }}
@@ -484,24 +519,31 @@ export default function Home() {
 
           {/* Seeking internships */}
           <motion.p
-            className="mt-6 text-sm md:text-base text-primary font-medium italic"
+            className="mt-6 text-sm md:text-base font-medium italic"
+            style={{ color: isDarkMode ? '#60a5fa' : '#2563eb' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 1 }}
           >
             Seeking SWE & PM 2026 internships
           </motion.p>
+
         </motion.div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.3 }}
+        >
           <ScrollIndicator />
-        </div>
+        </motion.div>
       </AuroraBackground>
 
       {/* MAIN CONTENT */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6">
 
-        {/* PROJECTS */}
+        {/* PROJECTS - Bento Box Layout */}
         <section id="Projects" className="py-24 scroll-mt-24">
           <ScrollReveal>
             <div className="flex items-center gap-4 mb-12">
@@ -510,127 +552,159 @@ export default function Home() {
             </div>
           </ScrollReveal>
 
-          <div className="space-y-4">
-            {/* Row 1: ClockIn (larger) + PoseVision (smaller) */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* ClockIn - takes 2 columns */}
-              <ScrollReveal delay={0.1} className="md:col-span-2">
-                <a href="https://www.clockin.now/" target="_blank" rel="noopener noreferrer" className="group block h-full">
-                  <Card className="overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-300 h-full cursor-pointer">
-                    <div className="relative h-44 overflow-hidden">
-                      <Image src="/clockin.png" alt="ClockIn" fill className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-700" />
+          {/* Bento Grid - Asymmetric puzzle layout */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 auto-rows-[180px] md:auto-rows-[200px]">
+
+            {/* ClockIn - Hero card, spans 8 cols */}
+            <ScrollReveal delay={0.1} className="md:col-span-8 md:row-span-2">
+              <a href="https://www.clockin.now/" target="_blank" rel="noopener noreferrer" className="group block h-full">
+                <div className="relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-primary/40 transition-all duration-500 cursor-pointer">
+                  <Image
+                    src="/clockin.png"
+                    alt="ClockIn"
+                    fill
+                    className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-700"
+                  />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+
+                  {/* Content overlay */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6">
+                    <div className="flex items-center gap-3 mb-2">
+                      <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">ClockIn</h3>
+                      <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-green-500/20 text-green-400 border border-green-500/30 backdrop-blur-sm">
+                        LIVE
+                      </span>
                     </div>
-                    <CardHeader className="p-4 space-y-2">
-                      <div className="flex items-center justify-between gap-2">
-                        <CardTitle className="text-lg font-bold">ClockIn</CardTitle>
-                        <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-green-500/10 text-green-500 border border-green-500/20">LIVE</span>
+                    <p className="text-white/80 text-sm md:text-base max-w-lg mb-3 leading-relaxed">
+                      ADHD-backed accountability system that turns focus sessions into timelapse recordings. Gamified streaks meet body doubling.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex flex-wrap gap-1.5">
+                        {["React Native", "Next.js", "TypeScript", "Supabase"].map((tech) => (
+                          <span key={tech} className="flex items-center gap-1.5 px-2 py-1 text-xs bg-white/10 backdrop-blur-sm rounded-full text-white/90 border border-white/10">
+                            {getTechIcon(tech)}
+                            <span className="hidden sm:inline">{tech}</span>
+                          </span>
+                        ))}
                       </div>
-                      <p className="text-xs text-muted-foreground line-clamp-2">ADHD-backed accountability system. Turns focus sessions into timelapse recordings.</p>
-                      <div className="flex items-center justify-between">
-                        <div className="flex flex-wrap gap-1">
-                          {["React Native", "Next.js", "TypeScript", "Supabase"].map((tech) => (
-                            <span key={tech} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-secondary/50 rounded">
-                              {getTechIcon(tech)}
-                            </span>
-                          ))}
-                        </div>
-                        <span className="flex items-center gap-1 text-primary font-medium text-xs group-hover:gap-1.5 transition-all whitespace-nowrap">
-                          clockin.now <ArrowUpRight className="w-3 h-3" />
+                      <span className="flex items-center gap-1.5 text-white font-medium text-sm group-hover:gap-2 transition-all">
+                        clockin.now <ArrowUpRight className="w-4 h-4" />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </ScrollReveal>
+
+            {/* PoseVision - Tall vertical card, spans 4 cols, 2 rows */}
+            <ScrollReveal delay={0.15} className="md:col-span-4 md:row-span-2">
+              <Link href="/projects/posevision" className="block h-full">
+                <div className="group relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-amber-500/40 transition-all duration-500 cursor-pointer">
+                  <ProjectCarousel
+                    media={[
+                      { type: "video", src: "/PoseVisionDemo.mp4", alt: "PoseVision Demo" },
+                      { type: "image", src: "/PoseVision2.png", alt: "PoseVision", imageClassName: "object-cover" }
+                    ]}
+                  />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-10" />
+
+                  {/* Content overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 z-10 pointer-events-none">
+                    <div className="flex items-center gap-2 mb-2">
+                      <h3 className="text-xl md:text-2xl font-bold text-white">PoseVision</h3>
+                      <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 backdrop-blur-sm">
+                        1st Place
+                      </span>
+                    </div>
+                    <p className="text-white/70 text-xs md:text-sm mb-3 line-clamp-2">
+                      AI personal trainer with real-time form correction via computer vision
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      {["Python", "OpenCV"].map((t) => (
+                        <span key={t} className="flex items-center gap-1 px-2 py-0.5 text-[10px] bg-white/10 backdrop-blur-sm rounded-full text-white/80 border border-white/10">
+                          {getTechIcon(t)}
                         </span>
-                      </div>
-                    </CardHeader>
-                  </Card>
-                </a>
-              </ScrollReveal>
-
-              {/* PoseVision - takes 1 column */}
-              <ScrollReveal delay={0.15}>
-                <Link href="/projects/posevision" className="block h-full">
-                  <Card className="group overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-300 h-full cursor-pointer">
-                    <div className="relative h-44 overflow-hidden">
-                      <ProjectCarousel media={[
-                        { type: "video", src: "/PoseVisionDemo.mp4", alt: "PoseVision Demo" },
-                        { type: "image", src: "/PoseVision2.png", alt: "PoseVision" }
-                      ]} />
+                      ))}
                     </div>
-                    <CardHeader className="p-4 space-y-2">
-                      <div className="flex items-center justify-between gap-2">
-                        <CardTitle className="text-lg font-bold">PoseVision</CardTitle>
-                        <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 whitespace-nowrap">1st Place</span>
-                      </div>
-                      <p className="text-xs text-muted-foreground line-clamp-2">AI personal trainer using computer vision for real-time form correction.</p>
-                      <div className="flex flex-wrap gap-1">
-                        {["Python", "OpenCV"].map((t) => (
-                          <span key={t} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-secondary/50 rounded">
-                            {getTechIcon(t)}
-                          </span>
-                        ))}
-                      </div>
-                    </CardHeader>
-                  </Card>
-                </Link>
-              </ScrollReveal>
-            </div>
+                  </div>
+                </div>
+              </Link>
+            </ScrollReveal>
 
-            {/* Row 2: Credit Compass + SerenityHelp */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Credit Compass */}
-              <ScrollReveal delay={0.2}>
-                <Link href="/projects/creditcompass" className="block h-full">
-                  <Card className="group overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-300 h-full cursor-pointer">
-                    <div className="relative h-40 overflow-hidden">
-                      <ProjectCarousel media={[
-                        { type: "image", src: "/Hackathon.png", alt: "Credit Compass" },
-                        { type: "video", src: "/CreditCompassDemo.mov", alt: "Demo" }
-                      ]} />
-                    </div>
-                    <CardHeader className="p-4 space-y-2">
-                      <div className="flex items-center justify-between gap-2">
-                        <CardTitle className="text-base font-bold">Credit Compass</CardTitle>
-                        <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-blue-500/10 text-blue-500 border border-blue-500/20">Winner</span>
-                      </div>
-                      <p className="text-xs text-muted-foreground line-clamp-2">AI-powered personalized credit card recommendations using LLMs.</p>
-                      <div className="flex flex-wrap gap-1">
-                        {["React", "Flask", "Python"].map((t) => (
-                          <span key={t} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-secondary/50 rounded">
-                            {getTechIcon(t)}
-                          </span>
-                        ))}
-                      </div>
-                    </CardHeader>
-                  </Card>
-                </Link>
-              </ScrollReveal>
+            {/* Credit Compass - Wide horizontal card */}
+            <ScrollReveal delay={0.2} className="md:col-span-5 md:row-span-1">
+              <Link href="/projects/creditcompass" className="block h-full">
+                <div className="group relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-blue-500/40 transition-all duration-500 cursor-pointer">
+                  <ProjectCarousel
+                    media={[
+                      { type: "image", src: "/Hackathon.png", alt: "Credit Compass", imageClassName: "object-cover" },
+                      { type: "video", src: "/CreditCompassDemo.mov", alt: "Demo" }
+                    ]}
+                  />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none z-10" />
 
-              {/* SerenityHelp */}
-              <ScrollReveal delay={0.25}>
-                <Link href="/projects/serenityhelp" className="block h-full">
-                  <Card className="group overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-300 h-full cursor-pointer">
-                    <div className="relative h-40 overflow-hidden">
-                      <ProjectCarousel media={[
-                        { type: "image", src: "/serenity1.png", alt: "SerenityHelp 1" },
-                        { type: "image", src: "/serenity2.png", alt: "SerenityHelp 2" },
-                        { type: "image", src: "/serenity3.png", alt: "SerenityHelp 3" }
-                      ]} />
+                  {/* Content overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 z-10 pointer-events-none">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <h3 className="text-lg md:text-xl font-bold text-white">Credit Compass</h3>
+                      <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 backdrop-blur-sm">
+                        Winner
+                      </span>
                     </div>
-                    <CardHeader className="p-4 space-y-2">
-                      <div className="flex items-center justify-between gap-2">
-                        <CardTitle className="text-base font-bold">SerenityHelp</CardTitle>
-                        <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-purple-500/10 text-purple-500 border border-purple-500/20">Hackathon</span>
-                      </div>
-                      <p className="text-xs text-muted-foreground line-clamp-2">AI voice agent for mental health crisis intervention.</p>
-                      <div className="flex flex-wrap gap-1">
-                        {["Python", "React"].map((t) => (
-                          <span key={t} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-secondary/50 rounded">
-                            {getTechIcon(t)}
-                          </span>
-                        ))}
-                      </div>
-                    </CardHeader>
-                  </Card>
-                </Link>
-              </ScrollReveal>
-            </div>
+                    <p className="text-white/70 text-xs mb-2 line-clamp-1">
+                      AI-powered personalized credit card recommendations
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      {["React", "Flask", "Python"].map((t) => (
+                        <span key={t} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-white/10 backdrop-blur-sm rounded-full text-white/80 border border-white/10">
+                          {getTechIcon(t)}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </ScrollReveal>
+
+            {/* SerenityHelp - Square-ish card */}
+            <ScrollReveal delay={0.25} className="md:col-span-7 md:row-span-1">
+              <Link href="/projects/serenityhelp" className="block h-full">
+                <div className="group relative h-full rounded-2xl overflow-hidden border border-border/30 hover:border-purple-500/40 transition-all duration-500 cursor-pointer">
+                  <ProjectCarousel
+                    media={[
+                      { type: "image", src: "/serenity2.png", alt: "SerenityHelp", imageClassName: "object-cover" },
+                      { type: "image", src: "/serenity1.png", alt: "SerenityHelp 1", imageClassName: "object-cover" },
+                      { type: "image", src: "/serenity3.png", alt: "SerenityHelp 3", imageClassName: "object-cover" }
+                    ]}
+                  />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none z-10" />
+
+                  {/* Content overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 z-10 pointer-events-none">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <h3 className="text-lg md:text-xl font-bold text-white">SerenityHelp</h3>
+                      <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30 backdrop-blur-sm">
+                        Hackathon
+                      </span>
+                    </div>
+                    <p className="text-white/70 text-xs mb-2 line-clamp-1">
+                      AI voice agent for mental health crisis intervention with multimodal sentiment analysis
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      {["Python", "React"].map((t) => (
+                        <span key={t} className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] bg-white/10 backdrop-blur-sm rounded-full text-white/80 border border-white/10">
+                          {getTechIcon(t)}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </ScrollReveal>
           </div>
         </section>
 
@@ -728,8 +802,8 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-6">
               {leadershipData.map((role, idx) => (
                 <ScrollReveal key={idx} delay={idx * 0.1}>
-                  <div className="group overflow-hidden rounded-2xl border border-border/50 bg-card hover:border-border transition-all duration-300 h-full">
-                    <div className="relative h-48 overflow-hidden" style={{ backgroundColor: isDarkMode ? '#171717' : '#e5e5e5' }}>
+                  <div className="group overflow-hidden rounded-2xl border border-border/50 bg-card hover:border-border transition-all duration-300 h-full flex flex-col">
+                    <div className="relative h-64 md:h-72 overflow-hidden flex-shrink-0" style={{ backgroundColor: isDarkMode ? '#171717' : '#e5e5e5' }}>
                       {role.images ? (
                         <ProjectCarousel media={role.images} />
                       ) : (
@@ -747,13 +821,13 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
-                    <div className="p-6">
+                    <div className="p-5 flex-grow">
                       <div className="flex items-start justify-between gap-2 mb-1">
                         <h4 className="text-lg font-bold">{role.title}</h4>
                         <span className="text-xs text-muted-foreground whitespace-nowrap">{role.date}</span>
                       </div>
-                      <p className="text-sm text-primary font-medium mb-3">{role.org}</p>
-                      <p className="text-sm text-muted-foreground">{role.description}</p>
+                      <p className="text-sm text-primary font-medium mb-2">{role.org}</p>
+                      <p className="text-sm text-muted-foreground line-clamp-3">{role.description}</p>
                     </div>
                   </div>
                 </ScrollReveal>
@@ -771,8 +845,8 @@ export default function Home() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {skillsData.map((cat, idx) => (
-              <ScrollReveal key={idx} delay={idx * 0.05}>
-                <div className="p-4 rounded-xl border border-border/40 bg-card/30 hover:bg-card hover:border-border transition-all duration-300">
+              <ScrollReveal key={idx} delay={idx * 0.05} className="h-full">
+                <div className="p-4 rounded-xl border border-border/40 bg-card/30 hover:bg-card hover:border-border transition-all duration-300 h-full">
                   <h4 className="text-xs font-bold text-primary uppercase tracking-wider mb-4">{cat.category}</h4>
                   <div className="flex flex-wrap gap-2">
                     {cat.skills.map((skill) => {
@@ -839,7 +913,7 @@ export default function Home() {
                       { type: "image", src: "/Life0.png", alt: "Life moment" },
                       { type: "image", src: "/Life2.jpeg", alt: "Life moment" },
                       { type: "image", src: "/Life1.png", alt: "Life moment" },
-                      { type: "image", src: "/life5.jpeg", alt: "Life moment" },
+                      { type: "video", src: "/life5.MOV", alt: "Life moment" },
                     ]}
                   />
                 </div>
@@ -860,21 +934,6 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Quick Stats */}
-              <div className="grid grid-cols-3 gap-4 pt-4">
-                <div className="text-center p-4 rounded-xl border border-border/40 bg-card/30">
-                  <div className="text-2xl md:text-3xl font-bold text-primary">2</div>
-                  <div className="text-xs text-muted-foreground mt-1">Publications</div>
-                </div>
-                <div className="text-center p-4 rounded-xl border border-border/40 bg-card/30">
-                  <div className="text-2xl md:text-3xl font-bold text-primary">2,500+</div>
-                  <div className="text-xs text-muted-foreground mt-1">Users Served</div>
-                </div>
-                <div className="text-center p-4 rounded-xl border border-border/40 bg-card/30">
-                  <div className="text-2xl md:text-3xl font-bold text-primary">4</div>
-                  <div className="text-xs text-muted-foreground mt-1">Hackathon Wins</div>
-                </div>
-              </div>
             </ScrollReveal>
           </div>
         </section>

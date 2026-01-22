@@ -48,7 +48,7 @@ export const ProjectCarousel = ({ media, className }) => {
                             loop
                             muted
                             playsInline
-                            className="w-full h-full object-contain bg-black"
+                            className="w-full h-full object-cover"
                         />
                     ) : (
                         <div className="relative w-full h-full">
@@ -66,34 +66,34 @@ export const ProjectCarousel = ({ media, className }) => {
             {/* Navigation Arrows - Only show if more than 1 item */}
             {media.length > 1 && (
                 <>
-                    <div className="absolute inset-0 flex items-center justify-between p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <div className="absolute inset-0 flex items-center justify-between p-2 pointer-events-none z-20">
                         <Button
                             variant="ghost"
                             size="icon"
                             onClick={prevSlide}
-                            className="pointer-events-auto h-8 w-8 rounded-full bg-black/50 hover:bg-black/70 text-white backdrop-blur-sm"
+                            className="pointer-events-auto h-9 w-9 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-sm shadow-lg border border-white/10"
                         >
-                            <ChevronLeft className="h-4 w-4" />
+                            <ChevronLeft className="h-5 w-5" />
                         </Button>
                         <Button
                             variant="ghost"
                             size="icon"
                             onClick={nextSlide}
-                            className="pointer-events-auto h-8 w-8 rounded-full bg-black/50 hover:bg-black/70 text-white backdrop-blur-sm"
+                            className="pointer-events-auto h-9 w-9 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-sm shadow-lg border border-white/10"
                         >
-                            <ChevronRight className="h-4 w-4" />
+                            <ChevronRight className="h-5 w-5" />
                         </Button>
                     </div>
 
                     {/* Dots Indicator */}
-                    <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1.5 z-10">
+                    <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
                         {media.map((_, index) => (
                             <button
                                 key={index}
                                 onClick={(e) => goToSlide(index, e)}
-                                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${currentIndex === index
-                                    ? "bg-white w-3"
-                                    : "bg-white/50 hover:bg-white/80"
+                                className={`h-2 rounded-full transition-all duration-300 shadow-sm ${currentIndex === index
+                                    ? "bg-white w-4"
+                                    : "bg-white/60 hover:bg-white/90 w-2"
                                     }`}
                             />
                         ))}
