@@ -354,10 +354,10 @@ export default function Home() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="pointer-events-auto bg-background/70 backdrop-blur-2xl border border-border/50 shadow-xl rounded-full px-3 py-2 flex items-center gap-1"
+          className="pointer-events-auto bg-background/70 backdrop-blur-2xl border border-border/50 shadow-xl rounded-full px-2 py-1.5 flex items-center gap-0.5"
           style={{ backgroundColor: navColor }}
         >
-          <div className="hidden md:flex items-center gap-1">
+          <div className="flex items-center gap-0.5">
             {sections.map((section) => {
               if (section === "Projects") {
                 return (
@@ -367,7 +367,7 @@ export default function Home() {
                       size="sm"
                       onClick={() => scrollToSection("Projects")}
                       className={cn(
-                        "rounded-full text-sm font-medium px-4 py-2 h-9 transition-all rounded-r-none pr-2",
+                        "rounded-full text-xs font-medium px-2 sm:px-3 py-1 h-7 sm:h-8 transition-all rounded-r-none pr-1",
                         activeSection === "Projects"
                           ? "bg-foreground/10 text-foreground"
                           : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
@@ -381,7 +381,7 @@ export default function Home() {
                           variant="ghost"
                           size="sm"
                           className={cn(
-                            "rounded-full text-sm font-medium px-2 py-2 h-9 transition-all rounded-l-none",
+                            "rounded-full text-xs font-medium px-1 py-1 h-7 sm:h-8 transition-all rounded-l-none",
                             activeSection === "Projects"
                               ? "bg-foreground/10 text-foreground"
                               : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
@@ -450,7 +450,7 @@ export default function Home() {
                       size="sm"
                       onClick={() => scrollToSection("Experience")}
                       className={cn(
-                        "rounded-full text-sm font-medium px-4 py-2 h-9 transition-all rounded-r-none pr-2",
+                        "rounded-full text-xs font-medium px-2 sm:px-3 py-1 h-7 sm:h-8 transition-all rounded-r-none pr-1",
                         activeSection === "Experience" || activeSection === "Leadership" || activeSection === "Resume" || activeSection === "About"
                           ? "bg-foreground/10 text-foreground"
                           : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
@@ -464,7 +464,7 @@ export default function Home() {
                           variant="ghost"
                           size="sm"
                           className={cn(
-                            "rounded-full text-sm font-medium px-2 py-2 h-9 transition-all rounded-l-none",
+                            "rounded-full text-xs font-medium px-1 py-1 h-7 sm:h-8 transition-all rounded-l-none",
                             activeSection === "Experience" || activeSection === "Leadership" || activeSection === "Resume" || activeSection === "About"
                               ? "bg-foreground/10 text-foreground"
                               : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
@@ -503,7 +503,7 @@ export default function Home() {
                   size="sm"
                   onClick={() => scrollToSection(section)}
                   className={cn(
-                    "rounded-full text-sm font-medium px-4 py-2 h-9 transition-all",
+                    "rounded-full text-xs font-medium px-2 sm:px-3 py-1 h-7 sm:h-8 transition-all",
                     activeSection === section
                       ? "bg-foreground/10 text-foreground"
                       : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
@@ -517,7 +517,7 @@ export default function Home() {
             {/* Contact */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="rounded-full text-sm font-medium px-4 py-2 h-9 gap-1 text-muted-foreground hover:text-foreground">
+                <Button variant="ghost" size="sm" className="rounded-full text-xs font-medium px-2 sm:px-3 py-1 h-7 sm:h-8 gap-0.5 text-muted-foreground hover:text-foreground">
                   Contact <ChevronDown className="w-3 h-3 opacity-60" />
                 </Button>
               </DropdownMenuTrigger>
@@ -561,66 +561,15 @@ export default function Home() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <div className="h-5 w-px bg-border/50 mx-2" />
+            <div className="h-4 w-px bg-border/50 mx-1" />
 
-            <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-9 w-9 rounded-full">
-              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-7 w-7 sm:h-8 sm:w-8 rounded-full">
+              {isDarkMode ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
             </Button>
           </div>
 
-          {/* Mobile Controls */}
-          <div className="flex md:hidden items-center gap-1">
-            <Button variant="ghost" size="icon" onClick={toggleTheme} className="h-9 w-9 rounded-full">
-              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </Button>
-            <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)} className="h-9 w-9 rounded-full">
-              {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-            </Button>
-          </div>
         </motion.div>
       </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="fixed top-20 left-1/2 -translate-x-1/2 z-40 w-72 md:hidden px-4"
-          >
-            <div className="bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl p-2 flex flex-col gap-1" style={{ backgroundColor: navColor }}>
-              {sections.map((section) => (
-                <Button key={section} variant="ghost" onClick={() => scrollToSection(section)}
-                  className={cn("w-full justify-start rounded-xl text-sm h-10 px-4",
-                    activeSection === section ? "bg-foreground/10" : ""
-                  )}>
-                  {section}
-                </Button>
-              ))}
-              <div className="h-px bg-border/50 my-1" />
-              {["Leadership", "Resume", "About"].map((item) => (
-                <Button key={item} variant="ghost" onClick={() => scrollToSection(item)}
-                  className="w-full justify-start rounded-xl text-sm h-10 px-4 text-muted-foreground">
-                  {item}
-                </Button>
-              ))}
-              <div className="h-px bg-border/50 my-1" />
-              <div className="px-4 py-2 flex items-center gap-3">
-                <a href="https://www.linkedin.com/in/roshan-sanjeev/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                <a href="https://github.com/RoshanSanjeev" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
-                  <Github className="w-5 h-5" />
-                </a>
-                <a href="mailto:roshan.sanjeev@gmail.com" className="text-muted-foreground hover:text-foreground">
-                  <Mail className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* HERO */}
       <AuroraBackground className="min-h-screen w-full" id="Home">
@@ -717,30 +666,30 @@ export default function Home() {
                     fill
                     className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-700"
                   />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                  {/* Gradient overlay - stronger on mobile */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20 sm:from-black/90 sm:via-black/30 sm:to-transparent" />
 
                   {/* Content overlay */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">ClockIn</h3>
-                      <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-green-500/20 text-green-400 border border-green-500/30 backdrop-blur-sm">
+                  <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5 md:p-6">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-1 sm:mb-2">
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-tight">ClockIn</h3>
+                      <span className="px-2 py-0.5 text-[10px] sm:text-xs font-bold rounded-full bg-green-500/20 text-green-400 border border-green-500/30 backdrop-blur-sm">
                         LIVE
                       </span>
                     </div>
-                    <p className="text-white/80 text-sm md:text-base max-w-lg mb-3 leading-relaxed">
-                      Shipping Accountability SaaS webapp that makes focusing on work effortless. Turns every focus session into time-lapse recordings, applying body doubling strategy endorsed by ADHD experts and clinical psychologists nationwide.
+                    <p className="text-white/80 text-xs sm:text-sm md:text-base max-w-lg mb-2 sm:mb-3 leading-relaxed line-clamp-2 sm:line-clamp-none">
+                      Shipping Accountability SaaS webapp that makes focusing on work effortless. Turns every focus session into time-lapse recordings.
                     </p>
                     <div className="flex items-center justify-between">
-                      <div className="flex flex-wrap gap-1.5">
+                      <div className="flex flex-wrap gap-1 sm:gap-1.5">
                         {["React Native", "Next.js", "TypeScript", "Supabase"].map((tech) => (
-                          <span key={tech} className="flex items-center gap-1.5 px-2 py-1 text-xs bg-white/10 backdrop-blur-sm rounded-full text-white/90 border border-white/10">
+                          <span key={tech} className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs bg-white/10 backdrop-blur-sm rounded-full text-white/90 border border-white/10">
                             {getTechIcon(tech)}
                             <span className="hidden sm:inline">{tech}</span>
                           </span>
                         ))}
                       </div>
-                      <span className="flex items-center gap-1.5 text-white font-medium text-sm group-hover:gap-2 transition-all">
+                      <span className="hidden sm:flex items-center gap-1.5 text-white font-medium text-sm group-hover:gap-2 transition-all">
                         clockin.now <ArrowUpRight className="w-4 h-4" />
                       </span>
                     </div>
@@ -886,7 +835,7 @@ export default function Home() {
                         {exp.images ? (
                           <ProjectCarousel media={exp.images} />
                         ) : (
-                          <Image src={exp.image} alt={exp.company} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                          <Image src={exp.image} alt={exp.company} fill className="object-cover group-hover:scale-105 transition-transform duration-700" style={{ objectPosition: 'center 35%' }} />
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
                         {exp.current && (

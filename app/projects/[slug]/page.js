@@ -239,7 +239,7 @@ export default function ProjectPage() {
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                   className="rounded-2xl overflow-hidden border border-border/50 flex-shrink-0 shadow-lg"
-                  style={{ backgroundColor: isDarkMode ? '#171717' : '#e5e5e5', maxHeight: '500px' }}
+                  style={{ backgroundColor: isDarkMode ? '#171717' : '#e5e5e5', maxHeight: '350px' }}
                 >
                   {item.type === "video" ? (
                     <video
@@ -249,7 +249,7 @@ export default function ProjectPage() {
                       loop
                       muted
                       playsInline
-                      className="h-full w-auto max-h-[500px]"
+                      className="h-full w-auto max-h-[350px]"
                     />
                   ) : (
                     <Image
@@ -257,7 +257,7 @@ export default function ProjectPage() {
                       alt={item.alt}
                       width={800}
                       height={600}
-                      className="h-full w-auto max-h-[500px] object-contain"
+                      className="h-full w-auto max-h-[350px] object-contain"
                     />
                   )}
                 </motion.div>
