@@ -220,7 +220,10 @@ export default function Home() {
       title: "AI Campus Ambassador",
       org: "Perplexity",
       date: "Sept 2025 - Present",
-      image: "/PerplexPrese.jpeg",
+      images: [
+        { type: "image", src: "/perplexity2.jpeg", alt: "Perplexity Campus Partner Presentation" },
+        { type: "image", src: "/PerplexPrese.jpeg", alt: "Perplexity Presentation" }
+      ],
       highlights: [{ value: "300+", label: "students engaged" }],
       description: "Developing AI adoption strategy for Comet browser through tailored presentations, working toward 500 sign-ups for hackathon sponsorship."
     },
@@ -229,8 +232,8 @@ export default function Home() {
       org: "Theta Tau Engineering Fraternity",
       date: "Mar 2024 - Present",
       images: [
-        { type: "image", src: "/ThetaTau3.jpeg", alt: "Theta Tau Recruitment Booth" },
-        { type: "image", src: "/ThetaTau2.jpeg", alt: "Theta Tau Presentation", imageClassName: "object-cover object-top" }
+        { type: "image", src: "/ThetaTau3.jpeg", alt: "Theta Tau Recruitment Booth", imageClassName: "object-cover" },
+        { type: "image", src: "/ThetaTau2.jpeg", alt: "Theta Tau Presentation", imageClassName: "object-cover", imageStyle: { objectPosition: "center 25%" } }
       ],
       highlights: [{ value: "70%", label: "chapter growth" }, { value: "$2K", label: "budget" }],
       description: "Led committee of 9, grew membership from ~10 to 40+ members. Organized presentations reaching 1,000+ students."
@@ -241,7 +244,7 @@ export default function Home() {
       date: "2024 - Present",
       image: "/HackathonOrganizer.png",
       highlights: [{ value: "500+", label: "participants" }],
-      description: "Organizing UC Merced's largest hackathon, coordinating logistics, sponsors, and workshops to foster student innovation."
+      description: "Organizing the largest hackathon in the San Joaquin Valley, coordinating logistics, sponsors, and workshops to foster student innovation."
     }
   ];
 
@@ -687,7 +690,7 @@ export default function Home() {
                   <div className="absolute bottom-0 left-0 right-0 p-4 z-10 pointer-events-none">
                     <div className="flex items-center gap-2 mb-1.5">
                       <h3 className="text-lg md:text-xl font-bold text-white">SerenityHelp</h3>
-                      <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30 backdrop-blur-sm">
+                      <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-purple-600 text-white border border-purple-400/50 shadow-lg">
                         Hackathon
                       </span>
                     </div>

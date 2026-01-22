@@ -57,6 +57,7 @@ export const ProjectCarousel = ({ media, className }) => {
                                 alt={media[currentIndex].alt || "Project media"}
                                 fill
                                 className={media[currentIndex].imageClassName || "object-cover"}
+                                style={media[currentIndex].imageStyle || {}}
                             />
                         </div>
                     )}

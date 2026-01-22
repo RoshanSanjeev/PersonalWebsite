@@ -82,9 +82,11 @@ The platform analyzes user spending patterns and financial goals to recommend th
       { name: "Flask", icon: SiFlask, color: "#000000" },
       { name: "Python", icon: SiPython, color: "#3776AB" },
     ],
-    images: [
-      { src: "/Hackathon.png", alt: "Credit Compass Team" },
+    media: [
+      { type: "image", src: "/Hackathon.png", alt: "Credit Compass Team" },
+      { type: "video", src: "/CreditCompassDemo.mov", alt: "Credit Compass Demo" },
     ],
+    sideBySide: true,
     links: {},
     status: "Alumni Prize - HackMercedX",
     features: [
@@ -175,9 +177,9 @@ export default function ProjectPage() {
         >
           {/* Side by side layout for projects with media array and sideBySide flag */}
           {project.media && project.sideBySide ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
               {project.media.map((item, idx) => (
-                <div key={idx} className="relative aspect-video rounded-2xl overflow-hidden border border-border/50" style={{ backgroundColor: isDarkMode ? '#171717' : '#e5e5e5' }}>
+                <div key={idx} className="rounded-2xl overflow-hidden border border-border/50" style={{ backgroundColor: isDarkMode ? '#171717' : '#e5e5e5' }}>
                   {item.type === "video" ? (
                     <video
                       src={item.src}
@@ -186,14 +188,15 @@ export default function ProjectPage() {
                       loop
                       muted
                       playsInline
-                      className="w-full h-full object-cover"
+                      className="w-full h-auto"
                     />
                   ) : (
                     <Image
                       src={item.src}
                       alt={item.alt}
-                      fill
-                      className="object-cover"
+                      width={800}
+                      height={600}
+                      className="w-full h-auto"
                     />
                   )}
                 </div>
