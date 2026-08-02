@@ -17,7 +17,7 @@ import {
   Github, Linkedin, Sun, Moon, Mail, ChevronDown, Copy, Check, ArrowUpRight
 } from "lucide-react";
 
-const sections = ["Home", "Projects", "Experience"];
+const sections = ["Home", "Experience", "Projects"];
 
 export default function Navbar({ activeSection = "Home", onSectionClick }) {
   const router = useRouter();

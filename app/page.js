@@ -656,6 +656,180 @@ export default function Home() {
       {/* MAIN CONTENT */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6">
 
+        {/* EXPERIENCE */}
+        <section id="Experience" className="py-24 scroll-mt-24">
+          <div className="mb-24">
+            <ScrollReveal>
+              <div className="flex items-center gap-4 mb-12">
+                <div className="h-12 w-1 rounded-full bg-gradient-to-b from-primary to-primary/20" />
+                <div>
+                  <h3 className="text-3xl sm:text-4xl font-bold">Experience</h3>
+                  <p className="text-sm text-muted-foreground mt-1">Professional journey</p>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            <div className="space-y-6">
+              {experienceData.map((exp, idx) => (
+                <ScrollReveal key={idx} delay={idx * 0.1}>
+                  <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card hover:border-border transition-all duration-300">
+                    <div className="grid md:grid-cols-12 gap-0">
+                      {/* Image or Carousel */}
+                      <div className="relative md:col-span-4 h-48 md:h-auto md:min-h-[260px] overflow-hidden" style={{ backgroundColor: isDarkMode ? '#171717' : '#e5e5e5' }}>
+                        {exp.images ? (
+                          <ProjectCarousel media={exp.images} />
+                        ) : (
+                          <Image src={exp.image} alt={exp.company} fill className="object-cover group-hover:scale-105 transition-transform duration-700" style={exp.imageStyle || { objectPosition: 'center 35%' }} />
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
+                        {exp.current && (
+                          <div className="absolute top-4 left-4 z-10">
+                            <span className="px-2 py-1 text-xs font-bold rounded bg-green-500/20 text-green-400 border border-green-500/30 backdrop-blur-sm">
+                              Current
+                            </span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Content */}
+                      <div className="md:col-span-8 p-6 md:p-8">
+                        <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
+                          <h4 className="text-xl md:text-2xl font-bold">{exp.role}</h4>
+                          <span className="text-sm text-muted-foreground">{exp.date}</span>
+                        </div>
+                        <p className="text-sm text-primary font-medium mb-4">{exp.company} · {exp.team}</p>
+
+                        {/* Highlights */}
+                        <div className="flex flex-wrap gap-4 mb-5">
+                          {exp.highlights.map((h, i) => (
+                            <div key={i} className="text-center">
+                              <div className="text-2xl md:text-3xl font-bold text-foreground">{h.value}</div>
+                              <div className="text-xs text-muted-foreground">{h.label}</div>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Tech */}
+                        <div className="flex flex-wrap gap-1.5 mb-4">
+                          {exp.tech.map((tech) => (
+                            <span key={tech} className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-secondary/50 rounded-md">
+                              {getTechIcon(tech)} {tech}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Bullets */}
+                        <ul className="space-y-1.5 text-sm text-muted-foreground">
+                          {exp.bullets.map((b, i) => (
+                            <li key={i} className="flex gap-2">
+                              <span className="text-primary mt-1.5 text-xs">●</span>
+                              <span>{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+
+          {/* LEADERSHIP */}
+          <div id="Leadership" className="scroll-mt-24 mb-24">
+            <ScrollReveal>
+              <div className="flex items-center gap-4 mb-12">
+                <div className="h-12 w-1 rounded-full bg-gradient-to-b from-primary to-primary/20" />
+                <div>
+                  <h3 className="text-3xl sm:text-4xl font-bold">Leadership</h3>
+                  <p className="text-sm text-muted-foreground mt-1">Impact & community</p>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {leadershipData.map((role, idx) => (
+                <ScrollReveal key={idx} delay={idx * 0.1}>
+                  <div className="group overflow-hidden rounded-2xl border border-border/50 bg-card hover:border-border transition-all duration-300 h-full flex flex-col">
+                    <div className="relative h-64 md:h-72 overflow-hidden flex-shrink-0" style={{ backgroundColor: isDarkMode ? '#171717' : '#e5e5e5' }}>
+                      {role.images ? (
+                        <ProjectCarousel media={role.images} />
+                      ) : (
+                        <Image src={role.image} alt={role.org} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                      )}
+                      {/* Logo Badge */}
+                      {role.logo && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.2 + idx * 0.1, type: "spring", stiffness: 200 }}
+                          className="absolute bottom-3 left-3 z-10"
+                        >
+                          <div
+                            className="p-1.5 rounded-xl backdrop-blur-md shadow-lg border w-11 h-11 flex items-center justify-center"
+                            style={{
+                              backgroundColor: isDarkMode ? 'rgba(23, 23, 23, 0.85)' : 'rgba(255, 255, 255, 0.9)',
+                              borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)'
+                            }}
+                          >
+                            <Image
+                              src={role.logo}
+                              alt={`${role.org} logo`}
+                              width={32}
+                              height={32}
+                              className={cn(
+                                "w-8 h-8 object-contain",
+                                role.logoStyle === "invert" && isDarkMode && "invert"
+                              )}
+                            />
+                          </div>
+                        </motion.div>
+                      )}
+                    </div>
+                    <div className="p-5 flex-grow">
+                      <div className="flex items-start justify-between gap-2 mb-1">
+                        <h4 className="text-lg font-bold">{role.title}</h4>
+                        <span className="text-xs text-muted-foreground whitespace-nowrap">{role.date}</span>
+                      </div>
+                      <p className="text-sm text-primary font-medium mb-2">{role.org}</p>
+                      <p className="text-sm text-muted-foreground line-clamp-3">{role.description}</p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+
+          {/* SKILLS */}
+          <ScrollReveal>
+            <div className="flex items-center gap-4 mb-10">
+              <div className="h-10 w-1 rounded-full bg-gradient-to-b from-primary to-primary/20" />
+              <h3 className="text-2xl font-bold">Skills</h3>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {skillsData.map((cat, idx) => (
+              <ScrollReveal key={idx} delay={idx * 0.05} className="h-full">
+                <div className="p-4 rounded-xl border border-border/40 bg-card/30 hover:bg-card hover:border-border transition-all duration-300 h-full">
+                  <h4 className="text-xs font-bold text-primary uppercase tracking-wider mb-4">{cat.category}</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {cat.skills.map((skill) => {
+                      const Icon = skill.icon;
+                      return (
+                        <div key={skill.name} className="flex items-center gap-1.5 px-2 py-1 text-xs font-medium bg-secondary/40 rounded-md hover:bg-secondary transition-colors">
+                          <Icon style={{ color: skill.color }} className="w-3.5 h-3.5" />
+                          {skill.name}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </section>
+
         {/* PROJECTS - Bento Box Layout */}
         <section id="Projects" className="py-24 scroll-mt-24">
           <ScrollReveal>
@@ -847,180 +1021,6 @@ export default function Home() {
                 </Link>
               </motion.div>
             </ScrollReveal>
-          </div>
-        </section>
-
-        {/* EXPERIENCE */}
-        <section id="Experience" className="py-24 scroll-mt-24">
-          <div className="mb-24">
-            <ScrollReveal>
-              <div className="flex items-center gap-4 mb-12">
-                <div className="h-12 w-1 rounded-full bg-gradient-to-b from-primary to-primary/20" />
-                <div>
-                  <h3 className="text-3xl sm:text-4xl font-bold">Experience</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Professional journey</p>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            <div className="space-y-6">
-              {experienceData.map((exp, idx) => (
-                <ScrollReveal key={idx} delay={idx * 0.1}>
-                  <div className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card hover:border-border transition-all duration-300">
-                    <div className="grid md:grid-cols-12 gap-0">
-                      {/* Image or Carousel */}
-                      <div className="relative md:col-span-4 h-48 md:h-auto md:min-h-[260px] overflow-hidden" style={{ backgroundColor: isDarkMode ? '#171717' : '#e5e5e5' }}>
-                        {exp.images ? (
-                          <ProjectCarousel media={exp.images} />
-                        ) : (
-                          <Image src={exp.image} alt={exp.company} fill className="object-cover group-hover:scale-105 transition-transform duration-700" style={exp.imageStyle || { objectPosition: 'center 35%' }} />
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
-                        {exp.current && (
-                          <div className="absolute top-4 left-4 z-10">
-                            <span className="px-2 py-1 text-xs font-bold rounded bg-green-500/20 text-green-400 border border-green-500/30 backdrop-blur-sm">
-                              Current
-                            </span>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Content */}
-                      <div className="md:col-span-8 p-6 md:p-8">
-                        <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
-                          <h4 className="text-xl md:text-2xl font-bold">{exp.role}</h4>
-                          <span className="text-sm text-muted-foreground">{exp.date}</span>
-                        </div>
-                        <p className="text-sm text-primary font-medium mb-4">{exp.company} · {exp.team}</p>
-
-                        {/* Highlights */}
-                        <div className="flex flex-wrap gap-4 mb-5">
-                          {exp.highlights.map((h, i) => (
-                            <div key={i} className="text-center">
-                              <div className="text-2xl md:text-3xl font-bold text-foreground">{h.value}</div>
-                              <div className="text-xs text-muted-foreground">{h.label}</div>
-                            </div>
-                          ))}
-                        </div>
-
-                        {/* Tech */}
-                        <div className="flex flex-wrap gap-1.5 mb-4">
-                          {exp.tech.map((tech) => (
-                            <span key={tech} className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-secondary/50 rounded-md">
-                              {getTechIcon(tech)} {tech}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Bullets */}
-                        <ul className="space-y-1.5 text-sm text-muted-foreground">
-                          {exp.bullets.map((b, i) => (
-                            <li key={i} className="flex gap-2">
-                              <span className="text-primary mt-1.5 text-xs">●</span>
-                              <span>{b}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-
-          {/* LEADERSHIP */}
-          <div id="Leadership" className="scroll-mt-24 mb-24">
-            <ScrollReveal>
-              <div className="flex items-center gap-4 mb-12">
-                <div className="h-12 w-1 rounded-full bg-gradient-to-b from-primary to-primary/20" />
-                <div>
-                  <h3 className="text-3xl sm:text-4xl font-bold">Leadership</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Impact & community</p>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {leadershipData.map((role, idx) => (
-                <ScrollReveal key={idx} delay={idx * 0.1}>
-                  <div className="group overflow-hidden rounded-2xl border border-border/50 bg-card hover:border-border transition-all duration-300 h-full flex flex-col">
-                    <div className="relative h-64 md:h-72 overflow-hidden flex-shrink-0" style={{ backgroundColor: isDarkMode ? '#171717' : '#e5e5e5' }}>
-                      {role.images ? (
-                        <ProjectCarousel media={role.images} />
-                      ) : (
-                        <Image src={role.image} alt={role.org} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                      )}
-                      {/* Logo Badge */}
-                      {role.logo && (
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.2 + idx * 0.1, type: "spring", stiffness: 200 }}
-                          className="absolute bottom-3 left-3 z-10"
-                        >
-                          <div
-                            className="p-1.5 rounded-xl backdrop-blur-md shadow-lg border w-11 h-11 flex items-center justify-center"
-                            style={{
-                              backgroundColor: isDarkMode ? 'rgba(23, 23, 23, 0.85)' : 'rgba(255, 255, 255, 0.9)',
-                              borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)'
-                            }}
-                          >
-                            <Image
-                              src={role.logo}
-                              alt={`${role.org} logo`}
-                              width={32}
-                              height={32}
-                              className={cn(
-                                "w-8 h-8 object-contain",
-                                role.logoStyle === "invert" && isDarkMode && "invert"
-                              )}
-                            />
-                          </div>
-                        </motion.div>
-                      )}
-                    </div>
-                    <div className="p-5 flex-grow">
-                      <div className="flex items-start justify-between gap-2 mb-1">
-                        <h4 className="text-lg font-bold">{role.title}</h4>
-                        <span className="text-xs text-muted-foreground whitespace-nowrap">{role.date}</span>
-                      </div>
-                      <p className="text-sm text-primary font-medium mb-2">{role.org}</p>
-                      <p className="text-sm text-muted-foreground line-clamp-3">{role.description}</p>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-
-          {/* SKILLS */}
-          <ScrollReveal>
-            <div className="flex items-center gap-4 mb-10">
-              <div className="h-10 w-1 rounded-full bg-gradient-to-b from-primary to-primary/20" />
-              <h3 className="text-2xl font-bold">Skills</h3>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {skillsData.map((cat, idx) => (
-              <ScrollReveal key={idx} delay={idx * 0.05} className="h-full">
-                <div className="p-4 rounded-xl border border-border/40 bg-card/30 hover:bg-card hover:border-border transition-all duration-300 h-full">
-                  <h4 className="text-xs font-bold text-primary uppercase tracking-wider mb-4">{cat.category}</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {cat.skills.map((skill) => {
-                      const Icon = skill.icon;
-                      return (
-                        <div key={skill.name} className="flex items-center gap-1.5 px-2 py-1 text-xs font-medium bg-secondary/40 rounded-md hover:bg-secondary transition-colors">
-                          <Icon style={{ color: skill.color }} className="w-3.5 h-3.5" />
-                          {skill.name}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
           </div>
         </section>
 
