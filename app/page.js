@@ -627,7 +627,7 @@ export default function Home() {
           >
             <p>Product Management Co-Op at eBay Collectibles Team</p>
             <p>Built enterprise software serving 2,500+ concurrent users.</p>
-            <p>Published ML Research at CVPR & ICCV 2025.</p>
+            <p>Published Machine Learning Research at CVPR & ICCV 2025.</p>
             <p>Perplexity AI Ambassador, Hackathon Winner & Organizer, Theta Tau Executive Board</p>
           </motion.div>
 
