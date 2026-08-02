@@ -2,12 +2,12 @@
 
 export default function ScrollIndicator() {
   const handleScrollClick = () => {
-    const projectsSection = document.getElementById('Projects');
-    if (projectsSection) {
+    const targetSection = document.getElementById('Experience');
+    if (targetSection) {
       // Offset for fixed header
       const offset = 100;
       const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = projectsSection.getBoundingClientRect().top;
+      const elementRect = targetSection.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
       const offsetPosition = elementPosition - offset;
 
@@ -25,11 +25,11 @@ export default function ScrollIndicator() {
       aria-label="Scroll to content"
       style={{ transform: 'translateZ(0)' }}
     >
-      <span className="text-neutral-600 dark:text-neutral-400 text-sm font-medium">Details below</span>
+      <span className="text-neutral-600 dark:text-neutral-400 text-base sm:text-lg font-medium">Details below</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
+        width="28"
+        height="28"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
