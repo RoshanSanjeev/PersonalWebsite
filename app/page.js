@@ -187,6 +187,8 @@ export default function Home() {
       team: "Collectibles",
       date: "Dec 2026",
       current: true,
+      image: "/ebay.png",
+      imageStyle: { objectPosition: "center 50%" },
       tech: ["Figma", "ChatGPT API", "UI/UX", "User Research"],
       highlights: [
         { value: "1st", label: "in Hackathon" },
@@ -871,7 +873,7 @@ export default function Home() {
                         {exp.images ? (
                           <ProjectCarousel media={exp.images} />
                         ) : (
-                          <Image src={exp.image} alt={exp.company} fill className="object-cover group-hover:scale-105 transition-transform duration-700" style={{ objectPosition: 'center 35%' }} />
+                          <Image src={exp.image} alt={exp.company} fill className="object-cover group-hover:scale-105 transition-transform duration-700" style={exp.imageStyle || { objectPosition: 'center 35%' }} />
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
                         {exp.current && (
