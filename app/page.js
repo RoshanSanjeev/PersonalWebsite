@@ -638,7 +638,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 1 }}
           >
-            Seeking SWE & PM 2026 internships
+            Seeking full-time positions in Product & Software
           </motion.p>
 
         </motion.div>
