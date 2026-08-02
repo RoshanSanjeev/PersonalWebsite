@@ -801,34 +801,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* SKILLS */}
-          <ScrollReveal>
-            <div className="flex items-center gap-4 mb-10">
-              <div className="h-10 w-1 rounded-full bg-gradient-to-b from-primary to-primary/20" />
-              <h3 className="text-2xl font-bold">Skills</h3>
-            </div>
-          </ScrollReveal>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {skillsData.map((cat, idx) => (
-              <ScrollReveal key={idx} delay={idx * 0.05} className="h-full">
-                <div className="p-4 rounded-xl border border-border/40 bg-card/30 hover:bg-card hover:border-border transition-all duration-300 h-full">
-                  <h4 className="text-xs font-bold text-primary uppercase tracking-wider mb-4">{cat.category}</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {cat.skills.map((skill) => {
-                      const Icon = skill.icon;
-                      return (
-                        <div key={skill.name} className="flex items-center gap-1.5 px-2 py-1 text-xs font-medium bg-secondary/40 rounded-md hover:bg-secondary transition-colors">
-                          <Icon style={{ color: skill.color }} className="w-3.5 h-3.5" />
-                          {skill.name}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
         </section>
 
         {/* PROJECTS - Bento Box Layout */}
@@ -1072,7 +1045,7 @@ export default function Home() {
             <ScrollReveal delay={0.2} className="md:col-span-3 space-y-6">
               <div className="space-y-4">
                 <p className="text-xl md:text-2xl font-light leading-relaxed text-foreground/90">
-                  Third-year Computer Science & Engineering student at <span className="text-primary font-medium">UC Merced</span>, building products that connect technology with exceptional user experience.
+                  Computer Science & Engineering student graduating in May 2027 at <span className="text-primary font-medium">UC Merced</span>, building products that connect technology with exceptional user experience.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
                   I thrive at the intersection of engineering and product thinking. Whether it's architecting enterprise systems serving thousands of users, publishing ML research at top-tier venues, or leading teams to build impactful solutions—I'm driven by the challenge of turning complex problems into elegant experiences.
