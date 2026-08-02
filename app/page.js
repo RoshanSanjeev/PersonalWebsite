@@ -625,6 +625,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.8 }}
           >
+            <p>Product Management Co-Op at eBay Collectibles Team</p>
             <p>Built enterprise software serving 2,500+ concurrent users.</p>
             <p>Published ML Research at CVPR & ICCV 2025.</p>
             <p>Perplexity AI Ambassador, Hackathon Winner & Organizer, Theta Tau Executive Board</p>
