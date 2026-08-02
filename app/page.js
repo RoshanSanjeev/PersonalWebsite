@@ -614,7 +614,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            Software Engineer → Published ML Researcher → AI Product Builder
+            Software Engineer → Published ML Researcher → Product Management
           </motion.p>
 
           {/* Blurb - line by line */}
@@ -639,7 +639,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 1 }}
           >
-            Seeking full-time positions in Product & Software
+            Seeking full-time positions in Product & Software for 2027
           </motion.p>
 
         </motion.div>
