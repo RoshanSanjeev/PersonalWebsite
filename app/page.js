@@ -50,60 +50,25 @@ const ScrollReveal = ({ children, className = "", delay = 0 }) => (
   </motion.div>
 );
 
-// Resume Viewer Component with Tabs
+// Resume Viewer Component
 const ResumeViewer = ({ isDarkMode }) => {
-  const [activeResume, setActiveResume] = useState("technical");
-
-  const resumes = [
-    { id: "technical", label: "Technical", file: "/RoshanSanjeev_Resume_Technical.pdf" },
-    { id: "product", label: "Product & Consulting", file: "/RoshanSanjeev_Resume.pdf" },
-  ];
-
-  const currentResume = resumes.find(r => r.id === activeResume);
-
   return (
     <Card className="border-border/50 overflow-hidden">
-      {/* Tab Buttons */}
-      <div className="flex justify-center gap-2 p-4 bg-secondary/30 border-b border-border/50">
-        {resumes.map((resume) => (
-          <button
-            key={resume.id}
-            onClick={() => setActiveResume(resume.id)}
-            className="px-6 py-2.5 text-sm font-semibold rounded-full transition-all duration-200 cursor-pointer"
-            style={activeResume === resume.id
-              ? { backgroundColor: isDarkMode ? '#ffffff' : '#171717', color: isDarkMode ? '#171717' : '#ffffff', border: 'none' }
-              : { backgroundColor: 'transparent', color: isDarkMode ? '#9ca3af' : '#6b7280', border: `1px solid ${isDarkMode ? '#404040' : '#d1d5db'}` }
-            }
-          >
-            {resume.label}
-          </button>
-        ))}
-      </div>
-
       {/* PDF Viewer */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeResume}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="w-full h-[700px] bg-white"
-        >
-          <iframe
-            src={currentResume.file}
-            className="w-full h-full"
-            title={`${currentResume.label} Resume`}
-          />
-        </motion.div>
-      </AnimatePresence>
+      <div className="w-full h-[700px] bg-white">
+        <iframe
+          src="/RoshanSanjeev_Resume.pdf"
+          className="w-full h-full"
+          title="Resume"
+        />
+      </div>
 
       {/* Download Button */}
       <div className="p-6 flex justify-center bg-secondary/30 border-t border-border/50">
         <Button asChild className="rounded-full px-6">
-          <a href={currentResume.file} download className="flex items-center gap-2">
+          <a href="/RoshanSanjeev_Resume.pdf" download className="flex items-center gap-2">
             <Download className="w-4 h-4" />
-            Download {currentResume.label} Resume
+            Download Resume
           </a>
         </Button>
       </div>
@@ -217,26 +182,24 @@ export default function Home() {
   // Experience Data
   const experienceData = [
     {
-      role: "Software Engineer Intern",
-      company: "University of California, Merced",
-      team: "Enterprise Application Services",
-      date: "Aug 2025 - Present",
+      role: "Product Management Co-Op, Collectibles",
+      company: "eBay",
+      team: "Collectibles",
+      date: "Dec 2026",
       current: true,
-      image: "/dine board soft launch-5.png",
-      tech: ["Flask", "React", "Redis", "Azure OAuth", "Nginx", "GitHub Actions"],
+      tech: ["Figma", "ChatGPT API", "UI/UX", "User Research"],
       highlights: [
-        { value: "2,500+", label: "daily users" },
-        { value: "80%", label: "productivity gain" },
+        { value: "1st", label: "in Hackathon" },
       ],
       bullets: [
-        "Built enterprise web apps serving 2,500+ daily users, resolving Jira tickets in Agile sprints",
-        "Integrated Azure Entra ID OAuth 2.0, driving 80% staff productivity increase",
-        "Architected Nginx + Gunicorn hosting with Flask/Redis backend & React frontend",
+        "Won company hackathon against 72 competing interns, presenting winning solution directly to eBay CEO & escalating the concept for development with marketing product leadership",
+        "Directing 0-to-1 A.I product development lifecycle from discovery/design to technical development, GTM strategy, & launch",
+        "Collaborated with cross-functional UXR, engineering, and AI teams to define requirements, technical feasibility, and roadmap",
       ]
     },
     {
       role: "Machine Learning Research Intern",
-      company: "Mi3 Lab, UC Merced",
+      company: "Mi3 Lab",
       team: "Computer Vision Research",
       date: "Jun 2025 - Present",
       current: true,
@@ -244,32 +207,50 @@ export default function Home() {
         { type: "image", src: "/Research.png", alt: "Research" },
         { type: "image", src: "/Mi31.jpeg", alt: "ICCV 2025 Honolulu", imageClassName: "object-cover object-left" }
       ],
-      tech: ["Python", "TensorFlow", "Pandas"],
+      tech: ["Python", "PyTorch", "Pandas", "NumPy"],
       highlights: [
         { value: "43.84%", label: "better than GPT-4o" },
         { value: "2", label: "publications" },
       ],
       bullets: [
-        "Published at CVPR 2025 & ICCV 2025 for VLLM navigation for visually impaired users",
-        "Outperformed GPT-4o baseline by 43.84% via frame sampling & model finetuning",
-        "Developed visualizations with Pandas/Matplotlib for paper & conference presentation",
+        "Published & presented research at 2 conferences, CVPR & ICCV, for VLLM able to generate real-time navigation instructions for users with visual impairments in complex urban environments",
+        "Outperformed GPT-4o baseline by 43.84% via fine-tuning VideoLLaMa3-7B, prompt engineering, and iterative testing",
+        "Translated complex technical findings to industry professionals & developed data visualisations with Pandas & Matplotlib",
+      ]
+    },
+    {
+      role: "Software Engineering Intern",
+      company: "University of California, Merced",
+      team: "Enterprise Application Services",
+      date: "Aug 2025 - Jan 2026",
+      current: false,
+      image: "/dine board soft launch-5.png",
+      tech: ["Flask", "React", "Redis", "Azure OAuth"],
+      highlights: [
+        { value: "2,500+", label: "daily users" },
+        { value: "80%", label: "productivity gain" },
+      ],
+      bullets: [
+        "Empathized with stakeholders to build web application serving ~2,500 users daily, driving an 80% increase in staff productivity",
+        "Developed REST APIs for SaaS web app, integrating Microsoft Azure Entra ID (OAuth 2.0 SSO), & TLS encryption",
+        "Engineered Flask/Redis backend & React frontend, optimizing performance & reliability, resolving Jira tickets in Agile sprints",
       ]
     },
     {
       role: "Product Development Intern",
-      company: "Plant Culture Systems",
+      company: "Plant Culture Systems (Startup)",
       team: "AI Product Team Lead",
       date: "Jul 2024 - Oct 2024",
       image: "/plantCultureSys.jpeg",
-      tech: ["Flutterflow", "Firebase", "ChatGPT API", "Figma"],
+      tech: ["Figma", "Firebase", "ChatGPT API"],
       highlights: [
         { value: "500+", label: "users" },
         { value: "50%", label: "engagement lift" },
       ],
       bullets: [
-        "Designed AI landing page for OurGarden using Flutterflow, engaging 500+ users",
-        "Led image analysis feature as A.I. subteam lead, improving engagement by 50%",
-        "Integrated ChatGPT API & Firebase, designed component system in Figma",
+        "Designed & developed the AI landing page for OurGarden, an app promoting sustainable local agriculture for 500+ users",
+        "Led A.I. subteam, translating stakeholder feedback to technical needs, improving engagement metrics by ~50% in Agile sprints",
+        "Deployed ChatGPT API & Firebase & created Figma mockups based on user requirements to deliver an end-to-end solution",
       ]
     },
     {
@@ -278,14 +259,13 @@ export default function Home() {
       team: "Analytics Platform",
       date: "Mar 2024 - Jun 2024",
       image: "/PostrueMain.png",
-      tech: ["Django", "PostgreSQL", "JavaScript", "Bootstrap"],
+      tech: ["Django", "PostgreSQL", "JavaScript", "HTML/CSS"],
       highlights: [
         { value: "Real-time", label: "analytics" },
       ],
       bullets: [
-        "Translated customer requirements into technical specs for posture analytics",
-        "Designed responsive UI with HTML, CSS, JavaScript & Bootstrap",
-        "Built PostgreSQL analytics dashboard for real-time sensor visualization",
+        "Gathered customer needs for Django posture analytics web application, translating them into technical specifications",
+        "Created a PostgreSQL analytics dashboard and frontend to visualise real-time sensor data & deliver actionable posture insights",
       ]
     }
   ];
