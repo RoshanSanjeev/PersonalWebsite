@@ -229,11 +229,11 @@ export default function Home() {
       image: "/dine board soft launch-5.png",
       tech: ["Flask", "React", "Redis", "Azure OAuth"],
       highlights: [
-        { value: "2,500+", label: "daily users" },
+        { value: "2,500+", label: "concurrent users" },
         { value: "80%", label: "productivity gain" },
       ],
       bullets: [
-        "Empathized with stakeholders to build web application serving ~2,500 users daily, driving an 80% increase in staff productivity",
+        "Empathized with stakeholders to build web application serving ~2,500 concurrent users, driving an 80% increase in staff productivity",
         "Developed REST APIs for SaaS web app, integrating Microsoft Azure Entra ID (OAuth 2.0 SSO), & TLS encryption",
         "Engineered Flask/Redis backend & React frontend, optimizing performance & reliability, resolving Jira tickets in Agile sprints",
       ]
@@ -625,7 +625,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.8 }}
           >
-            <p>Built enterprise software serving 2,500+ daily users.</p>
+            <p>Built enterprise software serving 2,500+ concurrent users.</p>
             <p>Published ML Research at CVPR & ICCV 2025.</p>
             <p>Perplexity AI Ambassador, Hackathon Winner & Organizer, Theta Tau Executive Board</p>
           </motion.div>
